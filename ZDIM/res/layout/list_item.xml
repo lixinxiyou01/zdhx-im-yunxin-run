@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/catalog"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="#dddddd"
+        android:paddingBottom="3dip"
+        android:paddingLeft="15dip"
+        android:paddingTop="3dip"
+        android:text="A"
+        android:textSize="12sp"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <zhwx.common.view.CircleImageView
+            android:id="@+id/headimgIV"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/defult_head_img" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:textSize="@dimen/BigTextSize"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+       	    android:marqueeRepeatLimit="marquee_forever"
+       	    android:focusableInTouchMode="true"
+            android:text="hhhh"
+            android:textColor="@color/main_bg" />
+    </LinearLayout>
+
+</LinearLayout>

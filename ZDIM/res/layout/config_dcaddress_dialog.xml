@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/dcAddressText"
+            android:layout_width="fill_parent"
+            android:layout_height="39dp"
+            android:background="@drawable/button_normal_shape"
+            android:ems="10"
+            android:paddingLeft="5dp"
+            android:paddingRight="30dp"
+            android:textColor="@color/black"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" >
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/delectTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_address_delect"
+             />
+
+    </RelativeLayout>
+
+</LinearLayout>

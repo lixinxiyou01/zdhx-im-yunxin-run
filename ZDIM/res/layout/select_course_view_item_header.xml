@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5f8480"
+    android:paddingBottom="5dip"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingTop="5dip" >
+
+    
+
+    <TextView
+        android:id="@+id/text_item_header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/white" />
+
+    
+
+</RelativeLayout>

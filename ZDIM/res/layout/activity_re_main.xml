@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_bg_repairs" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical" >
+
+            <LinearLayout
+                android:id="@+id/changeTypeLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/noticeTypeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="报修"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/flagIV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iv_change"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button1"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/topbar_back_bt"
+                android:onClick="onBack" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/top_bar"
+        android:layout_marginBottom="48dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onExpend"
+                android:background="@color/white" >
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/myOrderLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/checkAllOrderLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/list_item_selector"
+                    android:onClick="oncheckAllOrder" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="我的报修"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/imageButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_right" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/imageButton1"
+                        android:text="查看全部报修单"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <RelativeLayout
+                        android:id="@+id/wjd_a_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="onWjdA"
+                        android:background="@drawable/list_item_selector" >
+
+                        <Button
+                            android:id="@+id/Button04"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_dpc_a"
+                            android:padding="8dp"
+                            android:text="未接单"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_dpc_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:visibility="invisible"
+                            android:textSize="11sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wxz_a_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="onWxzA"
+                        android:background="@drawable/list_item_selector" >
+
+                        <Button
+                            android:id="@+id/Button03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_pcz_a"
+                            android:padding="8dp"
+                            android:text="维修中"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+                        
+                        <TextView
+                            android:id="@+id/count_pcz_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:visibility="invisible"
+                            android:textSize="11sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/dfk_a_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="onDfkA"
+                        android:background="@drawable/list_item_selector" >
+
+                        <Button
+                            android:id="@+id/Button02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_ypc_a"
+                            android:padding="8dp"
+                            android:text="待反馈"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_ypc_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:visibility="invisible"
+                            android:textSize="11sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/yxh_a_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="onYxhA"
+                        android:background="@drawable/list_item_selector" >
+
+                        <Button
+                            android:id="@+id/Button01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_dpj_a"
+                            android:padding="8dp"
+                            android:text="已修好"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+                        
+                        
+                        <TextView
+                            android:id="@+id/count_dpj_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:visibility="invisible"
+                            android:textSize="11sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/managerLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="oncheckAllOrderManager">
+
+                    <TextView
+                        android:id="@+id/TextView01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="报修管理"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/ImageView01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_right" />
+
+                    <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/ImageView01"
+                        android:text="查看全部维修单"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/line_middle"></RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/chack_item_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onDclB">
+
+                        <Button
+                            android:id="@+id/Button06"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_wsh_b"
+                            android:padding="8dp"
+                            android:text="待处理"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_wsh_b"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onYpdB">
+
+                        <Button
+                            android:id="@+id/Button07"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_wpc_b"
+                            android:padding="8dp"
+                            android:text="已派单"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_wpc_b"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onYwcB">
+
+                        <Button
+                            android:id="@+id/Button08"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_pcz_b"
+                            android:padding="8dp"
+                            android:text="已完成"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_pcz_b"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onFyspB">
+
+                        <Button
+                            android:id="@+id/Button05"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_ypc_b"
+                            android:padding="8dp"
+                            android:text="费用审批"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_ypc_b"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dirverLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="oncheckAllOrderDirver">
+
+                    <TextView
+                        android:id="@+id/TextView04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="我的维修"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/ImageView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_right" />
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/ImageView02"
+                        android:text="查看全部维修单"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/line_middle"></RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onWjdC">
+
+                        <Button
+                            android:id="@+id/Button13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_wqr_c"
+                            android:padding="8dp"
+                            android:text="未接单"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_wqr_c"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onWxzC">
+
+                        <Button
+                            android:id="@+id/Button14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_wjd_c"
+                            android:padding="8dp"
+                            android:text="维修中"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_wjs_c"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onYfkC">
+
+                        <Button
+                            android:id="@+id/Button12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_cm_dpj_c"
+                            android:padding="8dp"
+                            android:text="已反馈"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/count_dpj_c"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"></RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/line"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_notice_detail" >
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/actionBar1"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/list_item_selector"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:onClick="onRepair"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/btn_notice_sendnew" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:text="我要报修"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#666666" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="55dip"
+    android:background="@drawable/nim_contact_list_item_selecter"
+    >
+
+    <ImageView
+        android:id="@+id/img_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:contentDescription="@string/empty"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_secretary" />
+
+    <TextView
+        android:id="@+id/tv_func_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="班级"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/img_head"
+        android:layout_toEndOf="@+id/img_head" />
+    <View
+        android:id="@+id/bottomLine"
+        style="@style/horizontal_light_thin_divider"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/img_head" />
+
+</RelativeLayout>

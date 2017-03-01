@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_item_selector"
+    android:descendantFocusability="blocksDescendants" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="#f6fbff"
+             >
+
+            <TextView
+                android:id="@+id/goodsNameTV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:textColor="@color/greytext" 
+                android:text="物品名称" />
+
+            <TextView
+                android:id="@+id/goodsCountTV"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:text="数量"
+                android:gravity="center"
+                android:textColor="@color/greytext" />
+            
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/costTV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:text="金额"
+                android:gravity="center"
+                android:textColor="@color/greytext" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

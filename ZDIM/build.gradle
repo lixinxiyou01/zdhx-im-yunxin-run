@@ -1,0 +1,121 @@
+
+apply plugin: 'com.android.application'
+
+def getGitVersion() {
+    try {
+        return 'git rev-parse --short HEAD'.execute().text.trim()
+    } catch (Throwable th) {
+        return "";
+    }
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId = "com.zdhx.edu.im"
+        minSdkVersion 11
+        targetSdkVersion 24
+        buildConfigField "String", "GIT_REVISION", "\"${getGitVersion()}\""
+        buildConfigField "String", "BUILD_DATE", "\"${new Date().toLocaleString()}\"";
+        multiDexEnabled true
+
+        //Jpush
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a','x86'
+            // 还可以添加  'armeabi-v8a', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "cc3f74cfe0b39f1140baa114", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('D:/work/debug.keystore')
+        }
+        release {
+            storeFile file('D:/work/debug.keystore')
+            storePassword '95882368'
+            keyPassword '95882368'
+        }
+    }
+
+    buildTypes {
+        //高德定位
+        debug {
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [AMAP_KEY: "18e6693b64238e7bad444bbaff6de177"]
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res', 'res-avchat', 'res-chatroom']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs', 'libs-sdk']
+
+        }
+
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    dexOptions {
+        preDexLibraries false
+        jumboMode true
+        javaMaxHeapSize "4g"
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+}
+
+dependencies {
+    compile fileTree(include: '*.jar', dir: 'libs')
+    compile project(path: ':uikit')
+    compile 'com.android.support:multidex:1.0.0'
+    compile files('libs/xUtils-2.6.11.jar')
+    compile files('libs/nineoldanimatin.jar')
+    compile files('libs/gson-2.2.1.jar')
+    compile files('libs/ShareSDK-Core-2.7.7.jar')
+    compile files('libs/ShareSDK-QQ-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-2.7.7.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.7.7.jar')
+    compile files('libs/MobCommons-2016.0830.1940.jar')
+    compile files('libs/MobTools-2016.0830.1940.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/pgyer_sdk_2.2.2.jar')
+    compile files('libs/pinyin4j-2.5.0.jar')
+    compile files('libs/Zing_barcode_core.jar')
+    compile files('libs/GifView.jar')
+    compile project(':photoSelector')
+    compile project(':uikit')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
+    compile project(':datetimepicker')
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+
+    compile 'cn.jiguang.sdk:jpush:3.0.0'  // 此处以JPush 3.0.0 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.0.0'  // 此处以JCore 1.0.0 版本为例。
+}
+

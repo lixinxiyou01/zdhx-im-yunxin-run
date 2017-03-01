@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--
+    duration:持续时间
+    fromYDelta/toYDelta:动画、结束起始时 Y坐标上的位置
+    fromXDelta/toXDelta:动画、结束起始时 X坐标上的位置 
+    -->
+
+    <translate
+        android:duration="600"
+        android:fromYDelta="0.0"
+        android:toYDelta="100.0%p" />
+
+    <alpha
+        android:duration="500"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0" />
+
+</set>

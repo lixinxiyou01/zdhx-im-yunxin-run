@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/head_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp" >
+
+            <ImageView
+                android:id="@+id/refreshing_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/refreshing"
+                android:layout_toLeftOf="@+id/state_tv_layout"
+                android:visibility="gone" />
+            
+            <LinearLayout
+                android:id="@+id/state_tv_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/state_tv"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pull_to_refresh"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/state_iv"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/state_tv_layout"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/pull_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/state_tv_layout"
+                android:background="@drawable/pull_icon_big" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

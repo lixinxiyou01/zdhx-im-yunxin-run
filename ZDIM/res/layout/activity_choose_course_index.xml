@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f6f6"
+    tools:ignore="UselessParent,HardcodedText" >
+	<FrameLayout 
+	    android:id="@+id/top_bar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@color/main_bg">
+		<RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical" >
+	
+	        <TextView
+	            android:id="@+id/editTypeTV"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:text="选课说明"
+	            android:textColor="#ffffff"
+	            android:textSize="20sp" />
+	
+	        <Button
+	            android:id="@+id/button1"
+	            style="?android:attr/buttonStyleSmall"
+	            android:layout_width="wrap_content"
+	            android:layout_height="50dp"
+	            android:layout_alignParentLeft="true"
+	            android:layout_alignParentTop="true"
+	            android:background="@drawable/topbar_back_bt"
+	            android:onClick="onBack" />
+	
+	        <Button
+	            android:id="@+id/statisticsBT"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:visibility="invisible"
+	            android:text="统计"
+	            android:background="@null"
+	            android:textSize="15sp"
+	            android:layout_marginRight="10dp"
+	            android:textColor="@color/white"
+	             />
+
+	        <Button
+	            android:id="@+id/okbt"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:textColor="@color/white"
+	            android:background="@null"
+	            android:layout_centerVertical="true"
+	            android:paddingLeft="10dp"
+	            android:paddingRight="10dp"
+	            android:textSize="15sp"
+	            android:onClick="onMe"
+	            android:text="我的选课" />
+	
+	    </RelativeLayout>
+    
+	</FrameLayout>
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/top_bar"
+	     >
+
+		<LinearLayout
+		    android:id="@+id/login_btnLay"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentBottom="true"
+		    android:background="@color/white"
+		    android:orientation="horizontal" >
+
+		    <Button
+		        android:id="@+id/checkBT"
+		        android:layout_width="0dp"
+		        android:layout_height="50dp"
+		        android:layout_marginBottom="10dip"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginRight="10dip"
+		        android:layout_marginTop="10dip"
+		        android:layout_weight="5"
+		        android:background="@drawable/btn_login_selecter"
+		        android:gravity="center"
+		        android:onClick="onTack"
+		        android:paddingBottom="7dp"
+		        android:paddingTop="5dp"
+		        android:text="开始选课"
+		        android:enabled="false"
+		        android:textColor="@android:color/white"
+		        android:textSize="18sp" />
+		    
+		    <Chronometer
+		        android:id="@+id/chronometer"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:visibility="gone" />
+
+		</LinearLayout>
+
+		<ScrollView
+		    android:id="@+id/scrollView1"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_above="@+id/login_btnLay"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentTop="true" 
+		    android:visibility="gone">
+
+			<RelativeLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:padding="10dp" >
+
+				<TextView
+				    android:id="@+id/noteTV"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="15sp"
+				    android:textColor="@color/dark_gray"
+				     />
+
+			</RelativeLayout>
+
+		</ScrollView>
+
+		<WebView
+		    android:id="@+id/webView1"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_above="@+id/login_btnLay" />
+
+	</RelativeLayout>
+
+</RelativeLayout>

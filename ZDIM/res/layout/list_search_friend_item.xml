@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Copyright (c) 2013 The CCP project authors. All Rights Reserved.
+ 
+   Use of this source code is governed by a Beijing Speedtong Information Technology Co.,Ltd license
+   that can be found in the LICENSE file in the root of the web site.
+ 
+    				http://www.yuntongxun.com
+ 
+   An additional intellectual property rights grant can be found
+   in the file PATENTS.  All contributing project authors may
+   be found in the AUTHORS file in the root of the source tree.
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_item_ll"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/list_item_selector"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/SmallPadding"
+        android:layout_marginRight="@dimen/SmallerPadding">
+
+        <zhwx.common.view.CircleImageView
+            android:id="@+id/group_card_item_avatar_iv"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="@dimen/SmallPadding"
+        android:layout_weight="1.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/group_card_item_nick"
+            style="@style/CCPFontTitleInList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:tag="name_tv"
+            android:textColor="@color/normal_text_color"
+            android:textSize="@dimen/NormalTextSize" />
+
+        <TextView
+            android:id="@+id/account"
+            style="@style/CCPFontTipInList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dip"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:tag="account"
+            android:text="account"
+            android:visibility="gone"
+            android:textColor="#ff888888"
+            android:textSize="13.0dip" />
+    </LinearLayout>
+</LinearLayout>

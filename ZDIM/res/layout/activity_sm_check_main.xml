@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <FrameLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/c_header_height" >
+
+		<TextView
+		    android:layout_width="fill_parent"
+		    android:layout_height="match_parent"
+		    android:gravity="center"
+		    android:text="订车说明"
+			android:textColor="#FFFFFF"
+			android:textSize="25sp"
+		    android:background="#0072C6"
+		    />
+
+		<zhwx.ui.dcapp.carmanage.view.PagerSlidingTabStrip
+			android:id="@+id/tabs"
+			android:layout_width="match_parent"
+			android:layout_height="48dip"
+			android:layout_gravity="bottom"
+			android:background="@color/white"
+			android:fillViewport="false" />
+	</FrameLayout>
+	
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header" />
+
+</RelativeLayout>
