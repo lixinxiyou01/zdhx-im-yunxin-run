@@ -46,7 +46,7 @@ public class Constant {
 	/** 班级圈发送权限 */
 	public static final String CLASS_CIRCLE_CAN    = "1";	   			//可发
 	public static final String CLASS_CIRCLE_CANNOT = "0";			//不可发
-	
+
 	/** 圈子类型 */
 	public static final String CIRCLE_KIND_SCHOOL = "0";	   	//校友圈
 	public static final String CIRCLE_KIND_CLASS  = "1";			//班级墙报
