@@ -15,25 +15,18 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DensityUtil;
-import zhwx.common.util.ProgressThreadWrap;
-import zhwx.common.util.RunnableWrap;
-import zhwx.common.util.ToastUtil;
-import zhwx.common.util.UrlUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.common.view.refreshlayout.PullableListView;
 import zhwx.ui.dcapp.assets.model.CheckListItem;
@@ -180,8 +173,8 @@ public class ApplyRecordFragment extends ScrollTabHolderFragment {
 			
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<Button> btns = getOrderButtonList(position);
-			for (Button button : btns) {
+			List<TextView> btns = getOrderButtonList(position);
+			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
 			addListener(holder, position, convertView);
@@ -204,9 +197,9 @@ public class ApplyRecordFragment extends ScrollTabHolderFragment {
 		
 	}
 	
-	public List<Button> getOrderButtonList(final int position){
-		List<Button> btnList = new ArrayList<Button>();
-		Button ckBT = getOrderButton("查看");
+	public List<TextView> getOrderButtonList(final int position){
+		List<TextView> btnList = new ArrayList<TextView>();
+		TextView ckBT = getOrderButton("查看");
 		ckBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -220,58 +213,15 @@ public class ApplyRecordFragment extends ScrollTabHolderFragment {
 		return btnList;
 	}
 	
-	public Button getOrderButton (String text) {
+	public TextView getOrderButton (String text) {
 		LayoutParams params = new LayoutParams(
 			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-		Button button = new Button(getActivity());
+		TextView button = new TextView(getActivity());
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
 		button.setLayoutParams(params);
 		return button;
-	}
-	
-	public void addButtonListener(Button btn) {
-		
-	}
-	
-	/** 取消订车单 */
-	public void cancelOrderCar(final int position) {
-		String orderId = "";
-		mPostingdialog = new ECProgressDialog(getActivity(), "正在取消订车单");
-		mPostingdialog.show();
-		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("id", new ParameterValue(orderId));
-		new ProgressThreadWrap(getActivity(), new RunnableWrap() {
-			@Override
-			public void run() {
-				try {
-					final String flag = UrlUtil.cancelOrderCar(ECApplication.getInstance().getV3Address(), map);
-					handler.postDelayed(new Runnable() {
-						public void run() {
-							if (flag.contains("ok")) {
-								ToastUtil.showMessage("订单已取消");
-								allDataList.remove(position);
-								adapter.notifyDataSetChanged();
-							} else {
-								ToastUtil.showMessage("操作失败");
-							}
-							mPostingdialog.dismiss();
-						}
-					}, 5);
-				} catch (IOException e) {
-					e.printStackTrace();
-					ToastUtil.showMessage("请求失败，请稍后重试");
-					handler.postDelayed(new Runnable() {
-						
-						@Override
-						public void run() {
-							mPostingdialog.dismiss();
-						}
-					}, 5);
-				}
-			}
-		}).start();
 	}
 }
