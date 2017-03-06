@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/relativeLayout1"
+            android:layout_toRightOf="@+id/headIV"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/userNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/name_blue"
+                android:textSize="@dimen/NormalTextSize" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" >
+
+                <ImageView
+                    android:id="@+id/thumbUpIV"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_thumbup" />
+
+                <TextView
+                    android:id="@+id/contentTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="TextView"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="@color/normal_text_color"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/timeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/greytext"
+                android:textSize="@dimen/SmallTextSize" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray"
+            android:layout_marginTop="20dp" >
+
+            <ImageView
+                android:id="@+id/contentIV"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@color/gray" />
+
+            <TextView
+                android:id="@+id/momentContentTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:padding="2dp"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_content"
+                android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
+        </RelativeLayout>
+
+        <zhwx.common.view.CircleImageView
+            android:id="@+id/headIV"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/linearLayout1"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/defult_head_img" />
+    </RelativeLayout>
+
+</RelativeLayout>

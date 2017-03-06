@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_fragment"
+    style="@style/NavPage" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+         android:background="#eeeeee"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/schoolCircleBT"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_circle_selector" >
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/icon_schoolcircle" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/ImageView01"
+                android:text="校友圈"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/normal_text_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/unReadCircleCountTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/TextView01"
+                android:layout_centerVertical="true"
+                android:background="@drawable/red_circle"
+                android:gravity="center"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@+id/sMomentLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" 
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:visibility="invisible">
+
+                <zhwx.common.view.CircleImageView
+                    android:id="@+id/sMomentIV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/defult_head_img" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/icon_red_big"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/classCircleBT"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_circle_selector"
+            android:layout_marginTop="16dp" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_classcircle" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/imageView1"
+                android:layout_centerVertical="true"
+                android:text="班级墙报"
+                android:textSize="16sp"
+                android:textColor="@color/normal_text_color"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/unReadCircleCountTV2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textView1"
+                android:background="@drawable/red_circle"
+                android:gravity="center"
+                android:text="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:layout_marginLeft="10dp"
+                android:visibility="invisible" />
+            
+            <LinearLayout
+                android:id="@+id/cMomentLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" 
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:visibility="invisible">
+
+                <zhwx.common.view.CircleImageView
+                    android:id="@+id/cMomentIV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/defult_head_img" />
+
+                <TextView
+                    android:id="@+id/TextView123"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/icon_red_big"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

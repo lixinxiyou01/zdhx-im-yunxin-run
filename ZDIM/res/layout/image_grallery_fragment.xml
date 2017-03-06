@@ -14,7 +14,7 @@
         android:background="@android:color/transparent"
         android:visibility="visible"
         />
-    <com.zdhx.edu.im.photoview.PhotoView
+    <zhwx.common.view.photoview.PhotoView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:background="@android:color/transparent"

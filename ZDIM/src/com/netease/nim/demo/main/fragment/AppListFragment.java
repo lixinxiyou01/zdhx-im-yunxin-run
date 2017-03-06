@@ -21,7 +21,6 @@ public class AppListFragment extends MainTabFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        onCurrent();
     }
 
     @Override

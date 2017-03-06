@@ -3,6 +3,7 @@
     <!-- chat room -->
     <string name="chat_room">直播间</string>
     <string name="app_list">应用</string>
+    <string name="circle">圈子</string>
     <string name="chat_room_message">直播互动</string>
     <string name="chat_room_master">主播</string>
     <string name="chat_room_online_people">在线成员</string>

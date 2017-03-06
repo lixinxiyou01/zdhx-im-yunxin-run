@@ -47,6 +47,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Jorstin on 2015/3/18.
  */
+@SuppressWarnings("UnnecessaryLocalVariable")
 public class DemoUtils {
 	public static final String TAG = "ECDemo.DemoUtils";
 	private static final int MAX_DECODE_PICTURE_SIZE = 1920 * 1440;

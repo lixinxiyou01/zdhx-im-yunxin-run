@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/dateLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp" >
+
+                <TextView
+                    android:id="@+id/dayTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="25"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/main_bg"
+                    android:textSize="30sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/monthTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7月"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/main_bg" />
+
+                    <TextView
+                        android:id="@+id/weekTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="星期一"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/main_bg" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgIV"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@color/gray" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/contentTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:layout_marginRight="5dp"
+                    android:text="我曾经穿过山和大海，也穿过 人山人海，我曾问问整个世界，却从没得到答案"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#666666"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/imgCountTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="共7张"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

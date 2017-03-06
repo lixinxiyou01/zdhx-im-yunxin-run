@@ -2096,6 +2096,15 @@ public class UrlUtil {
 	}
 
 	/*******************************易耗品管理end*********************************************/
+
+	/**
+	 * 云信群发生变化通知IM后台
+	 *	map tid （云信群组ID）
+	 */
+	public static String synchroTeam(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/bd/neteaseTeam/mobile/synchroTeam"), map);
+	}
+
 	
 	/************************************ 数据接口end ************************************************************/
 }

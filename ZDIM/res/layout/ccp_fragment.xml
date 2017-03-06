@@ -11,7 +11,7 @@
    in the file PATENTS.  All contributing project authors may
    be found in the AUTHORS file in the root of the source tree.
  -->
-<com.zdhx.edu.im.common.base.CCPLayoutListenerView xmlns:android="http://schemas.android.com/apk/res/android"
+<zhwx.common.base.CCPLayoutListenerView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mm_base_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -30,4 +30,4 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" />
 
-</com.zdhx.edu.im.common.base.CCPLayoutListenerView>
+</zhwx.common.base.CCPLayoutListenerView>

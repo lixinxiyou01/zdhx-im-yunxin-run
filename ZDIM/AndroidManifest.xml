@@ -405,6 +405,76 @@
 
         <!--******************************************智微校 STATR******************************************************* -->
 
+        <!--圈子-->
+        <!-- 圈子评论列表 -->
+        <activity
+            android:name="zhwx.ui.circle.CircleRecordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 发圈子状态 -->
+        <activity
+            android:name="zhwx.ui.circle.SendNewCircleActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="分享到校友圈" >
+            <intent-filter>
+
+                <!-- 调用共享时，过滤共享文件，此处默认全部 -->
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- 允许图片类型文件 -->
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- 校友圈 -->
+        <activity
+            android:name="zhwx.ui.circle.SchoolCircleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+
+        <!-- 个人空间 -->
+        <activity
+            android:name="zhwx.ui.circle.MyCircleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <!-- 动态详情 -->
+        <activity
+            android:name="zhwx.ui.circle.CircleDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 班级墙报 -->
+        <activity
+            android:name="zhwx.ui.circle.ClassCircleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+        <!-- 选择班级 -->
+        <activity
+            android:name="zhwx.ui.circle.SelectClassActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 班级主页 -->
+        <activity
+            android:name="zhwx.ui.circle.MyClassCircleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+
         <!-- WebApp -->
         <activity
             android:name="zhwx.ui.webapp.WebAppActivity"
@@ -953,6 +1023,7 @@
         <activity android:name="zhwx.common.plugin.FileExplorerActivity" />
         <activity android:name="zhwx.ui.contact.AddContactActivity" />
         <activity android:name="zhwx.ui.settings.ChangePasswordActivity" />
+        <activity android:name="zhwx.common.view.imagegallery.ImageGralleryPagerActivity" />
 
         <!--三方SDK key-->
         <!-- 百度定位 -->

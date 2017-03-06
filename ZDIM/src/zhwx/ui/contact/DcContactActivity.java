@@ -268,8 +268,9 @@ public class DcContactActivity extends BaseActivity implements View.OnClickListe
 						TreeUser user = tree.get(i).getUserList().get(j);
 						datas.add(new FileBean(Integer.parseInt(user.getId().length() < 5 ? "0" : user.getId().substring(
 								25, 31)), Integer.parseInt(tree.get(i).getId()
-										.length() < 5 ? "0" : tree.get(i).getId().substring(23, 31)), user.getName(), user
-										.getAccId(), user.getHeadPortraitUrl(),PinYinUtil.getNameMatchString(user.getName())));
+										.length() < 5 ? "0" : tree.get(i).getId().substring(23, 31)),
+										user.getName() + (StringUtil.isNotBlank(user.getCourse())?"("+user.getCourse()+")":""),
+										user.getAccId(), user.getHeadPortraitUrl(),PinYinUtil.getNameMatchString(user.getName())));
 
 						ECContacts bean = new ECContacts();
 						bean.setNickname(user.getName());

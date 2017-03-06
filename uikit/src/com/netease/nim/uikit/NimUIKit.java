@@ -163,7 +163,7 @@ public final class NimUIKit {
     }
 
     /**
-     * 打开讨论组或高级群资料页
+     * 打开讨论组或群组资料页
      *
      * @param context 上下文
      * @param teamId  群id

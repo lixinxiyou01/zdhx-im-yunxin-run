@@ -20,6 +20,7 @@ public class TreeUser {
 	private String accId;
 	private String headPortraitUrl;
 	private String v3Id;
+	private String course;
 	public TreeUser() {
 		super();
 	}
@@ -65,4 +66,11 @@ public class TreeUser {
 		this.v3Id = v3Id;
 	}
 
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
 }

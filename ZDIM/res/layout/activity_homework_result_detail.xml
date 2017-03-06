@@ -110,7 +110,7 @@
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="10dp" >
 
-                            <com.zdhx.edu.im.common.view.FitImageView
+                            <zhwx.common.view.FitImageView
                                 android:id="@+id/noticeImgIV"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

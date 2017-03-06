@@ -108,6 +108,8 @@ public class TeamCreateHelper {
                     public void onSuccess(Team t) {
                         Log.i(TAG, "create team success, team id =" + t.getId() + ", now begin to update property...");
                         onCreateSuccess(context, t);
+                        //TODO 创建群组成功 通知IM后台
+                        TeamSynchroHelper.synchroTeam(t.getId(),context);
                     }
 
                     @Override

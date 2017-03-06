@@ -62,7 +62,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 高级群群资料页
+ * 群组群资料页
  * Created by huangjun on 2015/3/17.
  */
 public class AdvancedTeamInfoActivity extends UI implements
@@ -760,6 +760,7 @@ public class AdvancedTeamInfoActivity extends UI implements
             for (TeamMember mm : m) {
                 for (TeamMember member : members) {
                     if (mm.getAccount().equals(member.getAccount())) {
+                        //TODO 群组成员生变化 通知IM后台
                         members.set(members.indexOf(member), mm);
                         break;
                     }
@@ -770,6 +771,7 @@ public class AdvancedTeamInfoActivity extends UI implements
 
         @Override
         public void onRemoveTeamMember(TeamMember member) {
+            //TODO 移除群组成员 通知IM后台
             removeMember(member.getAccount());
         }
     };
@@ -779,6 +781,7 @@ public class AdvancedTeamInfoActivity extends UI implements
         public void onUpdateTeams(List<Team> teams) {
             for (Team team : teams) {
                 if (team.getId().equals(teamId)) {
+                    //TODO 新增群组 通知IM后台
                     updateTeamInfo(team);
                     updateTeamMemberDataSource();
                     break;
@@ -788,6 +791,7 @@ public class AdvancedTeamInfoActivity extends UI implements
 
         @Override
         public void onRemoveTeam(Team team) {
+            //TODO 删除群组 通知IM后台
             if (team.getId().equals(teamId)) {
                 AdvancedTeamInfoActivity.this.team = team;
                 finish();

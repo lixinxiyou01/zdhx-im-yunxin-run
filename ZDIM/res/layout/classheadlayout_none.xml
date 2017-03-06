@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <ImageView
+            android:id="@+id/topBackIV"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/head_2"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/app_name" />
+
+        <zhwx.common.view.CircleImageViewWithWhite
+            android:id="@+id/headImgIV"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="200dp"
+            android:visibility="gone"
+            android:src="@drawable/defult_classhead" 
+            />
+
+        <TextView
+            android:id="@+id/nameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/topBackIV"
+            android:layout_alignRight="@+id/headImgIV"
+            android:text="花千骨"
+            android:shadowColor="@color/black"
+            android:shadowDx="0"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:textStyle="bold"
+            android:layout_marginRight="105dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <LinearLayout
+            android:id="@+id/recordTipTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/topBackIV"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:background="#55000000"
+            android:gravity="center_vertical"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:visibility="invisible" >
+
+            <zhwx.common.view.CircleImageView
+                android:id="@+id/tipIV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/defult_head_img" />
+
+            <TextView
+                android:id="@+id/tipTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="{内容}"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

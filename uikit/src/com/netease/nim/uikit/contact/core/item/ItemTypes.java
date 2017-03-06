@@ -34,6 +34,6 @@ public interface ItemTypes {
 
         int NORMAL_TEAM = BASE + 1; // 普通群
 
-        int ADVANCED_TEAM = BASE + 2; // 高级群
+        int ADVANCED_TEAM = BASE + 2; // 群组
     }
 }

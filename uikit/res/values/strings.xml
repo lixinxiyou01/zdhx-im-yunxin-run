@@ -121,7 +121,7 @@
     <string name="team_introduce">群介绍</string>
     <string name="team_extension">扩展示例</string>
     <string name="click_set">点击设置</string>
-    <string name="create_advanced_team">创建高级群</string>
+    <string name="create_advanced_team">创建群组</string>
     <string name="reach_team_member_capacity">成员数量不能超过%1$d</string>
     <string name="team_authentication">身份验证</string>
     <string name="team_invite">邀请他人权限</string>
@@ -156,7 +156,7 @@
     <string name="quit_team">退出群</string>
     <string name="quit_normal_team">退出讨论组</string>
     <string name="team_apply_to_join">申请加入</string>
-    <string name="advanced_team">高级群</string>
+    <string name="advanced_team">群组</string>
     <string name="normal_team">讨论组</string>
     <string name="team_name_toast">群名称不能为空</string>
     <string name="not_allow_empty">不能为空</string>

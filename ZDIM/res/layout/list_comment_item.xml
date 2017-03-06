@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/commentItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        >
+
+        <TextView
+            android:id="@+id/replyUserNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="王小二"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/name_blue"
+            android:visibility="gone"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/replyStringTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回复"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/targetUserNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Text"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/name_blue"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="："
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/name_blue"
+            android:visibility="gone"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/contentTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:autoLink="none"
+            android:background="@drawable/btn_selector_comment_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

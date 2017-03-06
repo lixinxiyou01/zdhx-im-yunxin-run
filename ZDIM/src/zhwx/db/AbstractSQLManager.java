@@ -129,6 +129,8 @@ public abstract class AbstractSQLManager {
         private void createTables(SQLiteDatabase db) {
             // 创建联系人表
             createTableForContacts(db);
+            createImgInfoTable(db);
+
         }
 
         /**
@@ -154,6 +156,27 @@ public abstract class AbstractSQLManager {
                     + ContactsColumn.V3_ID + " TEXT ,"
                     + ContactsColumn.PINYIN + " TEXT "
                     + ")";
+            LogUtil.v(TAG + ":" + sql);
+            db.execSQL(sql);
+        }
+
+        public  static void createImgInfoTable(SQLiteDatabase db) {
+            String sql = "CREATE TABLE IF NOT EXISTS "
+                    + ImgInfoSqlManager.TABLES_NAME_IMGINFO
+                    + " ( "
+                    + ImgInfoSqlManager.ImgInfoColumn.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + ImgInfoSqlManager.ImgInfoColumn.MSGSVR_ID + " TEXT, "
+
+                    + ImgInfoSqlManager.ImgInfoColumn.OFFSET + " INTEGER, "
+                    + ImgInfoSqlManager.ImgInfoColumn.TOTALLEN + " INTEGER, "
+                    + ImgInfoSqlManager.ImgInfoColumn.BIG_IMGPATH + " TEXT, "
+                    + ImgInfoSqlManager.ImgInfoColumn.THUMBIMG_PATH + " TEXT, "
+                    + ImgInfoSqlManager.ImgInfoColumn.CREATE_TIME + " TEXT, "
+                    + ImgInfoSqlManager.ImgInfoColumn.MSG_LOCAL_ID + " TEXT, "
+                    + ImgInfoSqlManager.ImgInfoColumn.STATUS + " INTEGER, "
+                    + ImgInfoSqlManager.ImgInfoColumn.NET_TIMES + " TEXT "
+                    + ")";
+
             LogUtil.v(TAG + ":" + sql);
             db.execSQL(sql);
         }

@@ -66,17 +66,6 @@ public class ApplicationFragmentGroup extends TFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_application_group, container, false);
-	}
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
 		context = getActivity();
 		if (StringUtil.isNotBlank(ECApplication.getInstance().getCurrentIMUser().getAppCode())) {
 			appCodeString = ECApplication.getInstance().getCurrentIMUser().getAppCode();
@@ -91,6 +80,17 @@ public class ApplicationFragmentGroup extends TFragment {
 		}
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.fragment_application_group, container, false);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+	}
+
 
 	@Override
 	public void onStart() {
@@ -99,6 +99,9 @@ public class ApplicationFragmentGroup extends TFragment {
 	}
 
 	public void BuildAppGrid(){
+		if (appCode ==null || appCode.length==0) {
+			return;
+		}
 		appGroupContener = findView(R.id.appGroupContener);
         appGroupContener.removeAllViews();
         appGroups = Apps.getAppGroupList();
