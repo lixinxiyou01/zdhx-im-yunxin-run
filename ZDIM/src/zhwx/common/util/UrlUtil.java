@@ -2104,6 +2104,25 @@ public class UrlUtil {
 	public static String synchroTeam(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrlResponse(checkUrl(baseUrl + "/bd/neteaseTeam/mobile/synchroTeam"), map);
 	}
+	/****************************** *报修 ***************************************************/
+
+
+	/**
+	 * 请求首页权限和数字（报修管理没有功能）
+	 *	userId
+	 */
+	public static String getIndexData(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!getIndexData.action"), map);
+	}
+
+	/**
+	 * 获取设备一级分类
+	 */
+	public static String getDeviceKindLevelOneList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getDeviceKindLevelOneList.action"), map);
+	}
+
+
 
 	
 	/************************************ 数据接口end ************************************************************/

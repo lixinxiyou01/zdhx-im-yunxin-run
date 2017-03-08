@@ -1,27 +1,5 @@
 package zhwx.ui.dcapp.repairs;
 
-/** code is far away from bug with the animal protecting
-* 
-*     ┏┓　　　┏┓
-*   ┏┛┻━━━┛┻┓
-*   ┃　　　　　　　┃ 　
-*   ┃　　　━　　　┃
-*   ┃　┳┛　┗┳　┃
-*   ┃　　　　　　　┃
-*   ┃　　　┻　　　┃
-*   ┃　　　　　　　┃
-*   ┗━┓　　　┏━┛
- *     　   　┃　　　┃神兽保佑
- *     　   　┃　　　┃永无BUG！
- *     　　   ┃　　　┗━━━┓
- *     　   　┃　　　　　　　┣┓
- *     　   　┃　　　　　　　┏┛
- *     　   　┗┓┓┏━┳┓┏┛
- *   　  　   　┃┫┫　┃┫┫
- *   　  　   　┗┻┛　┗┻┛
-*
-*/
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,18 +56,18 @@ public class RMainActivity extends BaseActivity {
 
 	private ECProgressDialog mPostingdialog;
 	
-	private TextView count_dpc_a,count_pcz_a,count_ypc_a,count_dpj_a,count_wsh_b,count_wpc_b,
-					 count_pcz_b,count_ypc_b,count_wjs_c,count_wqr_c,count_dpj_c;
+	private TextView count_wjd_a,count_wxz_a,count_dfk_a,count_yxh_a,count_dcl_b,count_ypd_b,
+			count_ywc_b,count_fysp_b,count_wjd_c,count_wxz_c,count_hfk_c;
 	
 	private LinearLayout myOrderLay,managerLay,dirverLay;
 	
-	/** 司机 */
+	/** 维修工 */
 	public static final int STARTFLAG_MYTASK = 0;
 	
-	/** 订车人 */
-	public static final int STARTFLAG_MYORDERCAR = 1;
+	/** 报修人 */
+	public static final int STARTFLAG_MYREQUEST = 1;
 	
-	/** 派车人 */
+	/** 管理员 */
 	public static final int STARTFLAG_ORDERCHECK = 2;
 	
     private RelativeLayout chack_item_lay,nuLay;
@@ -108,12 +86,12 @@ public class RMainActivity extends BaseActivity {
 		mPostingdialog = new ECProgressDialog(this, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("operationCode", new ParameterValue("carmanage"));
+		map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					indexJson = UrlUtil.getIndex(ECApplication.getInstance().getV3Address(), map);
+					indexJson = UrlUtil.getIndexData(ECApplication.getInstance().getV3Address(), map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							refreshData1(indexJson);
@@ -149,58 +127,52 @@ public class RMainActivity extends BaseActivity {
 		IndexData data = new Gson().fromJson(indexJson, IndexData.class);
 		
 		//角色权限控制
-//		if (StringUtil.isNotBlank(data.getMyOrderCar().getDpc())) {
-//			myOrderLay.setVisibility(View.VISIBLE);
-//		}
-
 		if (data.getMyOrderCar() != null) {
-			count_dpc_a.setText(data.getMyOrderCar().getDpc());
-			count_dpc_a.setVisibility("0".equals(data.getMyOrderCar().getDpc())?View.INVISIBLE:View.VISIBLE);
-			count_dpc_a.bringToFront();
-			
-			count_pcz_a.setText(data.getMyOrderCar().getPcz());
-			count_pcz_a.setVisibility("0".equals(data.getMyOrderCar().getPcz())?View.INVISIBLE:View.VISIBLE);
-			count_pcz_a.bringToFront();
+			count_wjd_a.setText(data.getMyOrderCar().getDpc());
+			count_wjd_a.setVisibility("0".equals(data.getMyOrderCar().getDpc())?View.INVISIBLE:View.VISIBLE);
+			count_wjd_a.bringToFront();
 
-			count_ypc_a.setText(data.getMyOrderCar().getYpc());
-			count_ypc_a.setVisibility("0".equals(data.getMyOrderCar().getYpc())?View.INVISIBLE:View.VISIBLE);
-			count_ypc_a.bringToFront();
+			count_wxz_a.setText(data.getMyOrderCar().getPcz());
+			count_wxz_a.setVisibility("0".equals(data.getMyOrderCar().getPcz())?View.INVISIBLE:View.VISIBLE);
+			count_wxz_a.bringToFront();
 
-			count_dpj_a.setText(data.getMyOrderCar().getDpj());
-			count_dpj_a.setVisibility("0".equals(data.getMyOrderCar().getDpj())?View.INVISIBLE:View.VISIBLE);
-			count_dpj_a.bringToFront();
+			count_dfk_a.setText(data.getMyOrderCar().getYpc());
+			count_dfk_a.setVisibility("0".equals(data.getMyOrderCar().getYpc())?View.INVISIBLE:View.VISIBLE);
+			count_dfk_a.bringToFront();
+
+			count_yxh_a.setText(data.getMyOrderCar().getDpj());
+			count_yxh_a.setVisibility("0".equals(data.getMyOrderCar().getDpj())?View.INVISIBLE:View.VISIBLE);
+			count_yxh_a.bringToFront();
 		}
 		 
 		if (data.getOrderCarManage() != null) {
 			managerLay.setVisibility(View.VISIBLE);
-			count_wsh_b.setText(data.getOrderCarManage().getOrderCheck());
-			count_wsh_b.setVisibility("0".equals(data.getOrderCarManage().getOrderCheck())?View.INVISIBLE:View.VISIBLE);
+			count_dcl_b.setText(data.getOrderCarManage().getOrderCheck());
+			count_dcl_b.setVisibility("0".equals(data.getOrderCarManage().getOrderCheck())?View.INVISIBLE:View.VISIBLE);
 			chack_item_lay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.GONE:View.VISIBLE);
 			nuLay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.VISIBLE:View.GONE);
-			
-			count_wpc_b.setText(data.getOrderCarManage().getDpc());
-			count_wpc_b.setVisibility("0".equals(data.getOrderCarManage().getDpc())?View.INVISIBLE:View.VISIBLE);
-			
-			count_pcz_b.setText(data.getOrderCarManage().getPcz());
-			count_pcz_b.setVisibility("0".equals(data.getOrderCarManage().getPcz())?View.INVISIBLE:View.VISIBLE);
-			
-			count_ypc_b.setText(data.getOrderCarManage().getYpc());
-			count_ypc_b.setVisibility("0".equals(data.getOrderCarManage().getYpc())?View.INVISIBLE:View.VISIBLE);
+
+			count_ypd_b.setText(data.getOrderCarManage().getDpc());
+			count_ypd_b.setVisibility("0".equals(data.getOrderCarManage().getDpc())?View.INVISIBLE:View.VISIBLE);
+
+			count_ywc_b.setText(data.getOrderCarManage().getPcz());
+			count_ywc_b.setVisibility("0".equals(data.getOrderCarManage().getPcz())?View.INVISIBLE:View.VISIBLE);
+
+			count_fysp_b.setText(data.getOrderCarManage().getYpc());
+			count_fysp_b.setVisibility("0".equals(data.getOrderCarManage().getYpc())?View.INVISIBLE:View.VISIBLE);
 		}
 		
 		if (data.getMyTask() != null) {
 			dirverLay.setVisibility(View.VISIBLE);
-			count_wjs_c.setText(data.getMyTask().getWjs());
-			count_wjs_c.setVisibility("0".equals(data.getMyTask().getWjs())?View.INVISIBLE:View.VISIBLE);
-			
-			count_wqr_c.setText(data.getMyTask().getWqr());
-			count_wqr_c.setVisibility("0".equals(data.getMyTask().getWqr())?View.INVISIBLE:View.VISIBLE);
-			
-			count_dpj_c.setText(data.getMyTask().getWpj());
-			count_dpj_c.setVisibility("0".equals(data.getMyTask().getWpj())?View.INVISIBLE:View.VISIBLE);
+			count_wjd_c.setText(data.getMyTask().getWjs());
+			count_wjd_c.setVisibility("0".equals(data.getMyTask().getWjs())?View.INVISIBLE:View.VISIBLE);
+
+			count_wxz_c.setText(data.getMyTask().getWqr());
+			count_wxz_c.setVisibility("0".equals(data.getMyTask().getWqr())?View.INVISIBLE:View.VISIBLE);
+
+			count_hfk_c.setText(data.getMyTask().getWpj());
+			count_hfk_c.setVisibility("0".equals(data.getMyTask().getWpj())?View.INVISIBLE:View.VISIBLE);
 		}
-	
-		
 		mPostingdialog.dismiss();
 	}
 	
@@ -208,17 +180,19 @@ public class RMainActivity extends BaseActivity {
 		top_bar = (FrameLayout) findViewById(R.id.top_bar);
 		setImmerseLayout(top_bar);
 		noticeTV = (TextView) findViewById(R.id.noticeTV);
-		count_dpc_a = (TextView) findViewById(R.id.count_dpc_a);
-		count_pcz_a = (TextView) findViewById(R.id.count_pcz_a);
-		count_ypc_a = (TextView) findViewById(R.id.count_ypc_a);
-		count_dpj_a = (TextView) findViewById(R.id.count_dpj_a);
-		count_wsh_b = (TextView) findViewById(R.id.count_wsh_b);
-		count_wpc_b = (TextView) findViewById(R.id.count_wpc_b);
-		count_pcz_b = (TextView) findViewById(R.id.count_pcz_b);
-		count_ypc_b = (TextView) findViewById(R.id.count_ypc_b);
-		count_wjs_c = (TextView) findViewById(R.id.count_wjs_c);
-		count_wqr_c = (TextView) findViewById(R.id.count_wqr_c);
-		count_dpj_c = (TextView) findViewById(R.id.count_dpj_c);
+
+		count_wjd_a = (TextView) findViewById(R.id.count_wjd_a);
+		count_wxz_a = (TextView) findViewById(R.id.count_wxz_a);
+		count_dfk_a = (TextView) findViewById(R.id.count_dfk_a);
+		count_yxh_a = (TextView) findViewById(R.id.count_yxh_a);
+		count_dcl_b = (TextView) findViewById(R.id.count_dcl_b);
+		count_ypd_b = (TextView) findViewById(R.id.count_ypd_b);
+		count_ywc_b = (TextView) findViewById(R.id.count_ywc_b);
+		count_fysp_b = (TextView) findViewById(R.id.count_fysp_b);
+		count_wjd_c = (TextView) findViewById(R.id.count_wjd_c);
+		count_wxz_c = (TextView) findViewById(R.id.count_wxz_c);
+		count_hfk_c = (TextView) findViewById(R.id.count_hfk_c);
+
 		myOrderLay = (LinearLayout) findViewById(R.id.myOrderLay);
 		managerLay = (LinearLayout) findViewById(R.id.managerLay);
 		dirverLay = (LinearLayout) findViewById(R.id.dirverLay);
@@ -230,7 +204,7 @@ public class RMainActivity extends BaseActivity {
 	/** 订车人查看全部报修单 */
 	public void oncheckAllOrder(View v) {
 		startActivity(new Intent(context, OrderManageActivity.class)
-						  .putExtra("startFlag", STARTFLAG_MYORDERCAR)
+						  .putExtra("startFlag", STARTFLAG_MYREQUEST)
 						  .putExtra("status", OrderCarListItem.CHECKSTATUS_ALL));
 	}
 	
@@ -256,28 +230,28 @@ public class RMainActivity extends BaseActivity {
 	/** 未接单 */
 	public void onWjdA(View v){
 		startActivity(new Intent(context, OrderManageActivity.class)
-		.putExtra("startFlag", STARTFLAG_MYORDERCAR)
+		.putExtra("startFlag", STARTFLAG_MYREQUEST)
 		.putExtra("status", OrderCarListItem.CHECKSTATUS_DRAFT));
 	}
 	
 	/** 维修中 */
 	public void onWxzA(View v){
 		startActivity(new Intent(context, OrderManageActivity.class)
-		.putExtra("startFlag", STARTFLAG_MYORDERCAR)
+		.putExtra("startFlag", STARTFLAG_MYREQUEST)
 		.putExtra("status", OrderCarListItem.CHECKSTATUS_ASSIGNING));
 	}
 	
 	/** 待反馈 */
 	public void onDfkA(View v){
 		startActivity(new Intent(context, OrderManageActivity.class)
-		.putExtra("startFlag", STARTFLAG_MYORDERCAR)
+		.putExtra("startFlag", STARTFLAG_MYREQUEST)
 		.putExtra("status", OrderCarListItem.CHECKSTATUS_PASS));
 	}
 	
 	/** 已修好 */
 	public void onYxhA(View v){
 		startActivity(new Intent(context, OrderManageActivity.class)
-		.putExtra("startFlag", STARTFLAG_MYORDERCAR)
+		.putExtra("startFlag", STARTFLAG_MYREQUEST)
 		.putExtra("status", OrderCarListItem.CHECKSTATUS_FINISH));
 	}
 	

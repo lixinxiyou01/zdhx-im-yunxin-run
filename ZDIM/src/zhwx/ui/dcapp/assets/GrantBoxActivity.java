@@ -71,7 +71,7 @@ public class GrantBoxActivity extends BaseActivity implements OnClickListener{
 			
 			@Override
 			public void onClick(View arg0) {
-//				Intent intent = new Intent(context, AssetsListActivity.class); 
+//				Intent intent = new Intent(context, DeviceLevelOneActivity.class);
 //				startActivityForResult(intent, 111);
 				ECAlertDialog buildAlert = ECAlertDialog.buildColorButtonAlert(context, "查找资产", "#3989fc", "", "条件查找", "", "扫码查找", "#3989fc", new DialogInterface.OnClickListener() {
 					 @Override

@@ -144,7 +144,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_dpc_a"
+                            android:id="@+id/count_wjd_a"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -182,7 +182,7 @@
                             android:textSize="12sp" />
                         
                         <TextView
-                            android:id="@+id/count_pcz_a"
+                            android:id="@+id/count_wxz_a"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -221,7 +221,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_ypc_a"
+                            android:id="@+id/count_dfk_a"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -259,7 +259,7 @@
                         
                         
                         <TextView
-                            android:id="@+id/count_dpj_a"
+                            android:id="@+id/count_yxh_a"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -352,7 +352,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_wsh_b"
+                            android:id="@+id/count_dcl_b"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -389,7 +389,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_wpc_b"
+                            android:id="@+id/count_ypd_b"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -426,7 +426,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_pcz_b"
+                            android:id="@+id/count_ywc_b"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -463,7 +463,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_ypc_b"
+                            android:id="@+id/count_fysp_b"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -556,7 +556,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_wqr_c"
+                            android:id="@+id/count_wjd_c"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -593,7 +593,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_wjs_c"
+                            android:id="@+id/count_wxz_c"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -630,7 +630,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/count_dpj_c"
+                            android:id="@+id/count_hfk_c"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"

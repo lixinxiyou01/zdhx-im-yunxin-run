@@ -7,7 +7,7 @@ package zhwx;
  */
 public class Constant {
 
-	
+
 	
 	/** 智微校服务端地址 **/
 //	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //陈经纶
