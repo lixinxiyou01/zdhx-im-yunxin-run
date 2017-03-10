@@ -69,7 +69,7 @@ import zhwx.db.ContactSqlManager;
 import zhwx.ui.dcapp.carmanage.model.InputBaseInformation;
 
 /**   
- * @Title: OrderCarActivity.java 
+ * @Title: RepairsRequestActivity.java
  * @Package zhwx.ui.dcapp.carmanage
  * @author Li.xin @ 中电和讯
  * @date 2016-3-16 下午2:15:48 
@@ -351,7 +351,7 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 		
 		backUserCountET = (EditText) findViewById(R.id.backUserCountET);
 		
-		dateTV = (TextView) findViewById(R.id.dateTV);
+		dateTV = (TextView) findViewById(R.id.requsetUser);
 		timeTV = (TextView) findViewById(R.id.timeTV);
 		addressTV = (TextView) findViewById(R.id.addressTV);
 		userCountTV = (TextView) findViewById(R.id.userCountTV);

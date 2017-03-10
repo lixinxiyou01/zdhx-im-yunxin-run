@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -262,13 +263,13 @@ public class AssetsListActivity extends BaseActivity implements OnClickListener{
 	}
 	
 	public TextView getOrderButton (String text) {
-		LayoutParams params = new LayoutParams(
-			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
 		TextView button = new TextView(context);
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

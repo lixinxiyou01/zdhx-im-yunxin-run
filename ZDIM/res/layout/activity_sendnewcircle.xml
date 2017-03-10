@@ -85,8 +85,7 @@
                 android:horizontalSpacing="3dp"
                 android:numColumns="4"
                 android:paddingLeft="10dp"
-                android:verticalSpacing="3dp" >
-            </GridView>
+                android:verticalSpacing="3dp"></GridView>
 
             <RelativeLayout
                 android:id="@+id/selectClassBT"

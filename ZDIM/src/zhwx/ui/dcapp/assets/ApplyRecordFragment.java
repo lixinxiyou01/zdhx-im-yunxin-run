@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,12 +22,9 @@ import android.widget.TextView;
 import com.netease.nim.demo.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DensityUtil;
-import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.common.view.refreshlayout.PullableListView;
 import zhwx.ui.dcapp.assets.model.CheckListItem;
 import zhwx.ui.dcapp.assets.model.MyAssets;
@@ -42,15 +39,9 @@ public class ApplyRecordFragment extends ScrollTabHolderFragment {
 	
 	private int mPosition;
 
-	private HashMap<String, ParameterValue> map;
-		
 	private  List<MyAssets.ApplicationRecordsBean> allDataList;
 
 	private OrderListAdapter adapter;
-	
-	private ECProgressDialog mPostingdialog;
-	
-	private Handler handler = new Handler();
 	
 	private MyAssets assets;
 	
@@ -221,6 +212,8 @@ public class ApplyRecordFragment extends ScrollTabHolderFragment {
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+//		button.setTextColor(getResources().getColorStateList(R.color.btn_selector_textview));
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

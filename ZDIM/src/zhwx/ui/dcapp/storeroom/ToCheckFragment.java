@@ -6,13 +6,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -210,8 +210,8 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 			
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<Button> btns = getOrderButtonList(position);
-			for (Button button : btns) {
+			List<TextView> btns = getOrderButtonList(position);
+			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
 			addListener(holder, position, convertView);
@@ -234,10 +234,10 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 		
 	}
 	
-	public List<Button> getOrderButtonList(final int position){
+	public List<TextView> getOrderButtonList(final int position){
 		
-		List<Button> btnList = new ArrayList<Button>();
-		Button ckBT = getOrderButton("查看");
+		List<TextView> btnList = new ArrayList<TextView>();
+		TextView ckBT = getOrderButton("查看");
 		ckBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -245,8 +245,8 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 				startActivity(new Intent(getActivity(), ApplyDetailActivity.class).putExtra("id", auditData.getGridModel().get(position).getId()));
 			}
 		});
-		
-		Button shBT = getOrderButton("审核");
+
+		TextView shBT = getOrderButton("审核");
 		shBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -269,14 +269,15 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 		return btnList;
 	}
 
-	public Button getOrderButton (String text) {
+	public TextView getOrderButton (String text) {
 		LayoutParams params = new LayoutParams(
 			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-		Button button = new Button(getActivity());
+		TextView button = new TextView(getActivity());
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

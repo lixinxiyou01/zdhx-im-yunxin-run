@@ -6,12 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -135,8 +135,8 @@ public class AssetsSearchListActivity extends BaseActivity implements OnClickLis
 			
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<Button> btns = getOrderButtonList(position);
-			for (Button button : btns) {
+			List<TextView> btns = getOrderButtonList(position);
+			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
 			addListener(holder, position, convertView);
@@ -159,9 +159,9 @@ public class AssetsSearchListActivity extends BaseActivity implements OnClickLis
 		
 	}
 	
-	public List<Button> getOrderButtonList(final int position){
-		List<Button> btnList = new ArrayList<Button>();
-		Button ckBT = getOrderButton("查看");
+	public List<TextView> getOrderButtonList(final int position){
+		List<TextView> btnList = new ArrayList<TextView>();
+		TextView ckBT = getOrderButton("查看");
 		ckBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -174,7 +174,7 @@ public class AssetsSearchListActivity extends BaseActivity implements OnClickLis
 		});
 		
 		if (GrantBoxActivity.isHas(searchList.get(position))) {
-			Button addBT = getOrderButton("移除");
+			TextView addBT = getOrderButton("移除");
 			addBT.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -186,7 +186,7 @@ public class AssetsSearchListActivity extends BaseActivity implements OnClickLis
 			});
 			btnList.add(addBT);
 		} else {
-			Button addBT = getOrderButton("添加");
+			TextView addBT = getOrderButton("添加");
 			addBT.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -202,14 +202,15 @@ public class AssetsSearchListActivity extends BaseActivity implements OnClickLis
 		return btnList;
 	}
 	
-	public Button getOrderButton (String text) {
+	public TextView getOrderButton (String text) {
 		LayoutParams params = new LayoutParams(
 			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-		Button button = new Button(context);
+		TextView button = new TextView(context);
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

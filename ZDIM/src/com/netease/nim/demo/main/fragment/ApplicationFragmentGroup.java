@@ -40,6 +40,7 @@ import zhwx.ui.dcapp.assets.AMainActivity;
 import zhwx.ui.dcapp.carmanage.CMainActivity;
 import zhwx.ui.dcapp.checkin.CIMainActivity;
 import zhwx.ui.dcapp.homework.StudentHomeWorkListActivity;
+import zhwx.ui.dcapp.repairs.RMainActivity;
 import zhwx.ui.dcapp.score.MyScoreActivity;
 import zhwx.ui.dcapp.storeroom.SMainActivity;
 import zhwx.ui.dcapp.takecourse.TackCourseIndexActivity;
@@ -57,7 +58,7 @@ public class ApplicationFragmentGroup extends TFragment {
 	
     private String appCodeString = "";
 
-	private String addCode = "";
+	private String addCode = ",rm";
 
 	private List<Apps.AppGroup> appGroups = new ArrayList<>();
 
@@ -269,7 +270,10 @@ public class ApplicationFragmentGroup extends TFragment {
 					} else if (V3NoticeCenter.NOTICE_KIND_STORE.equals(kind)) { // 库房管理
 						startActivity(new Intent(context, SMainActivity.class));
 
-					}  else {
+					} else if (V3NoticeCenter.NOTICE_KIND_REPAIR.equals(kind)) { //报修
+						startActivity(new Intent(context, RMainActivity.class));
+
+					} else {
 						ToastUtil.showMessage("研发中...");
 					}
 				}

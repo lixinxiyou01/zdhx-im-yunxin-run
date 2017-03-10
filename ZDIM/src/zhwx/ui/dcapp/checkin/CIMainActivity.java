@@ -101,7 +101,7 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 	
 	private String localCity = "北京";
 
-	private String COMPANYADDRESS = "领秀新硅谷";
+	private String COMPANYADDRESS = "领秀新硅谷~";
 
 	private String COMPANYNAME = "中电和讯科技有限公司";
 

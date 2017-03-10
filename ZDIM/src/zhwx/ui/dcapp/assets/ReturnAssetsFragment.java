@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -183,8 +184,8 @@ public class ReturnAssetsFragment extends ScrollTabHolderFragment {
 		
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<Button> btns = getOrderButtonList(position);
-			for (Button button : btns) {
+			List<TextView> btns = getOrderButtonList(position);
+			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
 			addListener(holder, position, convertView);
@@ -207,9 +208,9 @@ public class ReturnAssetsFragment extends ScrollTabHolderFragment {
 		
 	}
 	
-	public List<Button> getOrderButtonList(final int position){
-		List<Button> btnList = new ArrayList<Button>();
-		Button ckBT = getOrderButton("查看");
+	public List<TextView> getOrderButtonList(final int position){
+		List<TextView> btnList = new ArrayList<TextView>();
+		TextView ckBT = getOrderButton("查看");
 		ckBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -221,18 +222,19 @@ public class ReturnAssetsFragment extends ScrollTabHolderFragment {
 			}
 		});
 		btnList.add(ckBT);
-		Button ffBT = getOrderButton("发放");
+		TextView ffBT = getOrderButton("发放");
 		return btnList;
 	}
 	
-	public Button getOrderButton (String text) {
+	public TextView getOrderButton (String text) {
 		LayoutParams params = new LayoutParams(
 			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-		Button button = new Button(getActivity());
+		TextView button = new TextView(getActivity());
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

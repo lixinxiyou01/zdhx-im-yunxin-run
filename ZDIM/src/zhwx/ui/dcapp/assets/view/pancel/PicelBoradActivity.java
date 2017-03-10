@@ -46,7 +46,6 @@ public class PicelBoradActivity extends BaseActivity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		getTopBarView().setBackGroundColor(R.color.main_bg_assets);
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "确定","签字", this);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		findView();
 	}
 
@@ -71,11 +70,11 @@ public class PicelBoradActivity extends BaseActivity implements OnClickListener,
 		m_sketchPad = (SketchPadView) findViewById(R.id.sketchpad);
 		m_sketchPad.setCallback(PicelBoradActivity.this);
 		Bitmap bitmap = null;
-		try {
-			bitmap = BitmapFactory.decodeStream(getAssets().open("paper.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			bitmap = BitmapFactory.decodeStream(getAssets().open("paper.png"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		initPaint(bitmap);
 	}
 
@@ -131,7 +130,7 @@ public class PicelBoradActivity extends BaseActivity implements OnClickListener,
 		m_sketchPad.setCallback(PicelBoradActivity.this);
 		line.removeAllViews();
 		line.addView(m_sketchPad);
-		m_sketchPad.setBkBitmap(bitmap);	
+//		m_sketchPad.setBkBitmap(bitmap);
 	}
 
 

@@ -3,7 +3,6 @@ package com.netease.nim.demo.main.fragment;
 import android.os.Bundle;
 
 import com.netease.nim.demo.R;
-import com.netease.nim.demo.main.model.MainTab;
 import com.netease.nim.uikit.common.activity.UI;
 
 /**
@@ -15,7 +14,7 @@ public class CircleListFragment extends MainTabFragment {
     private CircleFragment fragment;
 
     public CircleListFragment() {
-        setContainerId(MainTab.CIRCLE.fragmentId);
+//        setContainerId(MainTab.CIRCLE.fragmentId);
     }
 
     @Override

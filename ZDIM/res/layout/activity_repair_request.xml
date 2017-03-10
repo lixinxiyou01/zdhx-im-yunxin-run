@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <ScrollView
         android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_above="@+id/order_btnLay" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/order_btnLay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
-            </RelativeLayout>
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/requsetUser"
@@ -35,11 +30,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="    申请日期"
+                    android:text="报  修  人:"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/useDateET"
+                    android:id="@+id/requsetUserTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -48,158 +43,58 @@
                     android:layout_marginRight="10dp"
                     android:layout_toRightOf="@+id/requsetUser"
                     android:background="@null"
-                    android:editable="false"
-                    android:hint="使用资产的日期"
                     android:singleLine="true"
                     android:textColor="@color/greytext"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
+                android:background="@drawable/line_middle">
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/TextView02"
+                    android:id="@+id/timeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="    申请部门"
+                    android:text="报修物品:"
                     android:textSize="15sp" />
 
-                <Spinner
-                    android:id="@+id/applyDepatmentSP"
+                <TextView
+                    android:id="@+id/deviceNameTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/TextView02" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@color/white" >
-
-                <TextView
-                    android:id="@+id/TextView03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="    资产类别"
-                    android:textSize="15sp" />
-
-                <Spinner
-                    android:id="@+id/assetKindSP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/TextView03" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/list_item_selector"
-                android:onClick="onSelectKind" >
-
-                <TextView
-                    android:id="@+id/TextView04"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="资产类型"
-                    android:textSize="15sp" />
-
-                <Spinner
-                    android:id="@+id/kindSP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/TextView04"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/kindTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/TextView04"
-                    android:hint="去选择"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/icon_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" >
-
-                <TextView
-                    android:id="@+id/TextView01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="被申请校区"
+                    android:layout_toRightOf="@+id/timeTV"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/greytext"
                     android:textSize="15sp" />
-
-                <Spinner
-                    android:id="@+id/applySchoolSP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/TextView01" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
+                android:layout_marginTop="6dp"
+                android:background="@drawable/line_middle">
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/addressTV"
@@ -208,51 +103,138 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="        审核人"
-                    android:textSize="15sp" />
-
-                <Spinner
-                    android:id="@+id/auditorSP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/addressTV" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" >
-
-                <TextView
-                    android:id="@+id/TextView07"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="    用途说明"
+                    android:text="常见故障:"
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/instructionET"
+                    android:id="@+id/addressET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toLeftOf="@+id/imageView1"
+                    android:layout_toRightOf="@+id/addressTV"
+                    android:background="@null"
+                    android:editable="false"
+                    android:onClick="onFindAddress"
+                    android:singleLine="true"
+                    android:textColor="@color/greytext"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_middle">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/userCountTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="故障描述:"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/faultDescriptionET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/TextView07"
-                    android:background="@null"
-                    android:hint="选填"
+                    android:layout_toRightOf="@+id/userCountTV"
+                    android:lines="3"
+                    android:textColor="@color/greytext"
+                    android:textSize="15sp"></EditText>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_middle"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="故障地点:"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/TextView01"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/buildSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/floorSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/classSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_middle">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="联系电话:"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/mobileET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/image"
                     android:singleLine="true"
                     android:textColor="@color/greytext"
                     android:textSize="15sp" />
@@ -260,76 +242,66 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/TextView08"
+                    android:id="@+id/upLoadimage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="    配置说明"
+                    android:layout_marginTop="10dp"
+                    android:text="上传图片:"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/reasonET"
-                    android:layout_width="wrap_content"
+                <GridView
+                    android:id="@+id/repairFileGV"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/TextView08"
-                    android:background="@null"
-                    android:hint="选填"
-                    android:singleLine="true"
-                    android:textColor="@color/greytext"
-                    android:textSize="15sp" >
-
-                    <requestFocus />
-                </EditText>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line_middle" >
+                    android:layout_toRightOf="@+id/upLoadimage"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="4"
+                    android:paddingLeft="10dp"
+                    android:verticalSpacing="3dp">
+                </GridView>
             </RelativeLayout>
         </LinearLayout>
-
     </ScrollView>
 
     <LinearLayout
         android:id="@+id/order_btnLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:layout_marginRight="13dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="5"
+            android:background="#5d83ee"
+            android:gravity="center"
+            android:onClick="onOrder"
+            android:text="提交"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dip"
-            android:layout_marginTop="10dip"
             android:layout_weight="5"
-            android:background="@drawable/btn_cm_order_selecter"
+            android:background="#a6b9f1"
             android:gravity="center"
             android:onClick="onOrder"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp"
-            android:text="提交申请单"
+            android:text="取消"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>
-
 </RelativeLayout>

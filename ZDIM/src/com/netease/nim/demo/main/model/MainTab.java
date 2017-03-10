@@ -2,7 +2,6 @@ package com.netease.nim.demo.main.model;
 
 import com.netease.nim.demo.R;
 import com.netease.nim.demo.main.fragment.AppListFragment;
-import com.netease.nim.demo.main.fragment.CircleListFragment;
 import com.netease.nim.demo.main.fragment.ContactListFragment;
 import com.netease.nim.demo.main.fragment.MainTabFragment;
 import com.netease.nim.demo.main.fragment.SessionListFragment;
@@ -11,8 +10,8 @@ import com.netease.nim.demo.main.reminder.ReminderId;
 public enum MainTab {
     RECENT_CONTACTS(0, ReminderId.SESSION, SessionListFragment.class, R.string.main_tab_session, R.layout.session_list),
     CONTACT(1, ReminderId.CONTACT, ContactListFragment.class, R.string.main_tab_contact, R.layout.contacts_list),
-    APP_LIST(2,ReminderId.APP_LIST, AppListFragment.class, R.string.app_list, R.layout.app_list_tab),
-    CIRCLE(3,ReminderId.CIRCLE, CircleListFragment.class, R.string.circle, R.layout.circle_list_tab);
+    APP_LIST(2,ReminderId.APP_LIST, AppListFragment.class, R.string.app_list, R.layout.app_list_tab);
+//    CIRCLE(3,ReminderId.CIRCLE, CircleListFragment.class, R.string.circle, R.layout.circle_list_tab);
 //    CHAT_ROOM(3,ReminderId.INVALID, ChatRoomListFragment.class, R.string.chat_room, R.layout.chat_room_tab);
 
     public final int tabIndex;

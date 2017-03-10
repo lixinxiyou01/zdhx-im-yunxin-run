@@ -466,7 +466,7 @@ public class ECApplication extends Application {
     };
 
 
-    /********************************  智微校定义  ******************************/
+    /********************************  经纶教育定义  ******************************/
     /**
      * IM登录信息
      * @return
@@ -509,7 +509,7 @@ public class ECApplication extends Application {
 
     public String getV3Address(){
 //        return getCurrentIMUser().getV3Url();
-        return "http://192.168.1.125:8888/dc-repair";
+        return "http://192.168.1.120:7777/dc-repair";
     }
 
     /**
@@ -590,7 +590,7 @@ public class ECApplication extends Application {
     }
 
     /**
-     * 存储智微校服务器地址
+     * 存储经纶教育服务器地址
      * @param address
      */
     public void saveAddress(String address) {

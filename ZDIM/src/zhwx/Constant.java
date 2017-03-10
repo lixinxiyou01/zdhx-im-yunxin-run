@@ -9,9 +9,9 @@ public class Constant {
 
 
 	
-	/** 智微校服务端地址 **/
-//	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //陈经纶
-	public static final String SERVER_ADDRESS_DEFULT = "http://117.78.48.224:9999/im"; //正式
+	/** 经纶教育服务端地址 **/
+	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //陈经纶
+//	public static final String SERVER_ADDRESS_DEFULT = "http://117.78.48.224:9999/im"; //智微校正式
 	public static final String SERVER_ADDRESS_DEFULT_TEST = "http://www.zdhx-edu.com/im"; //中电
 	public static final String SERVER_ADDRESS_DEFULT_TEST1 = "http://192.168.1.8:9998/im"; //测试
 
@@ -19,7 +19,7 @@ public class Constant {
 
 
 	public static final class YunXin {
-		/** 云信AppId-智微校 **/
+		/** 云信AppId-经纶教育 **/
 		public static final String APPKEY = "e7b43b346eaf69308a902fd1b654caec";
 		public static final String SECRET  = "9a15f6fd0ac7";
 	}

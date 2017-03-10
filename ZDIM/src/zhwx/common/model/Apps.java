@@ -52,6 +52,7 @@ public class Apps implements Serializable {
 		appList.add(new Apps("教科研",R.drawable.icon_keyan,"tm"));
 		appList.add(new Apps("调查问卷",R.drawable.icon_diaochawenjuan,"qn"));
 		appList.add(new Apps("作业统计",R.drawable.icon_homework_cjl,"il"));
+		appList.add(new Apps("报修",R.drawable.icon_repair,"rm"));
 		return appList;
 	}
 
@@ -78,6 +79,7 @@ public class Apps implements Serializable {
 		xwbgAppList.add(new Apps("食堂管理",R.drawable.icon_cn,"cn"));
 		xwbgAppList.add(new Apps("资产管理",R.drawable.icon_zichan,"as"));
 		xwbgAppList.add(new Apps("易耗品管理",R.drawable.icon_store,"sm"));
+		xwbgAppList.add(new Apps("报修",R.drawable.icon_repair,"rm"));
 		xwbgAg.setApps(xwbgAppList);
 		appGroupList.add(xwbgAg);
 

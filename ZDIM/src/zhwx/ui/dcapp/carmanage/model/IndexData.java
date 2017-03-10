@@ -1,7 +1,7 @@
 package zhwx.ui.dcapp.carmanage.model;
 
 /**   
- * @Title: IndexData.java 
+ * @Title: RepairIndexData.java
  * @Package zhwx.ui.dcapp.carmanage
  * @author Li.xin @ 中电和讯
  * @date 2016-3-11 下午2:34:24 

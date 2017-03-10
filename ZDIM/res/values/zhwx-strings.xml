@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">智微校</string>
+    <string name="app_name">经纶教育</string>
     <string name="app_name_inner">云通讯IM(内部使用)</string>
     <string name="app_server_view">登录参数配置</string>
     <string name="app_server_config_error_tips">请先进行登录参数配置</string>
@@ -241,6 +241,7 @@
     <string name="question">想要跟自己谈谈人生么？</string>
     <string name="question_notice">退出后当前编辑内容不会保存，确认退出吗？</string>
     <string name="question_carmanager">退出后当前订车单内容不会保存，确认退出吗？</string>
+    <string name="question_repair">退出后当前页面内容不会保存，确认退出吗？</string>
     <string name="question_carmanager_cancel">确认取消此订车单吗？</string>
     <string name="question_carmanager_finish">确认结束派车吗？</string>
     <string name="question_notice_send">未填写主题，确认继续发送？</string>

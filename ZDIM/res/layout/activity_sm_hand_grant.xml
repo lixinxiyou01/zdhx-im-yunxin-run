@@ -29,7 +29,7 @@
                 android:focusableInTouchMode="true">
 
                 <TextView
-                    android:id="@+id/dateTV"
+                    android:id="@+id/requsetUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -46,7 +46,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/dateTV"
+                    android:layout_toRightOf="@+id/requsetUser"
                     android:singleLine="true"
                     android:textColor="@color/greytext"
                     android:textSize="16sp" />
@@ -265,8 +265,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
@@ -277,6 +275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="制单日期"
                     android:textSize="15sp" />
 
@@ -348,7 +347,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
 
                 <ListView
                     android:id="@+id/grantLV"
@@ -371,10 +371,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@color/white">
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -404,23 +405,23 @@
                             android:textColor="@color/greytext"
                             android:textSize="14sp" />
                     </RadioGroup>
+                    <GridView
+                        android:id="@+id/circleGV"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="3dp"
+                        android:numColumns="4"
+                        android:paddingLeft="10dp"
+                        android:verticalSpacing="3dp"
+                        android:visibility="gone"></GridView>
+
+                    <zhwx.ui.dcapp.assets.view.FitImageViewForAs
+                        android:id="@+id/fitImageViewForAs2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/btn_add_pic" />
                 </LinearLayout>
 
-                <GridView
-                    android:id="@+id/circleGV"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:horizontalSpacing="3dp"
-                    android:numColumns="4"
-                    android:paddingLeft="10dp"
-                    android:verticalSpacing="3dp"
-                    android:visibility="gone"></GridView>
-
-                <zhwx.ui.dcapp.assets.view.FitImageViewForAs
-                    android:id="@+id/fitImageViewForAs2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_add_pic" />
             </RelativeLayout>
 
         </LinearLayout>

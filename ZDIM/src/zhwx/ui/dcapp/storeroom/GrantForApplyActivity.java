@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -416,8 +416,8 @@ public class GrantForApplyActivity extends BaseActivity implements
 			holder.moneyET.setText(detail.getApplygoodsList().get(position).getMoney()+"");
 			// 动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<Button> btns = getOrderButtonList(position);
-			for (Button button : btns) {
+			List<TextView> btns = getOrderButtonList(position);
+			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
 			addListener(holder, position, convertView);
@@ -467,9 +467,9 @@ public class GrantForApplyActivity extends BaseActivity implements
 
 	}
 
-	public List<Button> getOrderButtonList(final int position) {
-		List<Button> btnList = new ArrayList<Button>();
-		Button removeBT = getOrderButton("移除");
+	public List<TextView> getOrderButtonList(final int position) {
+		List<TextView> btnList = new ArrayList<TextView>();
+		TextView removeBT = getOrderButton("移除");
 		removeBT.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -486,14 +486,15 @@ public class GrantForApplyActivity extends BaseActivity implements
 		return btnList;
 	}
 
-	public Button getOrderButton(String text) {
+	public TextView getOrderButton(String text) {
 		LayoutParams params = new LayoutParams(
 				LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-		Button button = new Button(context);
+		TextView button = new TextView(context);
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

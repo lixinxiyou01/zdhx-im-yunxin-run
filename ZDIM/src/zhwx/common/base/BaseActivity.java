@@ -1,7 +1,6 @@
 package zhwx.common.base;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,7 +51,6 @@ public abstract class BaseActivity extends FragmentActivity implements SwipeBack
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		ECApplication.getInstance().addActivity(this);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		mBaseActivity.init(getBaseContext(), this);
 		mHelper = new SwipeBackActivityHelper(this);
 		mHelper.onActivityCreate();

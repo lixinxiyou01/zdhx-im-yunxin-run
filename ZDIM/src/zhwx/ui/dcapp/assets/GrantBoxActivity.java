@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -197,8 +198,8 @@ public class GrantBoxActivity extends BaseActivity implements OnClickListener{
 			
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<Button> btns = getOrderButtonList(position);
-			for (Button button : btns) {
+			List<TextView> btns = getOrderButtonList(position);
+			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
 			addListener(holder, position, convertView);
@@ -221,9 +222,9 @@ public class GrantBoxActivity extends BaseActivity implements OnClickListener{
 		
 	}
 	
-	public List<Button> getOrderButtonList(final int position){
-		List<Button> btnList = new ArrayList<Button>();
-		Button ckBT = getOrderButton("查看");
+	public List<TextView> getOrderButtonList(final int position){
+		List<TextView> btnList = new ArrayList<TextView>();
+		TextView ckBT = getOrderButton("查看");
 		ckBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -233,7 +234,7 @@ public class GrantBoxActivity extends BaseActivity implements OnClickListener{
 				startActivity(intent);
 			}
 		});
-		Button removeBT = getOrderButton("移除");
+		TextView removeBT = getOrderButton("移除");
 		removeBT.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -246,14 +247,15 @@ public class GrantBoxActivity extends BaseActivity implements OnClickListener{
 		return btnList;
 	}
 	
-	public Button getOrderButton (String text) {
+	public TextView getOrderButton (String text) {
 		LayoutParams params = new LayoutParams(
 			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
-		Button button = new Button(context);
+		TextView button = new TextView(context);
 		button.setText(text);
 		button.setTextColor(Color.parseColor("#555555"));
 		button.setBackgroundResource(R.drawable.btn_selector_ordercar);
+		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
 	}

@@ -18,7 +18,7 @@ public class IdAndNameSpinnerAdapter extends ArrayAdapter<IdAndName>{
 	private List<? extends IdAndName> list;
 	
 	public IdAndNameSpinnerAdapter(Activity context, List<? extends IdAndName> area) {
-		super(context, android.R.layout.simple_list_item_1);
+		super(context, R.layout.spinner_items);
 		this.list = area;
 		this.context = context;
 	}

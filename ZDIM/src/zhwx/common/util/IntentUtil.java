@@ -21,6 +21,7 @@ import zhwx.ui.dcapp.homework.StudentHomeWorkDetailsActivity;
 import zhwx.ui.dcapp.storeroom.SMainActivity;
 import zhwx.ui.imapp.notice.NoticeDetailActivity;
 import zhwx.ui.webapp.WebAppActivity;
+import zhwx.ui.webapp.WebAppWithBackActivity;
 
 //自定义android Intent类，
 
@@ -381,7 +382,14 @@ public class IntentUtil {
 				intent.putExtra("webUrl",  ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_MESS
 						+ "?sourceId=" + v3NoticeCenter.getSourceId()
 						+ "&userId=" + ECApplication.getInstance().getCurrentIMUser().getId());
-			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CARMANAGE)) { //车辆管理
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_TECH_MANAGE)) { //科研管理
+
+				intent = new Intent(context,WebAppWithBackActivity.class);
+
+				intent.putExtra("webUrl",  Constant.WEBAPP_URL_TECH_MANAGE
+						+ "?loginName=" + ECApplication.getInstance().getCurrentIMUser().getLoginName());
+
+			}else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CARMANAGE)) { //车辆管理
 
 				intent = new Intent(context,CMainActivity.class);
 			}  else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CHECKIN)) { //考 勤

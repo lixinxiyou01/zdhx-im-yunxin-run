@@ -44,7 +44,7 @@ import zhwx.ui.dcapp.repairs.model.DeviceKind;
  * @author Li.xin @ zdhx
  * @date 2016年8月22日 下午12:42:43 
  */
-public class DeviceLevelOneActivity extends BaseActivity implements OnClickListener{
+public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListener{
 	
 	private Activity context;
 		
@@ -63,7 +63,9 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 	private  List<DeviceKind> allDataList;
 
 	private ImageLoader imageLoader;
-	
+
+	private String levelOneId;
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.activity_as_assetlist;
@@ -73,10 +75,11 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		levelOneId = getIntent().getStringExtra("id");
 		imageLoader = new ImageLoader(context);
 		cache = new RequestWithCacheGet(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_repairs);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, R.drawable.icon_sao,"设备分类", this);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"设备分类", this);
 		assetsLV = (PullableListView) findViewById(R.id.assetsLV);
 		assetsLV.enableAutoLoad(false);
 		assetsLV.setLoadmoreVisible(false);
@@ -85,7 +88,7 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 		assetsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				startActivity(new Intent(context,DeviceLevelTwoActivity.class).putExtra("id",allDataList.get(position).getId()));
+				startActivity(new Intent(context,DeviceLevelThreeActivity.class).putExtra("id",allDataList.get(position).getId()));
 			}
 		});
 		getData();
@@ -98,8 +101,9 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 		mPostingdialog = new ECProgressDialog(context, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		map.put("levelOneId",new ParameterValue(levelOneId));
 		try {
-			circleJson = cache.getRseponse(UrlUtil.getDeviceKindLevelOneList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
+			circleJson = cache.getRseponse(UrlUtil.getDeviceKindLevelTwoList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
 				
 				@Override
 				public void onResponse(String response) {
@@ -172,7 +176,7 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 			ViewHolder holder;
 			if (convertView == null) {
 				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_one, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_two, null);
 				holder = new ViewHolder();
 				holder.kindNameTV = (TextView) convertView.findViewById(R.id.kindNameTV);
 				holder.kindImgIV = (ImageView) convertView.findViewById(R.id.kindImgIV);

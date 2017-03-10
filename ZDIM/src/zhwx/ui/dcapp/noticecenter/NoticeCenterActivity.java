@@ -68,8 +68,7 @@ import zhwx.common.view.refreshlayout.PullableListView;
 import zhwx.common.view.waveview.WaveSwipeRefreshLayout;
 
 
-
-public class NoticeCenterActivity extends BaseActivity {
+public class NoticeCenterActivity extends BaseActivity implements OnClickListener{
 
 	private Activity context;
 
@@ -144,15 +143,13 @@ public class NoticeCenterActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		
 		context = this;
-	
-		getTopBarView().setVisibility(View.GONE);
+
+		getTopBarView().setBackGroundColor(R.color.main_bg);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, R.drawable.btn_mark_read,"消息中心", this);
 	
 		mRequestWithCache = new RequestWithCacheGet(context);
-	
 		mainLay = (RelativeLayout) findViewById(R.id.mainLay);
-	
 		listView = (PullableListView) findViewById(R.id.content_view);
-	
 		layout = (WaveSwipeRefreshLayout) findViewById(R.id.refresh_view);
 		layout.setColorSchemeColors(Color.WHITE, Color.WHITE);
 		layout.setWaveColor(Color.parseColor("#18ab8e"));
@@ -911,7 +908,6 @@ public class NoticeCenterActivity extends BaseActivity {
 	/**
 	 * 将消息置成删除
 	 * @param messageId
-	 * @param context
 	 * @return
 	 */
 	public void setMessageDelete(String messageId, final int size) {
@@ -943,7 +939,6 @@ public class NoticeCenterActivity extends BaseActivity {
 	/**
 	 * 将消息置成标记/取消标记
 	 * @param messageId
-	 * @param context
 	 * @return
 	 */
 	public void lightonForattention(String messageId, final int size,boolean isMark) {
@@ -999,9 +994,7 @@ public class NoticeCenterActivity extends BaseActivity {
 	
 	/**
 	 * 将消息置成已读
-	 * 
 	 * @param messageId
-	 * @param context
 	 * @return
 	 */
 	public void setMessageRead(String messageId,final int position) {
@@ -1034,8 +1027,6 @@ public class NoticeCenterActivity extends BaseActivity {
 	
 	/**
 	 * 将消息置成已读
-	 * @param messageId
-	 * @param context
 	 * @return
 	 */
 	public void setNoticeRead(String noticeId) {
@@ -1120,6 +1111,27 @@ public class NoticeCenterActivity extends BaseActivity {
 		super.onResume();
 	}
 
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btn_left:
+				finish();
+				break;
+			case R.id.btn_right:
+				ECAlertDialog buildAlert = ECAlertDialog.buildAlert(NoticeCenterActivity.this, R.string.intent_xlt_opendownload, null, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						markAllRead();
+					}
+				});
+				buildAlert.setMessage("是否全部标记为已读");
+				buildAlert.setTitle("提示");
+				buildAlert.show();
+				break;
+		}
+	}
+
 	/**
 	 * 获取未读消息数
 	 * 
@@ -1131,8 +1143,7 @@ public class NoticeCenterActivity extends BaseActivity {
 			@Override
 			public void run() {
 				try {
-					messageCount = UrlUtil.getMessageCount(
-							ECApplication.getInstance().getV3Address(), map).trim();
+					messageCount = UrlUtil.getMessageCount(ECApplication.getInstance().getV3Address(), map).trim();
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							unReadCountTV.setText(messageCount);
@@ -1143,10 +1154,34 @@ public class NoticeCenterActivity extends BaseActivity {
 				}
 			}
 		}).start();
-		
-//		SharedPreferences sharedPreferences = context.getSharedPreferences(RequestWithCache.SHAREDPREFERENCES_NAME, 0);
-//		sharedPreferences.edit().putString(url, response).commit();
 	}
+
+	/**
+	 * 获取未读消息数
+	 *
+	 */
+	public void markAllRead() {
+		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+		new ProgressThreadWrap(context, new RunnableWrap() {
+			@Override
+			public void run() {
+				try {
+					UrlUtil.setAllRead(ECApplication.getInstance().getAddress(), map).trim();
+					handler.postDelayed(new Runnable() {
+						public void run() {
+							ToastUtil.showMessage("已全部标记为已读");
+							pageNo = 1;
+							getData(pageNo);
+						}
+					}, 5);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.activity_notice_center;

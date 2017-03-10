@@ -848,6 +848,17 @@ public class UrlUtil {
 		return getUrlResponse(checkUrl(baseUrl) + "/bd/mobile/baseData!getMessageCount.action", map);
 	}
 
+	/**
+	 * 全部标记为已读
+	 * @param baseUrl
+	 * @param map（userId）
+	 * @return url
+	 * @throws IOException
+	 */
+	public static String setAllRead(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl) + "/bd/message/setAllRead", map);
+	}
+
 //	/**
 //	 * 绑定推送服务
 //	 * @param baseUrl
@@ -2104,7 +2115,7 @@ public class UrlUtil {
 	public static String synchroTeam(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrlResponse(checkUrl(baseUrl + "/bd/neteaseTeam/mobile/synchroTeam"), map);
 	}
-	/****************************** *报修 ***************************************************/
+	/******************************** 报修 ***************************************************/
 
 
 	/**
@@ -2120,6 +2131,21 @@ public class UrlUtil {
 	 */
 	public static String getDeviceKindLevelOneList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getDeviceKindLevelOneList.action"), map);
+	}
+	/**
+	 * 获取设备二级分类
+	 * levelOneId
+	 */
+	public static String getDeviceKindLevelTwoList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getDeviceKindLevelTwoList.action"), map);
+	}
+
+	/**
+	 * 获取设备三级分类
+	 * levelOneId
+	 */
+	public static String getDeviceKindLevelThreeList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getDeviceKindLevelThreeList.action"), map);
 	}
 
 

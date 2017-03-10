@@ -352,75 +352,31 @@ public class SketchPadView extends View implements IUndoCommand {
 		}
 
 		canvas.drawColor(m_bkColor);
-		canvas.drawBitmap(m_bkBitmap, 0, 0, null);
 		// Draw background bitmap.
 		if (null != m_bkBitmap) {
+			canvas.drawBitmap(m_bkBitmap, 0, 0, null);
 			RectF dst = new RectF(getLeft(), getTop(), getLeft(), getTop());
 //			RectF dst = new RectF(getLeft(), getTop(), 2048, 1080);
-			Rect rst = new Rect(0, 0, m_bkBitmap.getWidth(),m_bkBitmap.getHeight());
+			Rect rst = new Rect(0, 0, m_bkBitmap.getWidth(), m_bkBitmap.getHeight());
 			canvas.drawBitmap(m_bkBitmap, rst, dst, m_bitmapPaint);
-			System.out.println(canvas.getHeight()+"---------------------"+canvas.getWidth()+"-----------"+m_bkBitmap.getWidth()+"========"+m_bkBitmap.getHeight());
+			System.out.println(canvas.getHeight() + "---------------------" + canvas.getWidth() + "-----------" + m_bkBitmap.getWidth() + "========" + m_bkBitmap.getHeight());
 		}
 //
 		if (null != m_foreBitmap) {
 			canvas.drawBitmap(m_foreBitmap, 0, 0, m_bitmapPaint);
 		}
-		if(isfirst){
+		if (isfirst) {
 			historydo();
 			isfirst = false;
 		}
-//		if (null != m_curTool) {
-//			// Do NOT draw current tool stroke real time if stroke type is NOT
-//			// eraser, because
-//			// eraser is drawn on bitmap hold by m_canvas.
-			if (STROKE_ERASER != m_strokeType) {
-//				// We do NOT draw current tool's stroke to canvas when ACTION_UP
-//				// event is occurring,
-//				// because the stroke has been drawn to bitmap hold by m_canvas.
-//				// But the tool will be
-//				// drawn if undo or redo operation is performed.
-//				canvas.drawBitmap(m_bkBitmap, 0, 0, null);
-//				// Draw background bitmap.
-//				if (null != m_bkBitmap) {
-//					RectF dst = new RectF(getLeft(), getTop(), getRight(), getBottom());
-//					Rect rst = new Rect(0, 0, m_bkBitmap.getWidth(),
-//							m_bkBitmap.getHeight());
-//					canvas.drawBitmap(m_bkBitmap, rst, dst, m_bitmapPaint);
-//				}
-//
-				
-				if (!m_isTouchUp) {
-					
-						m_curTool.draw(canvas);
-					
-				}
+		if (STROKE_ERASER != m_strokeType) {
+			if (!m_isTouchUp) {
+
+				m_curTool.draw(canvas);
+
 			}
-//				
-//			}else{
-//				paint = new Paint();
-//				mImgDesRect = new RectF(getLeft(), getTop(), getRight(), getBottom());
-//				int sc = canvas.saveLayer(mImgDesRect.left, mImgDesRect.top,
-//						mImgDesRect.right, mImgDesRect.bottom, null,
-//						Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG
-//						| Canvas.HAS_ALPHA_LAYER_SAVE_FLAG
-//						| Canvas.FULL_COLOR_LAYER_SAVE_FLAG
-//						| Canvas.CLIP_TO_LAYER_SAVE_FLAG);
-//				paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.XOR));
-//				canvas.drawBitmap(m_bkBitmap, 0, 0, null);
-//				// Draw background bitmap.
-//				if (null != m_bkBitmap) {
-//					RectF dst = new RectF(getLeft(), getTop(), getRight(), getBottom());
-//					Rect rst = new Rect(0, 0, m_bkBitmap.getWidth(),
-//							m_bkBitmap.getHeight());
-//					canvas.drawBitmap(m_bkBitmap, rst, dst, null);
-//				}
-//
-//				if (null != m_foreBitmap) {
-//					canvas.drawBitmap(m_foreBitmap, 0, 0, paint);
-//				}
-			}
-//		}
-//	}
+		}
+	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {

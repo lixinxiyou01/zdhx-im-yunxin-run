@@ -49,7 +49,8 @@ public class V3NoticeCenter implements Serializable {
 	public static final String NOTICE_KIND_TECH_MANAGE = "tm";
 	public static final String NOTICE_KIND_QUESTION = "qn";
 	public static final String NOTICE_KIND_STORE = "sm";
-	
+	public static final String NOTICE_KIND_REPAIR = "rm";
+
 	public V3NoticeCenter() {
 		super();
 	}

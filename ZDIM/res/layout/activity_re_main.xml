@@ -68,9 +68,18 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onExpend"
                 android:background="@color/white" >
 
+                <TextView
+                    android:id="@+id/noticeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="{公告板}"
+                    android:maxLines="8"
+                    android:ellipsize="end"
+                    android:padding="10dp"
+                    android:textColor="@color/greytext"
+                    android:onClick="onExpend" />
             </RelativeLayout>
 
             <LinearLayout

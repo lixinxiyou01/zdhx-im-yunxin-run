@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -21,15 +22,13 @@ import java.util.HashMap;
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.ProgressThreadWrap;
-import zhwx.common.util.RequestWithCacheGet;
 import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
-import zhwx.ui.dcapp.carmanage.OrderCarActivity;
 import zhwx.ui.dcapp.carmanage.OrderManageActivity;
-import zhwx.ui.dcapp.carmanage.model.IndexData;
 import zhwx.ui.dcapp.carmanage.model.OrderCarListItem;
+import zhwx.ui.dcapp.repairs.model.RepairIndexData;
 
 /**
  * 报修主页
@@ -41,8 +40,6 @@ public class RMainActivity extends BaseActivity {
 	private Activity context;
 	
 	private FrameLayout top_bar;
-	
-	private RequestWithCacheGet mRequestWithCache;
 	
 	private HashMap<String, ParameterValue> map;
 	
@@ -69,15 +66,18 @@ public class RMainActivity extends BaseActivity {
 	
 	/** 管理员 */
 	public static final int STARTFLAG_ORDERCHECK = 2;
-	
-    private RelativeLayout chack_item_lay,nuLay;
+
+	private PopupWindow publicPop;
+
+	private View publicView;
+
+	private TextView publicTV;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getTopBarView().setVisibility(View.GONE);
 		context = this;
-		mRequestWithCache = new RequestWithCacheGet(context);
 		initView();
 	}
 	
@@ -94,7 +94,7 @@ public class RMainActivity extends BaseActivity {
 					indexJson = UrlUtil.getIndexData(ECApplication.getInstance().getV3Address(), map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
-							refreshData1(indexJson);
+//							refreshData1(indexJson);
 						}
 					}, 5);
 				} catch (IOException e) {
@@ -124,54 +124,52 @@ public class RMainActivity extends BaseActivity {
 			finish();
 			return;
 		}
-		IndexData data = new Gson().fromJson(indexJson, IndexData.class);
+		RepairIndexData data = new Gson().fromJson(indexJson, RepairIndexData.class);
 		
 		//角色权限控制
-		if (data.getMyOrderCar() != null) {
-			count_wjd_a.setText(data.getMyOrderCar().getDpc());
-			count_wjd_a.setVisibility("0".equals(data.getMyOrderCar().getDpc())?View.INVISIBLE:View.VISIBLE);
+		if (data.getMyRepair() != null) {
+			count_wjd_a.setText(data.getMyRepair().getWjd());
+			count_wjd_a.setVisibility("0".equals(data.getMyRepair().getWjd())?View.INVISIBLE:View.VISIBLE);
 			count_wjd_a.bringToFront();
 
-			count_wxz_a.setText(data.getMyOrderCar().getPcz());
-			count_wxz_a.setVisibility("0".equals(data.getMyOrderCar().getPcz())?View.INVISIBLE:View.VISIBLE);
+			count_wxz_a.setText(data.getMyRepair().getWxz());
+			count_wxz_a.setVisibility("0".equals(data.getMyRepair().getWxz())?View.INVISIBLE:View.VISIBLE);
 			count_wxz_a.bringToFront();
 
-			count_dfk_a.setText(data.getMyOrderCar().getYpc());
-			count_dfk_a.setVisibility("0".equals(data.getMyOrderCar().getYpc())?View.INVISIBLE:View.VISIBLE);
+			count_dfk_a.setText(data.getMyRepair().getDfk());
+			count_dfk_a.setVisibility("0".equals(data.getMyRepair().getDfk())?View.INVISIBLE:View.VISIBLE);
 			count_dfk_a.bringToFront();
 
-			count_yxh_a.setText(data.getMyOrderCar().getDpj());
-			count_yxh_a.setVisibility("0".equals(data.getMyOrderCar().getDpj())?View.INVISIBLE:View.VISIBLE);
+			count_yxh_a.setText(data.getMyRepair().getYxh());
+			count_yxh_a.setVisibility("0".equals(data.getMyRepair().getYxh())?View.INVISIBLE:View.VISIBLE);
 			count_yxh_a.bringToFront();
 		}
 		 
-		if (data.getOrderCarManage() != null) {
+		if (data.getRepairManage() != null) {
 			managerLay.setVisibility(View.VISIBLE);
-			count_dcl_b.setText(data.getOrderCarManage().getOrderCheck());
-			count_dcl_b.setVisibility("0".equals(data.getOrderCarManage().getOrderCheck())?View.INVISIBLE:View.VISIBLE);
-			chack_item_lay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.GONE:View.VISIBLE);
-			nuLay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.VISIBLE:View.GONE);
+			count_dcl_b.setText(data.getRepairManage().getDcl());
+			count_dcl_b.setVisibility("0".equals(data.getRepairManage().getDcl())?View.INVISIBLE:View.VISIBLE);
 
-			count_ypd_b.setText(data.getOrderCarManage().getDpc());
-			count_ypd_b.setVisibility("0".equals(data.getOrderCarManage().getDpc())?View.INVISIBLE:View.VISIBLE);
+			count_ypd_b.setText(data.getRepairManage().getYpd());
+			count_ypd_b.setVisibility("0".equals(data.getRepairManage().getYpd())?View.INVISIBLE:View.VISIBLE);
 
-			count_ywc_b.setText(data.getOrderCarManage().getPcz());
-			count_ywc_b.setVisibility("0".equals(data.getOrderCarManage().getPcz())?View.INVISIBLE:View.VISIBLE);
+			count_ywc_b.setText(data.getRepairManage().getYwc());
+			count_ywc_b.setVisibility("0".equals(data.getRepairManage().getYwc())?View.INVISIBLE:View.VISIBLE);
 
-			count_fysp_b.setText(data.getOrderCarManage().getYpc());
-			count_fysp_b.setVisibility("0".equals(data.getOrderCarManage().getYpc())?View.INVISIBLE:View.VISIBLE);
+			count_fysp_b.setText(data.getRepairManage().getFysp());
+			count_fysp_b.setVisibility("0".equals(data.getRepairManage().getFysp())?View.INVISIBLE:View.VISIBLE);
 		}
 		
 		if (data.getMyTask() != null) {
 			dirverLay.setVisibility(View.VISIBLE);
-			count_wjd_c.setText(data.getMyTask().getWjs());
-			count_wjd_c.setVisibility("0".equals(data.getMyTask().getWjs())?View.INVISIBLE:View.VISIBLE);
+			count_wjd_c.setText(data.getMyTask().getWjd());
+			count_wjd_c.setVisibility("0".equals(data.getMyTask().getWjd())?View.INVISIBLE:View.VISIBLE);
 
-			count_wxz_c.setText(data.getMyTask().getWqr());
-			count_wxz_c.setVisibility("0".equals(data.getMyTask().getWqr())?View.INVISIBLE:View.VISIBLE);
+			count_wxz_c.setText(data.getMyTask().getWxz());
+			count_wxz_c.setVisibility("0".equals(data.getMyTask().getWxz())?View.INVISIBLE:View.VISIBLE);
 
-			count_hfk_c.setText(data.getMyTask().getWpj());
-			count_hfk_c.setVisibility("0".equals(data.getMyTask().getWpj())?View.INVISIBLE:View.VISIBLE);
+			count_hfk_c.setText(data.getMyTask().getYfk());
+			count_hfk_c.setVisibility("0".equals(data.getMyTask().getYfk())?View.INVISIBLE:View.VISIBLE);
 		}
 		mPostingdialog.dismiss();
 	}
@@ -196,8 +194,45 @@ public class RMainActivity extends BaseActivity {
 		myOrderLay = (LinearLayout) findViewById(R.id.myOrderLay);
 		managerLay = (LinearLayout) findViewById(R.id.managerLay);
 		dirverLay = (LinearLayout) findViewById(R.id.dirverLay);
-		chack_item_lay = (RelativeLayout) findViewById(R.id.chack_item_lay);
-		nuLay = (RelativeLayout) findViewById(R.id.nuLay);
+		initPopMenu();
+	}
+
+	public void onExpend(View v) {
+		showPop();
+	}
+
+	/**
+	 * 初始化popupWindow
+	 */
+	private void initPopMenu() {
+		// 公告详情弹窗
+		publicView = context.getLayoutInflater().inflate(R.layout.layout_rm_public, null);
+		if (publicPop == null) {
+			publicPop = new PopupWindow(publicView, LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT, true);
+		}
+		if (publicPop.isShowing()) {
+			publicPop.dismiss();
+		}
+
+		publicTV = (TextView) publicView.findViewById(R.id.publicTV);
+	}
+
+	public void showPop() {
+		if (!publicPop.isShowing()) {
+			publicPop.setFocusable(false);
+			publicPop.setOutsideTouchable(true);
+			publicPop.setAnimationStyle(R.style.PopupAnimation_cm);
+			publicPop.showAtLocation(context.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+		} else {
+			publicPop.dismiss();
+		}
+	}
+
+	public void onClose(View v) {
+		if (publicPop.isShowing()) {
+			publicPop.dismiss();
+		}
 	}
 	
 
@@ -224,7 +259,7 @@ public class RMainActivity extends BaseActivity {
 	
 	/** 报修 */
 	public void onRepair(View v) {
-		startActivity(new Intent(context, OrderCarActivity.class));
+		startActivity(new Intent(context, DeviceLevelOneActivity.class));
 	}
 	
 	/** 未接单 */
