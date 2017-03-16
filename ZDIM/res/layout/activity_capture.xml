@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
-    <com.lanxum.hzth.im.common.view.capture.core.ViewfinderView
+    <zhwx.common.view.capture.core.ViewfinderView
         android:id="@+id/viewfinder_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
@@ -38,24 +38,24 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_bg_assets" >
+        android:background="@color/main_bg">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/common_title_TV_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dip"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="5dip"
                 android:background="@drawable/barcode_gallery"
                 android:clickable="true"
-                android:visibility="gone"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/LinearLayout01"
@@ -64,13 +64,13 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/TextView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="资产二维码"
+                    android:text="扫一扫"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
 

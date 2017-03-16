@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/icon_ring" />
+
+                <TextView
+                    android:id="@+id/requestTimeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/imageView9"
+                    android:text="{时间}" />
+
+                <TextView
+                    android:id="@+id/checkStatusViewTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/orderTimeTV"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="{状态}"
+                    android:textColor="@color/main_bg_carmanage" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" 
+                android:layout_marginRight="10dp"
+                android:background="@drawable/line_middle">
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/TextView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="报  修  人：" />
+
+                        <TextView
+                            android:id="@+id/requestUserNameTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="{requestUserNameTV}"
+                            android:textColor="@color/greytext" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/TextView06"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="故障地点：" />
+
+                        <TextView
+                            android:id="@+id/faultPlaceTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoText="true"
+                            android:singleLine="true"
+                            android:text="{faultPlaceTV}"
+                            android:textColor="@color/greytext" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/TextView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="报修物品：" />
+
+                        <TextView
+                            android:id="@+id/deviceNameTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="{deviceNameTV}"
+                            android:textColor="@color/greytext" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/TextView06"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="故障现象：" />
+
+                        <TextView
+                            android:id="@+id/faultTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="{faultTV}"
+                            android:textColor="@color/greytext" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/TextView06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话：" />
+
+                <TextView
+                    android:id="@+id/requestUserPhoneTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="{requestUserPhoneTV}"
+                    android:textColor="@color/greytext" />
+
+                <ImageView
+                    android:id="@+id/phoneIV"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_rm_phone" />
+
+                <ImageView
+                    android:id="@+id/messageIV"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_rm_message" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/line_middle" >
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:id="@+id/buttonContentLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp" >
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

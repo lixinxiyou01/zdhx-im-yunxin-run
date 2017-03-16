@@ -74,7 +74,7 @@
                     android:id="@+id/noticeTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="{公告板}"
+                    android:text="暂无公告"
                     android:maxLines="8"
                     android:ellipsize="end"
                     android:padding="10dp"
@@ -127,6 +127,12 @@
                         android:textSize="12sp" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/line_middle">
+                </RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
@@ -146,7 +152,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_dpc_a"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_wjd_a"
                             android:padding="8dp"
                             android:text="未接单"
                             android:textColor="@color/dark_gray"
@@ -184,7 +191,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_pcz_a"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_wxz_a"
                             android:padding="8dp"
                             android:text="维修中"
                             android:textColor="@color/dark_gray"
@@ -223,7 +231,8 @@
                             android:layout_centerHorizontal="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_ypc_a"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_dfk_a"
                             android:padding="8dp"
                             android:text="待反馈"
                             android:textColor="@color/dark_gray"
@@ -260,7 +269,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_dpj_a"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_yxh_a"
                             android:padding="8dp"
                             android:text="已修好"
                             android:textColor="@color/dark_gray"
@@ -333,7 +343,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/line_middle"></RelativeLayout>
+                    android:background="@drawable/line_middle">
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -354,8 +365,9 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_wsh_b"
+                            android:drawableTop="@drawable/icon_rm_dcl_b"
                             android:padding="8dp"
+                            android:drawablePadding="5dp"
                             android:text="待处理"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
@@ -391,7 +403,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_wpc_b"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_ypd_b"
                             android:padding="8dp"
                             android:text="已派单"
                             android:textColor="@color/dark_gray"
@@ -428,7 +441,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_pcz_b"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_yxh_a"
                             android:padding="8dp"
                             android:text="已完成"
                             android:textColor="@color/dark_gray"
@@ -465,7 +479,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_ypc_b"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_fysp_b"
                             android:padding="8dp"
                             android:text="费用审批"
                             android:textColor="@color/dark_gray"
@@ -558,7 +573,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_wqr_c"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_wjd_a"
                             android:padding="8dp"
                             android:text="未接单"
                             android:textColor="@color/dark_gray"
@@ -595,7 +611,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_wjd_c"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_wxz_a"
                             android:padding="8dp"
                             android:text="维修中"
                             android:textColor="@color/dark_gray"
@@ -632,7 +649,8 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_cm_dpj_c"
+                            android:drawablePadding="5dp"
+                            android:drawableTop="@drawable/icon_rm_dfk_a"
                             android:padding="8dp"
                             android:text="已反馈"
                             android:textColor="@color/dark_gray"
@@ -683,7 +701,7 @@
             android:id="@+id/actionBar1"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
-            android:background="@drawable/list_item_selector"
+            android:background="@color/main_bg_repairs"
             android:gravity="center"
             android:orientation="vertical"
             android:onClick="onRepair"
@@ -700,7 +718,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/btn_notice_sendnew" />
+                    android:src="@drawable/icon_rm_request_white" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -710,7 +728,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="我要报修"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#666666" />
+                    android:textColor="#ffffff" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

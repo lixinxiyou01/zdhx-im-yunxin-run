@@ -52,7 +52,7 @@
                 android:onClick="onBack" />
         </RelativeLayout>
     </FrameLayout>
-    
+
     <FrameLayout
         android:id="@+id/header"
         android:layout_width="match_parent"

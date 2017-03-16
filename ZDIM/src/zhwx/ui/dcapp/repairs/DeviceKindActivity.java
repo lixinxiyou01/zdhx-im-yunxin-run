@@ -25,6 +25,7 @@ import volley.Response;
 import volley.VolleyError;
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
+import zhwx.common.model.V3NoticeCenter;
 import zhwx.common.util.Log;
 import zhwx.common.util.RequestWithCacheGet;
 import zhwx.common.util.ToastUtil;
@@ -44,7 +45,7 @@ import zhwx.ui.dcapp.repairs.model.DeviceKind;
  * @author Li.xin @ zdhx
  * @date 2016年8月22日 下午12:42:43 
  */
-public class DeviceLevelThreeActivity extends BaseActivity implements OnClickListener{
+public class DeviceKindActivity extends BaseActivity implements OnClickListener{
 	
 	private Activity context;
 		
@@ -63,23 +64,20 @@ public class DeviceLevelThreeActivity extends BaseActivity implements OnClickLis
 	private  List<DeviceKind> allDataList;
 
 	private ImageLoader imageLoader;
-
-	private String levelTwoId;
-
+	
 	@Override
 	protected int getLayoutId() {
-		return R.layout.activity_as_assetlist;
+		return R.layout.activity_rm_device_kind;
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		levelTwoId = getIntent().getStringExtra("id");
 		imageLoader = new ImageLoader(context);
 		cache = new RequestWithCacheGet(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_repairs);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"设备分类", this);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, R.drawable.icon_sao,"设备分类", this);
 		assetsLV = (PullableListView) findViewById(R.id.assetsLV);
 		assetsLV.enableAutoLoad(false);
 		assetsLV.setLoadmoreVisible(false);
@@ -88,12 +86,19 @@ public class DeviceLevelThreeActivity extends BaseActivity implements OnClickLis
 		assetsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				startActivity(new Intent(context,RepairsRequestActivity.class)
-						.putExtra("id",allDataList.get(position).getId())
-						.putExtra("name",allDataList.get(position).getName()));
+				startActivityForResult(new Intent(context,DeviceLevelOneActivity.class).putExtra("id",allDataList.get(position).getId()),886);
 			}
 		});
 		getData();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 886) {
+			setResult(886);
+			finish();
+		}
 	}
 
 	/**
@@ -103,9 +108,8 @@ public class DeviceLevelThreeActivity extends BaseActivity implements OnClickLis
 		mPostingdialog = new ECProgressDialog(context, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("levelTwoId",new ParameterValue(levelTwoId));
 		try {
-			circleJson = cache.getRseponse(UrlUtil.getDeviceKindLevelThreeList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
+			circleJson = cache.getRseponse(UrlUtil.getMaintenanceTeamList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
 				
 				@Override
 				public void onResponse(String response) {
@@ -177,8 +181,12 @@ public class DeviceLevelThreeActivity extends BaseActivity implements OnClickLis
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
-				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_three, null);
+				if (position%2 == 0) {
+					convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_one, null);
+				} else {
+					convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_one_green, null);
+				}
+
 				holder = new ViewHolder();
 				holder.kindNameTV = (TextView) convertView.findViewById(R.id.kindNameTV);
 				holder.kindImgIV = (ImageView) convertView.findViewById(R.id.kindImgIV);
@@ -186,7 +194,6 @@ public class DeviceLevelThreeActivity extends BaseActivity implements OnClickLis
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
 			holder.kindNameTV.setText(getItem(position).getName());
 			imageLoader.DisplayImage(ECApplication.getInstance().getV3Address() + getItem(position).getImageUrl(), holder.kindImgIV,false);
 			addListener(holder, position, convertView);
@@ -215,7 +222,7 @@ public class DeviceLevelThreeActivity extends BaseActivity implements OnClickLis
 			finish();
 			break;
 		case R.id.btn_right:
-			startActivity(new Intent(context, CaptureActivity.class));
+			startActivity(new Intent(context, CaptureActivity.class).putExtra("moduleCode", V3NoticeCenter.NOTICE_KIND_REPAIR));
 			break;
 		}
 	}

@@ -119,7 +119,7 @@ public class ApplicationFragment extends TFragment {
 			appGV.setFocusable(false); //禁止gridview获取焦点 防止加载后滚动到底部
 			adapter = new MyAdapter();
 			appGV.setAdapter(adapter);
-			Tools.setGridViewHeightBasedOnChildren(appGV);
+			Tools.setGridViewHeightBasedOnChildren4(appGV);
 			appGV.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override

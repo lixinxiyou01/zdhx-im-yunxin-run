@@ -164,7 +164,7 @@ public class CircleDetailActivity extends BaseActivity {
 				noticeImgIV.setVisibility(View.GONE);
 				noticeImgGV.setVisibility(View.VISIBLE);
 				noticeImgGV.setAdapter(new ImageGirdAdapter(context, circle.getPicUrls()));
-				Tools.setGridViewHeightBasedOnChildren(noticeImgGV);
+				Tools.setGridViewHeightBasedOnChildren4(noticeImgGV);
 			}
 		}else{
 			noticeImgIV.setVisibility(View.GONE);

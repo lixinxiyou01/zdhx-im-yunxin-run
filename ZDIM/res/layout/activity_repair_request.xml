@@ -51,8 +51,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/line_middle">
-            </RelativeLayout>
+                android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -88,16 +87,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:background="@drawable/line_middle">
-            </RelativeLayout>
+                android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/addressTV"
+                    android:id="@+id/commentFaultTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -106,28 +104,21 @@
                     android:text="常见故障:"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/addressET"
+                <GridView
+                    android:id="@+id/commentFaultGV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toLeftOf="@+id/imageView1"
-                    android:layout_toRightOf="@+id/addressTV"
-                    android:background="@null"
-                    android:editable="false"
-                    android:onClick="onFindAddress"
-                    android:singleLine="true"
-                    android:textColor="@color/greytext"
-                    android:textSize="15sp" />
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@+id/commentFaultTV"
+                    android:numColumns="4" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/line_middle">
-            </RelativeLayout>
+                android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -135,7 +126,7 @@
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/userCountTV"
+                    android:id="@+id/faultDescriptionTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -149,10 +140,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/userCountTV"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@+id/faultDescriptionTV"
+                    android:background="@drawable/btn_ordercar_normal"
+                    android:gravity="top|left"
                     android:lines="3"
+                    android:hint="必填"
                     android:textColor="@color/greytext"
                     android:textSize="15sp"></EditText>
             </RelativeLayout>
@@ -169,7 +162,7 @@
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/TextView01"
+                    android:id="@+id/placeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -184,31 +177,79 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/TextView01"
+                    android:layout_toRightOf="@+id/placeTV"
                     android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/buildSP"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
 
-                    <Spinner
-                        android:id="@+id/floorSP"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/icon_rm_down" />
 
-                    <Spinner
-                        android:id="@+id/classSP"
+                        <Spinner
+                            android:id="@+id/buildSP"
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/btn_ordercar_normal" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/icon_rm_down" />
+
+                        <Spinner
+                            android:id="@+id/floorSP"
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/btn_ordercar_normal" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/icon_rm_down" />
+
+                        <Spinner
+                            android:id="@+id/classSP"
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/btn_ordercar_normal" />
+                    </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/line_middle">
-            </RelativeLayout>
+                android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -217,7 +258,7 @@
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/image"
+                    android:id="@+id/phoneTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -229,15 +270,27 @@
                 <EditText
                     android:id="@+id/mobileET"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="28dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/image"
+                    android:layout_toRightOf="@+id/phoneTV"
+                    android:background="@null"
                     android:singleLine="true"
+                    android:hint="必填"
+                    android:inputType="number"
                     android:textColor="@color/greytext"
                     android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_rm_request" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -264,12 +317,15 @@
                     android:id="@+id/repairFileGV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@+id/upLoadimage"
                     android:horizontalSpacing="3dp"
-                    android:numColumns="4"
+                    android:numColumns="3"
                     android:paddingLeft="10dp"
-                    android:verticalSpacing="3dp">
-                </GridView>
+                    android:verticalSpacing="3dp"></GridView>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

@@ -31,6 +31,7 @@ import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ResultParser;
 import com.google.zxing.common.HybridBinarizer;
+import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 
 import java.io.IOException;
@@ -38,9 +39,19 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 import zhwx.common.base.BaseActivity;
+import zhwx.common.model.ParameterValue;
+import zhwx.common.model.V3NoticeCenter;
+import zhwx.common.util.JsonUtil;
+import zhwx.common.util.ProgressThreadWrap;
+import zhwx.common.util.RunnableWrap;
+import zhwx.common.util.StringUtil;
+import zhwx.common.util.ToastUtil;
+import zhwx.common.util.UrlUtil;
 import zhwx.common.view.capture.camera.CameraManager;
 import zhwx.common.view.capture.executor.ResultHandler;
 import zhwx.ui.dcapp.assets.AssetDetailActivity;
+
+import static com.netease.nim.demo.team.TeamSynchroHelper.map;
 
 /**
  * 二维码扫描
@@ -66,9 +77,10 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	private final int from_photo = 010;
 	static final int PARSE_BARCODE_SUC = 3035;
 	static final int PARSE_BARCODE_FAIL = 3036;
-	String photoPath;
-	ProgressDialog mProgress;
+	private String photoPath;
+	private ProgressDialog mProgress;
 	private FrameLayout top_bar;
+	private String moduleCode;
 
 	enum IntentSource {
 		ZXING_LINK, NONE
@@ -115,6 +127,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		getTopBarView().setVisibility(View.GONE);
+		moduleCode = getIntent().getStringExtra("moduleCode");
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		cameraManager = new CameraManager(getApplication());
@@ -132,13 +145,43 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 		if (mProgress != null && mProgress.isShowing()) {
 			mProgress.dismiss();
 		}
-		
-		Intent intent = new Intent(this, AssetDetailActivity.class);
-		intent.putExtra("assetsCode", msg);
-		intent.putExtra("isAddMode", "isAddMode");
-		startActivity(intent);
-		finish();
+		if (StringUtil.isBlank(moduleCode)) { //资产管理
+			Intent intent = new Intent(this, AssetDetailActivity.class);
+			intent.putExtra("assetsCode", msg);
+			intent.putExtra("isAddMode", "isAddMode");
+			startActivity(intent);
+		} else if (V3NoticeCenter.NOTICE_KIND_REPAIR.equals(moduleCode)) { //报修
+
+
+		} else if ("login".equals(moduleCode)) { //扫码登录
+			LoginCapture capture = null;
+			if(msg.contains("u")&&msg.contains("i")){
+				capture = JsonUtil.json2JavaPojo(msg, LoginCapture.class);
+				map.put("uuid",new ParameterValue(capture.getU()));
+				map.put("dataSource",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+				map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+				new ProgressThreadWrap(this, new RunnableWrap() {
+					@Override
+					public void run() {
+						try {
+							UrlUtil.twoDimensionCodeLogin(ECApplication.getInstance().getV3Address(), map);
+							handler.postDelayed(new Runnable() {
+								public void run() {
+									ToastUtil.showMessage("扫码成功");
+									CaptureActivity.this.finish();
+								}
+							}, 5);
+						} catch (IOException e){
+							e.printStackTrace();
+						}
+					}
+				}).start();
+			}else{
+				ToastUtil.showMessage("二维码无效");
+			}
+		}
 		restartPreviewAfterDelay(0L);
+		finish();
 	}
 
 	public void setListeners() {

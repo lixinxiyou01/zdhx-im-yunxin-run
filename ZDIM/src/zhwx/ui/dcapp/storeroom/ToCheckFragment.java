@@ -39,7 +39,7 @@ import zhwx.ui.dcapp.carmanage.view.ScrollTabHolderFragment;
 import zhwx.ui.dcapp.storeroom.model.AuditData;
 
 /**   
- * @Title: OrderDetailFragment.java 
+ * @Title: RepairDetailFragment.java
  * @Package com.lanxum.hzth.im.ui.v3.carmanage 
  * @author Li.xin @ 中电和讯
  * @date 2016-3-17 下午4:33:18 

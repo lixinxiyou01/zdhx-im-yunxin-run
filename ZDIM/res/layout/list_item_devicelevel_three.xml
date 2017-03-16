@@ -7,15 +7,15 @@
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:gravity="center"
+        android:background="@drawable/btn_device_kind_two_selecter"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/btn_device_kind_two_selecter">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,13 +26,13 @@
 
             <zhwx.common.view.CircleImageView
                 android:id="@+id/kindImgIV"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/attach_file_icon_mailread_apk" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/attach_file_icon_mailread_apk"
+                />
 
             <TextView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:id="@+id/kindNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

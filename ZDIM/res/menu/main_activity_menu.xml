@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search_btn"
         android:icon="@drawable/action_bar_search_view_icon"
         android:title=""
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource" />
     <item
         android:id="@+id/welcome_menu"
         android:icon="@drawable/action_bar_black_more_icon"
         android:title=""
-        app:showAsAction="always">
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource">
         <menu>
             <item
                 android:id="@+id/add_buddy"
@@ -24,6 +27,9 @@
             <item
                 android:id="@+id/search_advanced_team"
                 android:title="@string/search_advanced_team"/>
+            <item
+                android:id="@+id/sao"
+                android:title="扫一扫"/>
             <item
                 android:id="@+id/about"
                 android:title="@string/settings"/>

@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/hl_head_ar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_title_heigh"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:background="@drawable/bg_title" >
 
@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/layout_title_content_heigh"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
                 android:src="@drawable/ic_title_btn_back" />
 
             <TextView
@@ -56,6 +57,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/btn_green_selector_rectangle"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"

@@ -2127,7 +2127,16 @@ public class UrlUtil {
 	}
 
 	/**
+	 * 获取故障信息
+	 *	deviceId
+	 */
+	public static String getMalfunctionPlaceList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!getMalfunctionPlaceList.action"), map);
+	}
+
+	/**
 	 * 获取设备一级分类
+	 * 维修组Id
 	 */
 	public static String getDeviceKindLevelOneList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getDeviceKindLevelOneList.action"), map);
@@ -2141,15 +2150,94 @@ public class UrlUtil {
 	}
 
 	/**
-	 * 获取设备三级分类
+	 * 获取维修组
 	 * levelOneId
 	 */
-	public static String getDeviceKindLevelThreeList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
-		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getDeviceKindLevelThreeList.action"), map);
+	public static String getMaintenanceTeamList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getMaintenanceTeamList.action"), map);
 	}
 
+	/**
+	 * 提交报修单
+	 */
+	public static String submitRepairApply(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!submitRepairApply.action", loginMap),files, map);
+	}
 
+	public static String submitRepairApply(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!submitRepairApply.action"), map);
+	}
+	/**
+	 * 获取我的报修单列表
+	 * status，userId
+	 */
+	public static String getRepairRequestListByStatus(String baseUrl,Map<String, ParameterValue> map){
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getRepairRequestListByStatus.action"), map);
+	}
 
-	
+	/**
+	 * 获取我的维修单列表
+	 * status，userId
+	 */
+	public static String getMyRepairListByStatus(String baseUrl,Map<String, ParameterValue> map){
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getMyRepairListByStatus.action"), map);
+	}
+
+	/**
+	 * 获取我的维修单列表
+	 * status，userId
+	 */
+	public static String getManageRepairListByStatus(String baseUrl,Map<String, ParameterValue> map){
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getManageRepairListByStatus.action"), map);
+	}
+
+	/**
+	 * 获取报修单详情
+	 * repairId
+	 */
+	public static String getRepairDetail(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!getRepairDetail.action"), map);
+	}
+
+	/**
+	 * 获取报修记录
+	 * repairId
+	 */
+	public static String getRepairRecord(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!getRepairRecord.action"), map);
+	}
+
+	/**
+	 * 接单
+	 * repairId
+	 */
+	public static String receiveRequest(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!receiveRequest.action"), map);
+	}
+
+	/**
+	 * 可派单人员列表
+	 * repairId
+	 */
+	public static String getCanDoWorkerList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!getCanDoWorkerList.action"), map);
+	}
+
+	/**
+	 * 派单操作
+	 * repairId，sendMessageFlag，workerId
+	 */
+	public static String saveSendRequest(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!saveSendRequest.action"), map);
+	}
+	/**
+	 * 删除报修单
+	 * repairId
+	 */
+	public static String repairRecordDelete(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!repairRecordDelete.action"), map);
+	}
+
 	/************************************ 数据接口end ************************************************************/
+
 }

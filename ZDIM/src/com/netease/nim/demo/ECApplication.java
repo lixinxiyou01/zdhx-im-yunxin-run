@@ -84,6 +84,7 @@ import zhwx.common.model.ParameterValue;
 import zhwx.common.model.User;
 import zhwx.common.util.IMUtils;
 import zhwx.common.util.SharPreUtil;
+import zhwx.common.util.StringUtil;
 import zhwx.common.util.UrlUtil;
 
 public class ECApplication extends Application {
@@ -482,34 +483,34 @@ public class ECApplication extends Application {
         return loginMap;
     }
 
-//    /**
-//     * V3登录信息
-//     * @return
-//     */
-//    public Map<String, ParameterValue> getV3LoginMap() {
-//        HashMap<String, ParameterValue> loginMap = new HashMap<String, ParameterValue>();
-//        loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
-//        loginMap.put("sys_username", new ParameterValue(getCurrentIMUser().getLoginName()));
-//        loginMap.put("sys_password", new ParameterValue(StringUtil.isBlank(getCurrentIMUser().getV3Pwd())?getCurrentIMUser().getPassWord():getCurrentIMUser().getV3Pwd()));
-//        return loginMap;
-//    }
-
     /**
      * V3登录信息
      * @return
      */
     public Map<String, ParameterValue> getV3LoginMap() {
-    	HashMap<String, ParameterValue> loginMap = new HashMap<String, ParameterValue>();
-    	loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
-    	loginMap.put("sys_username", new ParameterValue("jishuzhichi"));
-    	loginMap.put("sys_password", new ParameterValue("000000"));
-    	return loginMap;
+        HashMap<String, ParameterValue> loginMap = new HashMap<String, ParameterValue>();
+        loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
+        loginMap.put("sys_username", new ParameterValue(getCurrentIMUser().getLoginName()));
+        loginMap.put("sys_password", new ParameterValue(StringUtil.isBlank(getCurrentIMUser().getV3Pwd())?getCurrentIMUser().getPassWord():getCurrentIMUser().getV3Pwd()));
+        return loginMap;
     }
+
+//    /**
+//     * V3登录信息
+//     * @return
+//     */
+//    public Map<String, ParameterValue> getV3LoginMap() {
+//    	HashMap<String, ParameterValue> loginMap = new HashMap<String, ParameterValue>();
+//    	loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
+//    	loginMap.put("sys_username", new ParameterValue("jishuzhichi"));
+//    	loginMap.put("sys_password", new ParameterValue("000000"));
+//    	return loginMap;
+//    }
 
 
     public String getV3Address(){
-//        return getCurrentIMUser().getV3Url();
-        return "http://192.168.1.120:7777/dc-repair";
+        return getCurrentIMUser().getV3Url();
+//        return "http://192.168.1.118:7777/dc-repair";
     }
 
     /**

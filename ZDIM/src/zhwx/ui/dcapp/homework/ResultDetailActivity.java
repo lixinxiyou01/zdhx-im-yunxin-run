@@ -85,7 +85,7 @@ public class ResultDetailActivity extends BaseActivity {
 					list.add(picUrl);
 				}
 				noticeImgGV.setAdapter(new ImageGirdAdapter(context, list));
-				Tools.setGridViewHeightBasedOnChildren(noticeImgGV);
+				Tools.setGridViewHeightBasedOnChildren4(noticeImgGV);
 			}
 		}else{
 			noticeImgIV.setVisibility(View.GONE);

@@ -119,8 +119,8 @@ public class User implements Serializable{
 		this.kind = kind;
 	}
 	public String getV3Id() {
-//		return v3Id;
-		return "20150520125211813393070681955161";
+		return v3Id;
+//		return "20150520125211813393070681955161";
 	}
 	public void setV3Id(String v3Id) {
 		this.v3Id = v3Id;

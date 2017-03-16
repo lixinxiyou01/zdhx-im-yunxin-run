@@ -26,8 +26,6 @@ public class ImageGirdAdapter extends BaseAdapter {
 		mImageLoader = new ImageLoader(context);
 	}
 
-
-
 	@Override
 	public int getCount() {
 		return list.size();

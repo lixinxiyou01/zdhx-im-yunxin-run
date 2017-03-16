@@ -55,7 +55,7 @@ public class ImageGralleryPagerActivity extends BaseActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1, "1 / 1", this);
+        getTopBarView().setVisibility(View.GONE);
 
         pagerPosition = getIntent().getIntExtra(EXTRA_IMAGE_INDEX, 0);
         urls = getIntent().getParcelableArrayListExtra(EXTRA_IMAGE_URLS);
@@ -115,7 +115,7 @@ public class ImageGralleryPagerActivity extends BaseActivity implements View.OnC
 
         mPager.setCurrentItem(pagerPosition);
         initIndicatorIndex(pagerPosition);
-        setTitleFooterVisible(true);
+//        setTitleFooterVisible(true);
     }
 
     private void initIndicatorIndex(int arg0) {
@@ -159,8 +159,8 @@ public class ImageGralleryPagerActivity extends BaseActivity implements View.OnC
         @Override
         public void dispatchMessage(Message msg) {
             super.dispatchMessage(msg);
-            mFullscreen = !mFullscreen;
-            setTitleFooterVisible(mFullscreen);
+//            mFullscreen = !mFullscreen;
+//            setTitleFooterVisible(mFullscreen);
         }
 
     };

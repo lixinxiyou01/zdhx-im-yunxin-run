@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants" >
+
+   <zhwx.common.view.refreshlayout.PullableListView
+	    android:id="@+id/assetsLV"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+        android:dividerHeight="20dp"
+        android:divider="@null"
+        android:layout_margin="50dp">
+
+    </zhwx.common.view.refreshlayout.PullableListView>
+
+    <TextView
+        android:id="@+id/emptyTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:textColor="@color/text_desc"
+        android:text="无数据" />
+
+</RelativeLayout>

@@ -58,7 +58,9 @@ public class ApplicationFragmentGroup extends TFragment {
 	
     private String appCodeString = "";
 
-	private String addCode = ",rm";
+//	private String addCode = ",rm";
+
+	private String addCode = "";
 
 	private List<Apps.AppGroup> appGroups = new ArrayList<>();
 
@@ -132,7 +134,7 @@ public class ApplicationFragmentGroup extends TFragment {
 				gridView.setAdapter(new MyAdapter(appGroups.get(i).getApps()));
 				addListener(gridView);
 				appGroupContener.addView(gridView);
-				Tools.setGridViewHeightBasedOnChildren(gridView);
+				Tools.setGridViewHeightBasedOnChildren4(gridView);
 			}
 		}
 	}

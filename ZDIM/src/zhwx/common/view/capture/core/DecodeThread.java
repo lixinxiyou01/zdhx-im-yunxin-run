@@ -16,18 +16,18 @@
 
 package zhwx.common.view.capture.core;
 
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-
 import android.os.Handler;
 import android.os.Looper;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
+
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * This thread does all the heavy lifting of decoding the images.

@@ -84,7 +84,7 @@ public class Apps implements Serializable {
 		appGroupList.add(xwbgAg);
 
 		/**教务教学*/
-		AppGroup jwjxAg = new AppGroup("教务教学","jwjx");
+		AppGroup jwjxAg = new AppGroup("教育教学","jwjx");
 		List<Apps> jwjxAppList = new ArrayList<Apps>();
 		jwjxAppList.add(new Apps("查看课表",R.drawable.icon_classmanage,"course"));
 		jwjxAppList.add(new Apps("作业",R.drawable.icon_homework,"homework"));

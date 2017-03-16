@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants" >
+
+   <GridView
+	    android:id="@+id/assetsLV"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+        android:numColumns="2"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+       android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:divider="@null"
+        android:dividerHeight="10dp">
+
+    </GridView>
+
+    <TextView
+        android:id="@+id/emptyTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:textColor="@color/text_desc"
+        android:text="无数据" />
+
+</RelativeLayout>

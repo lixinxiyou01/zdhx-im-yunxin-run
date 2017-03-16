@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,9 +31,7 @@ import zhwx.common.util.RequestWithCacheGet;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
-import zhwx.common.view.capture.core.CaptureActivity;
 import zhwx.common.view.dialog.ECProgressDialog;
-import zhwx.common.view.refreshlayout.PullableListView;
 import zhwx.ui.dcapp.assets.model.AllAssets;
 import zhwx.ui.dcapp.repairs.model.DeviceKind;
 
@@ -54,7 +53,7 @@ public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListe
 	
 	private HashMap<String, ParameterValue> map;
 	
-	private PullableListView assetsLV;
+	private GridView assetsLV;
 	
 	private TextView emptyTV;
 	
@@ -64,34 +63,43 @@ public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListe
 
 	private ImageLoader imageLoader;
 
-	private String levelOneId;
+	private String levelTwoId;
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.activity_as_assetlist;
+		return R.layout.activity_rm_device_level_two;
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		levelOneId = getIntent().getStringExtra("id");
+		levelTwoId = getIntent().getStringExtra("id");
 		imageLoader = new ImageLoader(context);
 		cache = new RequestWithCacheGet(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_repairs);
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"设备分类", this);
-		assetsLV = (PullableListView) findViewById(R.id.assetsLV);
-		assetsLV.enableAutoLoad(false);
-		assetsLV.setLoadmoreVisible(false);
+		assetsLV = (GridView) findViewById(R.id.assetsLV);
 		emptyTV = (TextView) findViewById(R.id.emptyTV);
 		assetsLV.setEmptyView(emptyTV);
 		assetsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				startActivity(new Intent(context,DeviceLevelThreeActivity.class).putExtra("id",allDataList.get(position).getId()));
+				startActivityForResult(new Intent(context,RepairsRequestActivity.class)
+						.putExtra("id",allDataList.get(position).getId())
+						.putExtra("name",allDataList.get(position).getName()),886);
 			}
 		});
 		getData();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 886) {
+			setResult(886);
+			finish();
+		}
 	}
 
 	/**
@@ -101,7 +109,7 @@ public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListe
 		mPostingdialog = new ECProgressDialog(context, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("levelOneId",new ParameterValue(levelOneId));
+		map.put("levelOneId",new ParameterValue(levelTwoId));
 		try {
 			circleJson = cache.getRseponse(UrlUtil.getDeviceKindLevelTwoList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
 				
@@ -176,7 +184,7 @@ public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListe
 			ViewHolder holder;
 			if (convertView == null) {
 				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_two, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_three, null);
 				holder = new ViewHolder();
 				holder.kindNameTV = (TextView) convertView.findViewById(R.id.kindNameTV);
 				holder.kindImgIV = (ImageView) convertView.findViewById(R.id.kindImgIV);
@@ -211,9 +219,6 @@ public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListe
 		switch (v.getId()) {
 		case R.id.btn_left:
 			finish();
-			break;
-		case R.id.btn_right:
-			startActivity(new Intent(context, CaptureActivity.class));
 			break;
 		}
 	}

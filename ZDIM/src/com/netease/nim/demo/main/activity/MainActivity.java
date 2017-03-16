@@ -60,6 +60,7 @@ import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
+import zhwx.common.view.capture.core.CaptureActivity;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.ui.contact.AddContactActivity;
 
@@ -228,6 +229,9 @@ public class MainActivity extends UI {
                 break;
             case R.id.search_btn:
                 GlobalSearchActivity.start(MainActivity.this);
+                break;
+            case R.id.sao:
+                startActivity(new Intent(MainActivity.this, CaptureActivity.class).putExtra("moduleCode","login"));
                 break;
             default:
                 break;

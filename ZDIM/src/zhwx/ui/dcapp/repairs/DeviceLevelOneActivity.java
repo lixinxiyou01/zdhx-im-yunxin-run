@@ -30,7 +30,6 @@ import zhwx.common.util.RequestWithCacheGet;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
-import zhwx.common.view.capture.core.CaptureActivity;
 import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.common.view.refreshlayout.PullableListView;
 import zhwx.ui.dcapp.assets.model.AllAssets;
@@ -63,20 +62,23 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 	private  List<DeviceKind> allDataList;
 
 	private ImageLoader imageLoader;
-	
+
+	private String levelOneId;
+
 	@Override
 	protected int getLayoutId() {
-		return R.layout.activity_as_assetlist;
+		return R.layout.activity_rm_device_level_one;
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		levelOneId = getIntent().getStringExtra("id");
 		imageLoader = new ImageLoader(context);
 		cache = new RequestWithCacheGet(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_repairs);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, R.drawable.icon_sao,"设备分类", this);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"设备分类", this);
 		assetsLV = (PullableListView) findViewById(R.id.assetsLV);
 		assetsLV.enableAutoLoad(false);
 		assetsLV.setLoadmoreVisible(false);
@@ -85,10 +87,19 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 		assetsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				startActivity(new Intent(context,DeviceLevelTwoActivity.class).putExtra("id",allDataList.get(position).getId()));
+				startActivityForResult(new Intent(context,DeviceLevelTwoActivity.class).putExtra("id",allDataList.get(position).getId()),886);
 			}
 		});
 		getData();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 886) {
+			setResult(886);
+			finish();
+		}
 	}
 
 	/**
@@ -98,6 +109,7 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 		mPostingdialog = new ECProgressDialog(context, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		map.put("groupId",new ParameterValue(levelOneId));
 		try {
 			circleJson = cache.getRseponse(UrlUtil.getDeviceKindLevelOneList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
 				
@@ -172,7 +184,7 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 			ViewHolder holder;
 			if (convertView == null) {
 				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_one, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_devicelevel_two, null);
 				holder = new ViewHolder();
 				holder.kindNameTV = (TextView) convertView.findViewById(R.id.kindNameTV);
 				holder.kindImgIV = (ImageView) convertView.findViewById(R.id.kindImgIV);
@@ -207,9 +219,6 @@ public class DeviceLevelOneActivity extends BaseActivity implements OnClickListe
 		switch (v.getId()) {
 		case R.id.btn_left:
 			finish();
-			break;
-		case R.id.btn_right:
-			startActivity(new Intent(context, CaptureActivity.class));
 			break;
 		}
 	}

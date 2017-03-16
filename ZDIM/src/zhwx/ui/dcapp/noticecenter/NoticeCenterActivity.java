@@ -265,9 +265,7 @@ public class NoticeCenterActivity extends BaseActivity implements OnClickListene
 
 			@Override
 			public void onClick(View arg0) {
-				
 //				showChanagePop();
-				
 			}
 		});
 		setImmerseLayout(top_bar);

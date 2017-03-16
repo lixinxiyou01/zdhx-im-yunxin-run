@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.netease.nim.demo"
     android:installLocation="auto"
-    android:versionCode="2030"
-    android:versionName="2.0.3">
+    android:versionCode="2040"
+    android:versionName="2.0.4">
 
     <!-- 加入应用需要的权限 -->
 
@@ -98,8 +98,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <!-- 多端登录管理 -->
         <activity
@@ -107,8 +106,7 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
 
         <!-- 登录界面    -->
         <activity
@@ -117,8 +115,7 @@
             android:label="@string/login"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 关于 -->
         <activity
@@ -155,7 +152,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
             <intent-filter>
                 <action android:name="com.zdhx.im.UserProfileActivity" />    <!-- 自定义的action-->
                 <category android:name="android.intent.category.DEFAULT" /><!--必须加上这个，否则下面无法直接使用自定的action-->
@@ -245,22 +242,19 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/global_search_bg"
-            android:windowSoftInputMode="stateUnspecified">
-        </activity>
+            android:windowSoftInputMode="stateUnspecified"></activity>
 
         <activity
             android:name=".main.activity.GlobalSearchDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".main.activity.GlobalSearchDetailActivity2"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!-- 查看阅后即焚 -->
         <activity
@@ -386,14 +380,12 @@
         <!-- cosine -->
         <service
             android:name="com.netease.cosine.core.CosineService"
-            android:process=":cosine">
-        </service>
+            android:process=":cosine"></service>
 
         <receiver
             android:name="com.netease.cosine.target.CosineReceiver"
             android:exported="true"
-            android:process=":cosine">
-        </receiver>
+            android:process=":cosine"></receiver>
 
         <!-- cosine target SDK integrated -->
         <meta-data
@@ -410,14 +402,13 @@
         <activity
             android:name="zhwx.ui.circle.CircleRecordActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- 发圈子状态 -->
         <activity
             android:name="zhwx.ui.circle.SendNewCircleActivity"
             android:icon="@drawable/ic_launcher"
-            android:label="分享到校友圈" >
+            android:label="分享到校友圈">
             <intent-filter>
 
                 <!-- 调用共享时，过滤共享文件，此处默认全部 -->
@@ -435,8 +426,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
         <!-- 个人空间 -->
         <activity
@@ -444,43 +434,38 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <!-- 动态详情 -->
         <activity
             android:name="zhwx.ui.circle.CircleDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!-- 班级墙报 -->
         <activity
             android:name="zhwx.ui.circle.ClassCircleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <!-- 选择班级 -->
         <activity
             android:name="zhwx.ui.circle.SelectClassActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!-- 班级主页 -->
         <activity
             android:name="zhwx.ui.circle.MyClassCircleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <!-- WebApp -->
         <activity
             android:name="zhwx.ui.webapp.WebAppActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -496,52 +481,43 @@
         <activity
             android:name="zhwx.ui.webapp.WebAppWithBackActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.webapp.WebAppSelectActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- IM通知 -->
         <activity
             android:name="zhwx.ui.imapp.notice.NoticeActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.imapp.notice.NoticeDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.imapp.notice.SendNewNoticeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
         <activity
             android:name="zhwx.ui.imapp.notice.SeletePageOneActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.imapp.notice.SelectActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.imapp.notice.StatisticsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.imapp.notice.SelectedActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!--数校联系人-->
         <activity
             android:name="zhwx.ui.contact.DcContactActivity"
@@ -551,7 +527,7 @@
         <activity
             android:name="zhwx.ui.contact.DcContactSelectActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.zdhx.im.contactselect" />    <!-- 自定义的action-->
                 <category android:name="android.intent.category.DEFAULT" /><!--必须加上这个，否则下面无法直接使用自定的action-->
@@ -562,378 +538,334 @@
         <activity
             android:name="zhwx.ui.dcapp.checkin.CIMainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="zhwx.ui.dcapp.checkin.SupplementSaveActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="zhwx.ui.dcapp.checkin.CIStatisticsActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="zhwx.ui.dcapp.checkin.OutSignActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
         <!-- 牛栏山作业 -->
         <activity
             android:name="zhwx.ui.dcapp.homework.StudentHomeWorkListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.homework.StudentHomeWorkDetailsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.homework.SubmitHomeWorkActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.homework.ResultDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
 
         <!-- 订车管理 -->
         <activity
             android:name="zhwx.ui.dcapp.carmanage.CMainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.OrderManageActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.OrderCarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.OrderDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.CMSelectActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.CarListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.SendCarActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.DirverFeedBackActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.CheckActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.EvaluateActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name="zhwx.ui.dcapp.carmanage.AddressActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
         <!-- 成绩 -->
         <activity
             android:name="zhwx.ui.dcapp.score.MyScoreActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- 消息中心 -->
         <activity
             android:name="zhwx.ui.dcapp.noticecenter.NoticeCenterActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- 选课 -->
         <activity
             android:name="zhwx.ui.dcapp.takecourse.ChooseAcitivty"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.takecourse.CouseDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.takecourse.MyCourseActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.takecourse.TackCourseIndexActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- 资产管理 -->
         <activity
             android:name="zhwx.ui.dcapp.assets.AMainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.CheckManageActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.ApplyDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.AsCheckActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.AssetDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.view.pancel.PicelBoradActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            >
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.GrantedListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.GrantDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.AssetsListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.SendSearchActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.AssetsSearchListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.GrantBoxActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.GrantActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.ReSingActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.MyAssetsManageActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.ReturnDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.AssetKindSelectActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.AssetKindSelectActivityApply"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.assets.ApplyForAssetActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
 
         <!--库房-->
         <activity
             android:name="zhwx.ui.dcapp.storeroom.SMainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.MyApplyListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.SendBoxActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.ApplyForSActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.GoodsKindActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.GoodsListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.ApplyDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.ToCheckListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.StatisticsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.StatisticsDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.CheckActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.ToGrantActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.GrantForApplyActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.StoreListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.GrantByHandActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.GoodsListForHandActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.SelectForStoreActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!--报修-->
         <activity
             android:name="zhwx.ui.dcapp.repairs.RMainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="zhwx.ui.dcapp.repairs.DeviceKindActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.repairs.DeviceLevelOneActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.repairs.DeviceLevelTwoActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="zhwx.ui.dcapp.repairs.DeviceLevelThreeActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="zhwx.ui.dcapp.repairs.RepairsRequestActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity
+            android:name="zhwx.ui.dcapp.repairs.MyRepairManageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="zhwx.ui.dcapp.repairs.RepairCheckManageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="zhwx.ui.dcapp.repairs.RepairDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="zhwx.ui.dcapp.repairs.SendWorkActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+        <!-- 扫一扫 -->
+        <activity
+            android:name="zhwx.common.view.capture.core.CaptureActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
 
         <!--极光推送-->
         <!-- Required SDK 核心功能-->
@@ -941,7 +873,7 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -956,19 +888,19 @@
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
             android:exported="true">
-            <intent-filter >
+            <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
-                <category android:name="com.lanxum.hzth.im"/>
+                <category android:name="com.lanxum.hzth.im" />
             </intent-filter>
         </service>
 
         <!-- Required SDK核心功能-->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true" >
+            android:enabled="true">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
-                <category android:name="com.lanxum.hzth.im"/>
+                <category android:name="com.lanxum.hzth.im" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -978,6 +910,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -986,10 +919,11 @@
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:exported="false" >
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.lanxum.hzth.im" />
             </intent-filter>
@@ -999,8 +933,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
 
         <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
@@ -1066,8 +999,7 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote"></service>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

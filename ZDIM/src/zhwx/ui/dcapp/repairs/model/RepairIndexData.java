@@ -17,6 +17,7 @@ public class RepairIndexData {
 	private MyRepairBean myRepair;
 	private MyTaskBean myTask;
 	private RepairManageBean repairManage;
+	private String statement;
 
 	public MyRepairBean getMyRepair() {
 		return myRepair;
@@ -42,6 +43,14 @@ public class RepairIndexData {
 		this.repairManage = repairManage;
 	}
 
+	public String getNote() {
+		return statement;
+	}
+
+	public void setNote(String note) {
+		this.statement = note;
+	}
+
 	public static class MyRepairBean {
 		/**
 		 * dfk : 17831
@@ -50,40 +59,40 @@ public class RepairIndexData {
 		 * yxh : 65171
 		 */
 
-		private int dfk;
-		private int wjd;
-		private int wxz;
-		private int yxh;
+		private String dfk;
+		private String wjd;
+		private String wxz;
+		private String yxh;
 
-		public int getDfk() {
+		public String getDfk() {
 			return dfk;
 		}
 
-		public void setDfk(int dfk) {
+		public void setDfk(String dfk) {
 			this.dfk = dfk;
 		}
 
-		public int getWjd() {
+		public String getWjd() {
 			return wjd;
 		}
 
-		public void setWjd(int wjd) {
+		public void setWjd(String wjd) {
 			this.wjd = wjd;
 		}
 
-		public int getWxz() {
+		public String getWxz() {
 			return wxz;
 		}
 
-		public void setWxz(int wxz) {
+		public void setWxz(String wxz) {
 			this.wxz = wxz;
 		}
 
-		public int getYxh() {
+		public String getYxh() {
 			return yxh;
 		}
 
-		public void setYxh(int yxh) {
+		public void setYxh(String yxh) {
 			this.yxh = yxh;
 		}
 	}
@@ -95,31 +104,31 @@ public class RepairIndexData {
 		 * yfk : 88072
 		 */
 
-		private int wjd;
-		private int wxz;
-		private int yfk;
+		private String wjd;
+		private String wxz;
+		private String yfk;
 
-		public int getWjd() {
+		public String getWjd() {
 			return wjd;
 		}
 
-		public void setWjd(int wjd) {
+		public void setWjd(String wjd) {
 			this.wjd = wjd;
 		}
 
-		public int getWxz() {
+		public String getWxz() {
 			return wxz;
 		}
 
-		public void setWxz(int wxz) {
+		public void setWxz(String wxz) {
 			this.wxz = wxz;
 		}
 
-		public int getYfk() {
+		public String getYfk() {
 			return yfk;
 		}
 
-		public void setYfk(int yfk) {
+		public void setYfk(String yfk) {
 			this.yfk = yfk;
 		}
 	}
@@ -132,41 +141,43 @@ public class RepairIndexData {
 		 * ywc : 13830
 		 */
 
-		private int dcl;
-		private int fysp;
-		private int ypd;
-		private int ywc;
+		private String dcl;
+		private String fysp;
+		private String ypd;
+		private String ywc;
 
-		public int getDcl() {
+		public String getDcl() {
 			return dcl;
 		}
 
-		public void setDcl(int dcl) {
+		public void setDcl(String dcl) {
 			this.dcl = dcl;
 		}
 
-		public int getFysp() {
+		public String getFysp() {
 			return fysp;
 		}
 
-		public void setFysp(int fysp) {
+		public void setFysp(String fysp) {
 			this.fysp = fysp;
 		}
 
-		public int getYpd() {
+		public String getYpd() {
 			return ypd;
 		}
 
-		public void setYpd(int ypd) {
+		public void setYpd(String ypd) {
 			this.ypd = ypd;
 		}
 
-		public int getYwc() {
+		public String getYwc() {
 			return ywc;
 		}
 
-		public void setYwc(int ywc) {
+		public void setYwc(String ywc) {
 			this.ywc = ywc;
 		}
+
+
 	}
 }

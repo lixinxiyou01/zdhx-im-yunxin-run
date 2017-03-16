@@ -166,7 +166,7 @@ public class GrantActivity extends BaseActivity implements OnClickListener{
 		nowPhotos.add(null);
 		adapter = new ImageGVAdapter();
 		circleGV.setAdapter(adapter);
-		Tools.setGridViewHeightBasedOnChildren(circleGV);
+		Tools.setGridViewHeightBasedOnChildren4(circleGV);
 	}
 	
 	/**

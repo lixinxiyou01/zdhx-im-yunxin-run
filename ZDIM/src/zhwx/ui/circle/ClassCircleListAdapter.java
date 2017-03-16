@@ -155,7 +155,7 @@ public class ClassCircleListAdapter extends BaseAdapter {
 				holder.noticeImgGV.setVisibility(View.VISIBLE);
 				if (!mBusy) {
 					holder.noticeImgGV.setAdapter(new ImageGirdAdapter(context, getItem(position).getPicUrls()));
-					Tools.setGridViewHeightBasedOnChildren(holder.noticeImgGV);
+					Tools.setGridViewHeightBasedOnChildren4(holder.noticeImgGV);
 				}
 			}
 		}else{
