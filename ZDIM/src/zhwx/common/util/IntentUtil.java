@@ -18,6 +18,7 @@ import zhwx.ui.dcapp.assets.AMainActivity;
 import zhwx.ui.dcapp.carmanage.CMainActivity;
 import zhwx.ui.dcapp.checkin.CIMainActivity;
 import zhwx.ui.dcapp.homework.StudentHomeWorkDetailsActivity;
+import zhwx.ui.dcapp.repairs.RMainActivity;
 import zhwx.ui.dcapp.storeroom.SMainActivity;
 import zhwx.ui.imapp.notice.NoticeDetailActivity;
 import zhwx.ui.webapp.WebAppActivity;
@@ -406,6 +407,9 @@ public class IntentUtil {
 			}else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_STORE)) { //易耗品管理
 
 				intent = new Intent(context,SMainActivity.class);
+			}else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_REPAIR)){ //报修
+
+				intent = new Intent(context,RMainActivity.class);
 			}
 		}
 		return intent;

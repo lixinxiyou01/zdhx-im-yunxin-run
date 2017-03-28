@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
     >
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/actionLay"
+        android:layout_above="@+id/order_btnLay"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,9 +26,9 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:id="@+id/line0"
@@ -48,7 +48,7 @@
                         android:layout_toRightOf="@+id/line0"
                         android:text="报修信息"
                         android:textColor="@color/main_bg_carmanage"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
                 </RelativeLayout>
 
                 <TextView
@@ -61,12 +61,12 @@
 
                 <GridView
                     android:id="@+id/requestImgGV"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:numColumns="4"
                     >
                 </GridView>
@@ -83,8 +83,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="报修人："
-                        android:textSize="13sp" />
+                        android:text="报  修  人："
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/requestUserTV"
@@ -97,7 +97,37 @@
                         android:layout_toRightOf="@+id/TextView21"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:id="@+id/TextView147"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="联系电话："
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/requestPhoneTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/TextView147"
+                        android:singleLine="true"
+                        android:textColor="@color/greytext"
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -113,7 +143,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="报修时间："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/requestTimeTV"
@@ -126,7 +156,7 @@
                         android:layout_toRightOf="@+id/TextView181"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -142,7 +172,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="报修物品："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/requestDeviceTV"
@@ -155,10 +185,11 @@
                         android:layout_toRightOf="@+id/TextView161"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white">
@@ -171,7 +202,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="故障现象："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/faultKindTV"
@@ -184,7 +215,7 @@
                         android:layout_toRightOf="@+id/TextView1412"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -200,7 +231,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="故障描述："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/faultDescriptionTV"
@@ -213,10 +244,11 @@
                         android:layout_toRightOf="@+id/TextView141"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white">
@@ -229,7 +261,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="历史故障维修方式："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/repairHistoryTV"
@@ -242,7 +274,7 @@
                         android:layout_toRightOf="@+id/TextView143"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -258,7 +290,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="故障地点："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/faultPlaceTV"
@@ -271,36 +303,7 @@
                         android:layout_toRightOf="@+id/TextView144"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/TextView147"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="联系电话："
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/requestPhoneTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/TextView147"
-                        android:singleLine="true"
-                        android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
             </LinearLayout>
@@ -309,14 +312,16 @@
                 android:id="@+id/dirverFeedBackLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical" >
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                     >
+                    >
 
                     <TextView
                         android:id="@+id/line1"
@@ -334,28 +339,28 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:text="维修信息"
                         android:layout_toRightOf="@+id/line1"
+                        android:text="反馈信息"
                         android:textColor="@color/main_bg_carmanage"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/line"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:background="@color/line"
                     ></TextView>
 
                 <GridView
                     android:id="@+id/repairImgGV"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:numColumns="4"
                     >
                 </GridView>
@@ -363,7 +368,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white" >
+                    android:background="@color/white">
 
                     <TextView
                         android:id="@+id/TextView20"
@@ -372,8 +377,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="维修人："
-                        android:textSize="13sp" />
+                        android:text="维  修  人："
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/repairerTV"
@@ -386,42 +391,14 @@
                         android:layout_toRightOf="@+id/TextView20"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white" >
-
-                    <TextView
-                        android:id="@+id/TextView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="维修时间："
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/repairTimeTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/TextView18"
-                        android:singleLine="true"
-                        android:textColor="@color/greytext"
-                        android:textSize="13sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white" >
+                    android:background="@color/white">
 
                     <TextView
                         android:id="@+id/TextView16"
@@ -431,10 +408,10 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="维修状态："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
-                    <TextView
-                        android:id="@+id/repairStatusTV"
+                    <RadioGroup
+                        android:id="@+id/repairStatusRG"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -442,9 +419,27 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/TextView16"
-                        android:singleLine="true"
-                        android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/repairedRb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/btn_radio_selector"
+                            android:checked="true"
+                            android:text=" 已  修  好"
+                            android:textColor="@color/dark_gray"/>
+
+                        <RadioButton
+                            android:id="@+id/cantRepairRb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:button="@drawable/btn_radio_selector"
+                            android:text=" 不能维修"
+                            android:textColor="@color/dark_gray"/>
+                    </RadioGroup>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -460,10 +455,10 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="故障类型："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
-                    <TextView
-                        android:id="@+id/faultLeixingTV"
+                    <RadioGroup
+                        android:id="@+id/faultKindRG"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -471,27 +466,44 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/TextView149"
-                        android:singleLine="true"
-                        android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/normalFaultRb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/btn_radio_selector"
+                            android:checked="true"
+                            android:text=" 自然损坏"
+                            android:textColor="@color/dark_gray"/>
+
+                        <RadioButton
+                            android:id="@+id/personFaultRb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:button="@drawable/btn_radio_selector"
+                            android:text=" 人为损坏"
+                            android:textColor="@color/dark_gray"/>
+                    </RadioGroup>
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
                     android:background="@color/white">
 
                     <TextView
                         android:id="@+id/TextView1411"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
                         android:text="故障原因："
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/faultReasonTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -500,28 +512,33 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/TextView1411"
-                        android:singleLine="true"
+                        android:background="@drawable/btn_ordercar_normal"
+                        android:gravity="left|top"
+                        android:hint="选填"
+                        android:lines="3"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white">
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/TextView1422"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="@dimen/common_margin_10"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="消耗品及数量："
-                        android:textSize="13sp" />
+                        android:text="配件明细："
+                        android:textSize="13sp"/>
 
-                    <TextView
-                        android:id="@+id/elseTV"
+                    <LinearLayout
+                        android:id="@+id/elseLay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -529,9 +546,67 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/TextView1422"
+                        android:orientation="vertical"
+                        />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/elseContener"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/line"
+                    ></TextView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/TextView201"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="维修费用："
+                        android:textSize="13sp"/>
+
+                    <EditText
+                        android:id="@+id/repairCostTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/TextView201"
+                        android:ems="4"
+                        android:gravity="center_horizontal"
                         android:singleLine="true"
                         android:textColor="@color/greytext"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/yuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/repairCostTV"
+                        android:singleLine="true"
+                        android:text="元"
+                        android:textColor="@color/greytext"
+                        android:textSize="15sp"/>
                 </RelativeLayout>
 
             </LinearLayout>
@@ -540,16 +615,24 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/actionLay"
+        android:id="@+id/order_btnLay"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
-        android:gravity="right"
-        tools:ignore="Orientation"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="5"
+            android:background="@color/main_bg_repairs"
+            android:gravity="center"
+            android:onClick="onFeedBack"
+            android:text="提交反馈"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+
     </LinearLayout>
 
 </RelativeLayout>

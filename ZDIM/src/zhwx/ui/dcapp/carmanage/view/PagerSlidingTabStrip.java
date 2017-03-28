@@ -86,17 +86,17 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private Paint dividerPaint;
 
 	private int indicatorColor = 0xEEFFFFFF;
-	private int underlineColor = 0xFFFFFFFF;
-	private int dividerColor = 0xAAf28d2b;
+	private int underlineColor = 0xFFDDDDDD;
+	private int dividerColor = 0xFFDDDDDD;
 
 	private boolean shouldExpand = false;
 	private boolean textAllCaps = true;
 
 	private int scrollOffset = 52;
 	private int indicatorHeight = 3;
-	private int underlineHeight = 0;
+	private int underlineHeight = 1;
 	private int dividerPadding = 12;
-	private int tabPadding = 24;
+	private int tabPadding = 20;
 	private int dividerWidth = 1;
 
 	private int tabTextSize = 14;
@@ -311,7 +311,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		//改变当前textView 颜色
 		for (Entry<Integer, TextView> entry : viewMap.entrySet()) {
 			if (entry.getKey() == position) {
-				entry.getValue().setTextColor(dividerColor);
+				entry.getValue().setTextColor(indicatorColor);
 			} else {
 				entry.getValue().setTextColor(Color.parseColor("#AA000000"));
 			}

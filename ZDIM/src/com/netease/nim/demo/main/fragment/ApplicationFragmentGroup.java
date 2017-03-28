@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import zhwx.Constant;
+import zhwx.common.model.AppGroup;
 import zhwx.common.model.Apps;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.model.V3NoticeCenter;
@@ -62,7 +63,9 @@ public class ApplicationFragmentGroup extends TFragment {
 
 	private String addCode = "";
 
-	private List<Apps.AppGroup> appGroups = new ArrayList<>();
+	private List<AppGroup> appGroups = new ArrayList<>();
+
+	private List<AppGroup> currAppGroups = new ArrayList<>();
 
 	private LinearLayout appGroupContener;
 
@@ -94,7 +97,6 @@ public class ApplicationFragmentGroup extends TFragment {
 		super.onActivityCreated(savedInstanceState);
 	}
 
-
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -108,30 +110,32 @@ public class ApplicationFragmentGroup extends TFragment {
 		appGroupContener = findView(R.id.appGroupContener);
         appGroupContener.removeAllViews();
         appGroups = Apps.getAppGroupList();
-		//把集合中没有的App移除
+		currAppGroups.clear();
 		for (int i = 0; i < appGroups.size(); i++) {
-			for (int i1 = appGroups.get(i).getApps().size() - 1; i1 >= 0; i1--) {
-				boolean gKey = false;
-				for (int i2 = 0; i2 < appCode.length; i2++) {
-					if(appCode[i2].equals(appGroups.get(i).getApps().get(i1).getCode())) {
-						gKey = true;
-						break;
+			AppGroup aag = new AppGroup(appGroups.get(i).getGroupName(),appGroups.get(i).getGroupCode());
+			List<Apps> apps = new ArrayList<Apps>();
+
+			for (int i1 = 0; i1 < appCode.length; i1++) {
+				for (int i2 = 0; i2 < appGroups.get(i).getApps().size(); i2++) {
+					if(appCode[i1].equals(appGroups.get(i).getApps().get(i2).getCode())) {
+						apps.add(appGroups.get(i).getApps().get(i2));
 					}
 				}
-				if (!gKey) {
-					appGroups.get(i).getApps().remove(i1);
-				}
 			}
+			aag.setApps(apps);
+			currAppGroups.add(aag);
+		}
+		for (int i = 0; i < currAppGroups.size(); i++) {
 			//本组有APP
-			if(appGroups.get(i).getApps().size() > 0) {
+			if(currAppGroups.get(i).getApps().size() > 0) {
 				View titleView = LayoutInflater.from(getActivity()).inflate(R.layout.app_group_lay, null);
 				TextView groupNameTV = (TextView) titleView.findViewById(R.id.groupNameTV);
-				groupNameTV.setText(appGroups.get(i).getGroupName());
+				groupNameTV.setText(currAppGroups.get(i).getGroupName());
 				appGroupContener.addView(titleView);
 
 				GridView gridView = new GridView(context);
 				gridView.setNumColumns(4);
-				gridView.setAdapter(new MyAdapter(appGroups.get(i).getApps()));
+				gridView.setAdapter(new MyAdapter(currAppGroups.get(i).getApps()));
 				addListener(gridView);
 				appGroupContener.addView(gridView);
 				Tools.setGridViewHeightBasedOnChildren4(gridView);

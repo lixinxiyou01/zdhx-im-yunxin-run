@@ -272,7 +272,6 @@ public class ApplyForSActivity extends BaseActivity implements
 		getTopBarView().setBackGroundColor(R.color.main_bg_store);
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "提交",
 				"申领单", this);
-		setImmerseLayout(getTopBarView(), 1);
 		java.util.Calendar calendar = java.util.Calendar.getInstance();
 		final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
 				ApplyForSActivity.this, calendar.get(java.util.Calendar.YEAR),

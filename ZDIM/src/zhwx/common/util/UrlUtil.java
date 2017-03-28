@@ -1223,6 +1223,13 @@ public class UrlUtil {
 		return getUrl(checkUrl(baseUrl) + "/bd/mobile/baseData/getParentTree", map);
 	}
 
+	/**
+	 * 根据V3Id获取
+	 */
+	public static String getAccIdByV3Id(String baseUrl,Map<String, ParameterValue> map) throws Exception{
+		return getUrlResponse(checkUrl(baseUrl) + "/bd/user/getAccIdByV3Id", map);
+	}
+
 	/************************** 作业 ***************************************************************************/
 	/**
 	 * 获取学科列表
@@ -2236,6 +2243,56 @@ public class UrlUtil {
 	 */
 	public static String repairRecordDelete(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!repairRecordDelete.action"), map);
+	}
+
+	/**
+	 * 维修工提交反馈
+	 */
+	public static String saveWokerFeedBack(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!saveWokerFeedBack.action", loginMap),files, map);
+	}
+
+	public static String saveWokerFeedBack(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!saveWokerFeedBack.action"), map);
+	}
+
+	/**
+	 * 获取反馈项
+	 */
+	public static String getFeedbackContentList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!getFeedbackContentList.action"), map);
+	}
+
+	/**
+	 * 提交反馈
+	 *   attitudeStr 服务态度	number
+		 qualityStr	维修质量	number
+		 repairFlag	是否修好	string
+		 reportId	维修单Id	string
+		 scoreStr	整体评价	number
+		 speedStr	响应速度	number
+		 suggestion	意见	string
+		 technicalLevelStr	技术水平
+	 */
+	public static String saveFeedBack(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!saveFeedBack.action"), map);
+	}
+
+	/**
+	 * 获取反馈项
+	 * 	checkFlag	是否通过	string	1通过，2不通过
+	 checkNote	审核意见	string
+	 repairId	报修单Id
+	 */
+	public static String saveCostCheck(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!saveCostCheck.action"), map);
+	}
+
+	/**
+	 * 获取消耗物品
+	 */
+	public static String getGoods(String baseUrl,Map<String, ParameterValue> map) {
+		return getUrl(checkUrl(baseUrl + "/re/repairsRecordMobile!getGoods.action"), map);
 	}
 
 	/************************************ 数据接口end ************************************************************/

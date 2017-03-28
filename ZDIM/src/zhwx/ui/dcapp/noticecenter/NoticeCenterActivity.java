@@ -777,11 +777,11 @@ public class NoticeCenterActivity extends BaseActivity implements OnClickListene
 	private void delSeletedNotice() {
 		List<String> ids = new ArrayList<String>();
 		List<Integer> positions = new ArrayList<Integer>();
-		MessageListAdapter adapter1 = (MessageListAdapter) listView.getAdapter();
+
 		Set<Entry<Integer, Boolean>> entrySet = checkedItemMap.entrySet();
 		for (Entry<Integer, Boolean> entry : entrySet) {
 			int position = entry.getKey();
-			V3NoticeCenter msg = (V3NoticeCenter) adapter1.getItem(position);
+			V3NoticeCenter msg = (V3NoticeCenter) adapter.getItem(position);
 			ids.add(msg.getId());
 			positions.add(position);
 		}

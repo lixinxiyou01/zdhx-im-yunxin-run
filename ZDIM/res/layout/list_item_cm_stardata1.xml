@@ -31,10 +31,11 @@
             android:layout_toRightOf="@+id/starNameTV"
             android:numStars="5"
             android:rating="0"
+            android:stepSize="1"
             android:progressDrawable="@drawable/ratingbar_big_drawable"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:stepSize="1" />
+            />
 
     </RelativeLayout>
 

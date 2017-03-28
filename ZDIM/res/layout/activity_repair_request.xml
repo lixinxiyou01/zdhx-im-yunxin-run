@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
     <ScrollView
         android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/order_btnLay"
         android:layout_alignParentLeft="true"
@@ -20,7 +22,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@color/white">
 
                 <TextView
@@ -55,7 +56,54 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/phoneTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="联系电话:"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/mobileET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/phoneTV"
+                    android:background="@null"
+                    android:hint="必填"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/greytext"
+                    android:textSize="15sp"/>
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_rm_request"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/line_middle"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:background="@color/white">
 
                 <TextView
@@ -84,12 +132,13 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
@@ -98,20 +147,29 @@
                     android:id="@+id/commentFaultTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentTop="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="常见故障:"
                     android:textSize="15sp" />
 
-                <GridView
+                <zhwx.common.view.tagview.TagListView
+                    xmlns:f="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/commentFaultGV"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+
                     android:layout_toRightOf="@+id/commentFaultTV"
-                    android:numColumns="4" />
+                    f:horizontalSpacing="@dimen/tag_horizontal_spacing"
+                    f:orientation="horizontal"
+                    f:verticalSpacing="@dimen/tag_vertical_spacing"
+                    />
 
             </RelativeLayout>
 
@@ -158,17 +216,23 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@color/white">
+                android:background="@color/color_gray_d9d9d9">
 
                 <TextView
-                    android:id="@+id/placeTV"
+                    android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="故障地点:"
-                    android:textSize="15sp" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="8dp"
+                    android:text="报修地点"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -177,12 +241,54 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/placeTV"
                     android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/schoolTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_centerVertical="true"
+                            android:text="校   区："
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView81"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/icon_rm_down" />
+
+                        <Spinner
+                            android:id="@+id/schoolSP"
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:layout_toRightOf="@+id/schoolTV"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/btn_ordercar_normal"
+                            tools:ignore="UnknownId"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/buildTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="楼   宇："
+                            android:layout_centerVertical="true"
+                            android:textSize="15sp" />
 
                         <ImageView
                             android:id="@+id/imageView6"
@@ -199,12 +305,23 @@
                             android:layout_height="28dp"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/buildTV"
                             android:background="@drawable/btn_ordercar_normal" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/floorlTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_centerVertical="true"
+                            android:text="楼   层："
+                            android:textSize="15sp" />
 
                         <ImageView
                             android:id="@+id/imageView7"
@@ -219,6 +336,8 @@
                             android:id="@+id/floorSP"
                             android:layout_width="match_parent"
                             android:layout_height="28dp"
+                            android:layout_toRightOf="@+id/floorlTV"
+                            android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
                             android:background="@drawable/btn_ordercar_normal" />
                     </RelativeLayout>
@@ -226,6 +345,15 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/roomTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_centerVertical="true"
+                            android:text="房   间："
+                            android:textSize="15sp" />
 
                         <ImageView
                             android:id="@+id/imageView8"
@@ -240,63 +368,20 @@
                             android:id="@+id/classSP"
                             android:layout_width="match_parent"
                             android:layout_height="28dp"
+                            android:layout_toRightOf="@+id/roomTV"
+                            android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
-                            android:background="@drawable/btn_ordercar_normal" />
+                            android:background="@drawable/btn_ordercar_normal"
+                            tools:ignore="UnknownId"/>
                     </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line_middle"></RelativeLayout>
+                android:layout_height="0.5dp"
+                android:background="@color/line"></RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
-                android:background="@color/white">
-
-                <TextView
-                    android:id="@+id/phoneTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="联系电话:"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/mobileET"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/phoneTV"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:hint="必填"
-                    android:inputType="number"
-                    android:textColor="@color/greytext"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/icon_rm_request" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/line_middle"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -306,6 +391,7 @@
 
                 <TextView
                     android:id="@+id/upLoadimage"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -342,7 +428,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="5"
-            android:background="#5d83ee"
+            android:background="@color/main_bg_repairs"
             android:gravity="center"
             android:onClick="onOrder"
             android:text="提交"

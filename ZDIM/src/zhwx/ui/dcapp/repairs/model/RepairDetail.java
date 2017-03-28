@@ -47,8 +47,9 @@ public class RepairDetail {
         private String repairTime;
         private String malfunctionKind;
         private String malfunctionReason;
-        private String goodsSum;
+        private List<ConsumItem> goodsSum;
         private String workerName;
+        private String costApplication;
         private List<String> repairImageList;
 
         public String getRepairStatus() {
@@ -83,14 +84,6 @@ public class RepairDetail {
             this.malfunctionReason = malfunctionReason;
         }
 
-        public String getGoodsSum() {
-            return goodsSum;
-        }
-
-        public void setGoodsSum(String goodsSum) {
-            this.goodsSum = goodsSum;
-        }
-
         public String getWorkerName() {
             return workerName;
         }
@@ -105,6 +98,20 @@ public class RepairDetail {
 
         public void setRepairImageList(List<String> repairImageList) {
             this.repairImageList = repairImageList;
+        }
+
+        public String getCostApplication() {
+            return costApplication;
+        }
+
+        public void setCostApplication(String costApplication) {
+            this.costApplication = costApplication;
+        }
+        public List<ConsumItem> getGoodsSum() {
+            return goodsSum;
+        }
+        public void setGoodsSum(List<ConsumItem> goodsSum) {
+            this.goodsSum = goodsSum;
         }
     }
 

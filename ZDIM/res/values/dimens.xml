@@ -86,5 +86,12 @@
     <!-- map -->
     <dimen name="friend_map_btn_height">42dp</dimen>
     <dimen name="friend_map_bound_padding">80dp</dimen>
+
+    <!--tagview-->
+    <dimen name="tag_corner_radius">20.0dip</dimen>
+    <dimen name="tag_horizontal_spacing">5.0dip</dimen>
+    <dimen name="tag_vertical_spacing">5.0dip</dimen>
+    <dimen name="common_margin">12.0dip</dimen>
+    <dimen name="common_margin_10">10.0dip</dimen>
     
 </resources>

@@ -63,8 +63,8 @@ public class RepairDetailActivity extends BaseActivity implements ScrollTabHolde
 		mPagerSlidingTabStrip.setShouldExpand(true);
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
 		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.main_bg_repairs));
-		mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.main_bg_repairs));
-		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(R.color.main_bg_repairs));
+		mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.gray));
+		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(R.color.gray));
 		mPagerSlidingTabStrip.setTabPaddingLeftRight(10);
 		mPagerSlidingTabStrip.setOnPageChangeListener(this);
 	}

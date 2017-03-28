@@ -40,9 +40,7 @@ public class Constant {
 	/** 圈子 */
 	public static final String CIRCLE_PUBLICFLAG_PRIVATE = "0";	//不公开
 	public static final String CIRCLE_PUBLICFLAG_PUBLIC = "1";	//公开
-	public static final String STRING_TRUE = "true";	
-	public static final String STRING_FALSE = "false";	
-	public static final int COMMENT = 1;	
+	public static final int COMMENT = 1;
 	public static final int REPLY = 2;	
 	
 	/** 班级圈发送权限 */
@@ -57,19 +55,6 @@ public class Constant {
 	public static final String RECORD_KIND_COMMENT = "0";		//评论
 	public static final String RECORD_KIND_REPLY   = "1";			//回复
 	public static final String RECORD_KIND_THUMBUP = "2";		//赞
-
-	/** 消息类型 */
-	public static final String MESSAGE_KIND_NOTICE    = "1";// 消息类型：通知
-	public static final String MESSAGE_KIND_DOCUMENT  = "2";// 消息类型：公文
-	public static final String MESSAGE_KIND_WCWARNING = "3";// 消息类型：周历提醒
-	public static final String MESSAGE_KIND_IMMESSAGE = "4";// 消息类型：学生自主管理消息
-	public static final String MESSAGE_KIND_STOREROOM = "5";// 消息类型：库房管理消息
-	public static final String MESSAGE_KIND_REPAIRRECORD   = "6";// 消息类型：报修管理消息
-	public static final String MESSAGE_KIND_QUESTIONANSWER = "7";// 消息类型：答疑平台提醒
-	public static final String MESSAGE_KIND_DOCUMENTCIRCULATION = "8";// 消息类型：公文流转
-	public static final String MESSAGE_KIND_MATERIALSNOTICE = "9";// 消息类型：材料通知
-	public static final String MESSAGE_KIND_BAOXIU = "msg_repair";	//报修
-
 
 	/** 消息已读状态 */
 	public static final String NOTICE_READ_NO  = "0";	  //未读
@@ -95,7 +80,7 @@ public class Constant {
 	public static final String WEBAPP_URL_ANNOUNCEMENT = "/bd/webApp/announcement";	 //系统公告
 	public static final String WEBAPP_URL_MESS = "/bd/webApp/canteenmanage";	//食堂
 	public static final String WEBAPP_URL_HOMEWORK_CJL = "/il/homeWork!mobileWorkStatisticsIndex.action";	//陈经纶作业
-	public static final String WEBAPP_URL_TECH_MANAGE = "http://58.132.20.69/iphoneLoginUserCas";	//科研管理
+	public static final String WEBAPP_URL_TECH_MANAGE = "http://58.132.20.69/iphoneLoginUserCas";	//教科研管理
 	
 	/** 附件扩展名 */
 	public static final String ATTACHMENT_DOC  = "doc";	

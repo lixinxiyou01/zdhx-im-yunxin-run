@@ -135,9 +135,10 @@ public class RMainActivity extends BaseActivity {
         RepairIndexData data = new Gson().fromJson(indexJson, RepairIndexData.class);
 
         if (data.getNote()!= null && StringUtil.isNotBlank(data.getNote())) {
-            String  note = data.getNote().replaceAll("<p>","<br>").replaceAll("<\\/p>","<\\/br>");
-            noticeTV.setText(Html.fromHtml(note));
-            publicTV.setText(Html.fromHtml(note));
+//            String  note = data.getNote().replaceAll("<p>","<br>").replaceAll("<\\/p>","<\\/br>");
+            System.out.println("note" + data.getNote());
+            noticeTV.setText(Html.fromHtml(data.getNote()));
+            publicTV.setText(Html.fromHtml(data.getNote()));
         }
 
         //角色权限控制

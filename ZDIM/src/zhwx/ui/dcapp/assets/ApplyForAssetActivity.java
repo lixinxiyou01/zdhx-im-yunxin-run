@@ -251,7 +251,6 @@ public class ApplyForAssetActivity extends BaseActivity implements OnDateSetList
 	private void initView() {
 		getTopBarView().setBackGroundColor(R.color.main_bg_assets);
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"申请资产", this);
-		setImmerseLayout(getTopBarView(),1);
 		java.util.Calendar calendar = java.util.Calendar.getInstance();
 		final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
 				ApplyForAssetActivity.this, calendar.get(java.util.Calendar.YEAR),

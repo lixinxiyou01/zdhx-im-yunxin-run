@@ -36,10 +36,10 @@
                 android:clickable="false"
                 android:focusable="false" />
 
-            <zhwx.common.view.CircleImageView
+            <ImageView
                 android:id="@+id/app_headIV"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/icon_touxiang_persion_gray" />
@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:text="{模块名称}"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_gray"
                             android:textSize="16sp" />
                     </LinearLayout>
 

@@ -20,7 +20,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -58,14 +57,13 @@ import static com.netease.nim.demo.team.TeamSynchroHelper.map;
  * @author Li.Xin
  * 2014-9-26 上午10:49:11
  */
-public final class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback {
+public final class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback,OnClickListener {
 
 	private static final String TAG = CaptureActivity.class.getSimpleName();
 	private CameraManager cameraManager;
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
 	private TextView statusView;
-	private TextView common_title_TV_right;
 	private Result lastResult;
 	private boolean hasSurface;
 	private IntentSource source;
@@ -79,7 +77,6 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	static final int PARSE_BARCODE_FAIL = 3036;
 	private String photoPath;
 	private ProgressDialog mProgress;
-	private FrameLayout top_bar;
 	private String moduleCode;
 
 	enum IntentSource {
@@ -126,18 +123,21 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		getTopBarView().setVisibility(View.GONE);
 		moduleCode = getIntent().getStringExtra("moduleCode");
+		if (StringUtil.isBlank(moduleCode)) { //资产管理
+			getTopBarView().setBackGroundColor(R.color.main_bg_assets);
+		} else if (V3NoticeCenter.NOTICE_KIND_REPAIR.equals(moduleCode)) { //报修
+			getTopBarView().setBackGroundColor(R.color.main_bg_repairs);
+		} else if ("login".equals(moduleCode)) {//扫码登录
+			getTopBarView().setBackGroundColor(R.color.main_bg);
+		}
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"扫一扫", this);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		cameraManager = new CameraManager(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		viewfinderView.setCameraManager(cameraManager);
 		statusView = (TextView) findViewById(R.id.status_view);
-		common_title_TV_right = (TextView) findViewById(R.id.common_title_TV_right);
-		top_bar = (FrameLayout) findViewById(R.id.top_bar);
-		setImmerseLayout(top_bar);
-		setListeners();
 	}
 
 	public void showDialog(final String msg) {
@@ -151,8 +151,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 			intent.putExtra("isAddMode", "isAddMode");
 			startActivity(intent);
 		} else if (V3NoticeCenter.NOTICE_KIND_REPAIR.equals(moduleCode)) { //报修
-
-
+			ToastUtil.showMessage("报修扫码暂未开通");
 		} else if ("login".equals(moduleCode)) { //扫码登录
 			LoginCapture capture = null;
 			if(msg.contains("u")&&msg.contains("i")){
@@ -182,16 +181,6 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 		}
 		restartPreviewAfterDelay(0L);
 		finish();
-	}
-
-	public void setListeners() {
-
-		common_title_TV_right.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				StringUtils.showPictures(CaptureActivity.this, from_photo);
-			}
-		});
 	}
 
 	public String parsLocalPic(String path) {
@@ -424,6 +413,15 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 		statusView.setVisibility(View.VISIBLE);
 		viewfinderView.setVisibility(View.VISIBLE);
 		lastResult = null;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btn_left:
+				finish();
+				break;
+		}
 	}
 
 	public void drawViewfinder() {

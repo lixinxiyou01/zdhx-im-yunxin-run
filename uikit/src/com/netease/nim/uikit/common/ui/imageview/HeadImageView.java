@@ -87,7 +87,7 @@ public class HeadImageView extends CircleImageView {
 
         final UserInfoProvider.UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(account);
         boolean needLoad = userInfo != null && ImageLoaderKit.isImageUriValid(userInfo.getAvatar());
-
+        Log.e("AvatarUrl++++",userInfo.getAvatar());
         doLoadImage(needLoad, account, userInfo != null ? userInfo.getAvatar() : null, thumbSize);
     }
 
@@ -120,9 +120,6 @@ public class HeadImageView extends CircleImageView {
 //            final String thumbUrl = makeAvatarThumbNosUrl(url, thumbSize);
 
             // 异步从cache or NOS加载图片
-            if (url.contains("192.168")) {
-                Log.e("ErrorUrl",url);
-            }
             ImageLoader.getInstance().displayImage(url, new NonViewAware(new ImageSize(thumbSize, thumbSize),
                     ViewScaleType.CROP), options, new SimpleImageLoadingListener() {
                 @Override

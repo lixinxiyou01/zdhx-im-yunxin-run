@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
+import com.netease.nim.demo.session.SessionHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,7 +78,8 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 	private RepairAdapter adapter;
 	
 	private String json;
-	
+	private String accId;
+
 	private int pageNum = 1;
 	
 	private ECProgressDialog mPostingdialog;
@@ -288,7 +290,11 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 				} else if (startFlag == RMainActivity.STARTFLAG_MYREQUEST){
 					convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_repair, null);
 				} else if (startFlag == RMainActivity.STARTFLAG_ORDERCHECK){
-					convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_repair_manager, null);
+					if(RepairListItem.COST_STATUS_NEED.equals(getItem(position).getCheckStatus())) {
+						convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_repair_manager_check, null);
+					} else {
+						convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_repair_manager, null);
+					}
 				}
 
 				holder = new ViewHolder();
@@ -302,6 +308,7 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 				holder.deviceNameTV = (TextView) convertView.findViewById(R.id.deviceNameTV);
 				holder.faultPlaceTV = (TextView) convertView.findViewById(R.id.faultPlaceTV);
 				holder.requestUserPhoneTV = (TextView) convertView.findViewById(R.id.requestUserPhoneTV);
+				holder.costTV = (TextView) convertView.findViewById(R.id.costTV);
 
 				holder.phoneIV = (ImageView) convertView.findViewById(R.id.phoneIV);
 				holder.messageIV = (ImageView) convertView.findViewById(R.id.messageIV);
@@ -323,9 +330,11 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 			setText(holder.faultPlaceTV,getItem(position).getPlaceName());
 			setText(holder.requestUserPhoneTV,getItem(position).getRequestUserPhone());
 
+			setText(holder.costTV,getItem(position).getCostApplication() + "元");
+
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
-			List<TextView> btns = getOrderButtonList(getItem(position).getStatusCode(),position);
+			List<TextView> btns = getOrderButtonList(getItem(position).getStatusCode(),position,getItem(position).getCheckStatus());
 			for (TextView button : btns) {
 				holder.buttonContentLay.addView(button);
 			}
@@ -364,28 +373,54 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 				holder.messageIV.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (StringUtil.isBlank(getItem(position).getRequestUserPhone())) {
-							ToastUtil.showMessage("无可用电话号码");
+						if (ECApplication.getInstance().getCurrentIMUser().getV3Id().equals(getItem(position).getUserId())) {
+							ToastUtil.showMessage("不能与自己聊天");
 							return;
 						}
-						Uri smsToUri = Uri.parse("smsto:" + getItem(position).getRequestUserPhone());
-						Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);
-						intent.putExtra("sms_body", "");
-						startActivity(intent);
+						map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+						map.put("v3Id", new ParameterValue(getItem(position).getUserId()));
+						new ProgressThreadWrap(getActivity(), new RunnableWrap() {
+							@Override
+							public void run() {
+								try {
+									accId = UrlUtil.getAccIdByV3Id(ECApplication.getInstance().getAddress(), map);
+									handler.postDelayed(new Runnable() {
+										public void run() {
+											if (!"error".equals(accId)) {
+//												UserProfileActivity.start(getActivity(), accId.trim());
+												SessionHelper.startP2PSession(getActivity(), accId.trim());
+											} else {
+												ToastUtil.showMessage("此用户未开通即时通讯");
+											}
+										}
+									}, 5);
+								} catch (Exception e) {
+									e.printStackTrace();
+									ToastUtil.showMessage("请求失败，请稍后重试");
+									handler.postDelayed(new Runnable() {
+
+										@Override
+										public void run() {
+
+										}
+									}, 5);
+								}
+							}
+						}).start();
 					}
 				});
 			}
 		}
 		private class ViewHolder {
 			private TextView titleTV, checkStatusViewTV, requestTimeTV, faultTV,requestUserNameTV,deviceNameTV
-					,faultPlaceTV,requestUserPhoneTV,faultDescriptionTV;
+					,faultPlaceTV,requestUserPhoneTV,faultDescriptionTV,costTV;
 			private ImageView phoneIV,messageIV;
 			private LinearLayout buttonContentLay;
 		}
 		
 	}
-	
-	public List<TextView> getOrderButtonList(final String status,final int position){
+
+	public List<TextView> getOrderButtonList(final String status,final int position,final String costStatus){
 
 		List<TextView> btnList = new ArrayList<TextView>();
 		TextView ckBT = getOrderButton("查看");
@@ -432,21 +467,12 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 				buildAlert.show();
 			}
 		});
-		TextView sendBT = getOrderButton("派给他人");
+		TextView sendBT = getOrderButton("派单");
 		sendBT.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				startActivity(new Intent(getActivity(),SendWorkActivity.class).putExtra("repairId",allDataList.get(position).getId()));
-			}
-		});
-		TextView passBT = getOrderButton("转至其他维修组");
-		passBT.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				//TODO 转至其他维修组
-				ToastUtil.showMessage("转至其他维修组");
 			}
 		});
 
@@ -455,10 +481,8 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				//TODO 维修工反馈
-				ToastUtil.showMessage("维修工反馈");
-//				startActivity(new Intent(getActivity(),WorkerFeedBackActivity.class)
-//						.putExtra("repairId",allDataList.get(position).getId()));
+				startActivity(new Intent(getActivity(),WorkerFeedBackActivity.class)
+						.putExtra("repairId",allDataList.get(position).getId()));
 			}
 		});
 
@@ -467,8 +491,19 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				//TODO 报修人反馈
-				ToastUtil.showMessage("报修人反馈");
+				startActivity(new Intent(getActivity(),RequestFeedBackActivity.class)
+						.putExtra("repairId",allDataList.get(position).getId()));
+			}
+		});
+
+		TextView fyspBT = getOrderButton("费用审批");
+		fyspBT.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				//TODO 费用审批
+				startActivity(new Intent(getActivity(),CostCheckActivity.class)
+						.putExtra("repairId",allDataList.get(position).getId()));
 			}
 		});
 
@@ -484,31 +519,35 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 		} else if(startFlag == RMainActivity.STARTFLAG_ORDERCHECK) { /**报修管理*/
 
 			if(RepairListItem.STATUS_NOT_ACCEPTED.equals(status)) { //未接单
-				btnList.add(jdBT);
+//				btnList.add(jdBT);
 				btnList.add(sendBT);
-				btnList.add(passBT);
 			} else if (RepairListItem.STATUS_REPAIRING.equals(status)) { //维修中
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
+
 			} else if (RepairListItem.STATUS_DELAYFIX.equals(status)) { //延迟维修
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
 			} else if (RepairListItem.STATUS_CANNOT_BE_FIXED.equals(status)) { //不能维修
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
 			} else if (RepairListItem.STATUS_REPAIRED_OK.equals(status)) { //已修好
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
+			}
+
+			if(RepairListItem.COST_STATUS_NEED.equals(costStatus)) {
+				btnList.add(fyspBT);
 			}
 
 		} else if(startFlag == RMainActivity.STARTFLAG_MYTASK) { /**维修工*/
 
 			if(RepairListItem.STATUS_NOT_ACCEPTED.equals(status)) { //未接单
-				btnList.add(jdBT);
+
 			} else if (RepairListItem.STATUS_REPAIRING.equals(status)) { //维修中
 				btnList.add(workerFkBT);
 			} else if (RepairListItem.STATUS_DELAYFIX.equals(status)) { //延迟维修
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
 			} else if (RepairListItem.STATUS_CANNOT_BE_FIXED.equals(status)) { //不能维修
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
 			} else if (RepairListItem.STATUS_REPAIRED_OK.equals(status)) { //已修好
-				btnList.add(workerFkBT);
+//				btnList.add(workerFkBT);
 			}
 		}
 		btnList.add(ckBT);

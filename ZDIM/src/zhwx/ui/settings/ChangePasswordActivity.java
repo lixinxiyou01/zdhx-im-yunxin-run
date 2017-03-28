@@ -73,8 +73,7 @@ public class ChangePasswordActivity extends BaseActivity {
 				if(newPwdET.getEditableText().toString().equals(newPwdET2.getEditableText().toString())){
 					upLoadNewMessage(newPwdET.getEditableText().toString());
 				}else{
-					newPwdET2.setError(Html.fromHtml("<font color=#808183>"
-			                + "两次输入不一致" + "</font>"));
+					newPwdET2.setError(Html.fromHtml("<font color=#808183>" + "两次输入不一致" + "</font>"));
 				}
 			}else{
 				newPwdET2.setError(Html.fromHtml("<font color=#808183>"

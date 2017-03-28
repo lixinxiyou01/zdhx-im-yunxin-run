@@ -130,8 +130,6 @@ public class ECApplication extends Application {
         // crash handler
         AppCrashHandler.getInstance(this);
 
-
-
         CCPAppManager.setContext(this);
 
         initImageLoader();
@@ -510,7 +508,7 @@ public class ECApplication extends Application {
 
     public String getV3Address(){
         return getCurrentIMUser().getV3Url();
-//        return "http://192.168.1.118:7777/dc-repair";
+//        return "http://192.168.1.119:8888/dc-repair";
     }
 
     /**
@@ -708,19 +706,6 @@ public class ECApplication extends Application {
         return preferences.getString("lastClassCircleRecordTime", "2030-01-01 00:00:00");
     }
 
-
-    /**
-     * 存储背景
-     * @param bg
-     */
-    public void saveChatBg(int bg){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(instance);
-        preferences.edit().putInt("chatBg",bg).commit();
-    }
-    public int getChatBg(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(instance);
-        return preferences.getInt("chatBg", 0);
-    }
 
     //添加Activity到容器中
     public void addActivity(Activity activity){

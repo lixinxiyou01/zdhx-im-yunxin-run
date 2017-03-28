@@ -70,7 +70,7 @@ public class MyRepairManageActivity extends BaseActivity implements ScrollTabHol
 			getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"我的报修单", this);
 		} else if (startFlag == RMainActivity.STARTFLAG_MYTASK) {
 			kindList.add(new ListKind("全部",RepairListItem.CHECKSTATUS_ALL));
-			kindList.add(new ListKind("未接单",RepairListItem.CHECKSTATUS_WJD));
+//			kindList.add(new ListKind("未接单",RepairListItem.CHECKSTATUS_WJD));
 			kindList.add(new ListKind("维修中",RepairListItem.CHECKSTATUS_WXZ));
 			kindList.add(new ListKind("已反馈",RepairListItem.CHECKSTATUS_YFK));
 
@@ -104,8 +104,8 @@ public class MyRepairManageActivity extends BaseActivity implements ScrollTabHol
 		mPagerSlidingTabStrip.setShouldExpand(true);
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
 		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.main_bg_repairs));
-		mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.main_bg_repairs));
-		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(R.color.main_bg_repairs));
+		mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.gray));
+		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(R.color.gray));
 		mPagerSlidingTabStrip.setTabPaddingLeftRight(10);
 		mPagerSlidingTabStrip.setOnPageChangeListener(this);
 	}
@@ -179,13 +179,13 @@ public class MyRepairManageActivity extends BaseActivity implements ScrollTabHol
 				case 0:  
 					status = RepairListItem.CHECKSTATUS_ALL; //全部
 					break;
+//				case 1:
+//                    status = RepairListItem.CHECKSTATUS_WJD; //未接单
+//					break;
 				case 1:
-                    status = RepairListItem.CHECKSTATUS_WJD; //未接单
-					break;
-				case 2:
 					status = RepairListItem.CHECKSTATUS_WXZ; //维修中
 					break;
-				case 3:
+				case 2:
 					status = RepairListItem.CHECKSTATUS_YFK; //已反馈
 					break;
 				default:

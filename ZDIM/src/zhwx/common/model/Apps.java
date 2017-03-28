@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 
+
 /**   
  * @Title: Apps.java 
  * @Package com.zdhx.edu.im.common.entity 
@@ -70,16 +71,16 @@ public class Apps implements Serializable {
 		xwbgAppList.add(new Apps("我的通知", R.drawable.icon_tongzhi,"no"));
 		xwbgAppList.add(new Apps("Z邮",R.drawable.icon_tongzhi,"zmail"));
 		xwbgAppList.add(new Apps("周历",R.drawable.icon_weekcalendar,"wc"));
-		xwbgAppList.add(new Apps("公示",R.drawable.icon_gongshi,"pu"));
+		xwbgAppList.add(new Apps("校园公告",R.drawable.icon_gonggao,"cb"));
 		xwbgAppList.add(new Apps("我的工资",R.drawable.icon_wage,"fi"));
 		xwbgAppList.add(new Apps("工资",R.drawable.icon_wage,"fi2"));
-		xwbgAppList.add(new Apps("校园公告",R.drawable.icon_gonggao,"cb"));
-		xwbgAppList.add(new Apps("系统公告",R.drawable.icon_xitong,"an"));
-		xwbgAppList.add(new Apps("订车管理",R.drawable.icon_carmanager,"cm"));
-		xwbgAppList.add(new Apps("食堂管理",R.drawable.icon_cn,"cn"));
+		xwbgAppList.add(new Apps("报修",R.drawable.icon_repair,"rm"));
 		xwbgAppList.add(new Apps("资产管理",R.drawable.icon_zichan,"as"));
 		xwbgAppList.add(new Apps("易耗品管理",R.drawable.icon_store,"sm"));
-		xwbgAppList.add(new Apps("报修",R.drawable.icon_repair,"rm"));
+		xwbgAppList.add(new Apps("订车管理",R.drawable.icon_carmanager,"cm"));
+		xwbgAppList.add(new Apps("食堂管理",R.drawable.icon_cn,"cn"));
+		xwbgAppList.add(new Apps("公示",R.drawable.icon_gongshi,"pu"));
+		xwbgAppList.add(new Apps("系统公告",R.drawable.icon_xitong,"an"));
 		xwbgAg.setApps(xwbgAppList);
 		appGroupList.add(xwbgAg);
 
@@ -137,10 +138,13 @@ public class Apps implements Serializable {
 	 * @return
 	 */
 	public static synchronized Apps getApp(String code) {
+		if ("sr".equals(code)) {
+			code = "sm";
+		}
 		Apps app = getDefaultAppMap().get(code);
-//		if (app == null) {
-//			app = new Apps("开发中", R.drawable.icon_app_defult, code);
-//		}
+		if (app == null) {
+			app = new Apps("开发中", R.drawable.ic_launcher, code);
+		}
 		return app;
 	}
 	
@@ -172,41 +176,5 @@ public class Apps implements Serializable {
 	}
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-
-	public static class AppGroup {
-		private String groupName;
-		private String groupCode;
-		private List<Apps> apps;
-
-		public AppGroup(String groupName, String groupCode) {
-			this.groupName = groupName;
-			this.groupCode = groupCode;
-		}
-
-		public String getGroupName() {
-			return groupName;
-		}
-
-		public void setGroupName(String groupName) {
-			this.groupName = groupName;
-		}
-
-		public String getGroupCode() {
-			return groupCode;
-		}
-
-		public void setGroupCode(String groupCode) {
-			this.groupCode = groupCode;
-		}
-
-		public List<Apps> getApps() {
-			return apps;
-		}
-
-		public void setApps(List<Apps> apps) {
-			this.apps = apps;
-		}
 	}
 }

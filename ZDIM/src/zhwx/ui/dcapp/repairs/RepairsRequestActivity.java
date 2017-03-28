@@ -48,6 +48,8 @@ import zhwx.common.util.UrlUtil;
 import zhwx.common.util.compressImg.PictureUtil;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.common.view.dialog.ECProgressDialog;
+import zhwx.common.view.tagview.Tag;
+import zhwx.common.view.tagview.TagListView;
 import zhwx.ui.dcapp.assets.adapter.IdAndNameSpinnerAdapter;
 import zhwx.ui.dcapp.repairs.model.FaultList;
 
@@ -76,12 +78,10 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 
 	private ImageGVAdapter imgAdapter;
 
-	private CommentFaultAdapter faultAdapter;
-
 	private HashMap<String, ParameterValue> loginMap;
 
 	private String infoJson;
-	
+
 	private String orderFlag;
 
 	private String goodsId;
@@ -96,15 +96,17 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 
 	private FaultList fList;
 
-	private GridView commentFaultGV;
+	private TagListView commentFaultGV;
 
-	private Spinner buildSP,floorSP,classSP;
+	private final List<Tag> mTags = new ArrayList<Tag>();
+
+	private Spinner schoolSP,buildSP,floorSP,classSP;
 
 	private EditText faultDescriptionET,mobileET;
 
 	private String roomId = "";
 
-	private TextView faultDescriptionTV,phoneTV,placeTV;
+	private TextView faultDescriptionTV,phoneTV;
 
 
 	@Override
@@ -118,7 +120,6 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 		shake = AnimationUtils.loadAnimation(context, R.anim.shake);//加载动画资源文件
 		initView();
 		getIndex();
-		setImmerseLayout(getTopBarView(),1);
 	}
 
 	private void initView() {
@@ -131,7 +132,8 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 		imgAdapter = new ImageGVAdapter();
 		repairFileGV.setAdapter(imgAdapter);
 		Tools.setGridViewHeightBasedOnChildren3(repairFileGV);
-		commentFaultGV = (GridView) findViewById(R.id.commentFaultGV);
+		commentFaultGV = (TagListView) findViewById(R.id.commentFaultGV);
+		schoolSP = (Spinner) findViewById(R.id.schoolSP);
 		buildSP = (Spinner) findViewById(R.id.buildSP);
 		floorSP = (Spinner) findViewById(R.id.floorSP);
 		classSP = (Spinner) findViewById(R.id.classSP);
@@ -140,7 +142,7 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 		faultDescriptionTV = (TextView) findViewById(R.id.faultDescriptionTV);
 		phoneTV = (TextView) findViewById(R.id.phoneTV);
 		mobileET.setText(ECApplication.getInstance().getCurrentIMUser().getMobileNum());
-		placeTV = (TextView) findViewById(R.id.placeTV);
+
 	}
 
 	private void getIndex(){
@@ -180,24 +182,43 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 			return;
 		}
 		fList = new Gson().fromJson(indexJson, FaultList.class);
-		faultAdapter = new CommentFaultAdapter();
-		commentFaultGV.setAdapter(faultAdapter);
-		Tools.setGridViewHeightBasedOnChildren4(commentFaultGV);
-		buildSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getBuildingList()));
-		buildSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//		for (FaultList.FaultListBean faultListBean : fList.getFaultList()) {
+//			Tag tag = new Tag();
+//			tag.setId(faultListBean.getId());
+//			tag.setChecked(true);
+//			tag.setTitle(faultListBean.getName());
+//			mTags.add(tag);
+//		}
+//		commentFaultGV.setTags(mTags);
+
+
+		schoolSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getSchoolList()));
+		schoolSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, final int bPosition, long id) {
-				floorSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getBuildingList().get(bPosition).getFloorList()));
-				floorSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, final int schoolPosition, long id) {
+				buildSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getSchoolList().get(schoolPosition).getBuildingList()));
+				buildSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					@Override
-					public void onItemSelected(AdapterView<?> parent, View view, final int fPosition, long id) {
-						classSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getBuildingList()
-								.get(bPosition).getFloorList().get(fPosition).getRoomList()));
-						classSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+					public void onItemSelected(AdapterView<?> parent, View view, final int bPosition, long id) {
+						floorSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getSchoolList().get(schoolPosition)
+								.getBuildingList().get(bPosition).getFloorList()));
+						floorSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 							@Override
-							public void onItemSelected(AdapterView<?> parent, View view, int rPosition, long id) {
-								roomId = fList.getBuildingList().get(bPosition).getFloorList().get(fPosition).getRoomList()
-										      .get(rPosition).getId();
+							public void onItemSelected(AdapterView<?> parent, View view, final int fPosition, long id) {
+								classSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getSchoolList().get(schoolPosition)
+										.getBuildingList().get(bPosition).getFloorList().get(fPosition).getRoomList()));
+								classSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+									@Override
+									public void onItemSelected(AdapterView<?> parent, View view, int rPosition, long id) {
+										roomId = fList.getSchoolList().get(schoolPosition).getBuildingList().get(bPosition).getFloorList()
+												.get(fPosition).getRoomList().get(rPosition).getId();
+									}
+
+									@Override
+									public void onNothingSelected(AdapterView<?> parent) {
+
+									}
+								});
 							}
 
 							@Override
@@ -206,12 +227,13 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 							}
 						});
 					}
-
 					@Override
 					public void onNothingSelected(AdapterView<?> parent) {
+
 					}
 				});
 			}
+
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 
@@ -231,12 +253,11 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 		loginMap = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		map = new HashMap<String, ParameterValue>();
 		map.put("malfunctionDescribe",new ParameterValue(faultDescriptionET.getEditableText().toString())); //故障描述
-		map.put("malfunctionPlaceId",new ParameterValue(roomId)); //故障地点
-		map.put("telNumber",new ParameterValue(mobileET.getEditableText().toString())); //电话
-		map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id())); //报修人Id
+		map.put("malfunctionPlaceId",new ParameterValue(roomId)); 											//故障地点
+		map.put("telNumber",new ParameterValue(mobileET.getEditableText().toString())); 					//电话
+		map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));		//报修人Id
 		String malfunctionIds = goodsId + "," + formArry();
-		map.put("malfunctionIds",new ParameterValue(malfunctionIds)); //维修物,故障Ids
-
+		map.put("malfunctionIds",new ParameterValue(malfunctionIds)); 										//维修物,故障Ids
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
@@ -260,7 +281,7 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 					e.printStackTrace();
 					ToastUtil.showMessage("提交出错，请重试");
 					handler.postDelayed(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							mPostingdialog.dismiss();
@@ -275,10 +296,6 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 		boolean pass = true;
 		if (StringUtil.isBlank(faultDescriptionET.getEditableText().toString())) {
 			faultDescriptionTV.startAnimation(shake);
-			pass = false;
-		}
-		if (StringUtil.isBlank(roomId)) {
-			placeTV.startAnimation(shake);
 			pass = false;
 		}
 		if (StringUtil.isBlank(mobileET.getEditableText().toString())) {
@@ -327,10 +344,8 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 			Holder holder = null;
 			if (convertView == null) {
 				holder = new Holder();
-				convertView = View.inflate(context, R.layout.gv_item_image,
-						null);
-				holder.imageGV = (ImageView) convertView
-						.findViewById(R.id.imageGV);
+				convertView = View.inflate(context, R.layout.gv_item_image,null);
+				holder.imageGV = (ImageView) convertView.findViewById(R.id.imageGV);
 				holder.delBT = (ImageView) convertView.findViewById(R.id.delBT);
 				convertView.setTag(holder);
 			} else {
@@ -394,8 +409,7 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 						nowPhoto.add(nowPhotos.get(position));
 						Bundle bundle = new Bundle();
 						bundle.putSerializable("photos",(Serializable) nowPhoto);
-						CommonUtils.launchActivity(context,
-								PhotoPreviewActivity.class, bundle);
+						CommonUtils.launchActivity(context,PhotoPreviewActivity.class, bundle);
 					}
 				}
 			});
@@ -416,80 +430,21 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 
 	public String formArry() {
 		String result = "";
-		for (FaultList.FaultListBean f : fList.getFaultList()) {
-			if (f.isChecked()) {
-				result += (f.getId() + ",");
+//		for (FaultList.FaultListBean f : fList.getFaultList()) {
+//			if (f.isChecked()) {
+//				result += (f.getId() + ",");
+//			}
+//		}
+
+		for (Tag tag : commentFaultGV.getTags()) {
+			if (!tag.isChecked()) {
+				System.out.println(tag.getTitle() + "::" + tag.getId());
+				result += (tag.getId() + ",");
 			}
 		}
 		return result;
 	}
 
-	/**
-	 * 已选择图片适配
-	 *
-	 * @author lenovo
-	 *
-	 */
-	class CommentFaultAdapter extends BaseAdapter {
-
-		public CommentFaultAdapter() {
-			super();
-		}
-
-		@Override
-		public int getCount() {
-			return fList.getFaultList().size();
-		}
-
-		@Override
-		public FaultList.FaultListBean getItem(int position) {
-			return fList.getFaultList().get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(final int position, View convertView,ViewGroup parent) {
-			Holder holder = null;
-			if (convertView == null) {
-				holder = new Holder();
-				convertView = View.inflate(context, R.layout.list_item_rm_comment_fault,null);
-				holder.btn_comment_fault = (TextView) convertView.findViewById(R.id.btn_comment_fault);
-				convertView.setTag(holder);
-			} else {
-				holder = (Holder) convertView.getTag();
-			}
-			holder.btn_comment_fault.setText(getItem(position).getName());
-			if (getItem(position).isChecked()) {
-				holder.btn_comment_fault.setSelected(true);
-			} else {
-				holder.btn_comment_fault.setSelected(false);
-			}
-			addListener(holder, position);
-			return convertView;
-		}
-
-		private void addListener(Holder holder, final int position) {
-			holder.btn_comment_fault.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (getItem(position).isChecked()) {
-						fList.getFaultList().get(position).setChecked(false);
-					} else {
-						fList.getFaultList().get(position).setChecked(true);
-					}
-					notifyDataSetChanged();
-				}
-			});
-		}
-
-		class Holder {
-			private TextView btn_comment_fault;
-		}
-	}
 
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

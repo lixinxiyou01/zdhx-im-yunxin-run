@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zhwx.common.view.tagview.TagView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawablePadding="8.0dip"
+    android:minHeight="0.0dip"
+    android:paddingBottom="5dip"
+    android:paddingLeft="8.0dip"
+    android:paddingRight="8.0dip"
+    android:paddingTop="5dip"
+    android:textColor="#ff000000"
+    style="?android:attr/borderlessButtonStyle"
+    android:textSize="14.0sp" />

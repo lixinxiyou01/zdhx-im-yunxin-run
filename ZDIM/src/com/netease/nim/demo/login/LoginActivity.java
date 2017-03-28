@@ -610,9 +610,11 @@ public class LoginActivity extends UI implements OnKeyListener {
                 editText.setText(server);
             }
             if(!buildAlert.isShowing()){
-                buildAlert.show();
-                editText.setSelection(editText.getText().length());
-                editText.setSelectAllOnFocus(true);
+                if (context != null) {
+                    buildAlert.show();
+                    editText.setSelection(editText.getText().length());
+                    editText.setSelectAllOnFocus(true);
+                }
         }
     }
 

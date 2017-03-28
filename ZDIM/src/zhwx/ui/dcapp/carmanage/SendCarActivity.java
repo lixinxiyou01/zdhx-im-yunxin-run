@@ -148,7 +148,6 @@ public class SendCarActivity extends BaseActivity implements OnDateSetListener, 
 	
 	private void initView() {
 		top_bar = (FrameLayout) findViewById(R.id.top_bar);
-		setImmerseLayout(top_bar,1);
 		dirverET = (TextView) findViewById(R.id.dirverET);
 		carDateTimeET = (TextView) findViewById(R.id.carDateTimeET);
 		carDateTimeET.setOnClickListener(new OnClickListener() {

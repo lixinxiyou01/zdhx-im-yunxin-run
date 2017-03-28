@@ -11,7 +11,7 @@ import zhwx.ui.dcapp.assets.model.IdAndName;
 public class FaultList {
 
     private List<FaultListBean> faultList;
-    private List<BuildingListBean> buildingList;
+    private List<SchoolListBean> schoolList;
 
     public List<FaultListBean> getFaultList() {
         return faultList;
@@ -21,12 +21,12 @@ public class FaultList {
         this.faultList = faultList;
     }
 
-    public List<BuildingListBean> getBuildingList() {
-        return buildingList;
+    public List<SchoolListBean> getSchoolList() {
+        return schoolList;
     }
 
-    public void setBuildingList(List<BuildingListBean> buildingList) {
-        this.buildingList = buildingList;
+    public void setSchoolList(List<SchoolListBean> schoolList) {
+        this.schoolList = schoolList;
     }
 
     public static class FaultListBean {
@@ -64,30 +64,40 @@ public class FaultList {
         }
     }
 
-    public static class BuildingListBean extends IdAndName {
-        private List<FloorListBean> floorList;
-
-        public List<FloorListBean> getFloorList() {
-            return floorList;
+    public static class SchoolListBean extends IdAndName {
+        private List<BuildingListBean> buildingList;
+        public List<BuildingListBean> getBuildingList() {
+            return buildingList;
         }
 
-        public void setFloorList(List<FloorListBean> floorList) {
-            this.floorList = floorList;
+        public void setBuildingList(List<BuildingListBean> buildingList) {
+            this.buildingList = buildingList;
         }
+        public static class BuildingListBean extends IdAndName {
+            private List<FloorListBean> floorList;
 
-        public static class FloorListBean extends IdAndName{
-            private List<RoomListBean> roomList;
-
-            public List<RoomListBean> getRoomList() {
-                return roomList;
+            public List<FloorListBean> getFloorList() {
+                return floorList;
             }
 
-            public void setRoomList(List<RoomListBean> roomList) {
-                this.roomList = roomList;
+            public void setFloorList(List<FloorListBean> floorList) {
+                this.floorList = floorList;
             }
 
-            public static class RoomListBean extends IdAndName{
+            public static class FloorListBean extends IdAndName {
+                private List<RoomListBean> roomList;
 
+                public List<RoomListBean> getRoomList() {
+                    return roomList;
+                }
+
+                public void setRoomList(List<RoomListBean> roomList) {
+                    this.roomList = roomList;
+                }
+
+                public static class RoomListBean extends IdAndName {
+
+                }
             }
         }
     }

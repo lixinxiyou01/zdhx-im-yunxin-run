@@ -60,7 +60,7 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 	//R
 	private TextView requestUserTV,requestTimeTV,requestDeviceTV,faultKindTV,faultDescriptionTV,
 			repairHistoryTV,faultPlaceTV,requestPhoneTV,repairerTV,repairTimeTV,repairStatusTV
-			,faultLeixingTV,faultReasonTV,elseTV;
+			,faultLeixingTV,faultReasonTV,elseTV,costTV;
 
 	private GridView requestImgGV,repairImgGV;
 
@@ -106,6 +106,7 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 		elseTV = (TextView) v.findViewById(R.id.elseTV);
 		requestImgGV = (GridView) v.findViewById(R.id.requestImgGV);
 		repairImgGV = (GridView) v.findViewById(R.id.repairImgGV);
+		costTV = (TextView) v.findViewById(R.id.costTV);
 		return v;
 	}
 	@Override
@@ -151,9 +152,6 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 		}
 		System.out.println(json);
 		repairDetail = new Gson().fromJson(json,RepairDetail.class);
-//		requestUserTV,requestTimeTV,requestDeviceTV,faultKindTV,faultDescriptionTV,
-//		repairHistoryTV,faultPlaceTV,requestPhoneTV,repairerTV,repairTimeTV,repairStatusTV,
-//		faultLeixingTV,faultReasonTV,elseTV
 
 		//报修图片
 		requestImgGV.setAdapter(new RmImageGirdAdapter(getActivity(), repairDetail.getRequestInfo().getImageList()));
@@ -196,22 +194,28 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 			}
 		});
 
-		repairerTV.setText(repairDetail.getRepairInfo().getWorkerName());
-		repairTimeTV.setText(repairDetail.getRepairInfo().getRepairTime());
-		repairStatusTV.setText(repairDetail.getRepairInfo().getRepairStatus());
-		faultLeixingTV.setText(repairDetail.getRepairInfo().getMalfunctionKind());
-		faultReasonTV.setText(repairDetail.getRepairInfo().getMalfunctionReason());
-		elseTV.setText(StringUtil.isNotBlank(repairDetail.getRepairInfo().getGoodsSum())?repairDetail.getRepairInfo().getGoodsSum():"无");
+		repairerTV.setText(StringUtil.isBlank(repairDetail.getRepairInfo().getWorkerName())?"无":repairDetail.getRepairInfo().getWorkerName());
+		repairTimeTV.setText(StringUtil.isBlank(repairDetail.getRepairInfo().getRepairTime())?"无":repairDetail.getRepairInfo().getRepairTime());
+		repairStatusTV.setText(StringUtil.isBlank(repairDetail.getRepairInfo().getRepairStatus())?"无":repairDetail.getRepairInfo().getRepairStatus());
+		faultLeixingTV.setText(StringUtil.isBlank(repairDetail.getRepairInfo().getMalfunctionKind())?"无":repairDetail.getRepairInfo().getMalfunctionKind());
+		faultReasonTV.setText(StringUtil.isBlank(repairDetail.getRepairInfo().getMalfunctionReason())?"无":repairDetail.getRepairInfo().getMalfunctionReason());
+		costTV.setText("0".equals(repairDetail.getRepairInfo().getCostApplication())?"无":repairDetail.getRepairInfo().getCostApplication()+"元");
+		//TODO 消耗品列表
+		String eles = "";
+		for (int i = 0; i < repairDetail.getRepairInfo().getGoodsSum().size(); i++) {
+			String price = repairDetail.getRepairInfo().getGoodsSum().get(i).getPrice();
+			String name = repairDetail.getRepairInfo().getGoodsSum().get(i).getName();
+			String count = repairDetail.getRepairInfo().getGoodsSum().get(i).getCount();
+			String subTotal = repairDetail.getRepairInfo().getGoodsSum().get(i).getSubtotal();
+			if (i == repairDetail.getRepairInfo().getGoodsSum().size()-1) {
+				eles += (name + " 【" + price + "元*" + count + "个 = " + subTotal +"元】");
+			} else {
+				eles += (name + " 【" + price + "元*" + count + "个 = " + subTotal +"元】\n");
+			}
+		}
+		elseTV.setText(StringUtil.isBlank(eles)?"无":eles);
 
-//		actionLay.removeAllViews();
-//		List<TextView> btns = getOrderButtonList(status,evaluateFlag);
-//		if (btns.size() == 0) {
-//			actionLay.setVisibility(View.GONE);
-//		} else {
-//			for (TextView button : btns) {
-//				actionLay.addView(button);
-//			}
-//		}
+
 		mPostingdialog.dismiss();
 	}
 

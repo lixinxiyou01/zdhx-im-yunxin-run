@@ -133,7 +133,7 @@ public class MyAssetsManageActivity extends BaseActivity implements ScrollTabHol
 		mPagerSlidingTabStrip.setShouldExpand(true);
 		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.main_bg_assets));
 		mPagerSlidingTabStrip.setDividerColor(getResources().getColor(R.color.main_bg_assets));
-		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(R.color.main_bg_assets));
+		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(R.color.gray));
 		mPagerSlidingTabStrip.setTabPaddingLeftRight(10);
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
 		mPagerSlidingTabStrip.setOnPageChangeListener(this);

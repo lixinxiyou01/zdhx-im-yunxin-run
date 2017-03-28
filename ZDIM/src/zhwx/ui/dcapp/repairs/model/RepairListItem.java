@@ -1,10 +1,12 @@
 package zhwx.ui.dcapp.repairs.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Android on 2017/3/14.
  */
 
-public class RepairListItem {
+public class RepairListItem implements Serializable {
 
     /**
      * id : 20170314152210472078266413328200
@@ -17,10 +19,13 @@ public class RepairListItem {
      */
 
     private String id;
+    private String userId;
     private String applyTime;
     private String placeName;
     private String malfunction;
     private String faultDescription;
+    private String costApplication;
+    private String checkStatus;
     private String statusCode;
     private String statusView;
     private String DeviceName;
@@ -53,15 +58,26 @@ public class RepairListItem {
     /**
      * 返回状态
      */
-    public static final String STATUS_NOT_ACCEPTED="0"; //未接单
+    public static final String STATUS_NOT_ACCEPTED = "0"; //未接单
 
-    public static final String STATUS_REPAIRING="1";   //维修中
+    public static final String STATUS_REPAIRING = "1";   //维修中
 
-    public static final String STATUS_REPAIRED_OK="2"; //已维修
+    public static final String STATUS_REPAIRED_OK = "2"; //已维修
 
-    public static final String STATUS_CANNOT_BE_FIXED="3"; //不能维修
+    public static final String STATUS_CANNOT_BE_FIXED = "3"; //不能维修
 
-    public static final String STATUS_DELAYFIX="4"; //延迟维修
+    public static final String STATUS_DELAYFIX = "4"; //延迟维修
+
+    /**
+     * 审批状态
+     */
+    public static final String COST_STATUS_NEED = "0"; //需要审核但是未审核
+
+    public static final String COST_STATUS_PASS = "1";   //审核通过
+
+    public static final String COST_STATUS_PASS_NOT = "2"; //审核不通过
+
+    public static final String COST_STATUS_NEED_NOT = "3"; //不需要审核
 
 
     public String getId() {
@@ -142,5 +158,29 @@ public class RepairListItem {
 
     public void setFaultDescription(String faultDescription) {
         this.faultDescription = faultDescription;
+    }
+
+    public String getCostApplication() {
+        return costApplication;
+    }
+
+    public void setCostApplication(String costApplication) {
+        this.costApplication = costApplication;
+    }
+
+    public String getCheckStatus() {
+        return checkStatus;
+    }
+
+    public void setCheckStatus(String checkStatus) {
+        this.checkStatus = checkStatus;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

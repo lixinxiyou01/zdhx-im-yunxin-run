@@ -196,10 +196,8 @@ public class OutSignActivity extends BaseActivity implements OnClickListener {
 					}
 				}
 			}
-		} else {
-//			RelativeLayout custItem = (RelativeLayout) View.inflate(context, R.layout.list_item_ci_cust, null);
-//			custContener.addView(custItem);
 		}
+
 		final RelativeLayout addItem = (RelativeLayout) View.inflate(context, R.layout.list_item_ci_add, null);
 		Button addBT = (Button) addItem.findViewById(R.id.addBT);
 		addBT.setOnClickListener(new OnClickListener() {

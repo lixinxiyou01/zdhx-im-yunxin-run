@@ -1,5 +1,6 @@
 package zhwx.common.base;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -139,6 +140,11 @@ public abstract class BaseActivity extends FragmentActivity implements SwipeBack
 			Window window = getWindow();
 			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		}
+	}
+
+	@SuppressLint("NewApi")
+	public void setStatusBarColor(String colorString) {
+		getWindow().setStatusBarColor(Color.parseColor(colorString));
 	}
 
 	protected void setImmerseLayout(View view,int flag) {
