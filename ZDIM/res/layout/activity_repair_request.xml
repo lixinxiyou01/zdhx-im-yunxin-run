@@ -434,16 +434,5 @@
             android:text="提交"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="5"
-            android:background="#a6b9f1"
-            android:gravity="center"
-            android:onClick="onOrder"
-            android:text="取消"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
     </LinearLayout>
 </RelativeLayout>

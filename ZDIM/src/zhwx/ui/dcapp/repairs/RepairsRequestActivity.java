@@ -193,6 +193,13 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 
 
 		schoolSP.setAdapter(new IdAndNameSpinnerAdapter(context,fList.getSchoolList()));
+		if (StringUtil.isNotBlank(fList.getCurrSchoolId())) {
+			for (int i = 0; i < fList.getSchoolList().size(); i++) {
+				if (fList.getCurrSchoolId().equals(fList.getSchoolList().get(i).getId())) {
+					schoolSP.setSelection(i);
+				}
+			}
+		}
 		schoolSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, final int schoolPosition, long id) {

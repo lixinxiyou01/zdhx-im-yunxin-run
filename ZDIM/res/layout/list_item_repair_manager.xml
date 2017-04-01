@@ -90,7 +90,7 @@
                             android:id="@+id/requestUserNameTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="{requestUserNameTV}"
                             android:textColor="@color/greytext" />
                     </LinearLayout>
@@ -110,8 +110,7 @@
                             android:id="@+id/faultPlaceTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:autoText="true"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="{faultPlaceTV}"
                             android:textColor="@color/greytext" />
                     </LinearLayout>
@@ -140,7 +139,7 @@
                             android:id="@+id/deviceNameTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="{deviceNameTV}"
                             android:textColor="@color/greytext" />
                     </LinearLayout>
@@ -160,9 +159,9 @@
                             android:id="@+id/faultTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:text="{faultTV}"
-                            android:textColor="@color/greytext" />
+                            android:textColor="@color/greytext"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -186,7 +185,7 @@
                     android:id="@+id/requestUserPhoneTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
+                    android:maxLines="1"
                     android:text="{requestUserPhoneTV}"
                     android:textColor="@color/main_bg_repairs" />
 
@@ -199,7 +198,7 @@
 
                 <ImageView
                     android:id="@+id/messageIV"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/icon_rm_message" />

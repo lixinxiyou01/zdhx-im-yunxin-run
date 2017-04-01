@@ -8,10 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@drawable/bg_rm_else_lay"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,6 +53,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="配件名称："
+                android:maxLines="1"
                 android:textColor="#177bb6"
                 android:textSize="13sp"/>
 
@@ -84,6 +86,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="单 价(元)："
+                android:maxLines="1"
                 android:textColor="#177bb6"
                 android:textSize="13sp"/>
 
@@ -131,6 +134,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/TextView3"
                 android:background="@drawable/btn_ordercar_normal"
+                android:maxLines="1"
                 android:inputType="number"
                 android:padding="5dp"
                 android:textColor="@color/greytext"
@@ -163,10 +167,10 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/TextView4"
-                android:background="@drawable/btn_ordercar_normal"
+                android:background="@drawable/btn_ordercar_disable"
                 android:padding="5dp"
                 android:text="0.00"
-                android:textColor="@color/greytext"
+                android:textColor="@color/black"
                 android:textSize="15sp"/>
         </RelativeLayout>
     </LinearLayout>

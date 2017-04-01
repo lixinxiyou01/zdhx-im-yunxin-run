@@ -1225,6 +1225,7 @@ public class UrlUtil {
 
 	/**
 	 * 根据V3Id获取
+	 * @param v3Id
 	 */
 	public static String getAccIdByV3Id(String baseUrl,Map<String, ParameterValue> map) throws Exception{
 		return getUrlResponse(checkUrl(baseUrl) + "/bd/user/getAccIdByV3Id", map);

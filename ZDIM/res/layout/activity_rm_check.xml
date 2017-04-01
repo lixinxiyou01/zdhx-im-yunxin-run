@@ -45,18 +45,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:button="@drawable/btn_radio_selector"
                     android:textColor="@color/greytext"
                     android:textSize="14sp"
-                    android:text="通过" />
+                    android:text=" 通过" />
 
                 <RadioButton
                     android:id="@+id/unpassRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:button="@drawable/btn_radio_selector"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/greytext"
                     android:textSize="14sp"
-                    android:text="不通过" />
+                    android:text=" 不通过" />
             </RadioGroup>
 
         </LinearLayout>

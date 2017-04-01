@@ -10,6 +10,7 @@ import zhwx.ui.dcapp.assets.model.IdAndName;
 
 public class FaultList {
 
+    private String currSchoolId;
     private List<FaultListBean> faultList;
     private List<SchoolListBean> schoolList;
 
@@ -100,5 +101,13 @@ public class FaultList {
                 }
             }
         }
+    }
+
+    public String getCurrSchoolId() {
+        return currSchoolId;
+    }
+
+    public void setCurrSchoolId(String currSchoolId) {
+        this.currSchoolId = currSchoolId;
     }
 }
