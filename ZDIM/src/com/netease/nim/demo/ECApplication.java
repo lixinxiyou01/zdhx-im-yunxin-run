@@ -465,7 +465,7 @@ public class ECApplication extends Application {
     };
 
 
-    /********************************  经纶教育定义  ******************************/
+    /********************************  智微校定义  ******************************/
     /**
      * IM登录信息
      * @return
@@ -589,7 +589,7 @@ public class ECApplication extends Application {
     }
 
     /**
-     * 存储经纶教育服务器地址
+     * 存储智微校服务器地址
      * @param address
      */
     public void saveAddress(String address) {
@@ -604,7 +604,7 @@ public class ECApplication extends Application {
     public String getAddress(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(instance);
         String address = preferences.getString("address", Constant.SERVER_ADDRESS_DEFULT);
-        if (address.equals("http://58.132.20.16:9966/im")) {
+        if (address.equals("http://117.78.48.224:9999/im")) {
             address = Constant.SERVER_ADDRESS_DEFULT;
         }
         return address;

@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_transition"
+    android:background="@color/white"
     android:scrollbars="none" >
-<!--android:background="@color/white"-->
+    <!--android:background="@drawable/bg_transition"-->
+
 
 
     <RelativeLayout

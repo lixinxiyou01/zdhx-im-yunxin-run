@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">经纶教育</string>
+    <string name="app_name">智微校</string>
     <string name="nim_status_bar_audio_message">received an audio message from %1$s</string>
     <string name="nim_status_bar_custom_message">received a custom message from %1$s</string>
     <string name="nim_status_bar_file_message">received a file from %1$s</string>

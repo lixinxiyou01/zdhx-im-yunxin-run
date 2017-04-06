@@ -150,7 +150,7 @@
     <string name="about_clear_msg_history">清空所有聊天记录</string>
     <string name="clear_msg_history_success">聊天记录已清空</string>
 
-    <!-- 经纶教育SDK所需文案 -->
+    <!-- 智微校SDK所需文案 -->
     <string name="nim_status_bar_multi_messages_incoming">%1$d位联系人有新消息</string>
     <string name="nim_status_bar_ticker_text">%1$s有新消息</string>
     <string name="nim_status_bar_image_message">%1$s发来一条图片消息</string>
@@ -187,7 +187,7 @@
     <string name="multiport_push">PC/Web在线推送</string>
     <string name="msg_notice">消息提醒</string>
     <string name="setting_close">已关闭</string>
-    <string name="no_disturb_tips">在设定的时间段内经纶教育消息将不再提醒</string>
+    <string name="no_disturb_tips">在设定的时间段内智微校消息将不再提醒</string>
     <string name="time_from">从</string>
     <string name="time_to">至</string>
     <string name="time_from_default">22:00</string>
@@ -206,9 +206,9 @@
     <!-- 多端登录 -->
     <string name="multiport_manager">多端登录管理</string>
     <string name="multiport_logout">下线</string>
-    <string name="computer_version">经纶教育电脑版</string>
-    <string name="web_version">经纶教育网页版</string>
-    <string name="mobile_version">经纶教育移动版</string>
+    <string name="computer_version">智微校电脑版</string>
+    <string name="web_version">智微校网页版</string>
+    <string name="mobile_version">智微校移动版</string>
     <string name="multiport_logging">正在使用</string>
     <string name="kickout_notify">下线通知</string>
     <string name="kickout_content">你的帐号被%1$s踢出下线，请确定帐号信息安全</string>

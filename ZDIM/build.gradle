@@ -15,7 +15,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId = "com.lanxum.hzth.im"
+        applicationId = "com.zdhx.edu.im"
         minSdkVersion 11
         targetSdkVersion 24
         buildConfigField "String", "GIT_REVISION", "\"${getGitVersion()}\""
@@ -31,7 +31,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "272e5900ec657bb4455425e5", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "cc3f74cfe0b39f1140baa114", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
@@ -51,7 +51,7 @@ android {
         //高德定位
         debug {
             signingConfig signingConfigs.debug
-            manifestPlaceholders = [AMAP_KEY: "8a08faeb98cc1f79e3947bbbae9c268d"]
+            manifestPlaceholders = [AMAP_KEY: "18e6693b64238e7bad444bbaff6de177"]
         }
     }
 

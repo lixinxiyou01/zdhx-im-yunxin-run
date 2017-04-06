@@ -64,7 +64,8 @@ public abstract class MsgViewHolderBase extends TViewHolder {
 
     // 内容区域点击事件响应处理。
     protected void onItemClick() {
-        if (message.getAttachment()!=null && message.getMsgType()== MsgTypeEnum.file) {
+        //TODO 聊天内容点击事件
+        if (message.getAttachment() != null && message.getMsgType()== MsgTypeEnum.file) {
             FileAttachment attachment = (FileAttachment) message.getAttachment();
             IntentUtilForUikit.openFile(context,attachment);
         }
