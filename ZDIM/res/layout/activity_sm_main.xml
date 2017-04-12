@@ -127,9 +127,9 @@
                             android:layout_centerInParent="true"
                             android:background="@null"
                             android:clickable="false"
-                            android:drawableTop="@drawable/icon_sm_chuku"
+                            android:drawableTop="@drawable/icon_sm_fafang"
                             android:padding="8dp"
-                            android:text="出库"
+                            android:text="发放"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
 
@@ -148,6 +148,45 @@
                             android:textColor="@color/main_bg_carmanage"
                             android:textSize="11sp"
                             android:visibility="invisible" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ck_a_lay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/list_item_selector"
+                        android:onClick="onGetOutA">
+
+                        <Button
+                            android:id="@+id/Button022"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:drawableTop="@drawable/icon_sm_chuku"
+                            android:padding="8dp"
+                            android:text="出库"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/count_ck_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/cm_red_circle"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/main_bg_carmanage"
+                            android:textSize="11sp"
+                            android:visibility="invisible"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -171,6 +210,7 @@
                             android:text="统计"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
+
                     </RelativeLayout>
 
                 </LinearLayout>

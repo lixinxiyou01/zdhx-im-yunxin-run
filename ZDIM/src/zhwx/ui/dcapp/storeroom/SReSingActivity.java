@@ -1,4 +1,4 @@
-package zhwx.ui.dcapp.assets;
+package zhwx.ui.dcapp.storeroom;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -49,22 +47,19 @@ import zhwx.common.util.UrlUtil;
 import zhwx.common.util.compressImg.PictureUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.ui.dcapp.assets.model.AllAssets;
-import zhwx.ui.dcapp.assets.model.GrantDetail;
 import zhwx.ui.dcapp.assets.model.Granted;
 import zhwx.ui.dcapp.assets.view.WaterImageUtil;
 import zhwx.ui.dcapp.assets.view.pancel.PicelBoradActivity;
+import zhwx.ui.dcapp.storeroom.model.ReSignDetail;
 
 /**   
- * @Title: GrantActivity.java 
- * @Package zhwx.ui.dcapp.assets
- * @Description: TODO(用一句话描述该文件做什么) 
  * @author Li.xin @ zdhx
- * @date 2016年8月24日 下午3:24:40 
+ * @date 2017-4-11 08:56:26
  */
-public class ReSingActivity extends BaseActivity implements OnClickListener{
+public class SReSingActivity extends BaseActivity implements OnClickListener{
 	
 	private Activity context;
-	private GrantDetail model;
+	private ReSignDetail model;
 	private TextView userNameTV; //使用人
 	private TextView departmentTV; //使用人
 	private ListView assetLV;
@@ -91,10 +86,10 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 	private HashMap<String, ParameterValue> map;
 	
 	private Granted entity;
-	
+
+	private String id;
+
 	private String infoJson;
-	
-	private String locationId = ""; //locationId：物理位置id
 	
 	private ImageView signIV;
 	
@@ -103,10 +98,12 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getTopBarView().setBackGroundColor(R.color.main_bg_assets);
+		getTopBarView().setBackGroundColor(R.color.main_bg_store);
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "提交","补签", this);
+		getActivityLayoutView().setBackgroundColor(Color.parseColor("#ffffff"));
 		context = this;
 		entity = (Granted) getIntent().getSerializableExtra("model");
+		id = getIntent().getStringExtra("id");
 		getData();
 	}
 	
@@ -114,12 +111,12 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 		mPostingdialog = new ECProgressDialog(this, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("id", new ParameterValue(entity.getId()));
+		map.put("id", new ParameterValue(id));
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					json = UrlUtil.getGrantInfoJson(ECApplication.getInstance().getV3Address(), map);
+					json = UrlUtil.getReSignDetail(ECApplication.getInstance().getV3Address(), map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							if (json.contains("<html>")) {
@@ -127,7 +124,8 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 								mPostingdialog.dismiss();
 								return;
 							}
-							model = new Gson().fromJson(json, GrantDetail.class);
+							System.out.println(json);
+							model = new Gson().fromJson(json, ReSignDetail.class);
 							initView();
 							mPostingdialog.dismiss();
 						}
@@ -162,20 +160,10 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 		assetLV = (ListView) findViewById(R.id.assetLV);
 		assetLV.setAdapter(new OrderListAdapter());
 		Tools.setListViewHeightBasedOnChildren(assetLV);
-		assetLV.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				Intent intent = new Intent(context, AssetDetailActivity.class);
-				intent.putExtra("assetsCode", model.getGrantAssets().get(position).getCode());
-				startActivity(intent);
-			}
-		});
 		userNameTV = (TextView) findViewById(R.id.userNameTV);
-		userNameTV.setText(model.getUser());
+		userNameTV.setText(model.getUserName());
 		departmentTV = (TextView) findViewById(R.id.departmentTV);
-		departmentTV.setText(model.getDepartment());
+		departmentTV.setText(model.getGrantTime());
 		circleGV = (GridView) findViewById(R.id.circleGV);
 		nowPhotos.add(null);
 		adapter = new ImageGVAdapter();
@@ -189,26 +177,20 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 	 * 	移动端确认发放   
 	 */
 	private void grant(){
+		if(sendFiles.size() == 0) {
+			ToastUtil.showMessage("请签字");
+			return;
+		}
 		final HashMap<String, ParameterValue> loginMap = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		mPostingdialog = new ECProgressDialog(this, "正在提交");
 		mPostingdialog.show();
 		map = new HashMap<String, ParameterValue>();
-		map.put("id", new ParameterValue(entity.getId()));
-		map.put("locationId", new ParameterValue(locationId));
-		map.put("applicationRecordId", new ParameterValue(""));
-		map.put("userId", new ParameterValue(entity.getUserId()));
-		map.put("departmentId", new ParameterValue(entity.getDepartmentId()));
-		map.put("assetIds", new ParameterValue(formArry()));
+		map.put("id", new ParameterValue(id));
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					if(sendFiles.size() == 0) {
-						loginMap.putAll(map);
-						infoJson = UrlUtil.saveGrant(ECApplication.getInstance().getV3Address(),loginMap);
-					} else {
-						infoJson = UrlUtil.saveGrant(ECApplication.getInstance().getV3Address(), sendFiles,loginMap,map);
-					}
+					infoJson = UrlUtil.saveReSign(ECApplication.getInstance().getV3Address(), sendFiles,loginMap,map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							System.out.println(infoJson);
@@ -236,14 +218,6 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 		}).start();
 	}
 	
-	public String formArry() {
-		String result = "";
-		for (GrantDetail.GrantAssetsBean f : model.getGrantAssets()) {
-			result += f.getId() + ",";
-		}
-		return result;
-	}
-	
 	public class OrderListAdapter extends BaseAdapter {
 		
 		public OrderListAdapter(Context context, List<AllAssets> list,
@@ -257,12 +231,12 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public int getCount() {
-			return model.getGrantAssets().size();
+			return model.getGoodsList().size();
 		}
 
 		@Override
-		public GrantDetail.GrantAssetsBean getItem(int position) {
-			return model.getGrantAssets().get(position);
+		public ReSignDetail.GoodsListBean getItem(int position) {
+			return model.getGoodsList().get(position);
 		}
 
 		@Override
@@ -283,7 +257,7 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 				holder = (ViewHolder) convertView.getTag();
 			}
 			
-			holder.asNameTV.setText((position + 1) + ". " + getItem(position).getName());
+			holder.asNameTV.setText((position + 1) + ". " + getItem(position).getGoodsName() + " * " + getItem(position).getGoodsCount());
 			return convertView;
 		}
 		private class ViewHolder {
@@ -362,18 +336,6 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 					nowPhotos.add(null);
 					adapter.notifyDataSetChanged();
 				
-//					if (position == nowPhotos.size() - 1) {
-//
-//					} else {
-//						remove(position);
-//						for (int i = 0; i < nowPhotos.size(); i++) {
-//							if (nowPhotos.get(i) == null) {
-//								nowPhotos.remove(i);
-//							}
-//						}
-//						nowPhotos.add(null);
-//						adapter.notifyDataSetChanged();
-//					}
 				}
 			});
 			holder.imageGV.setOnClickListener(new OnClickListener() {
@@ -447,7 +409,7 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
 //				Bitmap textBitmap = WaterImageUtil.drawTextToRightBottom(this, watermarkBitmap, "资产管理 " + DateUtil.getCurrDateSecondString(),25, Color.WHITE,10,10);
 //				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, "资产管理 " + DateUtil.getCurrDateSecondString(),35, Color.WHITE);
-				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, model.getUser() + " " + DateUtil.getCurrDateSecondString() + "#资产管理",25, Color.WHITE);
+				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, model.getUserName() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
 				File tempFile = new File(sdCard, "sing.jpg");
 				sendFiles.clear();
 				sendFiles.add(tempFile);
@@ -514,6 +476,6 @@ public class ReSingActivity extends BaseActivity implements OnClickListener{
 	
 	@Override
 	protected int getLayoutId() {
-		return R.layout.activity_as_resing;
+		return R.layout.activity_sm_resing;
 	}
 }

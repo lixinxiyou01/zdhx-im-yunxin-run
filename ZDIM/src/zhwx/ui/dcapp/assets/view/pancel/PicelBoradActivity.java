@@ -2,7 +2,6 @@ package zhwx.ui.dcapp.assets.view.pancel;
 
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -20,7 +19,6 @@ import com.netease.nim.demo.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Calendar;
 
 import zhwx.common.base.BaseActivity;
@@ -28,6 +26,7 @@ import zhwx.ui.dcapp.assets.GrantActivity;
 import zhwx.ui.dcapp.assets.ReSingActivity;
 import zhwx.ui.dcapp.storeroom.GrantByHandActivity;
 import zhwx.ui.dcapp.storeroom.GrantForApplyActivity;
+import zhwx.ui.dcapp.storeroom.SReSingActivity;
 
 
 public class PicelBoradActivity extends BaseActivity implements OnClickListener,ISketchPadCallback {
@@ -94,6 +93,7 @@ public class PicelBoradActivity extends BaseActivity implements OnClickListener,
 			GrantByHandActivity.sourBitmap = bmBitmap;
 			GrantForApplyActivity.sourBitmap = bmBitmap;
 			ReSingActivity.sourBitmap = bmBitmap;
+			SReSingActivity.sourBitmap = bmBitmap;
 			m_sketchPad.cleanDrawingCache();
 			m_sketchPad.clearAllStrokes();
 			setResult(121);

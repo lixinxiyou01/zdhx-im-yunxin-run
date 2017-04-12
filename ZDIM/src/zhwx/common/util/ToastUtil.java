@@ -67,7 +67,7 @@ public class ToastUtil {
 				synchronized (synObj) {
 					if (toast != null) {
 						//toast.cancel();
-						toast.setText(msg);
+						toast.setText(msg+"");
 						toast.setDuration(len);
 					} else {
 						toast = Toast.makeText(ECApplication.getInstance().getApplicationContext(), msg, len);

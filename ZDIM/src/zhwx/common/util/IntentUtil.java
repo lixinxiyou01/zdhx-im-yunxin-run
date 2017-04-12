@@ -373,7 +373,7 @@ public class IntentUtil {
 
 				intent = new Intent(context,WebAppActivity.class);
 
-				intent.putExtra("webUrl",  ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_MESS
+				intent.putExtra("webUrl",  ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_ANNOUNCEMENT
 						+ "?sourceId=" + v3NoticeCenter.getSourceId()
 						+ "&userId=" + ECApplication.getInstance().getCurrentIMUser().getId());
 			}  else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_MESS)) { //食堂管理

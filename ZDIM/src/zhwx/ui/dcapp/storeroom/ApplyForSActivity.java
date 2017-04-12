@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
@@ -33,7 +31,9 @@ import com.netease.nim.demo.R;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
@@ -82,10 +82,6 @@ public class ApplyForSActivity extends BaseActivity implements
 
 	private String DATEPICKER_TAG = "datepicker";
 
-	private String departmentId, assetKindId, userId, schoolId, applyDate;
-
-	private Animation shake; // 表单必填项抖动
-
 	private static ListView grantLV;
 
 	private TextView emptyTV, dateET;
@@ -94,11 +90,12 @@ public class ApplyForSActivity extends BaseActivity implements
 
 	public static List<Goods.GridModelBean> selectedGoodList = new ArrayList<Goods.GridModelBean>();
 
+	private List<IdAndName> andNames3;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		shake = AnimationUtils.loadAnimation(context, R.anim.shake);// 加载动画资源文件
 		initView();
 		getData();
 	}
@@ -244,18 +241,22 @@ public class ApplyForSActivity extends BaseActivity implements
 					
 				}
 			});
-			List<IdAndName> andNames3 = new ArrayList<IdAndName>();
-			andNames3.add(new IdAndName("grsl", "个人申领"));
-			andNames3.add(new IdAndName("bmsl", "部门申领"));
+			andNames3 = new ArrayList<IdAndName>();
+			Iterator<Map.Entry<String, String>> it = applyInfos.getApplyReceiveKind().entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry<String, String> entry = it.next();
+				System.out.println("键key ："+entry.getKey()+" value ："+entry.getValue());
+				andNames3.add(new IdAndName(entry.getKey(), entry.getValue()));
+			}
 			applyKindSP.setAdapter(new IdAndNameSpinnerAdapter(context,andNames3));
 			applyKindSP.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
 					if (arg2 == 0) {
-						applyJsonModel.setKind("grsl");
+						applyJsonModel.setKind(andNames3.get(arg2).getId());
 					} else {
-						applyJsonModel.setKind("bmsl");
+						applyJsonModel.setKind(andNames3.get(arg2).getId());
 					}
 				}
 
@@ -422,11 +423,6 @@ public class ApplyForSActivity extends BaseActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == 101) {
-			if (data != null) {
-				assetKindId = data.getStringExtra("userId");
-			}
-		}
 	}
 
 	@Override

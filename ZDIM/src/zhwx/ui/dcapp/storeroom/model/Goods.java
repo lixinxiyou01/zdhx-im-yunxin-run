@@ -107,7 +107,7 @@ public class Goods implements Serializable{
         private String fu;
         private String ft;
         private String GOODSINFO_STATUS_INTO;
-        private int count = 0;
+        private int count = 1;
 
         public int getSecurityInventory() {
             return securityInventory;

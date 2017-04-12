@@ -69,7 +69,7 @@ public class CheckActivity extends BaseActivity {
 
 	private void initView() {
 		top_bar = (FrameLayout) findViewById(R.id.top_bar);
-		setImmerseLayout(top_bar, 1);
+		setImmerseLayout(top_bar);
 		checkRG = (RadioGroup) findViewById(R.id.checkRG);
 		checkRG.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 

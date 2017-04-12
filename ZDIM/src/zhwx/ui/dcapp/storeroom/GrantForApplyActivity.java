@@ -41,7 +41,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
@@ -276,11 +278,12 @@ public class GrantForApplyActivity extends BaseActivity implements
 			Tools.setListViewHeightBasedOnChildren(grantLV);
 			
 			andNames3.clear();
-			andNames3.add(new IdAndName("grsl", "个人申领"));
-			andNames3.add(new IdAndName("bmsl", "部门申领"));
-			andNames3.add(new IdAndName("hdly", "活动领用"));
-			andNames3.add(new IdAndName("pk", "盘亏"));
-			andNames3.add(new IdAndName("qt", "其他"));
+			Iterator<Map.Entry<String, String>> it = provideGoodsDetal.getOutwarehouseKind().entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry<String, String> entry = it.next();
+				System.out.println("键key ："+entry.getKey()+" value ："+entry.getValue());
+				andNames3.add(new IdAndName(entry.getKey(), entry.getValue()));
+			}
 			auditorSP.setAdapter(new IdAndNameSpinnerAdapter(context,andNames3));
 			auditorSP.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -565,20 +568,18 @@ public class GrantForApplyActivity extends BaseActivity implements
 					adapter.notifyDataSetChanged();
 				}
 			}
+		}
 
-			if (requestCode == 121) {
-				if (sourBitmap != null) {
-					Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
-					Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
-//				Bitmap textBitmap = WaterImageUtil.drawTextToRightBottom(this, watermarkBitmap, "资产管理 " + DateUtil.getCurrDateSecondString(),25, Color.WHITE,10,10);
-//				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, "资产管理 " + DateUtil.getCurrDateSecondString(),35, Color.WHITE);
-					Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, ECApplication.getInstance().getCurrentIMUser().getName() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",35, Color.WHITE);
-					File tempFile = new File(sdCard, "sing.jpg");
-					sendFiles.clear();
-					sendFiles.add(tempFile);
-					IMUtils.saveBitmapToLocal(tempFile, textBitmap);
-					signIV.setImageBitmap(textBitmap);
-				}
+		if (requestCode == 121) {
+			if (sourBitmap != null) {
+				Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
+				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
+				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, ECApplication.getInstance().getCurrentIMUser().getName() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
+				File tempFile = new File(sdCard, "sing.jpg");
+				sendFiles.clear();
+				sendFiles.add(tempFile);
+				IMUtils.saveBitmapToLocal(tempFile, textBitmap);
+				signIV.setImageBitmap(textBitmap);
 			}
 		}
 	}

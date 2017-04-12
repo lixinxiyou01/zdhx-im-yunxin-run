@@ -73,6 +73,8 @@ public class GoodsKindActivity extends BaseActivity implements OnClickListener {
 	private ECProgressDialog mPostingdialog;
 	
 	private ListView mystoreLV;
+
+	private View emptyView;
 	
 	private List<GoodsTree> treeList = new ArrayList<GoodsTree>();
 	
@@ -101,7 +103,9 @@ public class GoodsKindActivity extends BaseActivity implements OnClickListener {
 	 * 
 	 */
 	private void initView() {
+		emptyView = findViewById(R.id.emptyView);
 		mystoreLV = (ListView) findViewById(R.id.mystoreLV);
+		mystoreLV.setEmptyView(emptyView);
 	}
 
 	private void getData() {

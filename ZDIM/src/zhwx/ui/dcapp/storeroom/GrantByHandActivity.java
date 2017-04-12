@@ -14,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
@@ -41,7 +39,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
@@ -87,16 +87,12 @@ public class GrantByHandActivity extends BaseActivity implements
 
     private HashMap<String, ParameterValue> loginMap;
 
-	private String indexJson,dataJson;
+	private String dataJson;
 
 	private EditText applyCodeET, noteET, getUserET,buildUserET;
 
 	private String DATEPICKER_TAG = "datepicker";
 	
-	private String DATEPICKER_TAG_B = "datepicker_b";
-
-	private Animation shake; // 表单必填项抖动
-
 	private static ListView grantLV;
 
 	private TextView emptyTV,outDateTV,storeTV,buildDataTV;
@@ -113,7 +109,7 @@ public class GrantByHandActivity extends BaseActivity implements
 	
 	private ProvideGoodsDetal provideGoodsDetal;
 	
-	List<IdAndName> andNames3 = new ArrayList<IdAndName>();
+	private List<IdAndName> andNames3 = new ArrayList<IdAndName>();
 
 	private String getUserId;
 
@@ -133,15 +129,12 @@ public class GrantByHandActivity extends BaseActivity implements
 
 	private RadioGroup checkRG;
 
-	private boolean writeNow;
-
     private File sdCard = android.os.Environment.getExternalStorageDirectory();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		shake = AnimationUtils.loadAnimation(context, R.anim.shake);// 加载动画资源文件
 		initView();
 		getData();
 	}
@@ -237,6 +230,7 @@ public class GrantByHandActivity extends BaseActivity implements
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							ToastUtil.showMessage("提交成功");
+							setResult(120);
 							finish();
 						}
 					}, 5);
@@ -268,13 +262,14 @@ public class GrantByHandActivity extends BaseActivity implements
 			
 			buildUserET.setText(ECApplication.getInstance().getCurrentIMUser().getName());
 			buildDataTV.setText(DateUtil.getCurrDateString());
-				
 			andNames3.clear();
-			andNames3.add(new IdAndName("grsl", "个人申领"));
-			andNames3.add(new IdAndName("bmsl", "部门申领"));
-			andNames3.add(new IdAndName("hdly", "活动领用"));
-			andNames3.add(new IdAndName("pk", "盘亏"));
-			andNames3.add(new IdAndName("qt", "其他"));
+			Iterator<Map.Entry<String, String>> it = provideGoodsDetal.getOutwarehouseKind().entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry<String, String> entry = it.next();
+				System.out.println("键key ："+entry.getKey()+" value ："+entry.getValue());
+				andNames3.add(new IdAndName(entry.getKey(), entry.getValue()));
+			}
+
 			auditorSP.setAdapter(new IdAndNameSpinnerAdapter(context,andNames3));
 			auditorSP.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -295,8 +290,7 @@ public class GrantByHandActivity extends BaseActivity implements
 
 	private void initView() {
 		getTopBarView().setBackGroundColor(R.color.main_bg_store);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "提交","申领发放", this);
-		setImmerseLayout(getTopBarView(), 1);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "提交","发放物品", this);
 		java.util.Calendar calendar = java.util.Calendar.getInstance();
 		final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
 				GrantByHandActivity.this, calendar.get(java.util.Calendar.YEAR),
@@ -341,10 +335,8 @@ public class GrantByHandActivity extends BaseActivity implements
 			@Override
 			public void onCheckedChanged(RadioGroup arg0, int radioId) {
 				if (radioId == R.id.writeNowRB) {
-					writeNow = true;
 					signIV.setVisibility(View.VISIBLE);
 				} else {
-					writeNow = false;
 					signIV.setVisibility(View.GONE);
 				}
 			}
@@ -571,11 +563,11 @@ public class GrantByHandActivity extends BaseActivity implements
             }
         }
 
-        if (requestCode == 121) {
+        if (resultCode == 121) {
             if (sourBitmap != null) {
                 Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
                 Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
-                Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, ECApplication.getInstance().getCurrentIMUser().getName() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",35, Color.WHITE);
+                Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, getUserET.getEditableText().toString() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
                 File tempFile = new File(sdCard, "sing.jpg");
                 sendFiles.clear();
                 sendFiles.add(tempFile);
@@ -692,8 +684,7 @@ public class GrantByHandActivity extends BaseActivity implements
 			break;
 		}
 	}
-	
-	
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.activity_sm_hand_grant;

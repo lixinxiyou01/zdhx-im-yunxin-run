@@ -348,10 +348,8 @@ public class SendNewCircleActivity extends BaseActivity {
 						List<PhotoModel> nowPhoto = new ArrayList<PhotoModel>();
 						nowPhoto.add(nowPhotos.get(position));
 						Bundle bundle = new Bundle();
-						bundle.putSerializable("photos",
-								(Serializable) nowPhoto);
-						CommonUtils.launchActivity(context,
-								PhotoPreviewActivity.class, bundle);
+						bundle.putSerializable("photos",(Serializable) nowPhoto);
+						CommonUtils.launchActivity(context,PhotoPreviewActivity.class, bundle);
 					}
 				}
 			});

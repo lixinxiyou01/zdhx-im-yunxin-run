@@ -6,19 +6,19 @@ package zhwx.ui.dcapp.storeroom;
 *   ┏┛┻━━━┛┻┓
 *   ┃　　　　　　　┃ 　
 *   ┃　　　━　　　┃
-*   ┃　┳┛　┗┳　┃
+*   ┃　┳┛　┗┳　  ┃
 *   ┃　　　　　　　┃
 *   ┃　　　┻　　　┃
 *   ┃　　　　　　　┃
 *   ┗━┓　　　┏━┛
- *     　   　┃　　　┃神兽保佑
- *     　   　┃　　　┃永无BUG！
- *     　　   ┃　　　┗━━━┓
- *     　   　┃　　　　　　　┣┓
- *     　   　┃　　　　　　　┏┛
- *     　   　┗┓┓┏━┳┓┏┛
- *   　  　   　┃┫┫　┃┫┫
- *   　  　   　┗┻┛　┗┻┛
+*     ┃　　　┃神兽保佑
+*     ┃　　　┃永无BUG！
+*     ┃　　　┗━━━┓
+*     ┃　　　　　 ┣┓
+*     ┃　　　　　 ┏┛
+*     ┗┓┓┏━┳┓┏┛
+*   　  ┃┫┫　┃┫┫
+*   　  ┗┻┛　┗┻┛
 *
 */
 
@@ -41,10 +41,12 @@ import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import zhwx.common.base.BaseActivity;
+import zhwx.common.base.CCPAppManager;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
@@ -52,9 +54,11 @@ import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.Tools;
 import zhwx.common.util.UrlUtil;
+import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
 import zhwx.common.view.dialog.ECProgressDialog;
+import zhwx.common.view.imagegallery.ViewImageInfo;
 import zhwx.ui.dcapp.assets.model.AllAssets;
-import zhwx.ui.dcapp.storeroom.model.MyApplyDetail;
+import zhwx.ui.dcapp.storeroom.model.GetOutDetail;
 
 /**   
  * @Title: AMainActivity.java 
@@ -62,7 +66,7 @@ import zhwx.ui.dcapp.storeroom.model.MyApplyDetail;
  * @author Li.xin @ 中电和讯
  * @date 2016-3-7 上午9:52:07 
  */
-public class ApplyDetailActivity extends BaseActivity implements OnClickListener {
+public class GetOutDetailActivity extends BaseActivity implements OnClickListener {
 	
 	private Activity context;
 	
@@ -78,18 +82,21 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
 	
 	private String id = "";
 	
-	private MyApplyDetail detail;
-	
-	private TextView smCodeTV,departmentNameTV,checkUserTV,smApplyDateTV,getKindTV,reasonTV,beizhuTV,checkStatusViewTV;
+	private GetOutDetail detail;
+
+	private TextView smCodeTV,departmentNameTV,checkUserTV,smApplyDateTV,getKindTV,checkSignTV,nullTV;
+
+	private ImageLoader loader;
 	
 	
     @Override
-	protected int getLayoutId() {return R.layout.activity_sm_applydetail;}
+	protected int getLayoutId() {return R.layout.activity_sm_getoutdetail;}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
+		loader = new ImageLoader(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_store);
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"申请详情", this);
 		getActivityLayoutView().setBackgroundColor(Color.parseColor("#ffffff"));
@@ -108,9 +115,8 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
  		checkUserTV = (TextView) findViewById(R.id.checkUserTV);
  		smApplyDateTV = (TextView) findViewById(R.id.smApplyDateTV);
  		getKindTV = (TextView) findViewById(R.id.getKindTV);
- 		reasonTV = (TextView) findViewById(R.id.reasonTV);
- 		beizhuTV = (TextView) findViewById(R.id.beizhuTV);
- 		checkStatusViewTV = (TextView) findViewById(R.id.checkStatusViewTV);
+		checkSignTV = (TextView) findViewById(R.id.checkSignTV);
+		nullTV = (TextView) findViewById(R.id.nullTV);
 	}
 
 	private void getData() {
@@ -118,13 +124,15 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
 	}
 	
 	private void getNotice(){
+		mPostingdialog = new ECProgressDialog(this, "正在获取信息");
+		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		map.put("id", new ParameterValue(id));
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					indexJson = UrlUtil.getApplyRecordView(ECApplication.getInstance().getV3Address(), map);
+					indexJson = UrlUtil.OutWareDetail(ECApplication.getInstance().getV3Address(), map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							refreshData(indexJson);
@@ -146,25 +154,34 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
 	}
 	
 	private void refreshData(String indexJson) {
+		System.out.println(indexJson);
+		mPostingdialog.dismiss();
 		if (indexJson.contains("</html>")) {
 			ToastUtil.showMessage("数据异常");
 			return;
 		}
-		detail = new Gson().fromJson(indexJson, MyApplyDetail.class);
-		smCodeTV.setText(detail.getApplyreceiverecord().get(0).getCode());
-		departmentNameTV.setText(detail.getApplyreceiverecord().get(0).getDepartmentName());
-		checkUserTV.setText(detail.getApplyreceiverecord().get(0).getDeptCheckUser()); //部门审核人
-		smApplyDateTV.setText(detail.getApplyreceiverecord().get(0).getApplyDate());
-		getKindTV.setText(detail.getApplyreceiverecord().get(0).getKindValue());
-		reasonTV.setText(detail.getApplyreceiverecord().get(0).getReason());
-		beizhuTV.setText(detail.getApplyreceiverecord().get(0).getNote());
-		
-		String str = detail.getApplyreceiverecord().get(0).getDeptCheckStatus();
-		if (StringUtil.isNotBlank(detail.getApplyreceiverecord().get(0).getZwCheckStatus())) {
-			str += ","  + detail.getApplyreceiverecord().get(0).getZwCheckStatus();
-		}
-		checkStatusViewTV.setText(str);
+		detail = new Gson().fromJson(indexJson, GetOutDetail.class);
+		smCodeTV.setText(detail.getCode());
+		departmentNameTV.setText(detail.getWarehouseName());
+		checkUserTV.setText(detail.getReceiverName()); //部门审核人
+		smApplyDateTV.setText(detail.getDate());
+		getKindTV.setText(detail.getOutKindValue());
 		mystoreLV.setAdapter(new OrderListAdapter());
+		System.out.println(ECApplication.getInstance().getV3Address() + detail.getUrl());
+		if(StringUtil.isNotBlank(detail.getUrl())) {
+			checkSignTV.setVisibility(View.VISIBLE);
+			checkSignTV.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ArrayList<ViewImageInfo> urls = new ArrayList<ViewImageInfo>();
+					ViewImageInfo imageInfo = new ViewImageInfo("", ECApplication.getInstance().getV3Address() + detail.getUrl());
+					urls.add(imageInfo);
+					CCPAppManager.startChattingImageViewAction(context,0, urls);
+				}
+			});
+		}else {
+			nullTV.setVisibility(View.VISIBLE);
+		}
 		Tools.setListViewHeightBasedOnChildren(mystoreLV);
 	}
 	
@@ -182,12 +199,12 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
 
 		@Override
 		public int getCount() {
-			return detail.getApplygoodsList().size()+1;
+			return detail.getGoodsList().size()+1;
 		}
 
 		@Override
-		public MyApplyDetail.ApplygoodsListBean getItem(int position) {
-			return detail.getApplygoodsList().get(position);
+		public GetOutDetail.GoodsListBean getItem(int position) {
+			return detail.getGoodsList().get(position);
 		}
 
 		@Override
@@ -215,9 +232,9 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
 				holder.goodsCountTV.setText("数量");
 				holder.costTV.setText("金额");
 			} else {
-				holder.goodsNameTV.setText(getItem(position - 1).getGoodsInfoName());
+				holder.goodsNameTV.setText(getItem(position - 1).getName());
 				holder.goodsCountTV.setText(getItem(position - 1).getCount() + "");
-				holder.costTV.setText(getItem(position - 1).getMoney() + "");
+				holder.costTV.setText(getItem(position - 1).getSum() + "");
 			}
 			
 			if (position % 2 == 0) {
@@ -244,7 +261,7 @@ public class ApplyDetailActivity extends BaseActivity implements OnClickListener
 		}
 		
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();

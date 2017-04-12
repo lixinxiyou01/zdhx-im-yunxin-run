@@ -11,14 +11,14 @@ package zhwx.ui.dcapp.storeroom;
 *   ┃　　　┻　　　┃
 *   ┃　　　　　　　┃
 *   ┗━┓　　　┏━┛
- *     　   　┃　　　┃神兽保佑
- *     　   　┃　　　┃永无BUG！
- *     　　   ┃　　　┗━━━┓
- *     　   　┃　　　　　　　┣┓
- *     　   　┃　　　　　　　┏┛
- *     　   　┗┓┓┏━┳┓┏┛
- *   　  　   　┃┫┫　┃┫┫
- *   　  　   　┗┻┛　┗┻┛
+*     　   　┃　　　┃神兽保佑
+*     　   　┃　　　┃永无BUG！
+*     　　   ┃　　　┗━━━┓
+*     　   　┃　　　　　　　┣┓
+*     　   　┃　　　　　　　┏┛
+*     　   　┗┓┓┏━┳┓┏┛
+*   　  　   　┃┫┫　┃┫┫
+*   　  　   　┗┻┛　┗┻┛
 *
 */
 
@@ -68,9 +68,9 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 	
 	private IndexPageData indexData;
 	
-	private TextView count_dsh_a,count_dff_a;
+	private TextView count_dsh_a,count_dff_a,count_ck_a;
 	
-	private RelativeLayout dsh_a_lay,dff_a_lay,tj_a_lay;
+	private RelativeLayout dsh_a_lay,dff_a_lay,tj_a_lay,ck_a_lay;
 	
     @Override
 	protected int getLayoutId() {return R.layout.activity_sm_main;}
@@ -91,16 +91,18 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 	private void initView() {
 		count_dsh_a = (TextView) findViewById(R.id.count_dsh_a);
 		count_dff_a = (TextView) findViewById(R.id.count_dff_a);
+		count_ck_a = (TextView) findViewById(R.id.count_ck_a);
 		dsh_a_lay = (RelativeLayout) findViewById(R.id.dsh_a_lay);
 		dff_a_lay = (RelativeLayout) findViewById(R.id.dff_a_lay);
 		tj_a_lay = (RelativeLayout) findViewById(R.id.tj_a_lay);
+		ck_a_lay = (RelativeLayout) findViewById(R.id.ck_a_lay);
 	}
 	
 
 	private void getData() {
 		getNotice();   //获取公告板数据
 	}
-	
+
 	private void getNotice(){
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		new ProgressThreadWrap(this, new RunnableWrap() {
@@ -138,7 +140,10 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 		int checkCount = Integer.parseInt(indexData.getDeptCount()) + Integer.parseInt(indexData.getZwCount());
 		count_dsh_a.setText(checkCount + "");
 		count_dsh_a.setVisibility(checkCount > 0 ? View.VISIBLE : View.INVISIBLE);
-//		count_dff_a.setText(text);
+//		count_dff_a.setVisibility(Integer.parseInt(indexData.getSr_warehouseManage()) > 0 ? View.VISIBLE : View.INVISIBLE);
+//		count_dff_a.setText(indexData.getSr_warehouseManage());
+//		count_ck_a.setVisibility(Integer.parseInt(indexData.getSr_warehouseManage()) > 0 ? View.VISIBLE : View.INVISIBLE);
+//		count_ck_a.setText(indexData.getSr_warehouseManage());
 		
 		if ("1".equals(indexData.getDeptslsh())) {
 			dsh_a_lay.setVisibility(View.VISIBLE);
@@ -148,9 +153,10 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 		}
 		if ("1".equals(indexData.getSr_warehouseManage())) {
 			dff_a_lay.setVisibility(View.VISIBLE);
+			ck_a_lay.setVisibility(View.VISIBLE);
 		} else {
 			dff_a_lay.setVisibility(View.GONE);
-			
+			ck_a_lay.setVisibility(View.GONE);
 		}
 		if ("1".equals(indexData.getSr_statistics())) {
 			tj_a_lay.setVisibility(View.VISIBLE);
@@ -163,6 +169,7 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		getData();
 	}
 	
 	/**
@@ -185,6 +192,14 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 	 */
 	public void onGrantA(View v) {
 		startActivity(new Intent(context, ToGrantActivity.class));
+	}
+
+	/**
+	 * 出库
+	 * @param v
+	 */
+	public void onGetOutA(View v) {
+		startActivity(new Intent(context, ToGetOutListActivity.class));
 	}
 	/**
 	 * 统计

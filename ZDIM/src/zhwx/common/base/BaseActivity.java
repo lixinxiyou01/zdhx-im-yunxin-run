@@ -53,12 +53,12 @@ public abstract class BaseActivity extends FragmentActivity implements SwipeBack
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		ECApplication.getInstance().addActivity(this);
 		mBaseActivity.init(getBaseContext(), this);
+		mBaseActivity.getActivityLayoutView().setBackgroundColor(Color.parseColor("#f6f6f6"));
 		mHelper = new SwipeBackActivityHelper(this);
 		mHelper.onActivityCreate();
 		mSwipeBackLayout = getSwipeBackLayout();
 		mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
 		setImmerseLayout(getTopBarView());
-		mBaseActivity.getActivityLayoutView().setBackgroundColor(Color.parseColor("#f6f6f6"));
 	}
 
 	@Override

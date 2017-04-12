@@ -432,7 +432,7 @@ public class GrantActivity extends BaseActivity implements OnClickListener{
 			if (sourBitmap != null) {
 				Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
 				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
-				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, model.getApplyUser() + " " + DateUtil.getCurrDateSecondString() + "#资产管理",35, Color.WHITE);
+				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, model.getApplyUser() + " " + DateUtil.getCurrDateSecondString() + "#资产管理",25, Color.WHITE);
 				File tempFile = new File(sdCard, "sing.jpg");
 				sendFiles.clear();
 				sendFiles.add(tempFile);

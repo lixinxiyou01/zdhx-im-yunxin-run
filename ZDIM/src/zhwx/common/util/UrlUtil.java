@@ -45,6 +45,8 @@ public class UrlUtil {
 
 		HttpURLConnection conn = (HttpURLConnection) (new URL(checkUrl(url))
 				.openConnection());
+		conn.setReadTimeout(10*1000);
+		conn.setConnectTimeout(10*1000);
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
 		// POST必须大写
@@ -194,8 +196,8 @@ public class UrlUtil {
 		}
 		HttpURLConnection conn = (HttpURLConnection) (new URL(checkUrl(url))
 				.openConnection());
-		conn.setReadTimeout(1000000);
-		conn.setConnectTimeout(1000000);
+		conn.setReadTimeout(20*1000);
+		conn.setConnectTimeout(20*1000);
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
 		conn.setUseCaches(false);
@@ -2012,8 +2014,8 @@ public class UrlUtil {
 	 * @param
 	 * @throws IOException
 	 */
-	public static String warehouseListData(String baseUrl,Map<String, ParameterValue> map) throws IOException {
-		return getUrlResponse(checkUrl(baseUrl + "/sr/warehouseRecord!warehouseListData.action"), map);
+	public static String getOutWarehouseList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!getOutWarehouseList.action"), map);
 	}
 
 	/**
@@ -2106,12 +2108,40 @@ public class UrlUtil {
 		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!getGoodsIntoWarehouseDetal.action"), map);
 	}
 	/**
+	 * 获取补签详情
+	 * id
+	 * @throws IOException
+	 */
+	public static String getReSignDetail(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!getReSignDetail.action"), map);
+	}
+
+	/**
 	 * 物品出库详情列表  （校区  库房 数量	金额）
 	 * id
 	 * @throws IOException
 	 */
 	public static String getGoodsOutWarehouseDetal(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!getGoodsOutWarehouseDetal.action"), map);
+	}
+
+	/**
+	 * 物品出库详情
+	 * id
+	 * @throws IOException
+	 */
+	public static String OutWareDetail(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!OutWareDetail.action"), map);
+	}
+
+
+	/**
+	 * 提交补签带签字图
+	 *	id
+	 */
+	public static String saveReSign(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
+										  Map<String, ParameterValue> map) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/sr/storeroom!saveReSign.action", loginMap),files, map);
 	}
 
 	/*******************************易耗品管理end*********************************************/

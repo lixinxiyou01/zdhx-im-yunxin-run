@@ -53,6 +53,8 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 	private ECProgressDialog mPostingdialog;
 	
 	private String json;
+
+	private View emptyView;
 	
 	private TextView orderUserTV,telephoneTV,departmentNameTV,userDateTV,arriveTimeTV,
 					 addressTV,userCountTV,personListTV,reasonTV,instructionTV,fanchengFlagTV;
@@ -88,7 +90,9 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 		} else {
 			v = inflater.inflate(R.layout.activity_sm_goodskind, null);
 		}
+		emptyView = v.findViewById(R.id.emptyView);
 		mystoreLV = (ListView) v.findViewById(R.id.mystoreLV);
+		mystoreLV.setEmptyView(emptyView);
 		return v;
 	}
 	@Override

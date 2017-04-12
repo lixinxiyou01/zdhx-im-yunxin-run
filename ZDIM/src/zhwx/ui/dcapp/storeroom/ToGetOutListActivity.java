@@ -1,26 +1,5 @@
 package zhwx.ui.dcapp.storeroom;
 
-/** code is far away from bug with the animal protecting
-* 
-*     ┏┓　　　┏┓
-*   ┏┛┻━━━┛┻┓
-*   ┃　　　　　　　┃ 　
-*   ┃　　　━　　　┃
-*   ┃　┳┛　┗┳　┃
-*   ┃　　　　　　　┃
-*   ┃　　　┻　　　┃
-*   ┃　　　　　　　┃
-*   ┗━┓　　　┏━┛
- *     　   　┃　　　┃神兽保佑
- *     　   　┃　　　┃永无BUG！
- *     　　   ┃　　　┗━━━┓
- *     　   　┃　　　　　　　┣┓
- *     　   　┃　　　　　　　┏┛
- *     　   　┗┓┓┏━┳┓┏┛
- *   　  　   　┃┫┫　┃┫┫
- *   　  　   　┗┻┛　┗┻┛
-*
-*/
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,10 +15,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 
@@ -53,19 +32,18 @@ import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DensityUtil;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
+import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
-import zhwx.common.view.dialog.ECProgressDialog;
+import zhwx.common.view.refreshlayout.PullableListView;
 import zhwx.ui.dcapp.assets.model.AllAssets;
-import zhwx.ui.dcapp.storeroom.model.MyApply;
+import zhwx.ui.dcapp.storeroom.model.GetOutBean;
 
 /**   
- * @Title: AMainActivity.java 
- * @Package com.lanxum.hzth.im.ui.v3.assets 
  * @author Li.xin @ 中电和讯
  * @date 2016-3-7 上午9:52:07 
  */
-public class ToGrantActivity extends BaseActivity implements OnClickListener {
+public class ToGetOutListActivity extends BaseActivity implements OnClickListener {
 	
 	private Activity context;
 	
@@ -75,46 +53,67 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 	
 	private Handler handler = new Handler();
 
-	private ECProgressDialog mPostingdialog;
+	private List<GetOutBean> allDataList = new ArrayList<GetOutBean>();
+
+	private List<GetOutBean> newDataList = new ArrayList<GetOutBean>();
+
+	private PullableListView mystoreLV;
 	
-	private ListView mystoreLV;
-	
-	private MyApply myApply;
+	private View emptyView;
+
+	private OrderListAdapter adapter;
+
+	private int pageNo = 1;
 	
     @Override
-	protected int getLayoutId() {return R.layout.activity_sm_myapplylist;}
+	protected int getLayoutId() {return R.layout.activity_sm_getoutlist;}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
 		getTopBarView().setBackGroundColor(R.color.main_bg_store);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"申领单", this);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "添加","出库单", this);
 		initView();
+		getData(pageNo);
 	}
 	
 	/**
 	 * 
 	 */
 	private void initView() {
-		mystoreLV = (ListView) findViewById(R.id.mystoreLV);
+		mystoreLV = (PullableListView) findViewById(R.id.mystoreLV);
+		emptyView = findViewById(R.id.emptyView);
+		mystoreLV.setEmptyView(emptyView);
+		mystoreLV.setOnLoadListener(new PullableListView.OnLoadListener() {
+
+			@Override
+			public void onLoad(PullableListView pullableListView) {
+				if (pageNo != 1 && (StringUtil.isBlank(indexJson)||"[]".equals(indexJson.trim()))) {
+					mystoreLV.finishLoading();
+					mystoreLV.setLoadmoreVisible(false);
+					ToastUtil.showMessage("到底了");
+					return;
+				}
+				pageNo++;
+				getData(pageNo);
+			}
+		});
 	}
 
-	private void getData() {
-		getNotice();   //获取公告板数据
+	private void getData(int pageNo) {
+		getNotice(pageNo);   //获取公告板数据
 	}
 	
-	private void getNotice(){
-		mPostingdialog = new ECProgressDialog(this, "正在获取信息");
-		mPostingdialog.show();
+	private void getNotice(int pageNo){
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		map.put("id", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
-		map.put("pageObj.pageSize", new ParameterValue("1000"));
+		map.put("num", new ParameterValue(pageNo+""));
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					indexJson = UrlUtil.toApplyListData(ECApplication.getInstance().getV3Address(), map);
+					indexJson = UrlUtil.getOutWarehouseList(ECApplication.getInstance().getV3Address(), map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							refreshData(indexJson);
@@ -127,7 +126,6 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 						
 						@Override
 						public void run() {
-							mPostingdialog.dismiss();
 						}
 					}, 5);
 				}
@@ -140,9 +138,34 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			ToastUtil.showMessage("数据异常");
 			return;
 		}
-		myApply = new Gson().fromJson(indexJson, MyApply.class);
-		mystoreLV.setAdapter(new OrderListAdapter());
-		mPostingdialog.dismiss();
+		if (StringUtil.isBlank(indexJson)||"[]".equals(indexJson)) {
+			mystoreLV.finishLoading();
+			mystoreLV.setLoadmoreVisible(false);
+		}
+		if (pageNo == 1) {
+			allDataList.clear();
+		} else {
+			mystoreLV.finishLoading();
+		}
+		Gson gson = new Gson();
+		newDataList = gson.fromJson(indexJson, new TypeToken<List<GetOutBean>>() {}.getType());
+		if (newDataList != null && newDataList.size() != 0) {
+			allDataList.addAll(newDataList);
+		} else {
+			return;
+		}
+		if (pageNo == 1) {
+			if(allDataList.size() < 20) {
+				mystoreLV.finishLoading();
+				mystoreLV.setLoadmoreVisible(false);
+			}
+			adapter = new OrderListAdapter();
+			mystoreLV.setAdapter(adapter);
+		} else {
+			if (adapter != null) {
+				adapter.notifyDataSetChanged();
+			}
+		}
 	}
 	
 	public class OrderListAdapter extends BaseAdapter {
@@ -158,12 +181,12 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 
 		@Override
 		public int getCount() {
-			return myApply.getGridModel().size();
+			return allDataList.size();
 		}
 
 		@Override
-		public MyApply.GridModelBean getItem(int position) {
-			return myApply.getGridModel().get(position);
+		public GetOutBean getItem(int position) {
+			return allDataList.get(position);
 		}
 
 		@Override
@@ -176,14 +199,14 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			ViewHolder holder;
 			if (convertView == null) {
 				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_myassets, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_getout, null);
 				holder = new ViewHolder();
 				holder.smCodeTV = (TextView) convertView.findViewById(R.id.smCodeTV);
 				holder.departmentNameTV = (TextView) convertView.findViewById(R.id.departmentNameTV);
 				holder.smApplyDateTV = (TextView) convertView.findViewById(R.id.smApplyDateTV);
-				holder.getKindTV = (TextView) convertView.findViewById(R.id.getKindTV);
-				holder.checkStatusViewTV = (TextView) convertView.findViewById(R.id.checkStatusViewTV);
-				holder.sendStatusViewTV = (TextView) convertView.findViewById(R.id.sendStatusViewTV);
+				holder.outKindTV = (TextView) convertView.findViewById(R.id.outKindTV);
+				holder.signViewTV = (TextView) convertView.findViewById(R.id.signViewTV);
+				holder.receiverNameTV = (TextView) convertView.findViewById(R.id.receiverNameTV);
 				holder.buttonContentLay = (LinearLayout) convertView.findViewById(R.id.buttonContentLay);
 				
 				convertView.setTag(holder);
@@ -192,15 +215,16 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			}
 			
 			holder.smCodeTV.setText(getItem(position).getCode());
-			holder.departmentNameTV.setText(getItem(position).getDepartmentName());
-			holder.smApplyDateTV.setText(getItem(position).getDeptDate());
-			holder.getKindTV.setText(getItem(position).getKindValue());
-			holder.checkStatusViewTV.setText(getItem(position).getCheckStatusValue());
-			holder.sendStatusViewTV.setText(getItem(position).getProvideStatusValue());
-			if ("未发放".equals(getItem(position).getProvideStatusValue())) {
-				holder.sendStatusViewTV.setTextColor(Color.RED);
+			holder.departmentNameTV.setText(getItem(position).getWarehouseName());
+			holder.smApplyDateTV.setText(getItem(position).getDate());
+			holder.outKindTV.setText(getItem(position).getOutKindValue());
+			holder.receiverNameTV.setText(getItem(position).getReceiverName());
+			if (!getItem(position).isSignatureFlag()) {
+				holder.signViewTV.setText("未签字");
+				holder.signViewTV.setTextColor(Color.RED);
 			} else {
-				holder.sendStatusViewTV.setTextColor(Color.parseColor("#3573a2"));
+				holder.signViewTV.setText("已签字");
+				holder.signViewTV.setTextColor(Color.parseColor("#3573a2"));
 			}
 			
 			//动态添加操作按钮
@@ -223,7 +247,7 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 				final View view) {
 		}
 		private class ViewHolder {
-			private TextView smCodeTV,departmentNameTV,smApplyDateTV,getKindTV,sendStatusViewTV,checkStatusViewTV;
+			private TextView signViewTV,departmentNameTV,smApplyDateTV,outKindTV,smCodeTV,receiverNameTV;
 			private LinearLayout buttonContentLay;
 		}
 		
@@ -236,22 +260,20 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void onClick(View arg0) {
-				startActivity(new Intent(context, ApplyDetailActivity.class).putExtra("id", myApply.getGridModel().get(position).getId()));
+				startActivity(new Intent(context, GetOutDetailActivity.class).putExtra("id", allDataList.get(position).getId()));
 			}
 		});
+		TextView bqBT = getOrderButton("补签");
+		bqBT.setOnClickListener(new OnClickListener() {
 
-		if ("未发放".equals(myApply.getGridModel().get(position).getProvideStatusValue())) {
-			TextView shBT = getOrderButton("发放");
-			shBT.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					startActivity(new Intent(context, GrantForApplyActivity.class).putExtra("id", myApply.getGridModel().get(position).getId()));
-				}
-			});
-			btnList.add(shBT);
+			@Override
+			public void onClick(View arg0) {
+				startActivityForResult(new Intent(context, SReSingActivity.class).putExtra("id", allDataList.get(position).getId()),111);
+			}
+		});
+		if(!allDataList.get(position).isSignatureFlag()) {
+			btnList.add(bqBT);
 		}
-
 		btnList.add(ckBT);
 		return btnList;
 	}
@@ -268,13 +290,22 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 		button.setLayoutParams(params);
 		return button;
 	}
-	
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 120) {
+			pageNo = 1;
+			getData(pageNo);
+		}
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getData();
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -282,7 +313,7 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.text_right:
-			startActivity(new Intent(context, GrantByHandActivity.class));
+			startActivityForResult(new Intent(context, GrantByHandActivity.class),111);
 			break;
 		}
 	}

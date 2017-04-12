@@ -2,6 +2,7 @@ package zhwx.ui.dcapp.storeroom.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Android on 2017/1/14.
@@ -17,16 +18,16 @@ public class ProvideGoodsDetal implements Serializable {
      * schoolwarehouseTree : [{"schoolName":"中电小学","warehouseList":[{"warehouseName":"测试仓库1","warehouseId":"20170113162637091934873903924779"}],"schoolId":"20150915151222630637587846800681"},{"schoolName":"中电中学","warehouseList":[],"schoolId":"20150520125000317903308409460795"},{"schoolName":"中电测试学校","warehouseList":[],"schoolId":"20151020125000317903308409460795"}]
      */
 
-    private OutwarehouseKindBean outwarehouseKind;
+    private Map<String,String> outwarehouseKind;
     private List<WarehouseRecordDataBean> warehouseRecordData;
     private List<WarehouseRecordGoodsListBean> warehouseRecordGoodsList;
     private List<SchoolwarehouseTreeBean> schoolwarehouseTree;
 
-    public OutwarehouseKindBean getOutwarehouseKind() {
+    public Map<String,String> getOutwarehouseKind() {
         return outwarehouseKind;
     }
 
-    public void setOutwarehouseKind(OutwarehouseKindBean outwarehouseKind) {
+    public void setOutwarehouseKind(Map<String,String> outwarehouseKind) {
         this.outwarehouseKind = outwarehouseKind;
     }
 

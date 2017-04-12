@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">智微校</string>
+    <string name="app_name">经纶教育</string>
     <string name="app_name_inner">云通讯IM(内部使用)</string>
     <string name="app_server_view">登录参数配置</string>
     <string name="app_server_config_error_tips">请先进行登录参数配置</string>

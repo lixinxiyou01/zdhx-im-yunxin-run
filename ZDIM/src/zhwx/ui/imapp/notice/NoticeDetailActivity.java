@@ -231,7 +231,6 @@ public class NoticeDetailActivity extends BaseActivity {
 
 						@Override
 						public void downloading(int progress, int position) {
-							ToastUtil.showMessage(progress);
 							progressBar.setProgress(progress);
 						}
 
