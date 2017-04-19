@@ -188,8 +188,7 @@ public class UrlUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String commitWithFiles(String url, List<File> files,
-			Map<String, ParameterValue> map) throws IOException {
+	public static String commitWithFiles(String url, List<File> files,Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
 		System.out.println(url);
 		if (map == null) {
 			map = new HashMap<String, ParameterValue>();
@@ -235,27 +234,42 @@ public class UrlUtil {
 			}
 		}
 		out.write(sb.toString().getBytes("utf-8"));
+
+
+		long allTotalSize = 0;  //附件总大小
+		long hasUploadSize = 0; //已上传大小
+		int  allProgress = 0;  //总上传进度
+		for (int i = 0; i < files.size(); i++) {
+			allTotalSize += files.get(i).length();
+		}
+
 		// 文件
-		for (File file : files) {
+		for (int i = 0; i < files.size(); i++) {
+			File file = files.get(i);
 			StringBuffer strBuffer = new StringBuffer();
 			strBuffer.append("--" + boundary + "\r\n");
 			strBuffer.append("Content-Disposition: form-data; name=uploadFiles; filename="
-							+ file.getName() + "\r\n");
+					+ file.getName() + "\r\n");
 			strBuffer.append("Content-Type: application/octet-stream\r\n");
 			strBuffer.append("\r\n");
 			try {
 				in = new FileInputStream(file);
 				out.write(strBuffer.toString().getBytes());
+
 				byte[] buffer = new byte[1024];
 				int hasRead = -1;
 				int length = 0,progress = 0;
 				long totalSize = file.length();
 				while ((hasRead = in.read(buffer)) != -1) {
 					out.write(buffer, 0, hasRead);
-					length += hasRead; 
-					progress = (int) ((length * 100) / totalSize); 
-					//上传进度
-//					ToastUtil.showMessage("progress" + progress);
+					length += hasRead;  //当前附件上传大小
+					hasUploadSize += hasRead;  //总上传量
+					progress = (int) ((length * 100) / totalSize);  //当前上传进度
+					allProgress = (int) ((hasUploadSize * 100) / allTotalSize);  //总上传进度
+					//上传进度回调
+					if (callback != null) {
+						callback.upLoadProgress(files.size(),i,progress,allProgress);
+					}
 				}
 				out.write("\r\n".getBytes());
 			} catch (FileNotFoundException e) {
@@ -266,7 +280,7 @@ public class UrlUtil {
 					in.close();
 				}
 				if (out != null) {
-					// out.close();
+
 				}
 			}
 		}
@@ -287,11 +301,10 @@ public class UrlUtil {
 		return result;
 	}
 
-	public static String commitWithFiles(String url, File file,
-			Map<String, ParameterValue> map) throws IOException {
+	public static String commitWithFiles(String url, File file,Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
 		List<File> files = new ArrayList<File>();
 		files.add(file);
-		return commitWithFiles(url, files, map);
+		return commitWithFiles(url, files, map,callback);
 	}
 
 	/************************************ 数据接口start ************************************************************/
@@ -477,8 +490,8 @@ public class UrlUtil {
 	 */
 	public static String saveHeadPortrait(String baseUrl, File file,
 			Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/bd/user/saveHeadPortrait", loginMap), file,map);
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/bd/user/saveHeadPortrait", loginMap), file,map,callback);
 	}
 
 	/**
@@ -491,10 +504,10 @@ public class UrlUtil {
 	 */
 	public static String savePersonalMoment(String baseUrl, List<File> files,
 			Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
 		return commitWithFiles(
 				getUrl(baseUrl + "/bd/momentsAndroid/savePersonalMoment",
-						loginMap), files, map);
+						loginMap), files, map,callback);
 	}
 
 	/**
@@ -709,9 +722,9 @@ public class UrlUtil {
 	 */
 	public static String saveClassMoment(String baseUrl, List<File> files,
 			Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
 		return commitWithFiles(getUrl(baseUrl + "/bd/momentsAndroid/saveClassMoment", loginMap),
-				files, map);
+				files, map,callback);
 	}
 
 	/**
@@ -1145,8 +1158,8 @@ public class UrlUtil {
 	 *            sourceId 原通知id
 	 */
 	public static String sendNotice(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/no/noticeMobile/sendNotice", loginMap),files, map);
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/no/noticeMobile/sendNotice", loginMap),files, map,callback);
 	}
 	/**
 	 * 发/转发 通知 (native版通知)
@@ -1155,8 +1168,8 @@ public class UrlUtil {
 	 *            sourceId 原通知id
 	 */
 	public static String sendNoticeFile(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/no/noticeMobile/sendNoticeFile", loginMap),files, map);
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/no/noticeMobile/sendNoticeFile", loginMap),files, map,callback);
 	}
 
 	public static String sendNotice(String baseUrl,Map<String, ParameterValue> loginMap,
@@ -1257,11 +1270,11 @@ public class UrlUtil {
 	 */
 
 	public static String getAddHomework(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
 		if (files.size() == 0) {
 			return getUrlResponse(getUrl(baseUrl+ "/bd/homeWork/saveOrUpdateHomeWorkWithoutFile",loginMap), map);
 		}
-		return commitWithFiles(getUrl(baseUrl + "/bd/homeWork/saveOrUpdateHomeWork", loginMap),files, map);
+		return commitWithFiles(getUrl(baseUrl + "/bd/homeWork/saveOrUpdateHomeWork", loginMap),files, map,callback);
 	}
 
 	/**
@@ -1341,8 +1354,8 @@ public class UrlUtil {
 	 * studentWorkId=2222&content=3r23234&file=
 	 */
 	public static String saveHomeWorkAnswer(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-			Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/il/homeWork!saveHomeWorkAnswer.action", loginMap),files, map);
+			Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/il/homeWork!saveHomeWorkAnswer.action", loginMap),files, map,callback);
 	}
 	
 	/***************************************订车管理***********************************************/
@@ -1772,8 +1785,8 @@ public class UrlUtil {
 	 * 	移动端确认发放
 	 */
 	public static String saveGrant(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-								   Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/ao/assetMobile!saveGrant.action", loginMap),files, map);
+								   Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/ao/assetMobile!saveGrant.action", loginMap),files, map,callback);
 	}
 
 	public static String saveGrant(String baseUrl,Map<String, ParameterValue> loginMap) throws IOException {
@@ -2005,8 +2018,8 @@ public class UrlUtil {
 	}
 
 	public static String saveProvideGoods(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-										  Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/sr/storeroom!saveProvideGoods.action", loginMap),files, map);
+										  Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/sr/storeroom!saveProvideGoods.action", loginMap),files, map,callback);
 	}
 
 	/**
@@ -2016,6 +2029,15 @@ public class UrlUtil {
 	 */
 	public static String getOutWarehouseList(String baseUrl,Map<String, ParameterValue> map) throws IOException {
 		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!getOutWarehouseList.action"), map);
+	}
+
+	/**
+	 * 按姓名搜索出库单
+	 * @param
+	 * @throws IOException
+	 */
+	public static String searchGetOutByUserName(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!searchGetOutByUserName.action"), map);
 	}
 
 	/**
@@ -2134,14 +2156,23 @@ public class UrlUtil {
 		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!OutWareDetail.action"), map);
 	}
 
+	/**
+	 * 物品出库详情
+	 * id
+	 * @throws IOException
+	 */
+	public static String getStoreHandleRecord(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl + "/sr/storeroom!getStoreHandleRecord.action"), map);
+	}
+
 
 	/**
 	 * 提交补签带签字图
 	 *	id
 	 */
 	public static String saveReSign(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,
-										  Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/sr/storeroom!saveReSign.action", loginMap),files, map);
+										  Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/sr/storeroom!saveReSign.action", loginMap),files, map,callback);
 	}
 
 	/*******************************易耗品管理end*********************************************/
@@ -2198,8 +2229,8 @@ public class UrlUtil {
 	/**
 	 * 提交报修单
 	 */
-	public static String submitRepairApply(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!submitRepairApply.action", loginMap),files, map);
+	public static String submitRepairApply(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!submitRepairApply.action", loginMap),files, map,callback);
 	}
 
 	public static String submitRepairApply(String baseUrl,Map<String, ParameterValue> map) throws IOException {
@@ -2279,8 +2310,8 @@ public class UrlUtil {
 	/**
 	 * 维修工提交反馈
 	 */
-	public static String saveWokerFeedBack(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map) throws IOException {
-		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!saveWokerFeedBack.action", loginMap),files, map);
+	public static String saveWokerFeedBack(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!saveWokerFeedBack.action", loginMap),files, map,callback);
 	}
 
 	public static String saveWokerFeedBack(String baseUrl,Map<String, ParameterValue> map) throws IOException {

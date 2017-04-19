@@ -38,6 +38,7 @@ import java.util.List;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.IMUtils;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
@@ -273,7 +274,12 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 						loginMap.putAll(map);
 						orderFlag = UrlUtil.submitRepairApply(ECApplication.getInstance().getV3Address(),loginMap);
 					} else {
-						orderFlag = UrlUtil.submitRepairApply(ECApplication.getInstance().getV3Address(), sendFiles,loginMap,map);
+						orderFlag = UrlUtil.submitRepairApply(ECApplication.getInstance().getV3Address(), sendFiles, loginMap, map, new FileUpLoadCallBack() {
+							@Override
+							public void upLoadProgress(int fileCount, int currentIndex, int currentProgress,int allProgress) {
+
+							}
+						});
 					}
 					handler.postDelayed(new Runnable() {
 						public void run() {

@@ -39,14 +39,14 @@
         </RelativeLayout>
     </FrameLayout>
 
-    <include layout="@layout/search_bar_with_padding_edit" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true" >
     </RelativeLayout>
+
+    <include layout="@layout/search_bar_with_padding_edit"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

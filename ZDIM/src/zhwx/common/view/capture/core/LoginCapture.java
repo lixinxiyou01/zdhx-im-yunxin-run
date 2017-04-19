@@ -9,12 +9,6 @@ public class LoginCapture {
 		super();
 	}
 	
-	public LoginCapture(String u, String i) {
-		super();
-		this.u = u;
-		this.i = i;
-	}
-	
 	public String getU() {
 		return u;
 	}

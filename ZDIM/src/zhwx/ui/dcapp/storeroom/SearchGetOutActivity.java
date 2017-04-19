@@ -1,184 +1,197 @@
 package zhwx.ui.dcapp.storeroom;
 
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
+import android.text.Html;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
+import com.netease.nim.demo.contact.activity.UserProfileActivity;
+import com.netease.nim.uikit.common.util.string.StringUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DensityUtil;
+import zhwx.common.util.IMUtils;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
-import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
-import zhwx.common.view.refreshlayout.PullableListView;
+import zhwx.ui.contact.SearchFriendResult;
 import zhwx.ui.dcapp.assets.model.AllAssets;
 import zhwx.ui.dcapp.storeroom.model.GetOutBean;
 
-/**   
- * @author Li.xin @ 中电和讯
- * @date 2016-3-7 上午9:52:07 
- */
-public class ToGetOutListActivity extends BaseActivity implements OnClickListener {
-	
+
+public class SearchGetOutActivity extends Activity {
 	private Activity context;
-	
+	private EditText editText;
 	private HashMap<String, ParameterValue> map;
-	
-	private String indexJson;
+	private String searcheResult = "";
+	//过滤出字母、数字和中文的正则表达式
+	private String regex = "[^(a-zA-Z\\u4e00-\\u9fa5)]"; 
 	
 	private Handler handler = new Handler();
+	
+	private ListView resultLV;
+	  /**查看名片*/
+    public static final int REQUEST_VIEW_CARD = 0x6;
+    
+    private FrameLayout title;
 
 	private List<GetOutBean> allDataList = new ArrayList<GetOutBean>();
 
-	private List<GetOutBean> newDataList = new ArrayList<GetOutBean>();
-
-	private PullableListView mystoreLV;
-	
-	private View emptyView;
-
-	private OrderListAdapter adapter;
-
-	private int pageNo = 1;
-
-	private EditText searchET;
-	
-    @Override
-	protected int getLayoutId() {return R.layout.activity_sm_getoutlist;}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		getTopBarView().setBackGroundColor(R.color.main_bg_store);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "添加","出库单", this);
-		initView();
-		getData(pageNo);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_sm_search_getout);
+		title = (FrameLayout) findViewById(R.id.title);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			Window window = getWindow();
+			/*window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);*/
+			window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			
+			int statusBarHeight = IMUtils.getStatusBarHeight(this.getBaseContext());
+			title.setPadding(0, statusBarHeight, 0, 0);
+		}
+		editText = (EditText) findViewById(R.id.edit_note);
+		editText.setOnKeyListener(new OnKeyListener() {
+			
+			@Override
+			public boolean onKey(View arg0, int keyCode, KeyEvent event) {
+				if(keyCode == KeyEvent.KEYCODE_ENTER){//修改回车键功能
+					searchContact(null);
+				}
+				return false;
+			}
+		});
+		resultLV = (ListView) findViewById(R.id.resultLV);
+		resultLV.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				SearchFriendResult contacts = (SearchFriendResult) parent.getAdapter().getItem(position);
+				if (!StringUtil.isEmpty(contacts.getAccId())) {
+					UserProfileActivity.start(SearchGetOutActivity.this,contacts.getAccId());
+				} else {
+					ToastUtil.showMessage("无此用户和信息");
+				}
+			}
+		});
 	}
 	
 	/**
-	 * 
+	 * 查找contact
+	 * @param v
 	 */
-	private void initView() {
-		mystoreLV = (PullableListView) findViewById(R.id.mystoreLV);
-		emptyView = findViewById(R.id.emptyView);
-		mystoreLV.setEmptyView(emptyView);
-		mystoreLV.setOnLoadListener(new PullableListView.OnLoadListener() {
-
-			@Override
-			public void onLoad(PullableListView pullableListView) {
-				if (pageNo != 1 && (StringUtil.isBlank(indexJson)||"[]".equals(indexJson.trim()))) {
-					mystoreLV.finishLoading();
-					mystoreLV.setLoadmoreVisible(false);
-					ToastUtil.showMessage("到底了");
-					return;
-				}
-				pageNo++;
-				getData(pageNo);
-			}
-		});
-		searchET = (EditText) findViewById(R.id.searchET);
-		searchET.setRawInputType(InputType.TYPE_NULL);
-		searchET.setHint("按申领人姓名查找");
-		searchET.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				transfer(SearchGetOutActivity.class);
-			}
-		});
-	}
-
-	private void getData(int pageNo) {
-		getNotice(pageNo);   //获取公告板数据
-	}
+	public void searchContact(View v) {
+		String toAddUsername2 = editText.getEditableText().toString();
+		if(toAddUsername2.length()==0){
+			editText.setError(Html.fromHtml("<font color=#808183>" + "查找内容不能为空" + "</font>"));
+			return;
+		}
+		Pattern p = Pattern.compile(regex);     
+	    Matcher m = p.matcher(toAddUsername2);
+		if(!m.find()){
+			searcheFriend(toAddUsername2);
+		}else{
+			ToastUtil.showMessage("请输入中文或字母");
+		}
+	}	
 	
-	private void getNotice(int pageNo){
-		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("id", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
-		map.put("num", new ParameterValue(pageNo+""));
+	private void searcheFriend(String toAddUsername2) {
+		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+		map.put("userName", new ParameterValue(toAddUsername2));
+		final ProgressDialog pd = new ProgressDialog(this);
+		pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		pd.setMessage("正在查找…");
+		pd.setCancelable(false);
+		pd.show();
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					indexJson = UrlUtil.getOutWarehouseList(ECApplication.getInstance().getV3Address(), map);
+					searcheResult = UrlUtil.searchGetOutByUserName(ECApplication.getInstance().getAddress(),map);  //发送请求
 					handler.postDelayed(new Runnable() {
-						public void run() {
-							refreshData(indexJson);
+						public void run() { 
+							System.out.println(searcheResult);
+							if(searcheResult.contains("html")){
+								ToastUtil.showMessage("数据错误");
+								return;
+							}
+							if(!searcheResult.contains("name")){
+								ToastUtil.showMessage("未找到");
+								OrderListAdapter adapter = (OrderListAdapter) resultLV.getAdapter();
+								if(adapter!=null&&allDataList!=null){
+									allDataList.clear();
+									adapter.notifyDataSetChanged();
+								}
+								pd.dismiss();
+								return;
+							}
+							// 先隐藏键盘
+							((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+							.hideSoftInputFromWindow(SearchGetOutActivity.this.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
+							Gson gson = new Gson();
+							allDataList = gson.fromJson(searcheResult, new TypeToken<List<GetOutBean>>() {}.getType());
+							resultLV.setAdapter(new OrderListAdapter(context));
+							pd.dismiss();
 						}
 					}, 5);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
-					ToastUtil.showMessage("请求失败，请稍后重试");
+					ToastUtil.showMessage("未找到");
+					pd.dismiss();
 				}
 			}
 		}).start();
 	}
-	
-	private void refreshData(String indexJson) {
-		if (indexJson.contains("</html>")) {
-			ToastUtil.showMessage("数据异常");
-			return;
-		}
-		if (StringUtil.isBlank(indexJson)||"[]".equals(indexJson)) {
-			mystoreLV.finishLoading();
-			mystoreLV.setLoadmoreVisible(false);
-		}
-		if (pageNo == 1) {
-			allDataList.clear();
-		} else {
-			mystoreLV.finishLoading();
-		}
-		Gson gson = new Gson();
-		newDataList = gson.fromJson(indexJson, new TypeToken<List<GetOutBean>>() {}.getType());
-		if (newDataList != null && newDataList.size() != 0) {
-			allDataList.addAll(newDataList);
-		} else {
-			return;
-		}
-		if (pageNo == 1) {
-			if(allDataList.size() < 20) {
-				mystoreLV.finishLoading();
-				mystoreLV.setLoadmoreVisible(false);
-			}
-			adapter = new OrderListAdapter();
-			mystoreLV.setAdapter(adapter);
-		} else {
-			if (adapter != null) {
-				adapter.notifyDataSetChanged();
-			}
-		}
+
+	public void back(View v) {
+		finish();
 	}
-	
+
 	public class OrderListAdapter extends BaseAdapter {
-		
+
 		public OrderListAdapter(Context context, List<AllAssets> list,
-				int listFlag) {
+								int listFlag) {
+			super();
+		}
+		public OrderListAdapter(Context context) {
 			super();
 		}
 
@@ -205,7 +218,7 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
-				
+
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_getout, null);
 				holder = new ViewHolder();
 				holder.smCodeTV = (TextView) convertView.findViewById(R.id.smCodeTV);
@@ -215,12 +228,12 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 				holder.signViewTV = (TextView) convertView.findViewById(R.id.signViewTV);
 				holder.receiverNameTV = (TextView) convertView.findViewById(R.id.receiverNameTV);
 				holder.buttonContentLay = (LinearLayout) convertView.findViewById(R.id.buttonContentLay);
-				
+
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			holder.smCodeTV.setText(getItem(position).getCode());
 			holder.departmentNameTV.setText(getItem(position).getWarehouseName());
 			holder.smApplyDateTV.setText(getItem(position).getDate());
@@ -233,7 +246,7 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 				holder.signViewTV.setText("已签字");
 				holder.signViewTV.setTextColor(Color.parseColor("#3573a2"));
 			}
-			
+
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
 			List<TextView> btns = getOrderButtonList(position);
@@ -251,27 +264,27 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 		 * @param view
 		 */
 		private void addListener(final ViewHolder holder, final int position,
-				final View view) {
+								 final View view) {
 		}
 		private class ViewHolder {
 			private TextView signViewTV,departmentNameTV,smApplyDateTV,outKindTV,smCodeTV,receiverNameTV;
 			private LinearLayout buttonContentLay;
 		}
-		
+
 	}
-	
+
 	public List<TextView> getOrderButtonList(final int position){
 		List<TextView> btnList = new ArrayList<TextView>();
 		TextView ckBT = getOrderButton("查看");
-		ckBT.setOnClickListener(new OnClickListener() {
-			
+		ckBT.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View arg0) {
 				startActivity(new Intent(context, GetOutDetailActivity.class).putExtra("id", allDataList.get(position).getId()));
 			}
 		});
 		TextView bqBT = getOrderButton("补签");
-		bqBT.setOnClickListener(new OnClickListener() {
+		bqBT.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -284,10 +297,10 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 		btnList.add(ckBT);
 		return btnList;
 	}
-	
+
 	public TextView getOrderButton (String text) {
-		LayoutParams params = new LayoutParams(
-			    LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30));
 		params.setMargins(0, 0, DensityUtil.dip2px(10), 0);
 		TextView button = new TextView(context);
 		button.setText(text);
@@ -296,32 +309,5 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 		button.setGravity(Gravity.CENTER);
 		button.setLayoutParams(params);
 		return button;
-	}
-
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == 120) {
-			pageNo = 1;
-			getData(pageNo);
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_left:
-			finish();
-			break;
-		case R.id.text_right:
-			startActivityForResult(new Intent(context, GrantByHandActivity.class),111);
-			break;
-		}
 	}
 }

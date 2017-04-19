@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
@@ -35,12 +36,13 @@ import com.netease.nim.demo.R;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.model.V3NoticeCenter;
-import zhwx.common.util.JsonUtil;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
@@ -49,8 +51,6 @@ import zhwx.common.util.UrlUtil;
 import zhwx.common.view.capture.camera.CameraManager;
 import zhwx.common.view.capture.executor.ResultHandler;
 import zhwx.ui.dcapp.assets.AssetDetailActivity;
-
-import static com.netease.nim.demo.team.TeamSynchroHelper.map;
 
 /**
  * 二维码扫描
@@ -78,6 +78,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	private String photoPath;
 	private ProgressDialog mProgress;
 	private String moduleCode;
+	public static Map<String, ParameterValue> map;
 
 	enum IntentSource {
 		ZXING_LINK, NONE
@@ -141,7 +142,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	}
 
 	public void showDialog(final String msg) {
-		
+		System.out.println(msg);
 		if (mProgress != null && mProgress.isShowing()) {
 			mProgress.dismiss();
 		}
@@ -155,9 +156,10 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 		} else if ("login".equals(moduleCode)) { //扫码登录
 			LoginCapture capture = null;
 			if(msg.contains("u")&&msg.contains("i")){
-				capture = JsonUtil.json2JavaPojo(msg, LoginCapture.class);
+				capture = new Gson().fromJson(msg, LoginCapture.class);
+				map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
 				map.put("uuid",new ParameterValue(capture.getU()));
-				map.put("dataSource",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+				map.put("dataSource",new ParameterValue(capture.getI()));
 				map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
 				new ProgressThreadWrap(this, new RunnableWrap() {
 					@Override

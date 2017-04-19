@@ -6,19 +6,19 @@ package zhwx.ui.dcapp.storeroom;
 *   ┏┛┻━━━┛┻┓
 *   ┃　　　　　　　┃ 　
 *   ┃　　　━　　　┃
-*   ┃　┳┛　┗┳　  ┃
+*   ┃　┳┛　┗┳　┃
 *   ┃　　　　　　　┃
 *   ┃　　　┻　　　┃
 *   ┃　　　　　　　┃
 *   ┗━┓　　　┏━┛
-*     ┃　　　┃神兽保佑
-*     ┃　　　┃永无BUG！
-*     ┃　　　┗━━━┓
-*     ┃　　　　　 ┣┓
-*     ┃　　　　　 ┏┛
-*     ┗┓┓┏━┳┓┏┛
-*   　  ┃┫┫　┃┫┫
-*   　  ┗┻┛　┗┻┛
+ *     　   　┃　　　┃神兽保佑
+ *     　   　┃　　　┃永无BUG！
+ *     　　   ┃　　　┗━━━┓
+ *     　   　┃　　　　　　　┣┓
+ *     　   　┃　　　　　　　┏┛
+ *     　   　┗┓┓┏━┳┓┏┛
+ *   　  　   　┃┫┫　┃┫┫
+ *   　  　   　┗┻┛　┗┻┛
 *
 */
 
@@ -37,28 +37,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import zhwx.common.base.BaseActivity;
-import zhwx.common.base.CCPAppManager;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
-import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
-import zhwx.common.util.Tools;
 import zhwx.common.util.UrlUtil;
-import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
 import zhwx.common.view.dialog.ECProgressDialog;
-import zhwx.common.view.imagegallery.ViewImageInfo;
 import zhwx.ui.dcapp.assets.model.AllAssets;
-import zhwx.ui.dcapp.storeroom.model.GetOutDetail;
+import zhwx.ui.dcapp.storeroom.model.StatisticsData;
+import zhwx.ui.dcapp.storeroom.model.StoreHandleRecord;
 
 /**   
  * @Title: AMainActivity.java 
@@ -66,7 +62,7 @@ import zhwx.ui.dcapp.storeroom.model.GetOutDetail;
  * @author Li.xin @ 中电和讯
  * @date 2016-3-7 上午9:52:07 
  */
-public class GetOutDetailActivity extends BaseActivity implements OnClickListener {
+public class StoreHandleDetailActivity extends BaseActivity implements OnClickListener {
 	
 	private Activity context;
 	
@@ -80,27 +76,43 @@ public class GetOutDetailActivity extends BaseActivity implements OnClickListene
 	
 	private ListView mystoreLV;
 	
-	private String id = "";
+	private StatisticsData staticData;
 	
-	private GetOutDetail detail;
+	private String id = "";
 
-	private TextView smCodeTV,departmentNameTV,checkUserTV,smApplyDateTV,getKindTV,checkSignTV,nullTV,smBuildTV;
-
-	private ImageLoader loader;
+	private String warehouseId = "";
+	
+	private String name = "";
+	
+	private int kind = 0;
+	
+	private List<StoreHandleRecord> recordList;
+	
+	public static final int KIND_STORE = 0;
+	public static final int KIND_OUT = 1;
+	public static final int KIND_IN = 2;
 	
 	
     @Override
-	protected int getLayoutId() {return R.layout.activity_sm_getoutdetail;}
+	protected int getLayoutId() {return R.layout.activity_sm_statistics_detail;}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
-		loader = new ImageLoader(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_store);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"申请详情", this);
-		getActivityLayoutView().setBackgroundColor(Color.parseColor("#ffffff"));
+		kind = getIntent().getIntExtra("kind", 0);
 		id = getIntent().getStringExtra("id");
+		warehouseId = getIntent().getStringExtra("warehouseId");
+		name = getIntent().getStringExtra("name");
+		if (kind == KIND_IN) {
+			getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"入库详情", this);
+		} else if(kind == KIND_OUT){
+			getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"出库详情", this);
+		} else if(kind == KIND_STORE){
+			getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"库存详情", this);
+		}
+		getTopBarView().setSubTitle(name);
 		initView();
 		getData();
 	}
@@ -109,31 +121,30 @@ public class GetOutDetailActivity extends BaseActivity implements OnClickListene
 	 * 
 	 */
 	private void initView() {
- 		mystoreLV = (ListView) findViewById(R.id.mystoreLV);
- 		smCodeTV = (TextView) findViewById(R.id.smCodeTV);
- 		departmentNameTV = (TextView) findViewById(R.id.departmentNameTV);
- 		checkUserTV = (TextView) findViewById(R.id.checkUserTV);
- 		smApplyDateTV = (TextView) findViewById(R.id.smApplyDateTV);
- 		getKindTV = (TextView) findViewById(R.id.getKindTV);
-		checkSignTV = (TextView) findViewById(R.id.checkSignTV);
-		smBuildTV = (TextView) findViewById(R.id.smBuildTV);
-		nullTV = (TextView) findViewById(R.id.nullTV);
+		mystoreLV = (ListView) findViewById(R.id.mystoreLV);
 	}
 
 	private void getData() {
-		getNotice();   //获取公告板数据
+		getNotice();   
 	}
 	
 	private void getNotice(){
 		mPostingdialog = new ECProgressDialog(this, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		map.put("id", new ParameterValue(id));
+		map.put("goodsId", new ParameterValue(id));
+		map.put("warehouseId", new ParameterValue(warehouseId));
+		if (kind == KIND_STORE) {
+		} else if (kind == KIND_IN){
+			map.put("handleFlag", new ParameterValue("1"));
+		}else if (kind == KIND_OUT){
+			map.put("handleFlag", new ParameterValue("2"));
+		}
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
 				try {
-					indexJson = UrlUtil.OutWareDetail(ECApplication.getInstance().getV3Address(), map);
+					indexJson = UrlUtil.getStoreHandleRecord(ECApplication.getInstance().getV3Address(), map);
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							refreshData(indexJson);
@@ -155,38 +166,14 @@ public class GetOutDetailActivity extends BaseActivity implements OnClickListene
 	}
 	
 	private void refreshData(String indexJson) {
-		System.out.println(indexJson);
-		mPostingdialog.dismiss();
 		if (indexJson.contains("</html>")) {
 			ToastUtil.showMessage("数据异常");
 			return;
 		}
-		detail = new Gson().fromJson(indexJson, GetOutDetail.class);
-		smCodeTV.setText(detail.getCode());
-		departmentNameTV.setText(detail.getWarehouseName());
-		checkUserTV.setText(detail.getReceiverName()); //部门审核人
-		smApplyDateTV.setText(detail.getDate());
-		smBuildTV.setText(detail.getProductDate());
-		getKindTV.setText(detail.getOutKindValue());
+		recordList = new Gson().fromJson(indexJson, new TypeToken<List<StoreHandleRecord>>() {}.getType());
 		mystoreLV.setAdapter(new OrderListAdapter());
-		System.out.println(ECApplication.getInstance().getV3Address() + detail.getUrl());
-		if(StringUtil.isNotBlank(detail.getUrl())) {
-			checkSignTV.setVisibility(View.VISIBLE);
-			checkSignTV.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					ArrayList<ViewImageInfo> urls = new ArrayList<ViewImageInfo>();
-					ViewImageInfo imageInfo = new ViewImageInfo("", ECApplication.getInstance().getV3Address() + detail.getUrl());
-					urls.add(imageInfo);
-					CCPAppManager.startChattingImageViewAction(context,0, urls);
-				}
-			});
-		}else {
-			nullTV.setVisibility(View.VISIBLE);
-		}
-		Tools.setListViewHeightBasedOnChildren(mystoreLV);
+		mPostingdialog.dismiss();
 	}
-	
 	
 	public class OrderListAdapter extends BaseAdapter {
 		
@@ -201,12 +188,12 @@ public class GetOutDetailActivity extends BaseActivity implements OnClickListene
 
 		@Override
 		public int getCount() {
-			return detail.getGoodsList().size()+1;
+			return recordList.size() + 1;
 		}
 
 		@Override
-		public GetOutDetail.GoodsListBean getItem(int position) {
-			return detail.getGoodsList().get(position);
+		public StoreHandleRecord getItem(int position) {
+			return recordList.get(position - 1);
 		}
 
 		@Override
@@ -218,31 +205,38 @@ public class GetOutDetailActivity extends BaseActivity implements OnClickListene
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
-				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_apply_detail, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_statistics_inout, null);
 				holder = new ViewHolder();
-				holder.goodsNameTV = (TextView) convertView.findViewById(R.id.goodsNameTV);
-				holder.goodsCountTV = (TextView) convertView.findViewById(R.id.goodsCountTV);
-				holder.costTV = (TextView) convertView.findViewById(R.id.costTV);
+				holder.schoolTV = (TextView) convertView.findViewById(R.id.schoolTV);
+				holder.storeTV = (TextView) convertView.findViewById(R.id.storeTV);
+				holder.countTV = (TextView) convertView.findViewById(R.id.countTV);
+				holder.moneyTV = (TextView) convertView.findViewById(R.id.moneyTV);
 				holder.linearLayout1 = (LinearLayout) convertView.findViewById(R.id.linearLayout1);
+				
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			if(position == 0) {
-				holder.goodsNameTV.setText("物品名称");
-				holder.goodsCountTV.setText("数量");
-				holder.costTV.setText("金额");
-			} else {
-				holder.goodsNameTV.setText(getItem(position - 1).getName());
-				holder.goodsCountTV.setText(getItem(position - 1).getCount() + "");
-				holder.costTV.setText(getItem(position - 1).getSum() + "");
-			}
-			
 			if (position % 2 == 0) {
 				holder.linearLayout1.setBackgroundColor(Color.parseColor("#f6fbff"));
 			} else {
 				holder.linearLayout1.setBackgroundColor(Color.parseColor("#ffffff"));
+			}
+			if (position == 0) {
+				if (kind == KIND_IN) {
+					holder.schoolTV.setText("制单人");
+				} else if(kind == KIND_OUT){
+					holder.schoolTV.setText("申领人");
+
+				}
+				holder.storeTV.setText("日期");
+				holder.countTV.setText("数量");
+				holder.moneyTV.setText("金额");
+			} else {
+				holder.schoolTV.setText(getItem(position).getName());
+				holder.storeTV.setText(getItem(position).getDate());
+				holder.countTV.setText(getItem(position).getCount());
+				holder.moneyTV.setText(getItem(position).getSum());
 			}
 			addListener(holder, position, convertView);
 			return convertView;
@@ -258,12 +252,12 @@ public class GetOutDetailActivity extends BaseActivity implements OnClickListene
 				final View view) {
 		}
 		private class ViewHolder {
-			private TextView goodsNameTV,goodsCountTV,costTV;
+			private TextView schoolTV,storeTV,countTV,moneyTV;
 			private LinearLayout linearLayout1;
 		}
 		
 	}
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();

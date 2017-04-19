@@ -243,7 +243,7 @@ public class SchoolCircleActivity extends BaseActivity {
 				map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
 				map.put("content", new ParameterValue(mEditTextContent.getEditableText().toString().trim()));
 				map.put("kind", new ParameterValue(Constant.CIRCLE_KIND_SCHOOL));
-				if(commentKind==Constant.COMMENT){ //评论模式
+				if(commentKind == Constant.COMMENT){ //评论模式
 					map.put("momentId", new ParameterValue(allCircles.get(commentPosition).getId()));
 					new ProgressThreadWrap(context, new RunnableWrap() {
 						@Override

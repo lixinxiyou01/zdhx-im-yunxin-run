@@ -66,7 +66,7 @@ public class Apps implements Serializable {
 		List<AppGroup> appGroupList = new ArrayList<>();
 
 		/**校务办公*/
-		AppGroup xwbgAg = new AppGroup("校务办公","xwbg");
+		AppGroup xwbgAg = new AppGroup("日常办公","xwbg");
 		List<Apps> xwbgAppList = new ArrayList<Apps>();
 		xwbgAppList.add(new Apps("我的通知", R.drawable.icon_tongzhi,"no"));
 		xwbgAppList.add(new Apps("Z邮",R.drawable.icon_tongzhi,"zmail"));
@@ -79,37 +79,61 @@ public class Apps implements Serializable {
 		xwbgAppList.add(new Apps("易耗品管理",R.drawable.icon_store,"sm"));
 		xwbgAppList.add(new Apps("订车管理",R.drawable.icon_carmanager,"cm"));
 		xwbgAppList.add(new Apps("食堂管理",R.drawable.icon_cn,"cn"));
+		xwbgAppList.add(new Apps("调查问卷",R.drawable.icon_diaochawenjuan,"qn"));
 		xwbgAppList.add(new Apps("公示",R.drawable.icon_gongshi,"pu"));
 		xwbgAppList.add(new Apps("系统公告",R.drawable.icon_xitong,"an"));
 		xwbgAg.setApps(xwbgAppList);
 		appGroupList.add(xwbgAg);
 
-		/**教务教学*/
-		AppGroup jwjxAg = new AppGroup("教育教学","jwjx");
-		List<Apps> jwjxAppList = new ArrayList<Apps>();
-		jwjxAppList.add(new Apps("查看课表",R.drawable.icon_classmanage,"course"));
-		jwjxAppList.add(new Apps("作业",R.drawable.icon_homework,"homework"));
-		jwjxAppList.add(new Apps("作业",R.drawable.icon_homework,"hw"));
-		jwjxAppList.add(new Apps("作业统计",R.drawable.icon_homework_cjl,"il"));
-		jwjxAppList.add(new Apps("成绩单",R.drawable.icon_score,"cj"));
-		jwjxAppList.add(new Apps("学生选课",R.drawable.icon_tackcourse,"tc"));
-		jwjxAg.setApps(jwjxAppList);
-		appGroupList.add(jwjxAg);
+		/**教务*/
+		AppGroup jwAg = new AppGroup("教务","jw");
+		List<Apps> jwAppList = new ArrayList<Apps>();
+		jwAppList.add(new Apps("查看课表",R.drawable.icon_classmanage,"course"));
+		jwAppList.add(new Apps("作业统计",R.drawable.icon_homework_cjl,"il"));
+		jwAppList.add(new Apps("成绩单",R.drawable.icon_score,"cj"));
+		jwAppList.add(new Apps("学生选课",R.drawable.icon_tackcourse,"tc"));
+		jwAg.setApps(jwAppList);
+		appGroupList.add(jwAg);
+
+		/**教学*/
+		AppGroup jxAg = new AppGroup("教学","jx");
+		List<Apps> jxAppList = new ArrayList<Apps>();
+		jxAppList.add(new Apps("作业",R.drawable.icon_homework,"homework"));
+		jxAppList.add(new Apps("作业",R.drawable.icon_homework,"hw"));
+		jxAg.setApps(jxAppList);
+		appGroupList.add(jxAg);
+
+		/**教科研*/
+		AppGroup jkyAg = new AppGroup("教科研","jky");
+		List<Apps> jkyAppList = new ArrayList<Apps>();
+		jkyAppList.add(new Apps("教科研",R.drawable.icon_keyan,"tm"));
+		jkyAg.setApps(jkyAppList);
+		appGroupList.add(jkyAg);
 
 		/**德育管理*/
 		AppGroup dyglAg = new AppGroup("德育管理","dygl");
 		List<Apps> dyglAppList = new ArrayList<Apps>();
-		dyglAppList.add(new Apps("调查问卷",R.drawable.icon_diaochawenjuan,"qn"));
 		dyglAg.setApps(dyglAppList);
 		appGroupList.add(dyglAg);
 
+		/**资源*/
+		AppGroup zyAg = new AppGroup("资源","zy");
+		List<Apps> zyAppList = new ArrayList<Apps>();
+		zyAg.setApps(zyAppList);
+		appGroupList.add(zyAg);
+
+		/**市区应用*/
+		AppGroup sqyyAg = new AppGroup("市区应用","sqyy");
+		List<Apps> sqyyAppList = new ArrayList<Apps>();
+		sqyyAg.setApps(sqyyAppList);
+		appGroupList.add(sqyyAg);
+
 		/**其它*/
-		AppGroup elseAg = new AppGroup("其它应用","else");
+		AppGroup elseAg = new AppGroup("更多应用","else");
 		List<Apps> elseAppList = new ArrayList<Apps>();
 		elseAppList.add(new Apps("新闻",R.drawable.icon_news,"ne"));
 		elseAppList.add(new Apps("学乐堂",R.drawable.icon_xlt,"xlt"));
 		elseAppList.add(new Apps("考勤",R.drawable.icon_kaoqin,"ci"));
-		elseAppList.add(new Apps("教科研",R.drawable.icon_keyan,"tm"));
 		elseAg.setApps(elseAppList);
 		appGroupList.add(elseAg);
 

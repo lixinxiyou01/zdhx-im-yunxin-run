@@ -188,6 +188,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         if (!isAllowSendMessage(message)) {
             return false;
         }
+
         appendPushConfig(message);
         // send message to server and save to db
         NIMClient.getService(MsgService.class).sendMessage(message, false);

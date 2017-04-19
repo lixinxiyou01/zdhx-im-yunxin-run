@@ -294,6 +294,7 @@ public class ChooseAcitivty extends BaseActivity {
 					return;
 				}
 				if(schoolTermStudentCourse.getVersioned().equals("1")) {
+					ToastUtil.showMessage("该课程已封版关闭");
 					return;
 				}
 				if (schoolTermStudentCourse.getSelectedint() == -1) {
@@ -418,7 +419,7 @@ public class ChooseAcitivty extends BaseActivity {
 						if ("1".equals(iterable_element.getVersioned())) {
 							continue;
 						}
-						
+
 						if (maxhour != 0) {
 							int timecoutadd = hourcount;
 							try {
@@ -432,7 +433,7 @@ public class ChooseAcitivty extends BaseActivity {
 								iterable_element.setCantSelectReason("超出课时【"+ maxhour/100 +"】");
 							}
 						}
-						
+
 						if (maxschore != 0) {
 							int scorecountadd = scorecount;
 							try {
@@ -459,12 +460,12 @@ public class ChooseAcitivty extends BaseActivity {
 								iterable_element.setCantSelectReason("已达选课数量上限【"+maxcount+"门】");
 							}
 						}
-						
+
 						{// 选课人数
 							int maxcount = 0;
 							int selectedNum = 0;
 							try {
-								maxcount += Integer.parseInt(iterable_element.getMaxCount());
+								maxcount += Integer.parseInt(iterable_element.getMaxCount() == null ? "100000" : iterable_element.getMaxCount());
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -479,7 +480,7 @@ public class ChooseAcitivty extends BaseActivity {
 						}
 					}
 				}
-				
+
 				//TODO N选N冲突规则
 				if (mElective.getElectiveRuleMap().getRuleList()!=null) {
 					for (Elective.ElectiveRuleMap.ruleList rule : mElective.getElectiveRuleMap().getRuleList()) { //规则列表
@@ -492,11 +493,11 @@ public class ChooseAcitivty extends BaseActivity {
 								if (course.getCourseId().equals(iterable_element.getCourseId())) {//全部课程在当前规则中的课程
 									if (iterable_element.getSelectedint() == 1) { //已经选中
 										seletedCount ++;
-									} 
+									}
 								}
 							}
 						}
-						
+
 						if (seletedCount == maxQuantity) { //达到当前冲突上限
 							for (Elective.ElectiveRuleMap.ruleList.Course course : rule.getCourseList()) {  //规则中的课程
 								for (Elective.EcActivityCourseList.EcActivityCourse iterable_element : getAllcActivityCourse()) { //全部课程
@@ -509,10 +510,10 @@ public class ChooseAcitivty extends BaseActivity {
 									}
 								}
 							}
-						}	
+						}
 					}
-				}	
-				
+				}
+
 				//TODO 时间冲突检测  classTimeFlag时间冲突是否允许选择 1允许 0不允许
 				if ("0".equals(mElective.getElectiveRuleMap().getClassTimeFlag())) {
 					for (Elective.EcActivityCourseList.EcActivityCourse iterable_element : getAllselectdecActivityCourse()) { //选中的课程
@@ -523,15 +524,15 @@ public class ChooseAcitivty extends BaseActivity {
 							for (Elective.EcActivityCourseList.EcActivityCourse course : getAllcActivityCourse()) {			      //全部课程
 								String 	timeString	= course.getTime();
 								if (StringUtil.isNotBlank(timeString) && (!iterable_element.getCourseId().equals(course.getCourseId()))) {//自己和自己不验证冲突
-									String[] weeks= timeString.split(";")[0].split(",");   	          //周   
+									String[] weeks= timeString.split(";")[0].split(",");   	          //周
 									String[] dateAndCourses = timeString.split(";")[1].split(",");    //日、节
 									if (isConflict(selectWeeks, weeks) && isConflict(selectDateAndCourse, dateAndCourses)) {
 										if (iterable_element.getSelectedint() != -1) {                //已满
 											course.setSelectedint(-2);
 											course.setCantSelectReason("上课时间与【" + iterable_element.getCourseDisplayName() + "】冲突");
-											course.setCantSelectReasonPreview("时间冲突"); 
+											course.setCantSelectReasonPreview("时间冲突");
 										}
-									}	
+									}
 								}
 							}
 						}

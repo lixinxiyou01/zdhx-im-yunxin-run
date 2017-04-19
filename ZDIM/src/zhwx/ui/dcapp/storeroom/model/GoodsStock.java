@@ -40,6 +40,7 @@ public class GoodsStock implements Serializable {
          */
 
         private String warehouseName;
+        private String warehouseId;
         private String schoolName;
         private int count;
         private int moneycount;
@@ -75,6 +76,14 @@ public class GoodsStock implements Serializable {
 		public void setMoneycount(int moneycount) {
 			this.moneycount = moneycount;
 		}
+
+        public String getWarehouseId() {
+            return warehouseId;
+        }
+
+        public void setWarehouseId(String warehouseId) {
+            this.warehouseId = warehouseId;
+        }
     }
     
     

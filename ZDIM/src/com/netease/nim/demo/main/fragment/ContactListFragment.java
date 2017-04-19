@@ -150,6 +150,7 @@ public class ContactListFragment extends MainTabFragment {
             items.add(NORMAL_TEAM); //讨论组
             if(ECApplication.getInstance().getCurrentIMUser().getKind().equals(Constant.USER_TEACHER)) {
                 items.add(SCHOOL);  //组织结构
+                items.add(CLASS);
             } else {
                 items.add(CLASS);
             }

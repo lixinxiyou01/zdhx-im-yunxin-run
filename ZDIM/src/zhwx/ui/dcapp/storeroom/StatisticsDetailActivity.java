@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -212,7 +213,6 @@ public class StatisticsDetailActivity extends BaseActivity implements OnClickLis
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
-				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_statistics_inout, null);
 				holder = new ViewHolder();
 				holder.schoolTV = (TextView) convertView.findViewById(R.id.schoolTV);
@@ -244,7 +244,13 @@ public class StatisticsDetailActivity extends BaseActivity implements OnClickLis
 			} else {
 				holder.schoolTV.setText(getItem(position).getSchoolName());
 				holder.storeTV.setText(getItem(position).getWarehouseName());
-				holder.countTV.setText(getItem(position).getCount() + "");
+				if (kind == KIND_IN) {
+					holder.countTV.setText(Html.fromHtml("<u>"+getItem(position).getCount()+"</u>"));
+				} else if(kind == KIND_OUT){
+					holder.countTV.setText(Html.fromHtml("<u>"+getItem(position).getCount()+"</u>"));
+				} else if(kind == KIND_STORE){
+					holder.countTV.setText(getItem(position).getCount() + "");
+				}
 				holder.moneyTV.setText(getItem(position).getMoneycount() + "");
 			}
 			if (kind == KIND_STORE) {
@@ -265,7 +271,28 @@ public class StatisticsDetailActivity extends BaseActivity implements OnClickLis
 		 */
 		private void addListener(final ViewHolder holder, final int position,
 				final View view) {
-			
+			holder.countTV.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (kind == KIND_IN) {
+						Intent intent = new Intent(context, StoreHandleDetailActivity.class);
+						intent.putExtra("id", id);
+						intent.putExtra("kind", StoreHandleDetailActivity.KIND_IN);
+						intent.putExtra("name", name);
+						intent.putExtra("warehouseId", getItem(position).getWarehouseId());
+						startActivity(intent);
+					} else if(kind == KIND_OUT){
+						Intent intent = new Intent(context, StoreHandleDetailActivity.class);
+						intent.putExtra("id", id);
+						intent.putExtra("kind", StoreHandleDetailActivity.KIND_OUT);
+						intent.putExtra("name", name);
+						intent.putExtra("warehouseId", getItem(position).getWarehouseId());
+						startActivity(intent);
+					} else if(kind == KIND_STORE){
+
+					}
+				}
+			});
 		}
 		private class ViewHolder {
 			private TextView schoolTV,storeTV,countTV,moneyTV;

@@ -45,7 +45,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="{userNameTV}"
                         android:textSize="15sp"
                         android:textColor="@color/greytext" />
                 </LinearLayout>
@@ -67,7 +66,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="{departmentTV}"
                         android:textColor="@color/greytext"
                         android:textSize="15sp" />
                 </LinearLayout>

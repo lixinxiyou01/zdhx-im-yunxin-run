@@ -242,7 +242,7 @@ public class SessionListFragment extends MainTabFragment {
                         avatar_prospect_iv.setVisibility(View.VISIBLE);
                         TextView tv_message = (TextView) view.findViewById(R.id.tv_message);
                         tv_message.setText(SharPreUtil.getField("noticeContent"));
-
+                        //TODO 加红点
                         ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.SESSION);
                         item.setIndicator(true);
                         HomeFragment.onNoticeChange(item);

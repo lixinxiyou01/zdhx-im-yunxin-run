@@ -43,6 +43,7 @@ import java.util.List;
 import zhwx.common.base.BaseActivity;
 import zhwx.common.base.CCPAppManager;
 import zhwx.common.model.ParameterValue;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RequestWithCacheGet;
 import zhwx.common.util.RunnableWrap;
@@ -512,7 +513,12 @@ public class WorkerFeedBackActivity extends BaseActivity implements OnClickListe
 						loginMap.putAll(map);
 						orderFlag = UrlUtil.saveWokerFeedBack(ECApplication.getInstance().getV3Address(),loginMap);
 					} else {
-						orderFlag = UrlUtil.saveWokerFeedBack(ECApplication.getInstance().getV3Address(), sendFiles,loginMap,map);
+						orderFlag = UrlUtil.saveWokerFeedBack(ECApplication.getInstance().getV3Address(), sendFiles, loginMap, map, new FileUpLoadCallBack() {
+							@Override
+							public void upLoadProgress(int fileCount, int currentIndex, int currentProgress,int allProgress) {
+
+							}
+						});
 					}
 					handler.postDelayed(new Runnable() {
 						public void run() {

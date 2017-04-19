@@ -22,21 +22,21 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp"
-                    android:layout_weight="1" >
+                    android:paddingLeft="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp" >
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:id="@+id/TextView02"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="出库单号：" />
+                            android:text="出库单号："/>
 
                         <TextView
                             android:id="@+id/smCodeTV"
@@ -44,19 +44,19 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:text="{smCodeTV}"
-                            android:textColor="@color/greytext" />
+                            android:textColor="@color/greytext"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" >
+                        android:layout_marginTop="10dp">
 
                         <TextView
                             android:id="@+id/TextView01"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="出库仓库：" />
+                            android:text="出库仓库："/>
 
                         <TextView
                             android:id="@+id/departmentNameTV"
@@ -64,19 +64,19 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:text="{departmentNameTV}"
-                            android:textColor="@color/greytext" />
+                            android:textColor="@color/greytext"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" >
+                        android:layout_marginTop="10dp">
 
                         <TextView
                             android:id="@+id/TextView07"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="出库日期：" />
+                            android:text="出库日期："/>
 
                         <TextView
                             android:id="@+id/smApplyDateTV"
@@ -84,19 +84,19 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:text="{smApplyDateTV}"
-                            android:textColor="@color/greytext" />
+                            android:textColor="@color/greytext"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" >
+                        android:layout_marginTop="10dp">
 
                         <TextView
                             android:id="@+id/TextView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="出库类型：" />
+                            android:text="出库类型："/>
 
                         <TextView
                             android:id="@+id/outKindTV"
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:text="{getKindTV}"
-                            android:textColor="@color/greytext" />
+                            android:textColor="@color/greytext"/>
                     </LinearLayout>
 
                     <LinearLayout

@@ -38,6 +38,7 @@ import java.util.List;
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DateUtil;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.IMUtils;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
@@ -190,7 +191,12 @@ public class SReSingActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void run() {
 				try {
-					infoJson = UrlUtil.saveReSign(ECApplication.getInstance().getV3Address(), sendFiles,loginMap,map);
+					infoJson = UrlUtil.saveReSign(ECApplication.getInstance().getV3Address(), sendFiles, loginMap, map, new FileUpLoadCallBack() {
+						@Override
+						public void upLoadProgress(int fileCount, int currentIndex, int currentProgress,int allProgress) {
+
+						}
+					});
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							System.out.println(infoJson);

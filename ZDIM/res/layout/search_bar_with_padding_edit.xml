@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/imageView1"
             android:background="@null"
-            android:hint="姓名"
+            android:hint="按姓名查找"
             android:layout_marginRight="5dp"
             android:singleLine="true"
             android:textSize="15sp" >

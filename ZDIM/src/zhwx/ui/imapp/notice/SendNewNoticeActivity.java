@@ -1,7 +1,6 @@
 package zhwx.ui.imapp.notice;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -59,6 +58,7 @@ import zhwx.common.model.ParameterValue;
 import zhwx.common.plugin.FileExplorerActivity;
 import zhwx.common.util.CommonUtils;
 import zhwx.common.util.DensityUtil;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.FileUtils;
 import zhwx.common.util.IMUtils;
 import zhwx.common.util.InputTools;
@@ -881,6 +881,8 @@ public class SendNewNoticeActivity extends BaseActivity {
 		}
 	}
 
+	private ECProgressDialog progressDialog;
+
 	//发通知
 	public void sendNotice(){
 
@@ -904,12 +906,9 @@ public class SendNewNoticeActivity extends BaseActivity {
 			map.put("content", new ParameterValue(contentET.getEditableText().toString().trim()));
 		}
 
-
-		final ProgressDialog pd = new ProgressDialog(this);
-		pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		pd.setMessage("消息发送中…");
-		pd.setCancelable(false);
-		pd.show();
+		progressDialog = new ECProgressDialog(this, "正在发送请求");
+		progressDialog.setCancelable(false);
+		progressDialog.show();
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
@@ -919,15 +918,29 @@ public class SendNewNoticeActivity extends BaseActivity {
 							fileList.add(f.getFile());
 						}
 					}
-//					sendFlag = UrlUtil.sendNoticeFile(ECApplication.getInstance().getAddress(),fileList,ECApplication.getInstance().getLoginMap(),map); // 发送请求
 					if(fileList.size() == 0) {
 						sendFlag = UrlUtil.sendNotice(ECApplication.getInstance().getAddress(),ECApplication.getInstance().getLoginMap(),map); // 发送请求
 					} else {
-						sendFlag = UrlUtil.sendNoticeFile(ECApplication.getInstance().getAddress(),fileList,ECApplication.getInstance().getLoginMap(),map); // 发送请求
+						sendFlag = UrlUtil.sendNoticeFile(ECApplication.getInstance().getAddress(), fileList, ECApplication.getInstance().getLoginMap(), map, new FileUpLoadCallBack() {
+							@Override
+							public void upLoadProgress(final int fileCount, final int currentIndex, int currentProgress, final int allProgress) {
+
+								handler.postDelayed(new Runnable() {
+									@Override
+									public void run() {
+										if(100 == allProgress) {
+											progressDialog.setPressText("附件上传完成,正在发送");
+										} else {
+											progressDialog.setPressText("正在上传附件(" + (currentIndex + 1) + "/"+ fileCount + ") 总进度:" + allProgress + "%");
+										}
+									}
+								},5);
+							}
+						}); // 发送请求
 					}
 					handler.postDelayed(new Runnable() {
 						public void run() {
-							pd.dismiss();
+							progressDialog.dismiss();
 							if(sendFlag.contains("ok")) {
 								ToastUtil.showMessage("已发送");
 								finish();
@@ -941,7 +954,7 @@ public class SendNewNoticeActivity extends BaseActivity {
 					e.printStackTrace();
 					handler.postDelayed(new Runnable() {
 						public void run() {
-							pd.dismiss();
+							progressDialog.dismiss();
 							ToastUtil.showMessage("错误");
 							sendBT.setEnabled(true);
 						}

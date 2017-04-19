@@ -41,6 +41,7 @@ import java.util.List;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.InputTools;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
@@ -155,7 +156,12 @@ public class SubmitHomeWorkActivity extends BaseActivity {
 					for (int i = 0; i < sendFiles.size(); i++) {
 						System.out.println(sendFiles.get(i).getAbsolutePath());
 					}
-					sendFlag = UrlUtil.saveHomeWorkAnswer(ECApplication.getInstance().getV3Address(),sendFiles,ECApplication.getInstance().getV3LoginMap(),map); // 发送请求
+					sendFlag = UrlUtil.saveHomeWorkAnswer(ECApplication.getInstance().getV3Address(), sendFiles, ECApplication.getInstance().getV3LoginMap(), map, new FileUpLoadCallBack() {
+						@Override
+						public void upLoadProgress(int fileCount, int currentIndex,int currentProgress,int allProgress) {
+
+						}
+					}); // 发送请求
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							pd.dismiss();

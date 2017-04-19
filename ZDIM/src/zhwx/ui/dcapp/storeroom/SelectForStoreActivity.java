@@ -112,7 +112,7 @@ public class SelectForStoreActivity extends BaseActivity {
 			public void run() {
 				getData(KIND_TEACHER);
 			}
-		}, 50);
+		}, 500);
 		searchET = (EditText) findViewById(R.id.searchET);
 		searchET.addTextChangedListener(new TextWatcher() {
 			

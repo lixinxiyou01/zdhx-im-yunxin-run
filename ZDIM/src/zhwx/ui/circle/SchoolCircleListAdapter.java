@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
+import com.netease.nim.demo.main.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,6 +70,7 @@ public class SchoolCircleListAdapter extends BaseAdapter {
 	public static int REFRESH_FLAG = 1;
 	
 	public static final int REFRESH_FLAG_TEXT = 0;
+
 	public static final int REFRESH_FLAG_ALL = 1;
 	
 	public static final int MAX_THUMBUP = 10;
@@ -88,27 +90,27 @@ public class SchoolCircleListAdapter extends BaseAdapter {
 		this.recordTipTv = recordTipTv;
 		mImageLoader = new ImageLoader(context);
 		mImageLoader.DisplayImage(ECApplication.getInstance().getAddress()+ECApplication.getInstance().getCurrentIMUser().getHeadPortraitUrl(), headIV, false);
-//		if(MainActivity.counts != null && Integer.parseInt(MainActivity.counts.get(2).getCount()) > 0){
-//			this.recordTipTv.setVisibility(View.VISIBLE);
-//			this.tipTV.setText(MainActivity.counts.get(2).getCount()+"条新消息");
-//			mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + MainActivity.counts.get(2).getHeadUrl(), tipIV,
-//					false);
-//		}else{
-//			this.recordTipTv.setVisibility(View.INVISIBLE);
-//		}
+		if(MainActivity.counts != null && Integer.parseInt(MainActivity.counts.get(2).getCount()) > 0){
+			this.recordTipTv.setVisibility(View.VISIBLE);
+			this.tipTV.setText(MainActivity.counts.get(2).getCount()+"条新消息");
+			mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + MainActivity.counts.get(2).getHeadUrl(), tipIV,
+					false);
+		}else{
+			this.recordTipTv.setVisibility(View.INVISIBLE);
+		}
 	}
 	
 	@Override
 	public int getCount() {
 		mImageLoader.DisplayImage(ECApplication.getInstance().getAddress()+ECApplication.getInstance().getCurrentIMUser().getHeadPortraitUrl(), headIV, false);
-//		if(MainActivity.counts != null && Integer.parseInt(MainActivity.counts.get(2).getCount()) > 0){
-//			recordTipTv.setVisibility(View.VISIBLE);
-//			tipTV.setText(MainActivity.counts.get(2).getCount()+"条新消息");
-//			mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + MainActivity.counts.get(2).getHeadUrl(), tipIV,
-//					false);
-//		}else{
-//			recordTipTv.setVisibility(View.INVISIBLE);
-//		}
+		if(MainActivity.counts != null && Integer.parseInt(MainActivity.counts.get(2).getCount()) > 0){
+			recordTipTv.setVisibility(View.VISIBLE);
+			tipTV.setText(MainActivity.counts.get(2).getCount()+"条新消息");
+			mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + MainActivity.counts.get(2).getHeadUrl(), tipIV,
+					false);
+		}else{
+			recordTipTv.setVisibility(View.INVISIBLE);
+		}
 		return list.size();
 	}
 	

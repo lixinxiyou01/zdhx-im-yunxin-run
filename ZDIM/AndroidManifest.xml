@@ -802,6 +802,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name="zhwx.ui.dcapp.storeroom.StoreHandleDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name="zhwx.ui.dcapp.storeroom.CheckActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -843,6 +848,11 @@
         </activity>
         <activity
             android:name="zhwx.ui.dcapp.storeroom.ToGetOutListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="zhwx.ui.dcapp.storeroom.SearchGetOutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>

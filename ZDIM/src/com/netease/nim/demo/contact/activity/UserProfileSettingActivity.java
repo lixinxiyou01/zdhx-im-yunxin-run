@@ -318,8 +318,7 @@ public class UserProfileSettingActivity extends UI implements View.OnClickListen
             @Override
             public void run() {
                 try {
-                    upLoadFlag = UrlUtil.saveHeadPortrait(ECApplication
-                            .getInstance().getAddress(), image, loginMap, map); // 发送请求
+                    upLoadFlag = UrlUtil.saveHeadPortrait(ECApplication.getInstance().getAddress(), image, loginMap, map,null); // 发送请求
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             System.out.println(upLoadFlag);

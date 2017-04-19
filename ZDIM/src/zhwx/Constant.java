@@ -9,7 +9,7 @@ public class Constant {
 
 	/** 经纶教育服务端地址 **/
 	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //陈经纶
-//	public static final String SERVER_ADDRESS_DEFULT = "http://im.zdhx-edu.com/im"; //经纶教育正式
+//	public static final String SERVER_ADDRESS_DEFULT = "http://im.zdhx-edu.com/im"; //正式
 	public static final String SERVER_ADDRESS_DEFULT_TEST = "http://www.zdhx-edu.com/im"; //中电
 	public static final String SERVER_ADDRESS_DEFULT_TEST1 = "http://192.168.1.8:9998/im"; //测试
 

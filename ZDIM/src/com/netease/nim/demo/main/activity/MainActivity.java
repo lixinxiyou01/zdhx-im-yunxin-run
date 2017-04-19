@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 import com.netease.nim.demo.avchat.AVChatProfile;
@@ -27,7 +29,11 @@ import com.netease.nim.demo.avchat.activity.AVChatActivity;
 import com.netease.nim.demo.chatroom.helper.ChatRoomHelper;
 import com.netease.nim.demo.login.LoginActivity;
 import com.netease.nim.demo.login.LogoutHelper;
+import com.netease.nim.demo.main.fragment.CircleFragment;
 import com.netease.nim.demo.main.fragment.HomeFragment;
+import com.netease.nim.demo.main.reminder.ReminderId;
+import com.netease.nim.demo.main.reminder.ReminderItem;
+import com.netease.nim.demo.main.reminder.ReminderManager;
 import com.netease.nim.demo.session.SessionHelper;
 import com.netease.nim.demo.team.TeamCreateHelper;
 import com.netease.nim.demo.team.activity.AdvancedTeamSearchActivity;
@@ -52,14 +58,17 @@ import com.pgyersdk.update.UpdateManagerListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
+import zhwx.common.model.MomentRecordCount;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
+import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
 import zhwx.common.view.capture.core.CaptureActivity;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.ui.contact.AddContactActivity;
@@ -78,6 +87,12 @@ public class MainActivity extends UI {
     private final int BASIC_PERMISSION_REQUEST_CODE = 100;
 
     private HomeFragment mainFragment;
+
+    private HashMap<String, ParameterValue> map2;
+
+    public static List<MomentRecordCount> counts;
+
+    private ImageLoader mImageLoader;
 
     public static void start(Context context) {
         start(context, null);
@@ -109,7 +124,7 @@ public class MainActivity extends UI {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
-
+        mImageLoader = new ImageLoader(this);
         requestBasicPermission();
 
         onParseIntent();
@@ -410,6 +425,106 @@ public class MainActivity extends UI {
                 }
             }
         }).start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+    /**
+     * 主页各种通知
+     * personTime, classTime, personRecordTime, classRecordTime
+     */
+    public void getNewMomentRecordCount(){
+        System.out.println("主页各种通知");
+        map2 = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+        map2.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+        map2.put("personTime", new ParameterValue(ECApplication.getInstance().getLastSchoolCircleTime()));
+        map2.put("classTime", new ParameterValue(ECApplication.getInstance().getLastClassCircleTime()));
+        map2.put("personRecordTime", new ParameterValue(ECApplication.getInstance().getLastSchoolCircleRecordTime()));
+        map2.put("classRecordTime", new ParameterValue(ECApplication.getInstance().getLastClassCircleRecordTime()));
+        new ProgressThreadWrap(MainActivity.this, new RunnableWrap() {
+            @Override
+            public void run() {
+                try {
+                    final String json = UrlUtil.getNewMomentRecordCount(ECApplication.getInstance().getAddress(), map2).trim();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            refreshMomentRceord(json);
+                        }
+                    }, 5);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void refreshMomentRceord(String json){
+        System.out.println(json);
+        int sMomentCount = 0;
+        int cMomentCount = 0;
+        int sRceordCount = 0;
+        int cRceordCount = 0;
+        if(!json.contains("<html>")){
+            counts = new Gson().fromJson(json, new TypeToken<List<MomentRecordCount>>(){}.getType());
+            sMomentCount = Integer.parseInt(counts.get(0).getCount());
+            cMomentCount = Integer.parseInt(counts.get(1).getCount());
+            sRceordCount = Integer.parseInt(counts.get(2).getCount());
+            cRceordCount = Integer.parseInt(counts.get(3).getCount());
+
+            if((sRceordCount + cRceordCount) > 0){//有回复的时候显示数字
+                ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
+                item.setIndicator(true);
+                HomeFragment.onNoticeChange(item);
+            }else{
+                if((sMomentCount + cMomentCount) > 0){//没有回复有新动态的时候显示红点
+                    ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
+                    item.setIndicator(true);
+                    HomeFragment.onNoticeChange(item);
+                }else{//什么也没有隐藏
+                    ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
+                    item.setIndicator(false);
+                    HomeFragment.onNoticeChange(item);
+                }
+            }
+
+            //校友圈 收到新回复提示
+            if(sRceordCount > 0){
+                CircleFragment.unReadCircleCountTV1.setBackgroundResource(R.drawable.red_circle);
+                CircleFragment.unReadCircleCountTV1.setVisibility(View.VISIBLE);
+                CircleFragment.unReadCircleCountTV1.setText(sRceordCount + "");
+            }else{
+                CircleFragment.unReadCircleCountTV1.setVisibility(View.INVISIBLE);
+            }
+
+            //校友圈  新动态提示
+            if(sMomentCount > 0){
+                CircleFragment.sMomentLay.setVisibility(View.VISIBLE);
+                mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + counts.get(0).getHeadUrl(), CircleFragment.sMomentIV,
+                        false);
+            }else{
+                CircleFragment.sMomentLay.setVisibility(View.INVISIBLE);
+            }
+
+            //班级墙报  收到新回复提示
+            if(cRceordCount > 0){
+                CircleFragment.unReadCircleCountTV2.setVisibility(View.VISIBLE);
+                CircleFragment.unReadCircleCountTV2.setText(cRceordCount + "");
+            }else{
+                CircleFragment.unReadCircleCountTV2.setVisibility(View.INVISIBLE);
+            }
+
+            //班级墙报  新动态提示
+            if(cMomentCount > 0){
+                CircleFragment.cMomentLay.setVisibility(View.VISIBLE);
+                mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + counts.get(1).getHeadUrl(), CircleFragment.cMomentIV,false);
+            }else{
+                CircleFragment.cMomentLay.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     // 注销

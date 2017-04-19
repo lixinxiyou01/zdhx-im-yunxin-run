@@ -100,8 +100,6 @@ public class AboutActivity extends UI{
 				});
 			}
 		});
-
-//        CustomActions.customButton((Button) findViewById(R.id.about_custom_button_1));
 	}
 
 	public void onShare(View v) {

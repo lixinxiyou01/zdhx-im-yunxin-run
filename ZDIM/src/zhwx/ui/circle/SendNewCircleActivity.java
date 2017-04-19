@@ -1,7 +1,6 @@
 package zhwx.ui.circle;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -45,12 +44,14 @@ import zhwx.Constant;
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.model.UserClass;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.InputTools;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.util.compressImg.PictureUtil;
+import zhwx.common.view.dialog.ECProgressDialog;
 
 public class SendNewCircleActivity extends BaseActivity {
 
@@ -178,6 +179,8 @@ public class SendNewCircleActivity extends BaseActivity {
 		return R.layout.activity_sendnewcircle;
 	}
 
+	private ECProgressDialog progressDialog;
+
 	public void onSend(final View v) {
 		InputTools.KeyBoard(circleET, "close");
 		map = new HashMap<String, ParameterValue>();
@@ -185,13 +188,11 @@ public class SendNewCircleActivity extends BaseActivity {
 				.toString()));
 		map.put("tagId", new ParameterValue(""));
 		map.put("publicFlag", new ParameterValue(Constant.CIRCLE_PUBLICFLAG_PUBLIC));
-		map.put("location", new ParameterValue("大中国"));
+		map.put("location", new ParameterValue("北京"));
 		map.put("url", new ParameterValue(""));
-		final ProgressDialog pd = new ProgressDialog(this);
-		pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		pd.setMessage("动态发送中…");
-		pd.setCancelable(false);
-		pd.show();
+		progressDialog = new ECProgressDialog(this, "正在发送请求");
+		progressDialog.setCancelable(false);
+		progressDialog.show();
 		new ProgressThreadWrap(this, new RunnableWrap() {
 			@Override
 			public void run() {
@@ -204,12 +205,26 @@ public class SendNewCircleActivity extends BaseActivity {
 						} else {
 							sendFlag = UrlUtil.savePersonalMoment(ECApplication.getInstance().getAddress(), sendFiles,
 									ECApplication.getInstance().getLoginMap(),
-									map); // 发送请求
+									map, new FileUpLoadCallBack() {
+										@Override
+										public void upLoadProgress(final int fileCount, final int currentIndex, int currentProgress, final int allProgress) {
+											handler.postDelayed(new Runnable() {
+												@Override
+												public void run() {
+													if(100 == allProgress) {
+														progressDialog.setPressText("附件上传完成,正在发送");
+													} else {
+														progressDialog.setPressText("正在上传附件(" + (currentIndex + 1) + "/"+ fileCount + ") 总进度:" + allProgress + "%");
+													}
+												}
+											},5);
+										}
+									}); // 发送请求
 						}
 					} else if ("class".equals(circleFlag)) {
 						if (departmentId == null) {
 							ToastUtil.showMessage("未选择班级");
-							pd.dismiss();
+							progressDialog.dismiss();
 							return;
 						}
 						map.put("departmentId",new ParameterValue(departmentId));
@@ -219,15 +234,19 @@ public class SendNewCircleActivity extends BaseActivity {
 									ECApplication.getInstance().getLoginMap(),
 									map); // 发送请求
 						} else {
-							sendFlag = UrlUtil.saveClassMoment(ECApplication
-									.getInstance().getAddress(), sendFiles,
+							sendFlag = UrlUtil.saveClassMoment(ECApplication.getInstance().getAddress(), sendFiles,
 									ECApplication.getInstance().getLoginMap(),
-									map); // 发送请求
+									map, new FileUpLoadCallBack() {
+										@Override
+										public void upLoadProgress(int fileCount, int currentIndex,int currentProgress,int allProgress) {
+
+										}
+									}); // 发送请求
 						}
 					}
 					handler.postDelayed(new Runnable() {
 						public void run() {
-							pd.dismiss();
+							progressDialog.dismiss();
 							ToastUtil.showMessage("已发送");
 							setResult(101,new Intent().putExtra("flag", "refresh"));
 							finish();
@@ -237,7 +256,7 @@ public class SendNewCircleActivity extends BaseActivity {
 					e.printStackTrace();
 					handler.postDelayed(new Runnable() {
 						public void run() {
-							pd.dismiss();
+							progressDialog.dismiss();
 							ToastUtil.showMessage("错误");
 							finish();
 						}
