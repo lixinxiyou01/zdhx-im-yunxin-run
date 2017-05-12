@@ -316,7 +316,7 @@ public class MainActivity extends UI {
      * 检查更新
      */
     public void updata() {
-        PgyUpdateManager.register(MainActivity.this,new UpdateManagerListener() {
+        PgyUpdateManager.register(MainActivity.this,getString(R.string.file_provider),new UpdateManagerListener() {
 
             @Override
             public void onUpdateAvailable(final String result) {
@@ -430,6 +430,7 @@ public class MainActivity extends UI {
     @Override
     protected void onResume() {
         super.onResume();
+        getNewMomentRecordCount();
     }
 
 
@@ -492,37 +493,45 @@ public class MainActivity extends UI {
             }
 
             //校友圈 收到新回复提示
-            if(sRceordCount > 0){
-                CircleFragment.unReadCircleCountTV1.setBackgroundResource(R.drawable.red_circle);
-                CircleFragment.unReadCircleCountTV1.setVisibility(View.VISIBLE);
-                CircleFragment.unReadCircleCountTV1.setText(sRceordCount + "");
-            }else{
-                CircleFragment.unReadCircleCountTV1.setVisibility(View.INVISIBLE);
+            if (CircleFragment.unReadCircleCountTV1 != null) {
+                if(sRceordCount > 0){
+                    CircleFragment.unReadCircleCountTV1.setBackgroundResource(R.drawable.red_circle);
+                    CircleFragment.unReadCircleCountTV1.setVisibility(View.VISIBLE);
+                    CircleFragment.unReadCircleCountTV1.setText(sRceordCount + "");
+                }else{
+                    CircleFragment.unReadCircleCountTV1.setVisibility(View.INVISIBLE);
+                }
             }
 
             //校友圈  新动态提示
-            if(sMomentCount > 0){
-                CircleFragment.sMomentLay.setVisibility(View.VISIBLE);
-                mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + counts.get(0).getHeadUrl(), CircleFragment.sMomentIV,
-                        false);
-            }else{
-                CircleFragment.sMomentLay.setVisibility(View.INVISIBLE);
+            if (CircleFragment.sMomentLay != null) {
+                if(sMomentCount > 0){
+                    CircleFragment.sMomentLay.setVisibility(View.VISIBLE);
+                    mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + counts.get(0).getHeadUrl(), CircleFragment.sMomentIV,
+                            false);
+                }else{
+                    CircleFragment.sMomentLay.setVisibility(View.INVISIBLE);
+                }
             }
 
             //班级墙报  收到新回复提示
-            if(cRceordCount > 0){
-                CircleFragment.unReadCircleCountTV2.setVisibility(View.VISIBLE);
-                CircleFragment.unReadCircleCountTV2.setText(cRceordCount + "");
-            }else{
-                CircleFragment.unReadCircleCountTV2.setVisibility(View.INVISIBLE);
+            if (CircleFragment.unReadCircleCountTV2!=null) {
+                if(cRceordCount > 0){
+                    CircleFragment.unReadCircleCountTV2.setVisibility(View.VISIBLE);
+                    CircleFragment.unReadCircleCountTV2.setText(cRceordCount + "");
+                }else{
+                    CircleFragment.unReadCircleCountTV2.setVisibility(View.INVISIBLE);
+                }
             }
 
             //班级墙报  新动态提示
-            if(cMomentCount > 0){
-                CircleFragment.cMomentLay.setVisibility(View.VISIBLE);
-                mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + counts.get(1).getHeadUrl(), CircleFragment.cMomentIV,false);
-            }else{
-                CircleFragment.cMomentLay.setVisibility(View.INVISIBLE);
+            if (CircleFragment.cMomentLay != null) {
+                if(cMomentCount > 0){
+                    CircleFragment.cMomentLay.setVisibility(View.VISIBLE);
+                    mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + counts.get(1).getHeadUrl(), CircleFragment.cMomentIV,false);
+                }else{
+                    CircleFragment.cMomentLay.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }

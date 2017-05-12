@@ -1,6 +1,6 @@
 /**   
 * @Title: ObservableWebView.java 
-* @Package com.zdhx.edu.im.ui.v3.notice 
+* @Package com.zdhx.edu.im.ui.v3.notice
 * @author Li.xin @ 中电和讯
 * @date 2015-12-2 下午1:34:07 
 */
@@ -12,7 +12,7 @@ import android.webkit.WebView;
 
 /**   
  * @Title: ObservableWebView.java 
- * @Package com.zdhx.edu.im.ui.v3.notice 
+ * @Package com.zdhx.edu.im.ui.v3.notice
  * @author Li.xin @ 中电和讯
  * @date 2015-12-2 下午1:34:07 
  */

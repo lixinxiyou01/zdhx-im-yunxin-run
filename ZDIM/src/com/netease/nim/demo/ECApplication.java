@@ -465,7 +465,7 @@ public class ECApplication extends Application {
     };
 
 
-    /********************************  经纶教育定义  ******************************/
+    /********************************  智微校定义  ******************************/
     /**
      * IM登录信息
      * @return
@@ -488,6 +488,8 @@ public class ECApplication extends Application {
     public Map<String, ParameterValue> getV3LoginMap() {
         HashMap<String, ParameterValue> loginMap = new HashMap<String, ParameterValue>();
         loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
+        //lizheng加入
+        loginMap.put("dataSourceName", new ParameterValue(getCurrentIMUser().getDataSourceName()));
         loginMap.put("sys_username", new ParameterValue(getCurrentIMUser().getLoginName()));
         loginMap.put("sys_password", new ParameterValue(StringUtil.isBlank(getCurrentIMUser().getV3Pwd())?getCurrentIMUser().getPassWord():getCurrentIMUser().getV3Pwd()));
         return loginMap;
@@ -519,6 +521,9 @@ public class ECApplication extends Application {
         if (user != null) {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(instance);
             preferences.edit().putString("Id", user.getId())
+                    //lizheng加入
+                    .putString("dataSourceName",user.getDataSourceName())
+
                     .putString("Name", user.getName())
                     .putString("V3Id", user.getV3Id())
                     .putString("v3PassWord", user.getV3Pwd())
@@ -589,7 +594,7 @@ public class ECApplication extends Application {
     }
 
     /**
-     * 存储经纶教育服务器地址
+     * 存储智微校服务器地址
      * @param address
      */
     public void saveAddress(String address) {
@@ -603,7 +608,7 @@ public class ECApplication extends Application {
 
     public String getAddress(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(instance);
-        String address = preferences.getString("address", Constant.SERVER_ADDRESS_DEFULT);
+        String address = preferences.getString("address", "");
         if (address.equals("http://117.78.48.224:9999/im")) {
             address = Constant.SERVER_ADDRESS_DEFULT;
         }

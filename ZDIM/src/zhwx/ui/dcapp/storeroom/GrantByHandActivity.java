@@ -71,7 +71,7 @@ import static com.netease.nim.uikit.recent.RecentContactsFragment.adapter;
 
 /**
  * @Title: ApplyForAssetActivity.java
- * @Package com.lanxum.hzth.im.ui.v3.assets
+ * @Package com.zdhx.edu.im.ui.v3.assets
  * @author Li.xin @ zdhx
  * @date 2016年8月17日 下午3:52:22
  */

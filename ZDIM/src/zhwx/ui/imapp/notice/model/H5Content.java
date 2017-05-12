@@ -2,7 +2,7 @@ package zhwx.ui.imapp.notice.model;
 
 /**   
  * @Title: H5Content.java 
- * @Package com.zdhx.edu.im.ui.v3.notice 
+ * @Package com.zdhx.edu.im.ui.v3.notice
  * @author Li.xin @ 中电和讯
  * @date 2015-12-15 下午1:51:39 
  */

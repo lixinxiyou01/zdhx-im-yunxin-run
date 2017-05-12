@@ -25,7 +25,7 @@ import zhwx.ui.dcapp.assets.model.CheckListItem;
 
 /**   
  * @Title: GrantActivity.java 
- * @Package com.lanxum.hzth.im.ui.v3.assets 
+ * @Package com.zdhx.edu.im.ui.v3.assets
  * @Description: 资产发放购物车
  * @author Li.xin @ zdhx
  * @date 2016年8月22日 下午12:42:43 

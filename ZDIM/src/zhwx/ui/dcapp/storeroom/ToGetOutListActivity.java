@@ -105,7 +105,7 @@ public class ToGetOutListActivity extends BaseActivity implements OnClickListene
 		});
 		searchET = (EditText) findViewById(R.id.searchET);
 		searchET.setRawInputType(InputType.TYPE_NULL);
-		searchET.setHint("按申领人姓名查找");
+		searchET.setHint("按领用人姓名查找");
 		searchET.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

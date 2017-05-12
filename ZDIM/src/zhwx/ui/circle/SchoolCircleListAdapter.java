@@ -93,8 +93,7 @@ public class SchoolCircleListAdapter extends BaseAdapter {
 		if(MainActivity.counts != null && Integer.parseInt(MainActivity.counts.get(2).getCount()) > 0){
 			this.recordTipTv.setVisibility(View.VISIBLE);
 			this.tipTV.setText(MainActivity.counts.get(2).getCount()+"条新消息");
-			mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + MainActivity.counts.get(2).getHeadUrl(), tipIV,
-					false);
+			mImageLoader.DisplayImage(ECApplication.getInstance().getAddress() + MainActivity.counts.get(2).getHeadUrl(), tipIV,false);
 		}else{
 			this.recordTipTv.setVisibility(View.INVISIBLE);
 		}

@@ -165,12 +165,6 @@ public class LoginActivity extends UI implements OnKeyListener {
         context = this;
         setContentView(R.layout.activity_login_new);
         imgLoader = new ImageLoader(context);
-//        setContentView(R.layout.login_activity);
-//        ToolBarOptions options = new ToolBarOptions();
-//        options.isNeedNavigate = false;
-//        options.logoId = R.drawable.actionbar_white_logo_space;
-//        setToolBar(R.id.toolbar, options);
-
         initView();
         requestBasicPermission();
         onParseIntent();
@@ -310,18 +304,6 @@ public class LoginActivity extends UI implements OnKeyListener {
      * 登录面板
      */
     private void setupLoginPanel() {
-//        loginAccountEdit = findView(R.id.edit_login_account);
-//        loginPasswordEdit = findView(R.id.edit_login_password);
-//
-//        loginAccountEdit.setIconResource(R.drawable.user_account_icon);
-//        loginPasswordEdit.setIconResource(R.drawable.user_pwd_lock_icon);
-//
-//        loginAccountEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(32)});
-//        loginPasswordEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(32)});
-//        loginAccountEdit.addTextChangedListener(textWatcher);
-//        loginPasswordEdit.addTextChangedListener(textWatcher);
-//        loginPasswordEdit.setOnKeyListener(this);
-
         String account = ECApplication.getInstance().getCurrentIMUser().getLoginName();
         usernameET.setText(account);
     }
@@ -493,10 +475,8 @@ public class LoginActivity extends UI implements OnKeyListener {
      * 验证界面
      */
     public void showCheck() {
-        ip = ECApplication.getInstance().getAddress();
-        if (ip.length() == 0) {
+        if (ECApplication.getInstance().getAddress().length() == 0) {
             ECApplication.getInstance().saveAddress(Constant.SERVER_ADDRESS_DEFULT);
-            ip = Constant.SERVER_ADDRESS_DEFULT;
         }
         mPostingdialog = new ECProgressDialog(context, "连接服务器");
         mPostingdialog.show();
@@ -619,7 +599,7 @@ public class LoginActivity extends UI implements OnKeyListener {
     }
 
     public void updata() {
-        PgyUpdateManager.register(LoginActivity.this,new UpdateManagerListener() {
+        PgyUpdateManager.register(LoginActivity.this,getString(R.string.file_provider),new UpdateManagerListener() {
 
             @Override
             public void onUpdateAvailable(final String result) {

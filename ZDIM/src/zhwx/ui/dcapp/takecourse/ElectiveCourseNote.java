@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**   
  * @Title: ElectiveCourseNote.java 
- * @Package com.zdhx.edu.im.ui.v3.takecourse 
+ * @Package com.zdhx.edu.im.ui.v3.takecourse
  * @Description: TODO(用一句话描述该文件做什么) 
  * @author Li.xin @ zdhx
  * @date 2016年7月21日 上午11:27:33 

@@ -175,7 +175,7 @@ public final class CameraManager {
 
 	/**
 	 * Convenience method for
-	 * {@link com.lanxum.hzth.im.common.view.capture.core.CaptureActivity}
+	 * {@link com.zdhx.edu.im.common.view.capture.core.CaptureActivity}
 	 */
 	public synchronized void setTorch(boolean newSetting) {
 		if (camera != null) {

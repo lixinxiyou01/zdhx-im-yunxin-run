@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * com.lanxum.hzth.im.common.dialog in ECDemo_Android
+ * com.zdhx.edu.im.common.dialog in ECDemo_Android
  * Created by 容联•云通讯 Modify By Li.Xin @ 中电和讯 on 2015/4/18.
  */
 public abstract class IBaseAdapter<T> extends BaseAdapter {

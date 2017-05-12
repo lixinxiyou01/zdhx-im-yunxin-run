@@ -27,7 +27,7 @@ import zhwx.ui.dcapp.storeroom.model.CheckResult;
 
 /**
  * @Title: CheckActivity.java
- * @Package com.lanxum.hzth.im.ui.v3.carmanage
+ * @Package com.zdhx.edu.im.ui.v3.carmanage
  * @Description: 订车单审核
  * @author Li.xin @ 中电和讯
  * @date 2016-3-30 上午10:42:16

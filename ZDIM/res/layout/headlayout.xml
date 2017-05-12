@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/topBackIV"
             android:layout_alignRight="@+id/headImgIV"
-            android:text="经纶教育"
+            android:text="智微校"
             android:shadowColor="@color/black"
             android:shadowDx="0"
             android:shadowDy="1"

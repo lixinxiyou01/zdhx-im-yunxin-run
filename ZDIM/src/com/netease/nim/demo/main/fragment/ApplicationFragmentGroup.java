@@ -158,18 +158,21 @@ public class ApplicationFragmentGroup extends TFragment {
 							.equals(kind)) { // 周历
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_WEEKCALENDAR, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
 					} else if (V3NoticeCenter.NOTICE_KIND_PUBLIC.equals(kind)) { // 公示
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_PUBLICITY, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
 					} else if (V3NoticeCenter.NOTICE_KIND_WAGE.equals(kind)) { // 我的工资
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address()+ Constant.WEBAPP_URL_WAGE, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
@@ -177,30 +180,35 @@ public class ApplicationFragmentGroup extends TFragment {
 						// （二级）
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_WAGE2, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
 					} else if (V3NoticeCenter.NOTICE_KIND_COURSE.equals(kind)) { // 查看课表
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_VIEWCOURSEMOBILE, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
 					} else if (V3NoticeCenter.NOTICE_KIND_CAMPUSBULLETIN.equals(kind)) { // 校园公告
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_CAMPUSBULLETIN, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
 					}  else if (V3NoticeCenter.NOTICE_KIND_QUESTION.equals(kind)) { // 调查问卷
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_QUESTION, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
 					} else if (V3NoticeCenter.NOTICE_KIND_ANNOUNCEMENT.equals(kind)) { // 系统公告
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance()
 								.getAddress()+ Constant.WEBAPP_URL_ANNOUNCEMENT, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
@@ -208,6 +216,7 @@ public class ApplicationFragmentGroup extends TFragment {
 					} else if (V3NoticeCenter.NOTICE_KIND_MESS.equals(kind)) { // 食堂管理
 						Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
 						map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_MESS, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 
@@ -217,6 +226,7 @@ public class ApplicationFragmentGroup extends TFragment {
 						map.put("sys_username", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getLoginName()));
 						map.put("sys_password", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Pwd()));
 						map.put("sys_auto_authenticate", new ParameterValue("true"));
+						map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
 						String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_HOMEWORK_CJL, map);
 						startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 

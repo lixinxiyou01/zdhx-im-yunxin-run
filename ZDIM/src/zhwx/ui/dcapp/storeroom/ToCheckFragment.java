@@ -40,7 +40,7 @@ import zhwx.ui.dcapp.storeroom.model.AuditData;
 
 /**   
  * @Title: RepairDetailFragment.java
- * @Package com.lanxum.hzth.im.ui.v3.carmanage 
+ * @Package com.zdhx.edu.im.ui.v3.carmanage
  * @author Li.xin @ 中电和讯
  * @date 2016-3-17 下午4:33:18 
  */

@@ -78,6 +78,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 	private String photoPath;
 	private ProgressDialog mProgress;
 	private String moduleCode;
+	private  Handler myHandler = new Handler();
 	public static Map<String, ParameterValue> map;
 
 	enum IntentSource {
@@ -157,7 +158,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 			LoginCapture capture = null;
 			if(msg.contains("u")&&msg.contains("i")){
 				capture = new Gson().fromJson(msg, LoginCapture.class);
-				map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+				map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 				map.put("uuid",new ParameterValue(capture.getU()));
 				map.put("dataSource",new ParameterValue(capture.getI()));
 				map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
@@ -166,7 +167,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
 					public void run() {
 						try {
 							UrlUtil.twoDimensionCodeLogin(ECApplication.getInstance().getV3Address(), map);
-							handler.postDelayed(new Runnable() {
+							myHandler.postDelayed(new Runnable() {
 								public void run() {
 									ToastUtil.showMessage("扫码成功");
 									CaptureActivity.this.finish();

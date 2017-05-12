@@ -38,7 +38,7 @@ import zhwx.ui.dcapp.checkin.model.Cust;
 
 /**   
  * @Title: CIStatisticsActivity.java 
- * @Package com.zdhx.edu.im.ui.v3.checkin 
+ * @Package com.zdhx.edu.im.ui.v3.checkin
  * @author Li.xin @ zdhx
  * @date 2016年9月26日 下午3:11:05 
  */

@@ -57,7 +57,7 @@
         android:layout_margin="10dp"
         android:paddingLeft="5dp"
         android:background="@drawable/button_normal_shape"
-        android:hint="按申领人姓名搜索"
+        android:hint="按领用人姓名搜索"
         android:singleLine="true"
         android:imeOptions="actionSearch"
         android:textColorHint="#b3b3b3"

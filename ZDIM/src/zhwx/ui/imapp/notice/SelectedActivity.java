@@ -28,7 +28,7 @@ import zhwx.common.view.treelistview.utils.Node;
 
 /**   
  * @Title: SelectedActivity.java 
- * @Package com.zdhx.edu.im.ui.v3.notice 
+ * @Package com.zdhx.edu.im.ui.v3.notice
  * @author Li.xin @ 中电和讯
  * @date 2015-12-14 下午4:35:24 
  */

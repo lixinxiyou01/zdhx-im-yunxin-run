@@ -15,12 +15,14 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId = "com.lanxum.hzth.im"
+        applicationId = "com.zdhx.edu.im"
         minSdkVersion 11
         targetSdkVersion 24
         buildConfigField "String", "GIT_REVISION", "\"${getGitVersion()}\""
         buildConfigField "String", "BUILD_DATE", "\"${new Date().toLocaleString()}\"";
         multiDexEnabled true
+        versionCode 2110
+        versionName "2.1.1"
 
         //Jpush
         ndk {
@@ -31,7 +33,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "272e5900ec657bb4455425e5", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "cc3f74cfe0b39f1140baa114", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
@@ -51,7 +53,7 @@ android {
         //高德定位
         debug {
             signingConfig signingConfigs.debug
-            manifestPlaceholders = [AMAP_KEY: "8a08faeb98cc1f79e3947bbbae9c268d"]
+            manifestPlaceholders = [AMAP_KEY: "582aa3dba967322b4edfadcf98567982"]
         }
     }
 
@@ -84,11 +86,25 @@ android {
         exclude 'META-INF/NOTICE.txt'
     }
 
-
     aaptOptions {
         cruncherEnabled = false
         useNewCruncher = false
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                // 输出apk名称为XXXX_v1.0_2016-01-15.apk
+                def fileName = "ZWX_v${defaultConfig.versionName}.${releaseTime()}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("GMT+8"))
 }
 
 dependencies {
@@ -106,7 +122,7 @@ dependencies {
     compile files('libs/MobCommons-2016.0830.1940.jar')
     compile files('libs/MobTools-2016.0830.1940.jar')
     compile files('libs/BaiduLBS_Android.jar')
-    compile files('libs/pgyer_sdk_2.2.2.jar')
+    compile files('libs/pgyer_sdk_2.5.6.jar')
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/Zing_barcode_core.jar')
     compile files('libs/GifView.jar')
@@ -115,8 +131,10 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     compile project(':datetimepicker')
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
-
-    compile 'cn.jiguang.sdk:jpush:3.0.0'  // 此处以JPush 3.0.0 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.0.0'  // 此处以JCore 1.0.0 版本为例。
+    compile 'cn.jiguang.sdk:jpush:3.0.0'
+    // 此处以JPush 3.0.0 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.0.0'
+    // 此处以JCore 1.0.0 版本为例。
+    compile files('libs/pgyer_sdk_2.5.6.jar')
 }
 

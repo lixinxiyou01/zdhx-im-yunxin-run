@@ -58,7 +58,7 @@ import zhwx.ui.dcapp.storeroom.model.MyApplyDetail;
 
 /**   
  * @Title: AMainActivity.java 
- * @Package com.lanxum.hzth.im.ui.v3.assets 
+ * @Package com.zdhx.edu.im.ui.v3.assets
  * @author Li.xin @ 中电和讯
  * @date 2016-3-7 上午9:52:07 
  */

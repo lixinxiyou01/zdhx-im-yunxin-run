@@ -4,7 +4,7 @@ import java.util.List;
 
 /**   
  * @Title: ReadDetail.java 
- * @Package com.zdhx.edu.im.ui.v3.notice 
+ * @Package com.zdhx.edu.im.ui.v3.notice
  * @author Li.xin @ 中电和讯
  * @date 2015-12-10 下午2:26:39 
  */

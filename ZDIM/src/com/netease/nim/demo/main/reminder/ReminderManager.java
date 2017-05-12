@@ -73,6 +73,7 @@ public class ReminderManager {
         items.put(ReminderId.APP_LIST, new ReminderItem(ReminderId.APP_LIST));
         items.put(ReminderId.SESSION, new ReminderItem(ReminderId.SESSION));
         items.put(ReminderId.CONTACT, new ReminderItem(ReminderId.CONTACT));
+        items.put(ReminderId.CIRCLE, new ReminderItem(ReminderId.CIRCLE));
     }
 
     private final void updateUnreadMessageNum(int unreadNum, boolean delta, int reminderId) {

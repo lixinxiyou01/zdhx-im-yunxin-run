@@ -17,7 +17,7 @@ import java.io.StreamCorruptedException;
 /**
  * 
  * @Title: SharPreUtil.java 
- * @Package com.zdhx.edu.im.common.utils 
+ * @Package com.zdhx.edu.im.common.utils
  * @Description: (SharedPreferences 存储和获取对象)
  * @author Li.xin @ 中电和讯
  * @date 2015-11-9 下午3:55:59

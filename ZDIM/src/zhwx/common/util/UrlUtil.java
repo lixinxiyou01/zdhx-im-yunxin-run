@@ -65,8 +65,7 @@ public class UrlUtil {
 			Log.v("error", "错误的相应代码：" + conn.getResponseCode());
 			throw new IOException();
 		}
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				conn.getInputStream()));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String result = "";
 		String temp = null;
 		while ((temp = reader.readLine()) != null) {

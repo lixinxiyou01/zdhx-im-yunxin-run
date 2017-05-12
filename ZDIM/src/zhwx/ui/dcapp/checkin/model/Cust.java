@@ -2,7 +2,7 @@ package zhwx.ui.dcapp.checkin.model;
 
 /**   
  * @Title: Cust.java 
- * @Package com.zdhx.edu.im.ui.v3.checkin.model 
+ * @Package com.zdhx.edu.im.ui.v3.checkin.model
  * @Description: TODO(用一句话描述该文件做什么) 
  * @author Li.xin @ zdhx
  * @date 2016年10月19日 下午12:59:55 

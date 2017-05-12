@@ -2,7 +2,7 @@ package zhwx.ui.dcapp.checkin.model;
 
 /**   
  * @Title: Statistics.java 
- * @Package com.zdhx.edu.im.ui.v3.checkin 
+ * @Package com.zdhx.edu.im.ui.v3.checkin
  * @Description: TODO(用一句话描述该文件做什么) 
  * @author Li.xin @ zdhx
  * @date 2016年9月26日 下午3:39:28 

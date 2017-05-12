@@ -40,6 +40,7 @@ import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
+import zhwx.common.util.WifiUtil;
 import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.common.view.dialog.ECListDialog;
@@ -48,7 +49,7 @@ import zhwx.ui.dcapp.checkin.model.Attendance;
 
 /**   
  * @Title: CIMainActivity.java 
- * @Package com.zdhx.edu.im.ui.v3.checkin 
+ * @Package com.zdhx.edu.im.ui.v3.checkin
  * @author Li.xin @ zdhx
  * @date 2016年9月18日 下午12:30:47 
  */
@@ -101,7 +102,7 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 	
 	private String localCity = "北京";
 
-	private String COMPANYADDRESS = "领秀新硅谷~";
+	private String COMPANYADDRESS = "金域国际中心A座";
 
 	private String COMPANYNAME = "中电和讯科技有限公司";
 
@@ -169,6 +170,8 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 		new TimeThread().start();
 		requestBasicPermission();
 		getLocation();
+
+		ToastUtil.showMessage(new WifiUtil(context).getWifiName());
 	}
 
 
@@ -176,9 +179,7 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 	 * 基本权限管理
 	 */
 	private void requestBasicPermission() {
-		MPermission.with(CIMainActivity.this)
-				.addRequestCode(BASIC_PERMISSION_REQUEST_CODE)
-				.permissions(
+		MPermission.with(CIMainActivity.this).addRequestCode(BASIC_PERMISSION_REQUEST_CODE).permissions(
 						Manifest.permission.READ_PHONE_STATE,
 						Manifest.permission.ACCESS_COARSE_LOCATION,
 						Manifest.permission.ACCESS_FINE_LOCATION,
@@ -478,7 +479,8 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 						sb.append(poi.getName() + ";");
 						addressName = poi.getName();
 						if (COMPANYADDRESS.equals(poi.getName())) {
-							addressName = COMPANYNAME;
+//							addressName = COMPANYNAME;
+							names.add(COMPANYNAME);
 						}
 						names.add(addressName);
 					}

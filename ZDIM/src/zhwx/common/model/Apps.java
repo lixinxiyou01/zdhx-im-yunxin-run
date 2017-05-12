@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**   
  * @Title: Apps.java 
- * @Package com.zdhx.edu.im.common.entity 
+ * @Package com.zdhx.edu.im.common.entity
  * @Description: 应用
  * @author Li.xin @ 中电和讯
  * @date 2016-1-6 下午4:22:23 

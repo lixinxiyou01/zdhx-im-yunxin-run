@@ -39,7 +39,7 @@ import zhwx.ui.dcapp.score.model.StudentScoreInfo;
 
 /**   
  * @Title: MyScoreActivity.java 
- * @Package com.zdhx.edu.im.ui.v3.score 
+ * @Package com.zdhx.edu.im.ui.v3.score
  * @Description: TODO(用一句话描述该文件做什么) 
  * @author Li.xin @ zdhx
  * @date 2016年7月15日 下午12:30:37 

@@ -1,6 +1,8 @@
 package zhwx.common.model;
 
-public class Organization {
+import java.io.Serializable;
+
+public class Organization implements Serializable{
 	private String id;
 	private String name;
 	private String dataSourceName;

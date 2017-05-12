@@ -133,7 +133,7 @@ public class SearchGetOutActivity extends Activity {
 	}	
 	
 	private void searcheFriend(String toAddUsername2) {
-		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		map.put("userName", new ParameterValue(toAddUsername2));
 		final ProgressDialog pd = new ProgressDialog(this);
 		pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -144,7 +144,7 @@ public class SearchGetOutActivity extends Activity {
 			@Override
 			public void run() {
 				try {
-					searcheResult = UrlUtil.searchGetOutByUserName(ECApplication.getInstance().getAddress(),map);  //发送请求
+					searcheResult = UrlUtil.searchGetOutByUserName(ECApplication.getInstance().getV3Address(),map);  //发送请求
 					handler.postDelayed(new Runnable() {
 						public void run() { 
 							System.out.println(searcheResult);
@@ -152,7 +152,7 @@ public class SearchGetOutActivity extends Activity {
 								ToastUtil.showMessage("数据错误");
 								return;
 							}
-							if(!searcheResult.contains("name")){
+							if(!searcheResult.contains("receiverName")){
 								ToastUtil.showMessage("未找到");
 								OrderListAdapter adapter = (OrderListAdapter) resultLV.getAdapter();
 								if(adapter!=null&&allDataList!=null){

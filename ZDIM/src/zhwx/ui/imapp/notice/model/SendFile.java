@@ -6,7 +6,7 @@ import zhwx.common.model.Attachment;
 
 /**   
  * @Title: SendFile.java 
- * @Package com.zdhx.edu.im.ui.v3.notice 
+ * @Package com.zdhx.edu.im.ui.v3.notice
  * @author Li.xin @ 中电和讯
  * @date 2015-12-15 下午2:12:57 
  */

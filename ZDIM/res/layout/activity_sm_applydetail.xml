@@ -224,7 +224,7 @@
                 android:padding="10dp" >
             </LinearLayout>
 
-   <!--          <com.lanxum.hzth.im.ui.v3.assets.view.RoundCornerImageViewWithWhite
+   <!--          <com.zdhx.edu.im.ui.v3.assets.view.RoundCornerImageViewWithWhite
                 android:id="@+id/signIV"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

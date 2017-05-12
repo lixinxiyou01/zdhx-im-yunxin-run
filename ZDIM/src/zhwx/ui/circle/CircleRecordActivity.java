@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
+import com.netease.nim.demo.main.activity.MainActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -129,10 +130,10 @@ public class CircleRecordActivity extends BaseActivity {
 				if(Constant.CIRCLE_KIND_SCHOOL.equals(kind)){
 					ECApplication.getInstance().saveLastSchoolCircleRecordTime(records.get(0).getTime());
 					//TODO
-//					MainActivity.counts.get(2).setCount("0");
+					MainActivity.counts.get(2).setCount("0");
 				} else if (Constant.CIRCLE_KIND_CLASS.equals(kind)) {
 					ECApplication.getInstance().saveLastClassCircleRecordTime(records.get(0).getTime());
-//					MainActivity.counts.get(3).setCount("0");
+					MainActivity.counts.get(3).setCount("0");
 				}
 			}
 			recordLV.setAdapter(new MomentRecordAdapter());

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**   
  * @Title: ApplyJsonModel.java 
- * @Package com.lanxum.hzth.im.ui.v3.storeroom.model 
+ * @Package com.zdhx.edu.im.ui.v3.storeroom.model
  * @Description: TODO(用一句话描述该文件做什么) 
  * @author Li.xin @ zdhx
  * @date 2017年1月14日 下午5:34:19 

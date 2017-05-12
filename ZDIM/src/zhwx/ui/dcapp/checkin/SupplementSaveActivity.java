@@ -28,7 +28,7 @@ import zhwx.common.view.dialog.ECProgressDialog;
 
 /**   
  * @Title: SupplementSaveActivity.java 
- * @Package com.zdhx.edu.im.ui.v3.checkin 
+ * @Package com.zdhx.edu.im.ui.v3.checkin
  * @author Li.xin @ zdhx
  * @date 2016年9月26日 下午12:55:24 
  */
