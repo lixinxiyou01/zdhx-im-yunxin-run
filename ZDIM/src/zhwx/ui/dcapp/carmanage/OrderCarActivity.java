@@ -122,9 +122,9 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
     
     public static Map<Integer, Node> parentPositionMap = new HashMap<Integer, Node>();	
     
-    private TextView useDateET,arriveTimeET,userNameTV,phoneTV,departmentTV;
+    private TextView useDateET,startTimeET,arriveTimeET,userNameTV,phoneTV,departmentTV;
     
-    private TextView dateTV,timeTV,addressTV,userCountTV;
+    private TextView dateTV,startTimeTV,arriveTimeTV,addressTV,userCountTV;
     
     private TextView backDateTV,backTimeTV,backAddressTV,backCountTV;
     
@@ -134,6 +134,7 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
     private String TIMEPICKER_TAG = "timepicker";
     private String DATEPICKER_TAG_back = "datepicker_back";
     private String TIMEPICKER_TAG_back = "timepicker_back";
+    private String TIMEPICKER_TAG_start = "timepicker_start";
     private String TIMEPICKER_TAG_current = "timepicker";
     
     private Animation shake; //表单必填项抖动
@@ -266,10 +267,23 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 				}
 			}
 		});
-		
+
+		//TODO
+		startTimeET = (TextView) findViewById(R.id.startTimeET);
+		startTimeET.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				if (!timePickerDialog.isAdded()) {
+					timePickerDialog.show(getFragmentManager(), TIMEPICKER_TAG_start);
+					TIMEPICKER_TAG_current = TIMEPICKER_TAG_start;
+				}
+			}
+		});
+
 		arriveTimeET = (TextView) findViewById(R.id.arriveTimeET);
 		arriveTimeET.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				if (!timePickerDialog.isAdded()) {
@@ -278,7 +292,7 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 				}
 			}
 		});
-		
+
 		departmentTV = (TextView) findViewById(R.id.departmentTV);
 		addressET = (EditText) findViewById(R.id.addressET);
 		userCountET = (EditText) findViewById(R.id.userCountET);
@@ -352,7 +366,8 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 		backUserCountET = (EditText) findViewById(R.id.backUserCountET);
 		
 		dateTV = (TextView) findViewById(R.id.requsetUser);
-		timeTV = (TextView) findViewById(R.id.timeTV);
+		startTimeTV = (TextView) findViewById(R.id.startTimeTV);
+		arriveTimeTV = (TextView) findViewById(R.id.arriveTimeTV);
 		addressTV = (TextView) findViewById(R.id.addressTV);
 		userCountTV = (TextView) findViewById(R.id.userCountTV);
 		
@@ -556,10 +571,13 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 		instruction backDate,backCount,backAddress,backTime,backPersonList */
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
-		map.put("departmentId", new ParameterValue(departmentId));
+		map.put("departmentId", new ParameterValue(departmentId==null?"":departmentId));
 		map.put("phone", new ParameterValue(phoneTV.getText().toString()));
 		map.put("useDate", new ParameterValue(useDateET.getText().toString()));
-		map.put("arriveTime", new ParameterValue(arriveTimeET.getText().toString()));
+		map.put("startTime", new ParameterValue(startTimeET.getText().toString()));
+		if(StringUtil.isNotBlank(arriveTimeET.getText().toString())) {
+			map.put("arriveTime", new ParameterValue(arriveTimeET.getText().toString()));
+		}
 		map.put("address", new ParameterValue(addressET.getText().toString()));
 		map.put("userCount", new ParameterValue(userCountET.getText().toString()));
 //		map.put("personList", new ParameterValue(getArryString(carUserET.getTags())));
@@ -606,12 +624,16 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 	public boolean checkOrderList() {
 		boolean pass = true; 
 //		dateTV,timeTV,addressTV,userCountTV;
+		if (StringUtil.isBlank(departmentId)) {
+			ToastUtil.showMessage("未分配组织人员不能提交");
+			pass = false;
+		}
 		if (StringUtil.isBlank(useDateET.getText().toString())) {
 			dateTV.startAnimation(shake); 
 			pass = false;
 		}
-		if (StringUtil.isBlank(arriveTimeET.getText().toString())) {
-			timeTV.startAnimation(shake); 
+		if (StringUtil.isBlank(startTimeET.getText().toString())) {
+			startTimeTV.startAnimation(shake);
 			pass = false;
 		}
 		if (StringUtil.isBlank(addressET.getText().toString())) {
@@ -720,6 +742,8 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 		String time =  (hourOfDay < 10 ? "0" + hourOfDay : hourOfDay) + ":" + (minute < 10 ? "0" + minute : minute);
 		if (TIMEPICKER_TAG_current.equals(TIMEPICKER_TAG)) {
 			arriveTimeET.setText(time);
+		} else if(TIMEPICKER_TAG_current.equals(TIMEPICKER_TAG_start)) {
+			startTimeET.setText(time);
 		} else {
 			backArriveTimeET.setText(time);
 		}

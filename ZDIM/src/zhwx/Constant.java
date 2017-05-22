@@ -11,6 +11,7 @@ public class Constant {
 //	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //智微校
 	public static final String SERVER_ADDRESS_DEFULT = "http://im.zdhx-edu.com/im"; //智微校正式
 //	public static final String SERVER_ADDRESS_DEFULT = "http://hwzx.zdhx-edu.com/im"; //汇文中学
+//	public static final String SERVER_ADDRESS_DEFULT = "http://tj.zdhx-edu.com/im"; //天津
 	public static final String SERVER_ADDRESS_DEFULT_TEST = "http://www.zdhx-edu.com/im"; //中电
 	public static final String SERVER_ADDRESS_DEFULT_TEST1 = "http://192.168.1.8:9998/im"; //测试
 

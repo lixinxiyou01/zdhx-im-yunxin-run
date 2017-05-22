@@ -213,43 +213,43 @@ public class StudentHomeWorkDetailsActivity extends BaseActivity {
 							String lastName = IMUtils.getExtensionName(file.getName());
 							try {
 								if(Constant.ATTACHMENT_DOC.equals(lastName)){
-									startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_DOCX.equals(lastName)){
-									startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_PPT.equals(lastName)){
-									startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_PPTX.equals(lastName)){
-									startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_XLS.equals(lastName)){
-									startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_XLSX.equals(lastName)){
-									startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_PDF.equals(lastName)){
-									startActivity(IntentUtilForUikit.getPdfFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getPdfFileIntent(file.getPath(),context));
 									
 								}else if(Constant.ATTACHMENT_TXT.equals(lastName)){
 									startActivity(IntentUtilForUikit.getTextFileIntent(file.getPath(), false));
 
 								}else if(Constant.ATTACHMENT_JPG.equals(lastName)){
-									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 								}else if(Constant.ATTACHMENT_PNG.equals(lastName)){
-									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 								}else if(Constant.ATTACHMENT_GIF.equals(lastName)){
-									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 								}else if(Constant.ATTACHMENT_BMP.equals(lastName)){
-									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 								}else{
-									startActivity(IntentUtilForUikit.getAllFileIntent(file.getPath()));
+									startActivity(IntentUtilForUikit.getAllFileIntent(file.getPath(),context));
 								}
 							} catch (Exception e) {
 								e.printStackTrace();

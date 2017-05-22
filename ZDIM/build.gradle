@@ -21,8 +21,8 @@ android {
         buildConfigField "String", "GIT_REVISION", "\"${getGitVersion()}\""
         buildConfigField "String", "BUILD_DATE", "\"${new Date().toLocaleString()}\"";
         multiDexEnabled true
-        versionCode 2110
-        versionName "2.1.1"
+        versionCode 2120
+        versionName "2.1.2"
 
         //Jpush
         ndk {

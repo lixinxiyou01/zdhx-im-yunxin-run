@@ -142,6 +142,35 @@
                 android:background="@color/white" >
 
                 <TextView
+                    android:id="@+id/TextView022"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="出发时间"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/startTimeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/TextView022"
+                    android:singleLine="true"
+                    android:textColor="@color/greytext"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" >
+
+                <TextView
                     android:id="@+id/TextView02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -46,7 +46,7 @@ public class Apps implements Serializable {
 		appList.add(new Apps("作业",R.drawable.icon_homework,"hw"));
 		appList.add(new Apps("成绩单",R.drawable.icon_score,"cj"));
 		appList.add(new Apps("学生选课",R.drawable.icon_tackcourse,"tc"));
-		appList.add(new Apps("学乐堂",R.drawable.icon_xlt,"xlt"));
+		appList.add(new Apps("青蚕学堂",R.drawable.icon_xlt,"xlt"));
 		appList.add(new Apps("考勤",R.drawable.icon_kaoqin,"ci"));
 		appList.add(new Apps("资产管理",R.drawable.icon_zichan,"as"));
 		appList.add(new Apps("易耗品管理",R.drawable.icon_store,"sm"));
@@ -132,7 +132,7 @@ public class Apps implements Serializable {
 		AppGroup elseAg = new AppGroup("更多应用","else");
 		List<Apps> elseAppList = new ArrayList<Apps>();
 		elseAppList.add(new Apps("新闻",R.drawable.icon_news,"ne"));
-		elseAppList.add(new Apps("学乐堂",R.drawable.icon_xlt,"xlt"));
+		elseAppList.add(new Apps("青蚕学堂",R.drawable.icon_xlt,"xlt"));
 		elseAppList.add(new Apps("考勤",R.drawable.icon_kaoqin,"ci"));
 		elseAg.setApps(elseAppList);
 		appGroupList.add(elseAg);

@@ -115,7 +115,7 @@
                             android:id="@+id/TextView06"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="出发时间：" />
+                            android:text="出车时间：" />
 
                         <TextView
                             android:id="@+id/leaveTimeTV"
@@ -123,6 +123,26 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:text="{leaveTimeTV}"
+                            android:textColor="@color/greytext" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/TextView063"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="出发时间：" />
+
+                        <TextView
+                            android:id="@+id/startTimeTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="{startTimeTV}"
                             android:textColor="@color/greytext" />
                     </LinearLayout>
 

@@ -185,7 +185,7 @@ public class IMUtils {
         if ((filename != null) && (filename.length() > 0)) {
             int dot = filename.lastIndexOf('.');
             if ((dot > -1) && (dot < (filename.length() - 1))) {
-                return filename.substring(dot + 1).toLowerCase();
+                return filename.substring(dot + 1).trim().toLowerCase();
             }
         }
         return "";

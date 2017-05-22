@@ -1,14 +1,14 @@
 package com.netease.nim.uikit.common.util.file;
 
-import java.util.Locale;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.NimUIKit;
+import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.common.util.string.StringUtil;
+
+import java.util.Locale;
 
 public class FileUtil {
     private static final String TAG = "FileUtil";
@@ -27,7 +27,7 @@ public class FileUtil {
         if ((filename != null) && (filename.length() > 0)) {
             int dot = filename.lastIndexOf('.');
             if ((dot > -1) && (dot < (filename.length() - 1))) {
-                return filename.substring(dot + 1);
+                return filename.substring(dot + 1).toLowerCase();
             }
         }
         return "";

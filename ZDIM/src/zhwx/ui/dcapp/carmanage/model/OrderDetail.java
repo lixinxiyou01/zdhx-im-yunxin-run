@@ -27,6 +27,7 @@ public class OrderDetail {
 	private String checkFlag;
 	private String backTime;
 	private String carUserName;
+	private String startTime;
 	private String arriveTime;
 	private String address;
 	private String checkAdvice;
@@ -37,6 +38,14 @@ public class OrderDetail {
 	private String backPerson;
 	private List<Attachment> attachments;
 	private List<OaCarData> oaCarData;
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
 	public String getCheckStatusView() {
 		return checkStatusView;

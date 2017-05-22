@@ -268,7 +268,7 @@
     <string name="bind_code_error">请输入6位验证码</string>
     <string name="bind_code_hint">填写验证码</string>
     <string name="bind_noice_code">获取语音验证码</string>
-    <string name="bind_noice_code_success">获取成功,请注接听</string>
+    <string name="bind_noice_code_success">获取成功,请注接听</string>1
     <string name="bind_sms_code">获取短信验证码</string>
     <string name="bind_sms_code_success">获取成功,请注意查收短信</string>
     <string name="bind_time_formatter">剩余%1$s秒</string>
@@ -292,7 +292,7 @@
     <string name="refresh_fail">刷新失败</string>
     
     <!-- more -->
-    <string name="intent_xlt_opendownload">未安装学乐堂，是否前去下载？</string>
+    <string name="intent_xlt_opendownload">未安装青蚕学堂，是否前去下载？</string>
     <string name="searche_contact">搜索好友</string>
 
     <string name="qv_add">+</string>

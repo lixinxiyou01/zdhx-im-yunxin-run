@@ -91,7 +91,7 @@ public class AMainActivity extends BaseActivity implements OnClickListener {
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"资产管理", this);
 		mRequestWithCache = new RequestWithCacheGet(context);
 		initView();
-//		getData();
+		getData();
 	}
 	
 	private void getData() {

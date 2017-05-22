@@ -269,40 +269,40 @@ public class NoticeDetailActivity extends BaseActivity {
 						String lastName = IMUtils.getExtensionName(file.getName());
 						try {
 							if(Constant.ATTACHMENT_DOC.equals(lastName)){
-								startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath(),context));
 								
 							}else if(Constant.ATTACHMENT_DOCX.equals(lastName)){
-								startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getWordFileIntent(file.getPath(),context));
 								
 							}else if(Constant.ATTACHMENT_PPT.equals(lastName)){
-								startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath(),context));
 								
 							}else if(Constant.ATTACHMENT_PPTX.equals(lastName)){
-								startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getPptFileIntent(file.getPath(),context));
 								
 							}else if(Constant.ATTACHMENT_XLS.equals(lastName)){
-								startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath(),context));
 								
 							}else if(Constant.ATTACHMENT_XLSX.equals(lastName)){
-								startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getExcelFileIntent(file.getPath(),context));
 								
 							}else if(Constant.ATTACHMENT_PDF.equals(lastName)){
-								startActivity(IntentUtilForUikit.getPdfFileIntent(file.getPath()));
-								
+								startActivity(IntentUtilForUikit.getPdfFileIntent(file.getPath(),context));
+
 							}else if(Constant.ATTACHMENT_TXT.equals(lastName)){
 								startActivity(IntentUtilForUikit.getTextFileIntent(file.getPath(), false));
 
 							}else if(Constant.ATTACHMENT_JPG.equals(lastName)){
-								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 							}else if(Constant.ATTACHMENT_PNG.equals(lastName)){
-								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 							}else if(Constant.ATTACHMENT_GIF.equals(lastName)){
-								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
 							}else{
-								startActivity(IntentUtilForUikit.getAllFileIntent(file.getPath()));
+								startActivity(IntentUtilForUikit.getAllFileIntent(file.getPath(),context));
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -403,7 +403,8 @@ public class NoticeDetailActivity extends BaseActivity {
 				}
 				
 				File file = new File(idr, (String) title.getText());
-				if (file.exists()) {
+				//TODO 文件与本地文件 名称&&长度相同  视为已下载
+				if (file.exists() && file.length() != 0) {
 					imageView.setTag(R.drawable.amd_list_item_open);
 					imageView.setTag(R.drawable.amd_list_item_open, file);
 					imageView.setImageResource(R.drawable.amd_list_item_open);

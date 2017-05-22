@@ -38,6 +38,8 @@ public class OrderCarListItem {
 	private String  reason;
 	
 	private String  address;
+
+	private String  startTime;  //出发时间
 	
 	private String  arriveTime;
 	
@@ -57,7 +59,7 @@ public class OrderCarListItem {
 	private String  statusView; //状态
 	
 	private String  leaveTime;  //出车时间
-	
+
 	private String  carUserName ;  //用车人
 	
 	private String  useAddress ;  //上车地点
@@ -124,6 +126,14 @@ public class OrderCarListItem {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 	public String getArriveTime() {

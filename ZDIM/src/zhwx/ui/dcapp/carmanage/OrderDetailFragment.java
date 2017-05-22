@@ -71,7 +71,7 @@ public class OrderDetailFragment extends ScrollTabHolderFragment {
 	
 	private LinearLayout linkLay,onCallLay,onMsgLay,onIMLay,actionLay;
 	
-	private TextView orderUserTV,telephoneTV,departmentNameTV,userDateTV,arriveTimeTV,
+	private TextView orderUserTV,telephoneTV,departmentNameTV,userDateTV,startTimeTV,arriveTimeTV,
 				     checkTextTV,checkerNameTV,checkAdviceTV,
 					 addressTV,userCountTV,personListTV,reasonTV,instructionTV,fanchengFlagTV;
 	
@@ -123,6 +123,7 @@ public class OrderDetailFragment extends ScrollTabHolderFragment {
 			telephoneTV = (TextView) v.findViewById(R.id.telephoneTV);
 			departmentNameTV = (TextView) v.findViewById(R.id.departmentNameTV);
 			userDateTV = (TextView) v.findViewById(R.id.userDateTV);
+			startTimeTV = (TextView) v.findViewById(R.id.startTimeTV);
 			arriveTimeTV = (TextView) v.findViewById(R.id.arriveTimeTV);
 			addressTV = (TextView) v.findViewById(R.id.addressTV);
 			userCountTV = (TextView) v.findViewById(R.id.userCountTV);
@@ -260,6 +261,7 @@ public class OrderDetailFragment extends ScrollTabHolderFragment {
 					TextView telephoneTV = (TextView) carRecordItem.findViewById(R.id.telephoneTV);
 					TextView departmentNameTV = (TextView) carRecordItem.findViewById(R.id.departmentNameTV);
 					TextView userDateTV = (TextView) carRecordItem.findViewById(R.id.userDateTV);
+					TextView startTimeTV = (TextView) carRecordItem.findViewById(R.id.startTimeTV);
 					TextView arriveTimeTV = (TextView) carRecordItem.findViewById(R.id.arriveTimeTV);
 					TextView addressTV = (TextView) carRecordItem.findViewById(R.id.addressTV);
 					TextView userCountTV = (TextView) carRecordItem.findViewById(R.id.userCountTV);
@@ -324,6 +326,7 @@ public class OrderDetailFragment extends ScrollTabHolderFragment {
 					telephoneTV.setText(carData.getTelephone());
 					departmentNameTV.setText(carData.getDepartmentName());
 					userDateTV.setText(carData.getUserDate());
+					startTimeTV.setText(carData.getStartTime());
 					arriveTimeTV.setText(carData.getArriveTime());
 					addressTV.setText(carData.getAddress());
 					userCountTV.setText(carData.getUserCount());
@@ -393,6 +396,7 @@ public class OrderDetailFragment extends ScrollTabHolderFragment {
 			telephoneTV.setText(orderDetail.getTelephone());
 			departmentNameTV.setText(orderDetail.getDepartmentName());
 			userDateTV.setText(orderDetail.getUserDate());
+			startTimeTV.setText(orderDetail.getStartTime());
 			arriveTimeTV.setText(orderDetail.getArriveTime());
 			addressTV.setText(orderDetail.getAddress());
 			userCountTV.setText(orderDetail.getUserCount());

@@ -40,11 +40,9 @@ public class UrlUtil {
 		return getUrlResponse(url, null);
 	}
 
-	public static String getUrlResponse(String url,
-			Map<String, ParameterValue> map) throws IOException {
+	public static String getUrlResponse(String url,Map<String, ParameterValue> map) throws IOException {
 
-		HttpURLConnection conn = (HttpURLConnection) (new URL(checkUrl(url))
-				.openConnection());
+		HttpURLConnection conn = (HttpURLConnection) (new URL(checkUrl(url)).openConnection());
 		conn.setReadTimeout(10*1000);
 		conn.setConnectTimeout(10*1000);
 		conn.setDoInput(true);
@@ -76,8 +74,7 @@ public class UrlUtil {
 		return result;
 	}
 
-	public static void writeParameters(HttpURLConnection conn,
-			Map<String, ParameterValue> map) throws IOException {
+	public static void writeParameters(HttpURLConnection conn,Map<String, ParameterValue> map) throws IOException {
 		if (map == null) {
 			return;
 		}
@@ -97,6 +94,24 @@ public class UrlUtil {
 		Log.e("NoCacheUrl", conn.getURL().toString() + "?" + content);
 		out.flush();
 		out.close();
+	}
+
+
+	/**
+	 * 获取网络文件长度
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
+	public static long getFileSize(String url)  throws IOException {
+		// 创建连接
+		HttpURLConnection conn = (HttpURLConnection) (new URL(checkUrl(url)).openConnection());
+		//处理下载读取长度为-1 问题
+		conn.setRequestProperty("Accept-Encoding", "identity");
+		conn.connect();
+		// 获取文件大小
+		long length = conn.getContentLength();
+		return length;
 	}
 
 	public static String getUrl(String url, Map<String, ParameterValue> map) {

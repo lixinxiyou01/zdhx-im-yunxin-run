@@ -94,7 +94,7 @@ public class DownloadAsyncTask extends AsyncTask<String, Integer, File> {
 			}
 			
 			file = new File(idr, filename);
-			if ( file.exists() && file.length() == totalSize) {
+			if (file.exists() && file.length() == totalSize) {
 				publishProgress(100);
 				conn.disconnect();
 				return file;

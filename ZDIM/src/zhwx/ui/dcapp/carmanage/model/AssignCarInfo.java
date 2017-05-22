@@ -119,6 +119,7 @@ public class AssignCarInfo {
 		private String departmentName;
 		private String backTime;
 		private String carUserName;
+		private String startTime;
 		private String arriveTime;
 		private String address;
 		private String backAddress;
@@ -208,6 +209,15 @@ public class AssignCarInfo {
 		public void setArriveTime(String arriveTime) {
 			this.arriveTime = arriveTime;
 		}
+
+		public String getStartTime() {
+			return startTime;
+		}
+
+		public void setStartTime(String startTime) {
+			this.startTime = startTime;
+		}
+
 		public String getAddress() {
 			return address;
 		}

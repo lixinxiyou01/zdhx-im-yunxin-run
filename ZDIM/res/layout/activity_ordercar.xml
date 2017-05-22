@@ -293,11 +293,49 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/startTimeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="出发时间"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/startTimeET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/startTimeTV"
+                    android:background="@null"
+                    android:editable="false"
+                    android:hint="选择时间"
+                    android:singleLine="true"
+                    android:textColor="@color/greytext"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/line_middle">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white" >
 
                 <TextView
-                    android:id="@+id/timeTV"
+                    android:id="@+id/arriveTimeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -314,10 +352,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/timeTV"
+                    android:layout_toRightOf="@+id/arriveTimeTV"
                     android:background="@null"
                     android:editable="false"
-                    android:hint="选择时间"
+                    android:hint="选择时间（选填）"
                     android:singleLine="true"
                     android:textColor="@color/greytext"
                     android:textSize="15sp" />

@@ -3,6 +3,7 @@ package zhwx.common.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import com.netease.nim.demo.ECApplication;
@@ -23,6 +24,8 @@ import zhwx.ui.dcapp.storeroom.SMainActivity;
 import zhwx.ui.imapp.notice.NoticeDetailActivity;
 import zhwx.ui.webapp.WebAppActivity;
 import zhwx.ui.webapp.WebAppWithBackActivity;
+
+import static com.netease.nim.uikit.contact_selector.activity.ContactSelectActivity.context;
 
 //自定义android Intent类，
 
@@ -112,7 +115,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "image/*");
 
@@ -132,7 +135,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/pdf");
 
@@ -166,7 +169,8 @@ public class IntentUtil {
 
 		{
 
-			Uri uri2 = Uri.fromFile(new File(paramString));
+//			Uri uri2 = Uri.fromFile(new File(paramString));
+			Uri uri2 = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(paramString));
 
 			intent.setDataAndType(uri2, "text/plain");
 			return intent;
@@ -189,7 +193,7 @@ public class IntentUtil {
 
 		intent.putExtra("configchange", 0);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "audio/*");
 
@@ -211,7 +215,7 @@ public class IntentUtil {
 
 		intent.putExtra("configchange", 0);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "video/*");
 
@@ -231,7 +235,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/x-chm");
 
@@ -250,8 +254,8 @@ public class IntentUtil {
 		intent.addCategory("android.intent.category.DEFAULT");
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+//		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/msword");
 
@@ -271,7 +275,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/vnd.ms-excel");
 
@@ -291,30 +295,30 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = Uri.fromFile(new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
 
 		return intent;
 
 	}
-	
+
 	// android获取一个用于打开PPT文件的intent
-	
+
 	public static Intent getAllFileIntent(String param)
-	
+
 	{
-		
+
 		Intent intent = new Intent("android.intent.action.VIEW");
-		
+
 		intent.addCategory("android.intent.category.DEFAULT");
-		
+
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		
-		Uri uri = Uri.fromFile(new File(param));
-		
+
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+
 		intent.setDataAndType(uri, "*/*");
-		
+
 		return intent;
 	}
 

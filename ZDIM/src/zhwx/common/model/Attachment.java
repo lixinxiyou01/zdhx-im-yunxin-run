@@ -10,6 +10,7 @@ public class Attachment implements Serializable{
 	private String url;
 	private String name;
 	private String id;
+	private long lenth;
 	public Attachment() {
 		super();
 	}
@@ -30,5 +31,13 @@ public class Attachment implements Serializable{
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public long getLenth() {
+		return lenth;
+	}
+
+	public void setLenth(long lenth) {
+		this.lenth = lenth;
 	}
 }

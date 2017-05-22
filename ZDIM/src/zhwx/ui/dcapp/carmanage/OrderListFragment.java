@@ -298,11 +298,12 @@ public class OrderListFragment extends ScrollTabHolderFragment {
 				holder.carUserNameTV = (TextView) convertView.findViewById(R.id.carUserNameTV);
 				holder.telephoneTV = (TextView) convertView.findViewById(R.id.telephoneTV);
 				holder.arriveTimeTV = (TextView) convertView.findViewById(R.id.arriveTimeTV);
+				holder.startTimeTV = (TextView) convertView.findViewById(R.id.startTimeTV);
 				holder.addressTV = (TextView) convertView.findViewById(R.id.addressTV);
 				holder.orderTimeTV = (TextView) convertView.findViewById(R.id.orderTimeTV);
 				holder.buttonContentLay = (LinearLayout) convertView.findViewById(R.id.buttonContentLay);
 				holder.checkStatusViewTV = (TextView) convertView.findViewById(R.id.checkStatusViewTV);
-				
+
 				if (startFlag == CMainActivity.STARTFLAG_MYTASK) {
 					holder.leaveTimeTV = (TextView) convertView.findViewById(R.id.leaveTimeTV);
 					holder.leaveDateTV = (TextView) convertView.findViewById(R.id.leaveDateTV);
@@ -317,10 +318,11 @@ public class OrderListFragment extends ScrollTabHolderFragment {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			holder.carUserNameTV.setText(getItem(position).getCarUserName());
 			holder.telephoneTV.setText(getItem(position).getTelephone());
 			holder.arriveTimeTV.setText(getItem(position).getArriveTime());
+			holder.startTimeTV.setText(getItem(position).getStartTime());
 			holder.addressTV.setText(getItem(position).getAddress());
 			holder.orderTimeTV.setText(getItem(position).getOrderTime());
 			holder.checkStatusViewTV.setText(getItem(position).getCheckStatusView());
@@ -356,7 +358,7 @@ public class OrderListFragment extends ScrollTabHolderFragment {
 				final View view) {
 		}
 		private class ViewHolder {
-			private TextView orderTimeTV, checkStatusViewTV, userDateTV, arriveTimeTV,
+			private TextView orderTimeTV, checkStatusViewTV, userDateTV,startTimeTV, arriveTimeTV,
 							 addressTV,carUserNameTV,departmentNameTV,telephoneTV,
 							 leaveTimeTV,leaveDateTV,useAddressTV,carNameTV,carNumTV;
 			private LinearLayout buttonContentLay;

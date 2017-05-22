@@ -40,7 +40,6 @@ import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
-import zhwx.common.util.WifiUtil;
 import zhwx.common.util.lazyImageLoader.cache.ImageLoader;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.common.view.dialog.ECListDialog;
@@ -171,7 +170,7 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 		requestBasicPermission();
 		getLocation();
 
-		ToastUtil.showMessage(new WifiUtil(context).getWifiName());
+//		ToastUtil.showMessage(new WifiUtil(context).getWifiName());
 	}
 
 

@@ -205,7 +205,7 @@ public class ApplicationFragment extends TFragment {
 					} else if (V3NoticeCenter.NOTICE_KIND_CHECKIN.equals(kind)) {  //考勤
 						startActivity(new Intent(context, CIMainActivity.class));
 
-					} else if (V3NoticeCenter.NOTICE_KIND_XUELETANG.equals(kind)) {  //学乐堂
+					} else if (V3NoticeCenter.NOTICE_KIND_XUELETANG.equals(kind)) {  //青蚕学堂
 						try {
 							Intent intent = new Intent();
 							PackageManager packageManager = context.getPackageManager();
