@@ -1,26 +1,37 @@
 package zhwx.common.util;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import com.netease.nim.demo.ECApplication;
+import com.netease.nim.demo.R;
 import com.netease.nim.uikit.ConstantForUikit;
 import com.netease.nim.uikit.common.util.file.FileUtil;
 import com.netease.nimlib.sdk.msg.attachment.FileAttachment;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import zhwx.Constant;
+import zhwx.common.model.ParameterValue;
 import zhwx.common.model.V3NoticeCenter;
+import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.ui.dcapp.assets.AMainActivity;
 import zhwx.ui.dcapp.carmanage.CMainActivity;
 import zhwx.ui.dcapp.checkin.CIMainActivity;
 import zhwx.ui.dcapp.homework.StudentHomeWorkDetailsActivity;
+import zhwx.ui.dcapp.homework.StudentHomeWorkListActivity;
 import zhwx.ui.dcapp.repairs.RMainActivity;
+import zhwx.ui.dcapp.score.MyScoreActivity;
 import zhwx.ui.dcapp.storeroom.SMainActivity;
+import zhwx.ui.dcapp.takecourse.TackCourseIndexActivity;
+import zhwx.ui.imapp.notice.NoticeActivity;
 import zhwx.ui.imapp.notice.NoticeDetailActivity;
 import zhwx.ui.webapp.WebAppActivity;
 import zhwx.ui.webapp.WebAppWithBackActivity;
@@ -115,7 +126,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "image/*");
 
@@ -135,7 +146,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/pdf");
 
@@ -170,7 +181,7 @@ public class IntentUtil {
 		{
 
 //			Uri uri2 = Uri.fromFile(new File(paramString));
-			Uri uri2 = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(paramString));
+			Uri uri2 = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(paramString));
 
 			intent.setDataAndType(uri2, "text/plain");
 			return intent;
@@ -193,7 +204,7 @@ public class IntentUtil {
 
 		intent.putExtra("configchange", 0);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "audio/*");
 
@@ -215,7 +226,7 @@ public class IntentUtil {
 
 		intent.putExtra("configchange", 0);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "video/*");
 
@@ -235,7 +246,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/x-chm");
 
@@ -254,8 +265,8 @@ public class IntentUtil {
 		intent.addCategory("android.intent.category.DEFAULT");
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
-//		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
+//		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/msword");
 
@@ -275,7 +286,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/vnd.ms-excel");
 
@@ -295,7 +306,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
 
@@ -315,7 +326,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "*/*");
 
@@ -417,5 +428,150 @@ public class IntentUtil {
 			}
 		}
 		return intent;
+	}
+
+	public static void openApp(final Context context, String kind){
+		if (V3NoticeCenter.NOTICE_KIND_NEWS.equals(kind)) { // "新闻"
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", ECApplication.getInstance().getV3Address()
+					+ Constant.WEBAPP_URL_NEWS));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_WEEKCALENDAR
+				.equals(kind)) { // 周历
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_WEEKCALENDAR, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_PUBLIC.equals(kind)) { // 公示
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_PUBLICITY, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_WAGE.equals(kind)) { // 我的工资
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address()+ Constant.WEBAPP_URL_WAGE, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_WAGE2.equals(kind)) { // 工资
+			// （二级）
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_WAGE2, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_COURSE.equals(kind)) { // 查看课表
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_VIEWCOURSEMOBILE, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_CAMPUSBULLETIN.equals(kind)) { // 校园公告
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_CAMPUSBULLETIN, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		}  else if (V3NoticeCenter.NOTICE_KIND_QUESTION.equals(kind)) { // 调查问卷
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_QUESTION, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_ANNOUNCEMENT.equals(kind)) { // 系统公告
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance()
+					.getAddress()+ Constant.WEBAPP_URL_ANNOUNCEMENT, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_MESS.equals(kind)) { // 食堂管理
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_MESS, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_HOMEWORK_CJL.equals(kind)) { //陈经纶作业
+			Map<String, ParameterValue> map = new HashMap<String, ParameterValue>();
+			map.put("operationCode", new ParameterValue("il_statistics"));
+			map.put("sys_username", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getLoginName()));
+			map.put("sys_password", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Pwd()));
+			map.put("sys_auto_authenticate", new ParameterValue("true"));
+			map.put("dataSourceName",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getDataSourceName()));
+			String url = UrlUtil.getUrl(ECApplication.getInstance().getV3Address() + Constant.WEBAPP_URL_HOMEWORK_CJL, map);
+			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+		}  else if (V3NoticeCenter.NOTICE_KIND_SCORE.equals(kind)) {  //查看成绩
+			context.startActivity(new Intent(context, MyScoreActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_TACKCOUSE.equals(kind)) {  //选课
+			context.startActivity(new Intent(context, TackCourseIndexActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_CHECKIN.equals(kind)) {  //考勤
+			context.startActivity(new Intent(context, CIMainActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_XUELETANG.equals(kind)) {  //青蚕学堂
+			try {
+				Intent intent = new Intent();
+				PackageManager packageManager = context.getPackageManager();
+				intent = packageManager.getLaunchIntentForPackage("com.lanxum.hzth.intellectualclass");
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+						| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				context.startActivity(intent);
+			} catch (Exception e) {
+				e.printStackTrace();
+				ECAlertDialog buildAlert = ECAlertDialog.buildAlert(context, R.string.intent_xlt_opendownload, null, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Uri uri = Uri.parse("https://www.pgyer.com/xlt-android");
+						Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+						context.startActivity(intent);
+					}
+				});
+				buildAlert.setTitle("提示");
+				buildAlert.show();
+			}
+
+		} else if (V3NoticeCenter.NOTICE_KIND_TECH_MANAGE.equals(kind)) { //科研管理
+			V3NoticeCenter center = new V3NoticeCenter();
+			center.setKind(V3NoticeCenter.NOTICE_KIND_TECH_MANAGE);
+			context.startActivity(IntentUtil.getStartAppIntent(context, center));
+
+		}else if (V3NoticeCenter.NOTICE_KIND_HOMEWORK.equals(kind)) {   //作业本地
+			context.startActivity(new Intent(context, StudentHomeWorkListActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_HOMEWORK_DC.equals(kind)) { //作业数校
+			context.startActivity(new Intent(context, StudentHomeWorkListActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_NOTICE.equals(kind)) { //我的通知
+			context.startActivity(new Intent(context, NoticeActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_CARMANAGE.equals(kind)) { //订车管理
+			context.startActivity(new Intent(context, CMainActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_ASSETS.equals(kind)) { // 资产管理
+			context.startActivity(new Intent(context, AMainActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_STORE.equals(kind)) { // 库房管理
+			context.startActivity(new Intent(context, SMainActivity.class));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_REPAIR.equals(kind)) { //报修
+			context.startActivity(new Intent(context, RMainActivity.class));
+
+		} else {
+			ToastUtil.showMessage("研发中...");
+		}
 	}
 }

@@ -120,8 +120,7 @@ public class AddContactActivity extends Activity {
 	public void searchContact(View v) {
 		String toAddUsername2 = editText.getEditableText().toString();
 		if(toAddUsername2.length()==0){
-			editText.setError(Html.fromHtml("<font color=#808183>"
-	                + "查找内容不能为空" + "</font>"));
+			editText.setError(Html.fromHtml("<font color=#808183>" + "查找内容不能为空" + "</font>"));
 			return;
 		}
 		Pattern p = Pattern.compile(regex);     

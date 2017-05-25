@@ -169,6 +169,10 @@ public class WelcomeActivity extends UI {
     }
 
     private void showMainActivity(Intent intent) {
+        if (intent == null) { //自动登录
+            intent = new Intent();
+            intent.putExtra("startFlag",true);
+        }
         MainActivity.start(WelcomeActivity.this, intent);
         finish();
     }

@@ -449,7 +449,7 @@ public class LoginActivity extends UI implements OnKeyListener {
                 DataCacheManager.buildDataCacheAsync();
 
                 // 进入主界面
-                MainActivity.start(LoginActivity.this, null);
+                MainActivity.start(LoginActivity.this, new Intent().putExtra("startFlag",true));
                 finish();
             }
 
@@ -846,7 +846,7 @@ public class LoginActivity extends UI implements OnKeyListener {
         DataCacheManager.buildDataCacheAsync();
 
         // 进入主界面，此时可以查询数据（最近联系人列表、本地消息历史、群资料等都可以查询，但当云信服务器发起请求会返回408超时）
-        MainActivity.start(LoginActivity.this, null);
+        MainActivity.start(LoginActivity.this, new Intent().putExtra("startFlag",true));
 
         // 演示15s后手动登录，登录成功后，可以正常收发数据
         getHandler().postDelayed(new Runnable() {

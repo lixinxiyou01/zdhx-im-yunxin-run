@@ -90,6 +90,8 @@ public class MainActivity extends UI {
 
     private HashMap<String, ParameterValue> map2;
 
+    private HashMap<String, ParameterValue> saveLoginMap;
+
     public static List<MomentRecordCount> counts;
 
     private ImageLoader mImageLoader;
@@ -283,7 +285,31 @@ public class MainActivity extends UI {
             if (!TextUtils.isEmpty(account)) {
                 SessionHelper.startP2PSession(this, account);
             }
+        } else if (intent.hasExtra("startFlag")) {
+            //TODO 登录统计
+            saveLoginToServer();
         }
+    }
+
+
+    /**
+     * 提交登录状态到服务器
+     */
+    public void saveLoginToServer(){
+        System.out.println("提交登录状态到服务器");
+        saveLoginMap = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+        saveLoginMap.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+        saveLoginMap.put("terminal", new ParameterValue("0"));
+        new ProgressThreadWrap(MainActivity.this, new RunnableWrap() {
+            @Override
+            public void run() {
+                try {
+                    UrlUtil.saveOrUpdate(ECApplication.getInstance().getAddress(), saveLoginMap).trim();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void showMainFragment() {

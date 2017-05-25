@@ -765,6 +765,16 @@ public class UrlUtil {
 	}
 
 	/**
+	 * 统计用户登录
+	 * @param baseUrl
+	 * @param userId
+	 *        terminal     android 0, ios 1, pc 2
+	 */
+	public static String saveOrUpdate(String baseUrl,Map<String, ParameterValue> map) throws IOException {
+		return getUrlResponse(checkUrl(baseUrl) + "/bd/loginRecord/saveOrUpdate", map);
+	}
+
+	/**
 	 * 获取被评论&攒详细列表
 	 * @param baseUrl
 	 * @param map

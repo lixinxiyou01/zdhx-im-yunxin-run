@@ -15,6 +15,7 @@
         android:layout_height="3dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:visibility="gone"
         android:progressDrawable="@drawable/progress_drawable" />
 
     <RelativeLayout

@@ -50,7 +50,6 @@ public class WebAppActivity extends BaseActivity {
 		getTopBarView().setVisibility(View.GONE);
 		mainLay = (RelativeLayout) findViewById(R.id.mainLay);
 		loadingLay = (RelativeLayout) findViewById(R.id.loadingLay);
-//		setImmerseLayout(mainLay);
 		url = getIntent().getStringExtra("webUrl");
 		System.out.println(url);
 		webAppWV = (WebView) findViewById(R.id.webAppWV);
@@ -70,6 +69,11 @@ public class WebAppActivity extends BaseActivity {
 
 
 		webAppWV.addJavascriptInterface(new Object() {
+
+			@JavascriptInterface
+			public void openNativeApp(String code) {
+				IntentUtil.openApp(context,code);
+			}
 
 			@JavascriptInterface
 			public void openTreeList() {

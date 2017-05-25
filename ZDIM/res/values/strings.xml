@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_activity_main">MainActivity</string>
-    <string name="file_provider">com.pgyersdk.zdhx.provider</string>
+    <string name="file_provider">com.pgyersdk.zdhx.zhwx.provider</string>
     <string name="empty"></string>
     <string name="main_tab_session">消息</string>
     <string name="main_tab_contact">通讯录</string>
