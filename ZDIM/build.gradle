@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.zdhx.edu.im"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 24
         buildConfigField "String", "GIT_REVISION", "\"${getGitVersion()}\""
         buildConfigField "String", "BUILD_DATE", "\"${new Date().toLocaleString()}\"";
