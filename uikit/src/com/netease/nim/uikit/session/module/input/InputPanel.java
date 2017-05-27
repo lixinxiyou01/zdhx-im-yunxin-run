@@ -132,6 +132,13 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
         }
     }
 
+    public void onDestroy() {
+        // release
+        if (audioMessageHelper != null) {
+            audioMessageHelper.destroyAudioRecorder();
+        }
+    }
+
     public boolean collapse(boolean immediately) {
         boolean respond = (emoticonPickerView != null && emoticonPickerView.getVisibility() == View.VISIBLE
                 || actionPanelBottomLayout != null && actionPanelBottomLayout.getVisibility() == View.VISIBLE);
@@ -588,7 +595,7 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
                     touched = false;
                     onEndAudioRecord(isCancelled(v, event));
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    touched = false;
+                    touched = true;
                     cancelAudioRecord(isCancelled(v, event));
                 }
 
@@ -625,23 +632,8 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
     private void onStartAudioRecord() {
         container.activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        started = audioMessageHelper.startRecord();
+        audioMessageHelper.startRecord();
         cancelled = false;
-        if (started == false) {
-            Toast.makeText(container.activity, R.string.recording_init_failed, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!touched) {
-            return;
-        }
-
-        audioRecordBtn.setText(R.string.record_audio_end);
-        audioRecordBtn.setBackgroundResource(R.drawable.nim_message_input_edittext_box_pressed);
-
-        updateTimerTip(false); // 初始化语音动画状态
-        playAudioRecordAnim();
     }
 
     /**
@@ -650,6 +642,7 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
      * @param cancel
      */
     private void onEndAudioRecord(boolean cancel) {
+        started = false;
         container.activity.getWindow().setFlags(0, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         audioMessageHelper.completeRecord(cancel);
@@ -718,7 +711,16 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
 
     @Override
     public void onRecordStart(File audioFile, RecordType recordType) {
+        started = true;
+        if (!touched) {
+            return;
+        }
 
+        audioRecordBtn.setText(R.string.record_audio_end);
+        audioRecordBtn.setBackgroundResource(R.drawable.nim_message_input_edittext_box_pressed);
+
+        updateTimerTip(false); // 初始化语音动画状态
+        playAudioRecordAnim();
     }
 
     @Override
@@ -729,7 +731,9 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
 
     @Override
     public void onRecordFail() {
-
+        if (started) {
+            Toast.makeText(container.activity, R.string.recording_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.netease.nim.demo"
-          android:installLocation="auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.netease.nim.demo"
+    android:installLocation="auto">
 
     <!-- 加入应用需要的权限 -->
 
@@ -52,6 +52,10 @@
     <uses-permission android:name="com.zdhx.edu.im.permission.RECEIVE_MSG"/>
 
     <uses-permission android:name="com.company.app.fileprovider.READ" />
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        tools:overrideLibrary="android.support.multidex,com.photoselector,android.support.design,android.support.v4"/>
 
     <application
         android:name=".ECApplication"
@@ -289,14 +293,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <!-- 音视频 -->
-        <activity
-            android:name=".avchat.activity.AVChatActivity"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-
         <!-- 白板 -->
         <activity
             android:name=".rts.activity.RTSActivity"
@@ -319,18 +315,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
-
-        <!-- 聊天室 -->
-        <activity
-            android:name=".chatroom.activity.ChatRoomActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-
-        <!-- NRTC Settings -->
-        <activity
-            android:name=".avchat.activity.AVChatSettingsActivity"
-            android:screenOrientation="portrait"/>
 
         <!-- 声明云信后台服务 -->
         <service
@@ -381,13 +365,6 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.zdhx.edu.im.ACTION.RECEIVE_RTS_NOTIFICATION"/>
-            </intent-filter>
-        </receiver>
-
-        <!-- 申明本地电话状态（通话状态）的广播接收器，第三方APP集成时音视频模块时，如果需要网络通话与本地电话互斥，请加上此接收器 -->
-        <receiver android:name="com.netease.nimlib.receiver.IncomingCallReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE"/>
             </intent-filter>
         </receiver>
 

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.netease.nim.demo.DemoCache;
 import com.netease.nim.demo.R;
-import com.netease.nim.demo.avchat.activity.AVChatActivity;
 import com.netease.nim.demo.common.util.sys.SysInfoUtil;
 import com.netease.nim.demo.config.preference.Preferences;
 import com.netease.nim.demo.login.LoginActivity;
@@ -119,7 +118,7 @@ public class WelcomeActivity extends UI {
                 if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
                     parseNotifyIntent(intent);
                     return;
-                } else if (intent.hasExtra(Extras.EXTRA_JUMP_P2P) || intent.hasExtra(AVChatActivity.INTENT_ACTION_AVCHAT)) {
+                } else if (intent.hasExtra(Extras.EXTRA_JUMP_P2P)) {
                     parseNormalIntent(intent);
                 }
             }

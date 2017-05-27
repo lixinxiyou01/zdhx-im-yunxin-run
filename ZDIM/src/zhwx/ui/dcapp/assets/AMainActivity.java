@@ -91,38 +91,6 @@ public class AMainActivity extends BaseActivity implements OnClickListener {
 		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"资产管理", this);
 		mRequestWithCache = new RequestWithCacheGet(context);
 		initView();
-		getData();
-	}
-	
-	private void getData() {
-		getNotice();   //获取公告板数据
-	}
-	
-	private void getNotice(){
-		mapA = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
-		new ProgressThreadWrap(this, new RunnableWrap() {
-			@Override
-			public void run() {
-				try {
-					indexJson = UrlUtil.getNotSignedGrantNumJson(ECApplication.getInstance().getV3Address(), mapA);
-					handler.postDelayed(new Runnable() {
-						public void run() {
-							refreshData(indexJson);
-						}
-					}, 5);
-				} catch (IOException e) {
-					e.printStackTrace();
-					ToastUtil.showMessage("请求失败，请稍后重试");
-					handler.postDelayed(new Runnable() {
-						
-						@Override
-						public void run() {
-							mPostingdialog.dismiss();
-						}
-					}, 5);
-				}
-			}
-		}).start();
 	}
 	
 	private void getIndex(){

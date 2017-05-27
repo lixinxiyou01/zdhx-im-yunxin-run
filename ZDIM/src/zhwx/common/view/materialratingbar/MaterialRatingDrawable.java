@@ -6,10 +6,11 @@
 package zhwx.common.view.materialratingbar;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.support.v7.content.res.AppCompatResources;
+import android.os.Build;
 import android.view.Gravity;
 
 import com.netease.nim.demo.R;
@@ -33,11 +34,12 @@ public class MaterialRatingDrawable extends LayerDrawable {
         setId(2, android.R.id.progress);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static Drawable createLayerDrawable(int tileResId, boolean tintAsActivatedElseNormal,
                                                 Context context) {
         int tintColor = ThemeUtils.getColorFromAttrRes(tintAsActivatedElseNormal ?
                 R.attr.colorControlActivated : com.netease.nim.demo.R.attr.colorControlNormal, context);
-        TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(context, tileResId));
+        TileDrawable drawable = new TileDrawable(context.getResources().getDrawable(tileResId));
         //noinspection RedundantCast
         ((TintableDrawable) drawable).setTint(tintColor);
         return drawable;

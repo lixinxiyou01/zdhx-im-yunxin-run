@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.netease.nim.demo.DemoCache;
 import com.netease.nim.demo.R;
-import com.netease.nim.demo.avchat.activity.AVChatSettingsActivity;
 import com.netease.nim.demo.config.preference.Preferences;
 import com.netease.nim.demo.config.preference.UserPreferences;
 import com.netease.nim.demo.contact.activity.UserProfileSettingActivity;
@@ -239,7 +238,7 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
                 clearIndex();
                 break;
             case TAG_NRTC_SETTINGS:
-                startActivity(new Intent(SettingsActivity.this, AVChatSettingsActivity.class));
+//                startActivity(new Intent(SettingsActivity.this, AVChatSettingsActivity.class));
                 break;
             default:
                 break;

@@ -14,6 +14,11 @@ import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.contact.ContactEventListener;
 import com.netease.nim.uikit.contact.ContactProvider;
 import com.netease.nim.uikit.contact_selector.activity.ContactSelectActivity;
+import com.netease.nim.uikit.custom.DefalutContactEventListener;
+import com.netease.nim.uikit.custom.DefalutP2PSessionCustomization;
+import com.netease.nim.uikit.custom.DefalutTeamSessionCustomization;
+import com.netease.nim.uikit.custom.DefalutUserInfoProvider;
+import com.netease.nim.uikit.custom.DefaultContactProvider;
 import com.netease.nim.uikit.session.SessionCustomization;
 import com.netease.nim.uikit.session.SessionEventListener;
 import com.netease.nim.uikit.session.activity.P2PMessageActivity;
@@ -26,6 +31,11 @@ import com.netease.nim.uikit.session.viewholder.MsgViewHolderFactory;
 import com.netease.nim.uikit.team.activity.AdvancedTeamInfoActivity;
 import com.netease.nim.uikit.team.activity.NormalTeamInfoActivity;
 import com.netease.nim.uikit.uinfo.UserInfoHelper;
+import com.netease.nimlib.sdk.AbortableFuture;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -33,7 +43,9 @@ import com.netease.nimlib.sdk.team.constant.TeamTypeEnum;
 import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * UIKit能力输出类。
@@ -79,6 +91,22 @@ public final class NimUIKit {
     // 群聊界面定制
     private static SessionCustomization commonTeamSessionCustomization;
 
+    // 在线状态展示内容
+    private static OnlineStateContentProvider onlineStateContentProvider;
+
+    // 在线状态变化监听
+    private static List<OnlineStateChangeListener> onlineStateChangeListeners;
+
+    /**
+     * 初始化UIKit, 用户信息、联系人信息使用 {@link DefalutUserInfoProvider}，{@link DefaultContactProvider}
+     * 若用户自行提供 userInfoProvider，contactProvider，请使用 {@link NimUIKit#init(Context, UserInfoProvider, ContactProvider)}
+     *
+     * @param context
+     */
+    public static void init(Context context) {
+        init(context, null, null);
+    }
+
     /**
      * 初始化UIKit，须传入context以及用户信息提供者
      *
@@ -88,8 +116,12 @@ public final class NimUIKit {
      */
     public static void init(Context context, UserInfoProvider userInfoProvider, ContactProvider contactProvider) {
         NimUIKit.context = context.getApplicationContext();
-        NimUIKit.userInfoProvider = userInfoProvider;
-        NimUIKit.contactProvider = contactProvider;
+
+        initUserInfoProvider(userInfoProvider);
+        initContactProvider(contactProvider);
+        initDefalutSessionCustomization();
+        initDefalutContactEventListener();
+
         NimUIKit.imageLoaderKit = new ImageLoaderKit(context, null);
 
         // init data cache
@@ -107,6 +139,121 @@ public final class NimUIKit {
         // init log
         String path = StorageUtil.getDirectoryByDirType(StorageType.TYPE_LOG);
         LogUtil.init(path, Log.DEBUG);
+    }
+
+    // 初始化用户信息提供者
+    private static void initUserInfoProvider(UserInfoProvider userInfoProvider) {
+
+        if (userInfoProvider == null) {
+            userInfoProvider = new DefalutUserInfoProvider(context);
+        }
+
+        NimUIKit.userInfoProvider = userInfoProvider;
+    }
+
+    // 初始化联系人信息提供者
+    private static void initContactProvider(ContactProvider contactProvider) {
+
+        if (contactProvider == null) {
+            contactProvider = new DefaultContactProvider();
+        }
+
+        NimUIKit.contactProvider = contactProvider;
+    }
+
+    // 初始化会话定制，群、P2P
+    private static void initDefalutSessionCustomization() {
+        if (commonP2PSessionCustomization == null) {
+            commonP2PSessionCustomization = new DefalutP2PSessionCustomization();
+        }
+        if (commonTeamSessionCustomization == null) {
+            commonTeamSessionCustomization = new DefalutTeamSessionCustomization();
+        }
+    }
+
+    // 初始化联系人点击事件
+    private static void initDefalutContactEventListener() {
+        if (contactEventListener == null) {
+            contactEventListener = new DefalutContactEventListener();
+        }
+    }
+
+    /**
+     * 打开单聊界面，若开发者未设置 {@link NimUIKit#setCommonP2PSessionCustomization(SessionCustomization)},
+     * 则定制化信息 SessionCustomization 为{@link DefalutP2PSessionCustomization}
+     * <p>
+     * 若需要为目标会话提供单独定义的SessionCustomization，请使用{@link NimUIKit#startChatting(Context, String, SessionTypeEnum, SessionCustomization, IMMessage)}
+     *
+     * @param context 上下文
+     * @param account 目标账号
+     */
+    public static void startP2PSession(Context context, String account) {
+        startP2PSession(context, account, null);
+    }
+
+    /**
+     * 同 {@link NimUIKit#startP2PSession(Context, String)},同时聊天界面打开后，列表跳转至anchor位置
+     *
+     * @param context 上下文
+     * @param account 目标账号
+     * @param anchor  跳转到指定消息的位置，不需要跳转填null
+     */
+    public static void startP2PSession(Context context, String account, IMMessage anchor) {
+        NimUIKit.startChatting(context, account, SessionTypeEnum.P2P, commonP2PSessionCustomization, anchor);
+    }
+
+    /**
+     * 打开群聊界面，若开发者未设置 {@link NimUIKit#setCommonTeamSessionCustomization(SessionCustomization)},
+     * 则定制化信息 SessionCustomization 为{@link DefalutTeamSessionCustomization}
+     * <p>
+     * 若需要为目标会话提供单独定义的SessionCustomization，请使用{@link NimUIKit#startChatting(Context, String, SessionTypeEnum, SessionCustomization, IMMessage)}
+     *
+     * @param context 上下文
+     * @param tid     群id
+     */
+    public static void startTeamSession(Context context, String tid) {
+        startTeamSession(context, tid, null);
+    }
+
+    /**
+     * 同 {@link NimUIKit#startTeamSession(Context, String)},同时聊天界面打开后，列表跳转至anchor位置
+     *
+     * @param context 上下文
+     * @param tid     群id
+     * @param anchor  跳转到指定消息的位置，不需要跳转填null
+     */
+    public static void startTeamSession(Context context, String tid, IMMessage anchor) {
+        NimUIKit.startChatting(context, tid, SessionTypeEnum.Team, commonTeamSessionCustomization, anchor);
+    }
+
+    /**
+     * 手动登陆，由于手动登陆完成之后，UIKit 需要设置账号、构建缓存等，使用此方法登陆 UIKit 会将这部分逻辑处理好，开发者只需要处理自己的逻辑即可
+     *
+     * @param loginInfo 登陆账号信息
+     * @param callback  登陆结果回调
+     */
+    public static AbortableFuture<LoginInfo> doLogin(LoginInfo loginInfo, final RequestCallback<LoginInfo> callback) {
+
+        AbortableFuture<LoginInfo> loginRequest = NIMClient.getService(AuthService.class).login(loginInfo);
+        loginRequest.setCallback(new RequestCallback<LoginInfo>() {
+            @Override
+            public void onSuccess(LoginInfo loginInfo) {
+                NimUIKit.setAccount(loginInfo.getAccount());
+                DataCacheManager.buildDataCacheAsync();
+                callback.onSuccess(loginInfo);
+            }
+
+            @Override
+            public void onFailed(int code) {
+                callback.onFailed(code);
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+                callback.onException(exception);
+            }
+        });
+        return loginRequest;
     }
 
     /**
@@ -163,7 +310,7 @@ public final class NimUIKit {
     }
 
     /**
-     * 打开讨论组或群组资料页
+     * 打开讨论组或高级群资料页
      *
      * @param context 上下文
      * @param teamId  群id
@@ -189,6 +336,7 @@ public final class NimUIKit {
         return account;
     }
 
+
     public static UserInfoProvider getUserInfoProvider() {
         return userInfoProvider;
     }
@@ -205,8 +353,31 @@ public final class NimUIKit {
         return imageLoaderKit;
     }
 
+    /**
+     * 设置位置信息提供者
+     *
+     * @param locationProvider 位置信息提供者
+     */
     public static void setLocationProvider(LocationProvider locationProvider) {
         NimUIKit.locationProvider = locationProvider;
+    }
+
+    /**
+     * 设置单聊界面定制 SessionCustomization
+     *
+     * @param commonP2PSessionCustomization 聊天界面定制化
+     */
+    public static void setCommonP2PSessionCustomization(SessionCustomization commonP2PSessionCustomization) {
+        NimUIKit.commonP2PSessionCustomization = commonP2PSessionCustomization;
+    }
+
+    /**
+     * 设置群聊界面定制 SessionCustomization
+     *
+     * @param commonTeamSessionCustomization 聊天界面定制化
+     */
+    public static void setCommonTeamSessionCustomization(SessionCustomization commonTeamSessionCustomization) {
+        NimUIKit.commonTeamSessionCustomization = commonTeamSessionCustomization;
     }
 
     /**
@@ -302,6 +473,7 @@ public final class NimUIKit {
 
     /**
      * 设置消息撤回的监听器
+     *
      * @param msgRevokeFilter
      */
     public static void setMsgRevokeFilter(MsgRevokeFilter msgRevokeFilter) {
@@ -310,6 +482,7 @@ public final class NimUIKit {
 
     /**
      * 获取消息撤回的监听器
+     *
      * @return
      */
     public static MsgRevokeFilter getMsgRevokeFilter() {
@@ -330,5 +503,44 @@ public final class NimUIKit {
      */
     public static void CustomPushContentProvider(CustomPushContentProvider mixPushCustomConfig) {
         NimUIKit.customPushContentProvider = mixPushCustomConfig;
+    }
+
+    public static OnlineStateContentProvider getOnlineStateContentProvider() {
+        return onlineStateContentProvider;
+    }
+
+    public static void setOnlineStateContentProvider(OnlineStateContentProvider onlineStateContentProvider) {
+        NimUIKit.onlineStateContentProvider = onlineStateContentProvider;
+    }
+
+    public static void addOnlineStateChangeListeners(OnlineStateChangeListener onlineStateChangeListener) {
+        if (onlineStateChangeListeners == null) {
+            onlineStateChangeListeners = new LinkedList<>();
+        }
+        onlineStateChangeListeners.add(onlineStateChangeListener);
+    }
+
+    public static void removeOnlineStateChangeListeners(OnlineStateChangeListener onlineStateChangeListener) {
+        if (onlineStateChangeListeners == null) {
+            return;
+        }
+        onlineStateChangeListeners.remove(onlineStateChangeListener);
+    }
+
+    public static void notifyOnlineStateChange(Set<String> accounts) {
+        if (onlineStateChangeListeners != null) {
+            for (OnlineStateChangeListener listener : onlineStateChangeListeners) {
+                listener.onlineStateChange(accounts);
+            }
+        }
+    }
+
+    /**
+     * 设置了 onlineStateContentProvider 则表示UIKit需要展示在线状态
+     *
+     * @return
+     */
+    public static boolean enableOnlineState() {
+        return onlineStateContentProvider != null;
     }
 }

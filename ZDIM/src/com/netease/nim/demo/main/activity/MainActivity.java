@@ -24,9 +24,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
-import com.netease.nim.demo.avchat.AVChatProfile;
-import com.netease.nim.demo.avchat.activity.AVChatActivity;
-import com.netease.nim.demo.chatroom.helper.ChatRoomHelper;
 import com.netease.nim.demo.login.LoginActivity;
 import com.netease.nim.demo.login.LogoutHelper;
 import com.netease.nim.demo.main.fragment.CircleFragment;
@@ -41,13 +38,11 @@ import com.netease.nim.uikit.LoginSyncDataStatusObserver;
 import com.netease.nim.uikit.NimUIKit;
 import com.netease.nim.uikit.common.activity.UI;
 import com.netease.nim.uikit.common.ui.dialog.DialogMaker;
-import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nim.uikit.contact_selector.activity.ContactSelectActivity;
 import com.netease.nim.uikit.permission.MPermission;
 import com.netease.nim.uikit.permission.annotation.OnMPermissionDenied;
 import com.netease.nim.uikit.permission.annotation.OnMPermissionGranted;
 import com.netease.nim.uikit.team.helper.TeamHelper;
-import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.NimIntent;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -186,11 +181,6 @@ public class MainActivity extends UI {
     private void onInit() {
         // 加载主页面
         showMainFragment();
-
-        // 聊天室初始化
-        ChatRoomHelper.init();
-
-        LogUtil.ui("NIM SDK cache path=" + NIMClient.getSdkStorageDirPath());
     }
 
     @Override
@@ -273,13 +263,15 @@ public class MainActivity extends UI {
         } else if (intent.hasExtra(EXTRA_APP_QUIT)) {
             onLogout();
             return;
-        } else if (intent.hasExtra(AVChatActivity.INTENT_ACTION_AVCHAT)) {
-            if (AVChatProfile.getInstance().isAVChatting()) {
-                Intent localIntent = new Intent();
-                localIntent.setClass(this, AVChatActivity.class);
-                startActivity(localIntent);
-            }
-        } else if (intent.hasExtra(com.netease.nim.demo.main.model.Extras.EXTRA_JUMP_P2P)) {
+        }
+//        else if (intent.hasExtra(AVChatActivity.INTENT_ACTION_AVCHAT)) {
+//            if (AVChatProfile.getInstance().isAVChatting()) {
+//                Intent localIntent = new Intent();
+//                localIntent.setClass(this, AVChatActivity.class);
+//                startActivity(localIntent);
+//            }
+//        }
+        else if (intent.hasExtra(com.netease.nim.demo.main.model.Extras.EXTRA_JUMP_P2P)) {
             Intent data = intent.getParcelableExtra(com.netease.nim.demo.main.model.Extras.EXTRA_DATA);
             String account = data.getStringExtra(com.netease.nim.demo.main.model.Extras.EXTRA_ACCOUNT);
             if (!TextUtils.isEmpty(account)) {

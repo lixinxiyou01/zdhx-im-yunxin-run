@@ -21,7 +21,6 @@ import com.netease.nim.demo.session.extension.RTSAttachment;
 import com.netease.nim.demo.session.extension.SnapChatAttachment;
 import com.netease.nim.demo.session.extension.StickerAttachment;
 import com.netease.nim.demo.session.search.SearchMessageActivity;
-import com.netease.nim.demo.session.viewholder.MsgViewHolderAVChat;
 import com.netease.nim.demo.session.viewholder.MsgViewHolderDefCustom;
 import com.netease.nim.demo.session.viewholder.MsgViewHolderFile;
 import com.netease.nim.demo.session.viewholder.MsgViewHolderGuess;
@@ -43,7 +42,6 @@ import com.netease.nim.uikit.session.module.MsgRevokeFilter;
 import com.netease.nim.uikit.team.model.TeamExtras;
 import com.netease.nim.uikit.team.model.TeamRequestCode;
 import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.avchat.model.AVChatAttachment;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.FileAttachment;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
@@ -302,7 +300,7 @@ public class SessionHelper {
 
     private static void registerViewHolders() {
         NimUIKit.registerMsgItemViewHolder(FileAttachment.class, MsgViewHolderFile.class);
-        NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
+//        NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
         NimUIKit.registerMsgItemViewHolder(GuessAttachment.class, MsgViewHolderGuess.class);
         NimUIKit.registerMsgItemViewHolder(CustomAttachment.class, MsgViewHolderDefCustom.class);
         NimUIKit.registerMsgItemViewHolder(StickerAttachment.class, MsgViewHolderSticker.class);
@@ -363,9 +361,7 @@ public class SessionHelper {
         NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
             @Override
             public boolean shouldIgnore(IMMessage message) {
-                if (message.getAttachment() != null
-                        && (message.getAttachment() instanceof AVChatAttachment
-                        || message.getAttachment() instanceof RTSAttachment)) {
+                if (message.getAttachment() != null && (message.getAttachment() instanceof RTSAttachment)) {
                     // 视频通话消息和白板消息 不允许撤回
                     return true;
                 } else if (DemoCache.getAccount().equals(message.getSessionId())) {

@@ -111,7 +111,6 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     compile project(path: ':uikit')
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support:design:25.1.0'
     compile files('libs/xUtils-2.6.11.jar')
     compile files('libs/nineoldanimatin.jar')
     compile files('libs/gson-2.2.1.jar')

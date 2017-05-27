@@ -35,7 +35,7 @@ class TransactionManager {
     }
 
     public void registerTransactionObserver(TransactionObserver o) {
-        TransactionCenter.getInstance().registerObserver(sessionId, o);
+//        TransactionCenter.getInstance().registerObserver(sessionId, o);
     }
 
     public void sendStartTransaction(float x, float y) {
@@ -76,7 +76,7 @@ class TransactionManager {
     };
 
     private void sendCacheTransaction() {
-        TransactionCenter.getInstance().sendToRemote(sessionId, toAccount, this.cache);
+//        TransactionCenter.getInstance().sendToRemote(sessionId, toAccount, this.cache);
         cache.clear();
     }
 }
