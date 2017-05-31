@@ -6,6 +6,15 @@ android {
     compileSdkVersion 25
     buildToolsVersion "23.0.3"
 
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'

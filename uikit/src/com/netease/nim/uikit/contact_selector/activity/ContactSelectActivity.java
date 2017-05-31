@@ -3,13 +3,12 @@ package com.netease.nim.uikit.contact_selector.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -54,6 +53,7 @@ import java.util.List;
  * <p/>
  * Created by huangjun on 2015/3/3.
  */
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class ContactSelectActivity extends UI implements View.OnClickListener, android.support.v7.widget.SearchView.OnQueryTextListener {
 
     public static final String EXTRA_DATA = "EXTRA_DATA"; // 请求数据：Option
@@ -85,7 +85,7 @@ public class ContactSelectActivity extends UI implements View.OnClickListener, a
 
     private Button btnSelect;
 
-    private SearchView searchView;
+//    private SearchView searchView;
 
     // other
 
@@ -203,8 +203,8 @@ public class ContactSelectActivity extends UI implements View.OnClickListener, a
 
     @Override
     public void onBackPressed() {
-        searchView.setQuery("", true);
-        searchView.setIconified(true);
+//        searchView.setQuery("", true);
+//        searchView.setIconified(true);
         showKeyboard(false);
         finish();
     }
@@ -212,25 +212,25 @@ public class ContactSelectActivity extends UI implements View.OnClickListener, a
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         // search view
-        getMenuInflater().inflate(R.menu.contacts_search_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
-
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem menuItem) {
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                finish();
-                return false;
-            }
-        });
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        this.searchView = searchView;
-        this.searchView.setVisibility(option.searchVisible ? View.VISIBLE : View.GONE);
-        searchView.setOnQueryTextListener(this);
+//        getMenuInflater().inflate(R.menu.contacts_search_menu, menu);
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        MenuItemCompat.setOnActionExpandListener(item, new MenuItemCompat.OnActionExpandListener() {
+//
+//            @Override
+//            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+//                finish();
+//                return false;
+//            }
+//        });
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//        this.searchView = searchView;
+//        this.searchView.setVisibility(option.searchVisible ? View.VISIBLE : View.GONE);
+//        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -320,9 +320,9 @@ public class ContactSelectActivity extends UI implements View.OnClickListener, a
 
             private void setSearchViewVisible(boolean visible) {
                 option.searchVisible = visible;
-                if (searchView != null) {
-                    searchView.setVisibility(option.searchVisible ? View.VISIBLE : View.GONE);
-                }
+//                if (searchView != null) {
+//                    searchView.setVisibility(option.searchVisible ? View.VISIBLE : View.GONE);
+//                }
             }
         };
 
@@ -386,11 +386,11 @@ public class ContactSelectActivity extends UI implements View.OnClickListener, a
                             Toast.makeText(ContactSelectActivity.this, option.maxSelectedTip, Toast.LENGTH_SHORT).show();
                         }
 
-                        if (!TextUtils.isEmpty(queryText) && searchView != null) {
-                            searchView.setQuery("", true);
-                            searchView.setIconified(true);
-                            showKeyboard(false);
-                        }
+//                        if (!TextUtils.isEmpty(queryText) && searchView != null) {
+//                            searchView.setQuery("", true);
+//                            searchView.setIconified(true);
+//                            showKeyboard(false);
+//                        }
                     }
                     arrangeSelected();
                 } else {

@@ -59,6 +59,8 @@
 
             <EditText
                 android:id="@+id/pjNameET"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/pjPriceTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -69,6 +71,8 @@
                 android:layout_toRightOf="@+id/TextView1"
                 android:background="@drawable/btn_ordercar_normal"
                 android:padding="5dp"
+                android:maxLines="1"
+                android:inputType="text"
                 android:textColor="@color/greytext"
                 android:textSize="15sp"/>
         </RelativeLayout>
@@ -92,6 +96,8 @@
 
             <EditText
                 android:id="@+id/pjPriceTV"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/pjCountTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -103,6 +109,7 @@
                 android:background="@drawable/btn_ordercar_normal"
                 android:inputType="numberDecimal"
                 android:padding="5dp"
+                android:maxLines="1"
                 android:textColor="@color/greytext"
                 android:textSize="15sp"/>
         </RelativeLayout>
@@ -125,6 +132,7 @@
 
             <EditText
                 android:id="@+id/pjCountTV"
+                android:imeOptions="actionDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -170,6 +178,7 @@
                 android:background="@drawable/btn_ordercar_disable"
                 android:padding="5dp"
                 android:text="0.00"
+                android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
         </RelativeLayout>

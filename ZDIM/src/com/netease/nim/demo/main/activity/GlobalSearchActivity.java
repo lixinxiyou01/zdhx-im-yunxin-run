@@ -63,6 +63,7 @@ public class GlobalSearchActivity extends UI implements OnItemClickListener {
             @Override
             public void run() {
                 MenuItemCompat.expandActionView(item);
+                item.expandActionView();
             }
         });
 

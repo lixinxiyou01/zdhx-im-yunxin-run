@@ -29,5 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/universal-image-loader-1.9.3-with-sources.jar')
     compile 'com.android.support:design:23.3.0'
-    compile 'com.android.support:support-v4:26.0.0-alpha1'
+    compile 'com.android.support:support-v4:25.3.1'
 }

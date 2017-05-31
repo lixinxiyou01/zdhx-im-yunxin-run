@@ -79,7 +79,9 @@
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/color_black_ff666666"
-                    android:textSize="15sp" />
+                    android:maxLines="2"
+                    android:layout_marginRight="5dp"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/user_nick"

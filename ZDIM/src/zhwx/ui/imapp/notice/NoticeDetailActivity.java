@@ -454,7 +454,7 @@ public class NoticeDetailActivity extends BaseActivity {
 	 * @return
 	 */
 	private Map<String, ParameterValue> getMap(String messageId) {
-		Map<String, ParameterValue> map = ECApplication.getInstance().getLoginMap();
+		Map<String, ParameterValue> map = ECApplication.getInstance().getV3LoginMap();
 		map.put("id", new ParameterValue(messageId));
 		map.put("widthPx", new ParameterValue(DensityUtil.px2dip(context, CommonUtils.getWidthPixels(context))+""));
 		return map;
