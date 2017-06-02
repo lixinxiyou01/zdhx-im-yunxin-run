@@ -216,10 +216,10 @@
 
     <!-- 多端在线类型 -->
     <string name="on_line">在线</string>
-    <string name="on_line_pc">电脑在线</string>
+    <string name="on_line_pc">PC在线</string>
     <string name="on_line_web">web在线</string>
     <string name="client_aos">Android</string>
-    <string name="client_ios">iOS</string>
+    <string name="client_ios">iPhone</string>
     <string name="on_line_busy">忙碌</string>
     <string name="off_line">离线</string>
 

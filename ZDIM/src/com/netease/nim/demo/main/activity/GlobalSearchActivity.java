@@ -212,10 +212,8 @@ public class GlobalSearchActivity extends UI implements OnItemClickListener {
                 }
                 break;
             }
-
             default:
                 break;
         }
     }
-
 }
