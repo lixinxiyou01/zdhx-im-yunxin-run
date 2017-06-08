@@ -12,7 +12,7 @@ import com.netease.nim.uikit.common.activity.UI;
  */
 public class AppListFragment extends MainTabFragment {
 
-    private ApplicationFragmentGroup fragment;
+    private ApplicationFragmentWeb fragment;
 
     public AppListFragment() {
         setContainerId(MainTab.APP_LIST.fragmentId);
@@ -25,10 +25,10 @@ public class AppListFragment extends MainTabFragment {
 
     @Override
     protected void onInit() {
-        fragment = new ApplicationFragmentGroup();
+        fragment = new ApplicationFragmentWeb();
         fragment.setContainerId(R.id.app_list_fragment);
         final UI activity = (UI) getActivity();
-        fragment = (ApplicationFragmentGroup) activity.addFragment(fragment);
+        fragment = (ApplicationFragmentWeb) activity.addFragment(fragment);
     }
 
 }
