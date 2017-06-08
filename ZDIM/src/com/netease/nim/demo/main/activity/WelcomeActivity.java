@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.netease.nim.demo.DemoCache;
+import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 import com.netease.nim.demo.common.util.sys.SysInfoUtil;
 import com.netease.nim.demo.config.preference.Preferences;
@@ -51,7 +52,6 @@ public class WelcomeActivity extends UI {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (firstEnter) {
             firstEnter = false;
             Runnable runnable = new Runnable() {
@@ -136,9 +136,9 @@ public class WelcomeActivity extends UI {
     private boolean canAutoLogin() {
         String account = Preferences.getUserAccount();
         String token = Preferences.getUserToken();
-
+        String appWebUrl = ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl();
         Log.i(TAG, "get local sdk token =" + token);
-        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token);
+        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(appWebUrl);
     }
 
     private void parseNotifyIntent(Intent intent) {

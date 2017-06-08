@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -171,7 +170,7 @@ public class GrantActivity extends BaseActivity implements OnClickListener{
 	}
 	
 	/**
-	  * @param id:发放记录id；locationId：物理位置id；applicationRecordId：申请记录id
+	  * @param :发放记录id；locationId：物理位置id；applicationRecordId：申请记录id
 	  * ；userId：领用人id；departmentId：领用部门id；assetIds：资产ids（用，分割）
 	 * 	移动端确认发放   
 	 */
@@ -436,9 +435,9 @@ public class GrantActivity extends BaseActivity implements OnClickListener{
 		
 		if (requestCode == 111) {
 			if (sourBitmap != null) {
-				Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
-				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
-				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, model.getApplyUser() + " " + DateUtil.getCurrDateSecondString() + "#资产管理",25, Color.WHITE);
+//				Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
+//				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
+				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, sourBitmap, model.getApplyUser() + " " + DateUtil.getCurrDateSecondString() + "#资产管理",25, Color.WHITE);
 				File tempFile = new File(sdCard, "sing.jpg");
 				sendFiles.clear();
 				sendFiles.add(tempFile);

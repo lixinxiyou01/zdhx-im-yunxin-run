@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/app_list_fragment"
-        android:name="com.netease.nim.demo.main.fragment.ApplicationFragmentWeb"
+        android:name="com.netease.nim.demo.main.fragment.ApplicationFragmentGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

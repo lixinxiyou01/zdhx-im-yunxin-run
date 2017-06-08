@@ -30,8 +30,6 @@ public class ApplicationFragmentWeb extends TFragment {
 
 	private WebView webAppWV;
 
-	private String url;
-
 	private LoadingView loadView;
 
 
@@ -55,8 +53,7 @@ public class ApplicationFragmentWeb extends TFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		url = ECApplication.getInstance().getAddress() + "/bd/webApp/appCenter?userId=" + ECApplication.getInstance().getCurrentIMUser().getId();
-		System.out.println(url);
+		System.out.println(ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl());
 		webAppWV = (WebView) v.findViewById(R.id.webAppWV);
 		loadView = (LoadingView) v.findViewById(R.id.loadView);
 		loadView.setVisibility(View.GONE);
@@ -78,7 +75,7 @@ public class ApplicationFragmentWeb extends TFragment {
 		webAppWV.addJavascriptInterface(new Object() {
 
 			@JavascriptInterface
-			public void openNatigveApp(String code) {
+			public void openNativeApp(String code) {
 				IntentUtil.openApp(context,code);
 			}
 
@@ -95,7 +92,7 @@ public class ApplicationFragmentWeb extends TFragment {
 			}
 		});
 
-		webAppWV.loadUrl(url);
+		webAppWV.loadUrl(ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl());
 		webAppWV.setWebViewClient(new HelloWebViewClient());
 		webAppWV.setWebChromeClient(new WebChromeClient(){
 			@Override

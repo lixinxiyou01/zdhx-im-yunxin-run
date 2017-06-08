@@ -221,6 +221,37 @@
                     android:textSize="15sp"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/upLoadimage"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="上传图片:"
+                    android:textSize="15sp" />
+
+                <GridView
+                    android:id="@+id/feedBackFileGV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/upLoadimage"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="3"
+                    android:paddingLeft="10dp"
+                    android:verticalSpacing="3dp"></GridView>
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"

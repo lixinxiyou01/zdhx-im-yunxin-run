@@ -76,11 +76,13 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
     dexOptions {
         preDexLibraries false
         jumboMode true
         javaMaxHeapSize "4g"
     }
+
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'

@@ -3,6 +3,7 @@ package com.netease.nim.demo.contact.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -73,12 +74,17 @@ public class UserProfileActivity extends UI {
     private TextView mobileText;
     private TextView emailText;
     private TextView signatureText;
+    private TextView departmentNameText;
     private RelativeLayout birthdayLayout;
     private RelativeLayout phoneLayout;
     private RelativeLayout emailLayout;
     private RelativeLayout signatureLayout;
     private RelativeLayout aliasLayout;
+    private RelativeLayout departmentNameLayout;
     private TextView nickText;
+
+    //按钮
+    private ImageView smsIV,callIV;
 
     // 开关
     private ViewGroup toggleLayout;
@@ -176,16 +182,23 @@ public class UserProfileActivity extends UI {
         birthdayText = (TextView) birthdayLayout.findViewById(R.id.value);
         phoneLayout = findView(R.id.phone);
         mobileText = (TextView) phoneLayout.findViewById(R.id.value);
+
+        smsIV = (ImageView) phoneLayout.findViewById(R.id.smsIV);
+        callIV = (ImageView) phoneLayout.findViewById(R.id.callIV);
+
         emailLayout = findView(R.id.email);
         emailText = (TextView) emailLayout.findViewById(R.id.value);
         signatureLayout = findView(R.id.signature);
         signatureText = (TextView) signatureLayout.findViewById(R.id.value);
         aliasLayout = findView(R.id.alias);
+        departmentNameLayout = findView(R.id.departmentName);
+        departmentNameText = (TextView) departmentNameLayout.findViewById(R.id.value);
         ((TextView) birthdayLayout.findViewById(R.id.attribute)).setText(R.string.birthday);
         ((TextView) phoneLayout.findViewById(R.id.attribute)).setText(R.string.phone);
         ((TextView) emailLayout.findViewById(R.id.attribute)).setText(R.string.email);
         ((TextView) signatureLayout.findViewById(R.id.attribute)).setText(R.string.signature);
         ((TextView) aliasLayout.findViewById(R.id.attribute)).setText(R.string.alias);
+        ((TextView) departmentNameLayout.findViewById(R.id.attribute)).setText(R.string.departmentname);
 
         addFriendBtn.setOnClickListener(onClickListener);
         chatBtn.setOnClickListener(onClickListener);
@@ -269,10 +282,31 @@ public class UserProfileActivity extends UI {
         } else {
             birthdayLayout.setVisibility(View.GONE);
         }
-
+        if (userInfo.getExtensionMap() != null && !TextUtils.isEmpty(userInfo.getExtensionMap().get("departmentName").toString())) {
+            departmentNameLayout.setVisibility(View.VISIBLE);
+            departmentNameText.setText(userInfo.getExtensionMap().get("departmentName").toString());
+        } {
+            departmentNameLayout.setVisibility(View.GONE);
+        }
         if (!TextUtils.isEmpty(userInfo.getMobile())) {
             phoneLayout.setVisibility(View.VISIBLE);
             mobileText.setText(userInfo.getMobile());
+            smsIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri smsToUri = Uri.parse("smsto:" + userInfo.getMobile());
+                    Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);
+                    intent.putExtra("sms_body", "");
+                    startActivity(intent);
+                }
+            });
+            callIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent phoneIntent=new Intent("android.intent.action.DIAL", Uri.parse("tel:" + userInfo.getMobile()));
+                    startActivity(phoneIntent);
+                }
+            });
         } else {
             phoneLayout.setVisibility(View.GONE);
         }

@@ -151,6 +151,10 @@ public class UrlUtil {
 	}
 
 	public static String getImgUrl(String url, Map<String, ParameterValue> map) {
+		if (url.startsWith("http")) {
+			Log.e("downLoadUrl",url);
+			return  url;
+		}
 		url = url + "&";
 		Set<String> keySet = map.keySet();
 		int i = 0;
@@ -166,7 +170,7 @@ public class UrlUtil {
 				i++;
 			}
 		}
-		System.out.println(url);
+		Log.e("downLoadUrl",url);
 		return url;
 	}
 

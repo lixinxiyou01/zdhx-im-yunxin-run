@@ -3,7 +3,6 @@ package com.netease.nim.uikit.common.ui.imageview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.netease.nim.uikit.ImageLoaderKit;
@@ -87,7 +86,6 @@ public class HeadImageView extends CircleImageView {
 
         final UserInfoProvider.UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(account);
         boolean needLoad = userInfo != null && ImageLoaderKit.isImageUriValid(userInfo.getAvatar());
-        Log.e("AvatarUrl++++",userInfo.getAvatar());
         doLoadImage(needLoad, account, userInfo != null ? userInfo.getAvatar() : null, thumbSize);
     }
 

@@ -2,11 +2,17 @@ package zhwx.ui.dcapp.repairs;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
@@ -14,9 +20,19 @@ import android.widget.RatingBar;
 import com.google.gson.Gson;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
+import com.photoselector.model.PhotoModel;
+import com.photoselector.ui.PhotoPreviewActivity;
+import com.photoselector.ui.PhotoSelectorActivity;
+import com.photoselector.util.CommonUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
@@ -24,7 +40,9 @@ import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
+import zhwx.common.util.Tools;
 import zhwx.common.util.UrlUtil;
+import zhwx.common.util.compressImg.PictureUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.ui.dcapp.repairs.model.RequestFeedBackItem;
 
@@ -53,6 +71,18 @@ public class RequestFeedBackActivity extends BaseActivity implements View.OnClic
 	private String isFixed = "1";
 
 	private EditText suggestET;
+
+	private GridView feedBackFileGV;
+
+	private List<PhotoModel> nowPhotos = new ArrayList<PhotoModel>();
+
+	private List<Bitmap> nowBmp = new ArrayList<Bitmap>();
+
+	public static final int MAX_IMG_COUNT = 6; // 选择图数量上限
+
+	private List<File> sendFiles = new ArrayList<File>();
+
+	private ImageGVAdapter imgAdapter;
 
 
 	@Override
@@ -136,6 +166,11 @@ public class RequestFeedBackActivity extends BaseActivity implements View.OnClic
 		allRB = (RatingBar) findViewById(R.id.allRB);
 		taiduRB = (RatingBar) findViewById(R.id.taiduRB);
 		suduRB = (RatingBar) findViewById(R.id.suduRB);
+		feedBackFileGV = (GridView) findViewById(R.id.feedBackFileGV);
+		nowPhotos.add(null);
+		imgAdapter = new ImageGVAdapter();
+		feedBackFileGV.setAdapter(imgAdapter);
+		Tools.setGridViewHeightBasedOnChildren3(feedBackFileGV);
 	}
 
 	public void onSend(View v) {
@@ -181,6 +216,174 @@ public class RequestFeedBackActivity extends BaseActivity implements View.OnClic
 				}
 			}
 		}).start();
+	}
+
+
+	/**
+	 * 已选择图片适配
+	 * @author lenovo
+	 */
+	class ImageGVAdapter extends BaseAdapter {
+
+		public ImageGVAdapter() {
+			super();
+		}
+
+		@Override
+		public int getCount() {
+			return nowPhotos.size();
+		}
+
+		@Override
+		public PhotoModel getItem(int position) {
+			return nowPhotos.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(final int position, View convertView,
+							ViewGroup parent) {
+			Holder holder = null;
+			if (convertView == null) {
+				holder = new Holder();
+				convertView = View.inflate(context, R.layout.gv_item_image,null);
+				holder.imageGV = (ImageView) convertView.findViewById(R.id.imageGV);
+				holder.delBT = (ImageView) convertView.findViewById(R.id.delBT);
+				convertView.setTag(holder);
+			} else {
+				holder = (Holder) convertView.getTag();
+			}
+			if (nowPhotos.get(position) == null) {
+				holder.imageGV.setImageResource(R.drawable.icon_rm_addpic);
+				holder.delBT.setVisibility(View.INVISIBLE);
+			} else {
+				if (nowPhotos.get(position) != null) {
+					holder.imageGV.setImageBitmap(nowBmp.get(position));
+					holder.delBT.setVisibility(View.VISIBLE);
+				}
+			}
+			addListener(holder, position);
+			return convertView;
+		}
+
+		private void addListener(Holder holder, final int position) {
+			holder.delBT.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					if (position == nowPhotos.size() - 1) {
+
+					} else {
+						remove(position);
+						for (int i = 0; i < nowPhotos.size(); i++) {
+							if (nowPhotos.get(i) == null) {
+								nowPhotos.remove(i);
+							}
+						}
+						nowPhotos.add(null);
+						imgAdapter.notifyDataSetChanged();
+					}
+				}
+			});
+			holder.imageGV.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View view) {
+
+					if (position == nowPhotos.size() - 1) {
+						if (nowPhotos.get(nowPhotos.size() - 1) == null) {
+							Intent intent = new Intent(context,
+									PhotoSelectorActivity.class);
+							intent.putExtra("canSelectCount", MAX_IMG_COUNT + 1 - nowPhotos.size());
+							startActivityForResult(intent, 0);
+						} else {
+							remove(position);
+							for (int i = 0; i < nowPhotos.size(); i++) {
+								if (nowPhotos.get(i) == null) {
+									nowPhotos.remove(i);
+								}
+							}
+							nowPhotos.add(null);
+							imgAdapter.notifyDataSetChanged();
+						}
+					} else {
+						List<PhotoModel> nowPhoto = new ArrayList<PhotoModel>();
+						nowPhoto.add(nowPhotos.get(position));
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("photos",(Serializable) nowPhoto);
+						CommonUtils.launchActivity(context,PhotoPreviewActivity.class, bundle);
+					}
+				}
+			});
+		}
+
+		class Holder {
+			private ImageView imageGV;
+			private ImageView delBT;
+		}
+	}
+
+	public void remove(int position) {
+		nowPhotos.remove(position);
+		nowBmp.remove(position);
+		sendFiles.remove(position);
+		Tools.setGridViewHeightBasedOnChildren3(feedBackFileGV);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0 && resultCode == RESULT_OK) {
+			if (data != null && data.getExtras() != null) {
+				@SuppressWarnings("unchecked")
+				List<PhotoModel> photos = (List<PhotoModel>) data.getExtras().getSerializable("photos");
+				for (int i = 0; i < nowPhotos.size(); i++) {
+					if (nowPhotos.get(i) == null) {
+						nowPhotos.remove(i);
+					}
+				}
+				for (PhotoModel photoModel : photos) {
+					nowPhotos.add(photoModel);
+				}
+				if (nowPhotos.size() < MAX_IMG_COUNT) {
+					nowPhotos.add(null);
+				}
+				if (nowPhotos == null || nowPhotos.isEmpty())
+					return;
+				Compress();
+				imgAdapter.notifyDataSetChanged();
+				Tools.setGridViewHeightBasedOnChildren3(feedBackFileGV);
+			}
+		}
+	}
+
+	// 压缩图片 并存储
+	public void Compress() {
+		nowBmp.clear();
+		sendFiles.clear();
+		try {
+			for (int i = 0; i < nowPhotos.size(); i++) {
+				if (nowPhotos.get(i) != null) {
+					File f = new File(nowPhotos.get(i).getOriginalPath());
+					File fs = new File(PictureUtil.getAlbumDir(), "small_"+ f.getName());
+					Bitmap bm = PictureUtil.getSmallBitmap(nowPhotos.get(i).getOriginalPath());
+					if (bm != null) {
+						FileOutputStream fos = new FileOutputStream(fs);
+						bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+						nowBmp.add(bm);
+						sendFiles.add(fs);
+					}
+				} else {
+					nowBmp.add(null);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

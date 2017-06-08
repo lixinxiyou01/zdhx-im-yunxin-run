@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/color_background">
 
     <LinearLayout
@@ -76,11 +76,11 @@
                     android:id="@+id/user_account"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/color_black_ff666666"
-                    android:maxLines="2"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:maxLines="2"
+                    android:textColor="@color/color_black_ff666666"
                     android:textSize="12sp" />
 
                 <TextView
@@ -103,6 +103,11 @@
             android:background="@color/color_split_line_d9d9d9" />
 
         <include
+            android:id="@+id/departmentName"
+            layout="@layout/user_profile_item"
+            />
+
+        <include
             android:id="@+id/alias"
             layout="@layout/user_profile_item"
             android:visibility="gone" />
@@ -111,9 +116,32 @@
             android:id="@+id/birthday"
             layout="@layout/user_profile_item" />
 
-        <include
+        <RelativeLayout
             android:id="@+id/phone"
-            layout="@layout/user_profile_item" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/user_profile_item" />
+
+            <ImageView
+                android:id="@+id/smsIV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/LargePadding"
+                android:src="@drawable/icon_sms" />
+
+            <ImageView
+                android:id="@+id/callIV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_toLeftOf="@+id/smsIV"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_call" />
+
+        </RelativeLayout>
 
         <include
             android:id="@+id/email"

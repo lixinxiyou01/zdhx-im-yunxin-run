@@ -58,20 +58,15 @@ public class PictureUtil {
 	}
 	/**
 	 * 根据路径获得突破并压缩返回bitmap用于显示
-	 * 
-	 * @param imagesrc
 	 * @return
 	 */
 	@SuppressWarnings("static-access")
 	public static Bitmap getSmallBitmap(String filePath) {
-		
-		
 		final BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(filePath, options);
 		options.inSampleSize = calculateInSampleSize(options, 480, 800);
 		options.inJustDecodeBounds = false;
-		
 		return BitmapFactory.decodeFile(filePath, options);
 	}
 	/**

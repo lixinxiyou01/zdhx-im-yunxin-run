@@ -250,8 +250,7 @@ public class NoticeDetailActivity extends BaseActivity {
 
 						}
 					}, context);
-					downloadAsyncTask.execute(UrlUtil.getImgUrl(item.getTag().toString(),  ECApplication.getInstance().getLoginMap()), "aaa", arg2 + "", title);
-					System.out.println(UrlUtil.getImgUrl(ECApplication.getInstance().getAddress()+item.getTag().toString(), ECApplication.getInstance().getLoginMap()));
+					downloadAsyncTask.execute(UrlUtil.getImgUrl(item.getTag().toString(),ECApplication.getInstance().getV3LoginMap()), "aaa", arg2 + "", title);
 					imageView.setTag(R.drawable.amd_list_item_pause, downloadAsyncTask);
 					return;
 				}

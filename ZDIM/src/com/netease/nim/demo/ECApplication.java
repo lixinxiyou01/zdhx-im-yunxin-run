@@ -268,7 +268,7 @@ public class ECApplication extends Application {
     }
 
     private void initImageLoader() {
-        File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), "Hzth_IM_File/image");
+        File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), "zdhx_im_File/image");
         ImageLoaderConfiguration config = new ImageLoaderConfiguration
                 .Builder(this)
                 .threadPoolSize(1)//线程池内加载的数量
@@ -374,6 +374,7 @@ public class ECApplication extends Application {
         // 通讯录列表定制初始化
         ContactHelper.init();
 
+        //在线状态提供者
         NimUIKit.setOnlineStateContentProvider(new DemoOnlineStateContentProvider());
     }
 
@@ -526,7 +527,7 @@ public class ECApplication extends Application {
 
     public String getV3Address(){
         return getCurrentIMUser().getV3Url();
-//        return "http://192.168.1.52:9999/dc-storeroom";
+//        return "http://192.168.1.121:5555/dc-repair";
     }
 
     /**
@@ -557,6 +558,7 @@ public class ECApplication extends Application {
                     .putString("appCode", user.getAppCode())
                     .putString("accId", user.getAccId())
                     .putString("neteaseToken", user.getNeteaseToken())
+                    .putString("appCenterUrl", user.getAppCenterUrl())
                     .commit();
             SharPreUtil.saveObject(user.getId(),user);
         }
@@ -589,6 +591,7 @@ public class ECApplication extends Application {
         user.setV3Url(preferences.getString("v3Url", ""));
         user.setToken(preferences.getString("token", ""));
         user.setAccId(preferences.getString("accId", ""));
+        user.setAppCenterUrl(preferences.getString("appCenterUrl", ""));
         user.setNeteaseToken(preferences.getString("neteaseToken", ""));
         return user;
     }

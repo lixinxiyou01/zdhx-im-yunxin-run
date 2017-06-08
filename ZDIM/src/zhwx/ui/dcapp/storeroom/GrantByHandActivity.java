@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -571,9 +570,9 @@ public class GrantByHandActivity extends BaseActivity implements
 
         if (resultCode == 121) {
             if (sourBitmap != null) {
-                Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
-                Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
-                Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, getUserET.getEditableText().toString() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
+//              Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
+//              Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
+                Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, sourBitmap, getUserET.getEditableText().toString() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
                 File tempFile = new File(sdCard, "sing.jpg");
                 sendFiles.clear();
                 sendFiles.add(tempFile);

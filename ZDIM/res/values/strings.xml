@@ -238,6 +238,7 @@
     <string name="user_information">个人信息</string>
     <string name="nickname">昵 称</string>
     <string name="alias">备注名</string>
+    <string name="departmentname">部 门</string>
     <string name="gender">性 别</string>
     <string name="male">男</string>
     <string name="female">女</string>

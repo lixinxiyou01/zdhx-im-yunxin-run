@@ -37,9 +37,19 @@ public class User implements Serializable{
 	private String accId;   //云信Id
 	private String neteaseToken;  //云信登录Token
 
+	private String appCenterUrl;
 	public User() {
 		super();
 	}
+
+	public String getAppCenterUrl() {
+		return appCenterUrl;
+	}
+
+	public void setAppCenterUrl(String appCenterUrl) {
+		this.appCenterUrl = appCenterUrl;
+	}
+
 	public String getId() {
 		return id;
 	}

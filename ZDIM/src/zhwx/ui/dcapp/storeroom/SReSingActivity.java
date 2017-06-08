@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -411,11 +410,11 @@ public class SReSingActivity extends BaseActivity implements OnClickListener{
 		
 		if (requestCode == 111) {
 			if (sourBitmap != null) {
-				Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
-				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
+//				Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_cjl);
+//				Bitmap watermarkBitmap = WaterImageUtil.createWaterMaskLeftTop(context,sourBitmap, waterBitmap,0,0);
 //				Bitmap textBitmap = WaterImageUtil.drawTextToRightBottom(this, watermarkBitmap, "资产管理 " + DateUtil.getCurrDateSecondString(),25, Color.WHITE,10,10);
 //				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, "资产管理 " + DateUtil.getCurrDateSecondString(),35, Color.WHITE);
-				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, watermarkBitmap, model.getUserName() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
+				Bitmap textBitmap = WaterImageUtil.drawTextToCenter(this, sourBitmap, model.getUserName() + " " + DateUtil.getCurrDateSecondString() + "#低值易耗品",25, Color.WHITE);
 				File tempFile = new File(sdCard, "sing.jpg");
 				sendFiles.clear();
 				sendFiles.add(tempFile);
