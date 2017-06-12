@@ -1,12 +1,15 @@
 package com.netease.nim.uikit.recent.viewholder;
 
+import com.netease.nim.uikit.NimUIKit;
 import com.netease.nim.uikit.session.helper.TeamNotificationHelper;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.attachment.NotificationAttachment;
 import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.netease.nimlib.sdk.msg.model.RecentContact;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,15 @@ public class CommonRecentViewHolder extends RecentViewHolder {
     @Override
     protected String getContent() {
         return descOfMsg();
+    }
+
+    @Override
+    protected String getOnlineStateContent(RecentContact recent) {
+        if (recent.getSessionType() == SessionTypeEnum.P2P && NimUIKit.enableOnlineState()) {
+            return NimUIKit.getOnlineStateContentProvider().getSimpleDisplay(recent.getContactId());
+        } else {
+            return super.getOnlineStateContent(recent);
+        }
     }
 
     protected String descOfMsg() {

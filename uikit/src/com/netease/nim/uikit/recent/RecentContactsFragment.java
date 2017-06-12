@@ -12,6 +12,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.netease.nim.uikit.NimUIKit;
+import com.netease.nim.uikit.OnlineStateChangeListener;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.cache.FriendDataCache;
 import com.netease.nim.uikit.cache.TeamDataCache;
@@ -47,6 +49,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.netease.nim.uikit.common.ui.dialog.CustomAlertDialog.onSeparateItemClickListener;
 
@@ -89,6 +92,7 @@ public class RecentContactsFragment extends TFragment implements TAdapterDelegat
         requestMessages(true);
         registerObservers(true);
         registerDropCompletedListener(true);
+        registerOnlineStateChangeListener(true);
     }
 
     @Override
@@ -128,6 +132,7 @@ public class RecentContactsFragment extends TFragment implements TAdapterDelegat
         super.onDestroy();
         registerObservers(false);
         registerDropCompletedListener(false);
+        registerOnlineStateChangeListener(false);
     }
 
     /**
@@ -184,6 +189,25 @@ public class RecentContactsFragment extends TFragment implements TAdapterDelegat
 
             }
         });
+    }
+
+
+    OnlineStateChangeListener onlineStateChangeListener = new OnlineStateChangeListener() {
+        @Override
+        public void onlineStateChange(Set<String> accounts) {
+            notifyDataSetChanged();
+        }
+    };
+
+    private void registerOnlineStateChangeListener(boolean register) {
+        if (!NimUIKit.enableOnlineState()) {
+            return;
+        }
+        if (register) {
+            NimUIKit.addOnlineStateChangeListeners(onlineStateChangeListener);
+        } else {
+            NimUIKit.removeOnlineStateChangeListeners(onlineStateChangeListener);
+        }
     }
 
     private void showLongClickMenu(final RecentContact recent) {

@@ -37,6 +37,8 @@ public abstract class RecentViewHolder extends TViewHolder implements OnClickLis
 
     protected TextView tvDatetime;
 
+    protected TextView tvOnlineState;
+
     // 消息发送错误状态标记，目前没有逻辑处理
     protected ImageView imgMsgStatus;
 
@@ -65,6 +67,8 @@ public abstract class RecentViewHolder extends TViewHolder implements OnClickLis
         loadPortrait();
 
         updateNickLabel(UserInfoHelper.getUserTitleName(recent.getContactId(), recent.getSessionType()));
+
+        updateOnlineState(recent);
 
         updateMsgLabel();
 
@@ -136,6 +140,19 @@ public abstract class RecentViewHolder extends TViewHolder implements OnClickLis
         tvDatetime.setText(timeString);
     }
 
+    protected String getOnlineStateContent(RecentContact recent) {
+        return "";
+    }
+
+    protected void updateOnlineState(RecentContact recent) {
+        if (recent.getSessionType() == SessionTypeEnum.Team) {
+            tvOnlineState.setVisibility(View.GONE);
+        } else {
+            tvOnlineState.setVisibility(View.VISIBLE);
+            tvOnlineState.setText(getOnlineStateContent(recent));
+        }
+    }
+
     protected void updateNickLabel(String nick) {
         int labelWidth = ScreenUtil.screenWidth;
         labelWidth -= ScreenUtil.dip2px(50 + 70); // 减去固定的头像和时间宽度
@@ -162,6 +179,8 @@ public abstract class RecentViewHolder extends TViewHolder implements OnClickLis
         this.imgMsgStatus = (ImageView) view.findViewById(R.id.img_msg_status);
         this.bottomLine = view.findViewById(R.id.bottom_line);
         this.topLine = view.findViewById(R.id.top_line);
+
+        this.tvOnlineState = (TextView) view.findViewById(R.id.tv_online_state);
 
         this.tvUnread.setClickListener(new DropFake.ITouchListener() {
             @Override
