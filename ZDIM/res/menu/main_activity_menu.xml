@@ -9,7 +9,6 @@
         app:showAsAction="always"
         tools:ignore="AppCompatResource" />
     <item
-        android:id="@+id/welcome_menu"
         android:icon="@drawable/action_bar_black_more_icon"
         android:title=""
         app:showAsAction="always"

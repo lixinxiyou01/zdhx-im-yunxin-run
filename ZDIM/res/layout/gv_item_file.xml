@@ -9,7 +9,6 @@
     tools:ignore="HardcodedText,UselessParent" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >

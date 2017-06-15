@@ -111,7 +111,6 @@
                         android:layout_marginTop="10dp" >
 
                         <TextView
-                            android:id="@+id/TextView061"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="出发时间：" />
@@ -147,7 +146,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/manageLay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"

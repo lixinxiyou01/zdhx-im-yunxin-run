@@ -74,7 +74,6 @@
                     android:src="@drawable/defult_head_img" />
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:background="@drawable/icon_red_big"
@@ -142,7 +141,6 @@
                     android:src="@drawable/defult_head_img" />
 
                 <TextView
-                    android:id="@+id/TextView123"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:background="@drawable/icon_red_big"

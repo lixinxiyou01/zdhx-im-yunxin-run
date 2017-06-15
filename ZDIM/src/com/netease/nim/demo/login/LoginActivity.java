@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -50,8 +49,6 @@ import com.netease.nim.uikit.permission.annotation.OnMPermissionGranted;
 import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.RequestCallbackWrapper;
-import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.ClientType;
 import com.netease.nimlib.sdk.auth.LoginInfo;
@@ -79,8 +76,6 @@ import zhwx.common.view.CircleImageViewWithWhite;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.ui.adapter.OrganizationSpinnerAdapter;
-
-import static com.netease.nim.demo.R.string.login;
 
 
 /**
@@ -282,25 +277,6 @@ public class LoginActivity extends UI implements OnKeyListener {
     }
 
     /**
-     * ActionBar 右上角按钮
-     */
-    private void initRightTopBtn() {
-        rightTopBtn = addRegisterRightTopBtn(this, login);
-        rightTopBtn.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (registerMode) {
-                    register();
-                } else {
-                    //fakeLoginTest(); // 假登录代码示例
-                    loginImServer();
-                }
-            }
-        });
-    }
-
-    /**
      * 登录面板
      */
     private void setupLoginPanel() {
@@ -308,21 +284,6 @@ public class LoginActivity extends UI implements OnKeyListener {
         usernameET.setText(account);
     }
 
-    /**
-     * 注册面板
-     */
-    private void setupRegisterPanel() {
-        loginLayout = findView(R.id.login_layout);
-        registerLayout = findView(R.id.register_layout);
-        switchModeBtn = findView(R.id.register_login_tip);
-
-        switchModeBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchMode();
-            }
-        });
-    }
 
     private TextWatcher textWatcher = new TextWatcher() {
 
@@ -375,6 +336,7 @@ public class LoginActivity extends UI implements OnKeyListener {
             }
         }).setCanceledOnTouchOutside(false);
         map = new HashMap<String, ParameterValue>();
+        map.put("terminal", new ParameterValue("android"));//android 0, ios 1, pc 2
         map.put("loginName", new ParameterValue(loginName));
         map.put("password", new ParameterValue(passWord));
         map.put("organizationId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getOrganizationId()));
@@ -711,7 +673,6 @@ public class LoginActivity extends UI implements OnKeyListener {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(LoginActivity.this, R.string.register_success, Toast.LENGTH_SHORT).show();
-                switchMode();  // 切换回登录
                 usernameET.setText(account);
                 passwordET.setText(password);
 
@@ -767,103 +728,4 @@ public class LoginActivity extends UI implements OnKeyListener {
     /**
      * ***************************************** 注册/登录切换 **************************************
      */
-    private void switchMode() {
-        registerMode = !registerMode;
-
-        if (registerMode && !registerPanelInited) {
-            registerAccountEdit = findView(R.id.edit_register_account);
-            registerNickNameEdit = findView(R.id.edit_register_nickname);
-            registerPasswordEdit = findView(R.id.edit_register_password);
-
-            registerAccountEdit.setIconResource(R.drawable.user_account_icon);
-            registerNickNameEdit.setIconResource(R.drawable.nick_name_icon);
-            registerPasswordEdit.setIconResource(R.drawable.user_pwd_lock_icon);
-
-            registerAccountEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
-            registerNickNameEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-            registerPasswordEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
-
-            registerAccountEdit.addTextChangedListener(textWatcher);
-            registerNickNameEdit.addTextChangedListener(textWatcher);
-            registerPasswordEdit.addTextChangedListener(textWatcher);
-
-            registerPanelInited = true;
-        }
-
-        setTitle(registerMode ? R.string.register : login);
-        loginLayout.setVisibility(registerMode ? View.GONE : View.VISIBLE);
-        registerLayout.setVisibility(registerMode ? View.VISIBLE : View.GONE);
-        switchModeBtn.setText(registerMode ? R.string.login_has_account : R.string.register);
-        if (registerMode) {
-            rightTopBtn.setEnabled(true);
-        } else {
-            boolean isEnable = usernameET.getText().length() > 0
-                    && passwordET.getText().length() > 0;
-            rightTopBtn.setEnabled(isEnable);
-        }
-    }
-
-    public TextView addRegisterRightTopBtn(UI activity, int strResId) {
-        String text = activity.getResources().getString(strResId);
-        TextView textView = findView(R.id.action_bar_right_clickable_textview);
-        textView.setText(text);
-        if (textView != null) {
-            textView.setBackgroundResource(R.drawable.register_right_top_btn_selector);
-            textView.setPadding(ScreenUtil.dip2px(10), 0, ScreenUtil.dip2px(10), 0);
-        }
-        return textView;
-    }
-
-    /**
-     * *********** 假登录示例：假登录后，可以查看该用户数据，但向云信发送数据会失败；随后手动登录后可以发数据 **************
-     */
-    private void fakeLoginTest() {
-        // 获取账号、密码；账号用于假登录，密码在手动登录时需要
-        final String account = usernameET.getEditableText().toString().toLowerCase();
-        final String token = tokenFromPassword(passwordET.getEditableText().toString());
-
-        // 执行假登录
-        boolean res = NIMClient.getService(AuthService.class).openLocalCache(account); // SDK会将DB打开，支持查询。
-        Log.i("test", "fake login " + (res ? "success" : "failed"));
-
-        if (!res) {
-            return;
-        }
-
-        // Demo缓存当前假登录的账号
-        DemoCache.setAccount(account);
-
-        // 初始化消息提醒
-        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-
-        // 初始化免打扰
-        if (UserPreferences.getStatusConfig() == null) {
-            UserPreferences.setStatusConfig(DemoCache.getNotificationConfig());
-        }
-        NIMClient.updateStatusBarNotificationConfig(UserPreferences.getStatusConfig());
-
-        // 构建缓存
-        DataCacheManager.buildDataCacheAsync();
-
-        // 进入主界面，此时可以查询数据（最近联系人列表、本地消息历史、群资料等都可以查询，但当云信服务器发起请求会返回408超时）
-        MainActivity.start(LoginActivity.this, new Intent().putExtra("startFlag",true));
-
-        // 演示15s后手动登录，登录成功后，可以正常收发数据
-        getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loginRequest = NIMClient.getService(AuthService.class).login(new LoginInfo(account, token));
-                loginRequest.setCallback(new RequestCallbackWrapper() {
-                    @Override
-                    public void onResult(int code, Object result, Throwable exception) {
-                        Log.i("test", "real login, code=" + code);
-                        if (code == ResponseCode.RES_SUCCESS) {
-                            saveLoginInfo(account, token);
-                            finish();
-                        }
-                    }
-                });
-            }
-        }, 15 * 1000);
-    }
 }

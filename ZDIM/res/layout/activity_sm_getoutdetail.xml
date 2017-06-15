@@ -7,7 +7,6 @@
     android:descendantFocusability="blocksDescendants" >
 
     <ScrollView
-        android:id="@+id/mainliat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/order_btnLay"
@@ -81,7 +80,6 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/TextView071"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="制单日期："/>
@@ -157,7 +155,6 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/TextView132"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="领用人签字："/>

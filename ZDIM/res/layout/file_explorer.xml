@@ -16,7 +16,6 @@
     android:background="@color/white" >
 
     <LinearLayout
-        android:id="@+id/control_tab"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/SmallListHeight"
         android:orientation="horizontal" >

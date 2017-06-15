@@ -5,11 +5,8 @@
     <dimen name="isetting_item_height">55dip</dimen>
     <dimen name="isetting_item_padding_left">15dip</dimen>
     <dimen name="isetting_item_padding_right">15dip</dimen>
-    <dimen name="general_item_height">50dp</dimen>
     <dimen name="action_bar_height">48dip</dimen>
     <dimen name="pager_sliding_tab_strip_height">40dip</dimen>
-    <dimen name="actionbar_title_size">17dp</dimen>
-    <dimen name="actionbar_sub_title_size">13dp</dimen>
     <dimen name="text_size_9">9sp</dimen>
     <dimen name="text_size_10">10sp</dimen>
     <dimen name="text_size_11">11sp</dimen>
@@ -33,7 +30,6 @@
     <dimen name="text_size_45">45sp</dimen>
     <dimen name="text_size_46">46sp</dimen>
     <dimen name="text_size_55">55sp</dimen>
-    <dimen name="sns_content_text_size_15">15sp</dimen>
     <dimen name="split_one_pixels">1px</dimen>
     <dimen name="text_small_size_ten_sp">10sp</dimen>
     
@@ -91,7 +87,6 @@
     <dimen name="tag_corner_radius">20.0dip</dimen>
     <dimen name="tag_horizontal_spacing">5.0dip</dimen>
     <dimen name="tag_vertical_spacing">5.0dip</dimen>
-    <dimen name="common_margin">12.0dip</dimen>
     <dimen name="common_margin_10">10.0dip</dimen>
     
 </resources>

@@ -219,7 +219,6 @@
                 android:background="@color/color_gray_d9d9d9">
 
                 <TextView
-                    android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -257,7 +256,6 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:id="@+id/imageView81"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -291,7 +289,6 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:id="@+id/imageView6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -324,7 +321,6 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:id="@+id/imageView7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -356,7 +352,6 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:id="@+id/imageView8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -424,7 +419,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button5"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="5"

@@ -50,7 +50,6 @@
                         android:textColor="@color/greytext" />
 
                     <TextView
-                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -65,7 +64,6 @@
                         android:text="x" />
 
                     <TextView
-                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -149,7 +147,6 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button1"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"

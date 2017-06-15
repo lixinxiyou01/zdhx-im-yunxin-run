@@ -53,7 +53,6 @@
                 android:background="@color/white" >
 
                 <LinearLayout
-                    android:id="@+id/ttt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
@@ -64,7 +63,6 @@
                         android:gravity="center_vertical" >
 
                         <TextView
-                            android:id="@+id/back"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:layout_alignParentLeft="true"
@@ -105,18 +103,15 @@
             </FrameLayout>
 
             <zhwx.ui.imapp.notice.view.MyScrollView
-                android:id="@+id/ScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <LinearLayout
-                    android:id="@+id/top_bar2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
                     <LinearLayout
-                        android:id="@+id/top_bar3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/homework_bg2"
@@ -170,7 +165,6 @@
                     </LinearLayout>
 
                     <RelativeLayout
-                        android:id="@+id/top_bar4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp" >

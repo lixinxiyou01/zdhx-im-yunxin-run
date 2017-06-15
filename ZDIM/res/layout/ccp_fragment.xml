@@ -12,14 +12,12 @@
    be found in the AUTHORS file in the root of the source tree.
  -->
 <zhwx.common.base.CCPLayoutListenerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mm_base_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/transparent"
     android:orientation="vertical" >
 
     <View
-        android:id="@+id/view_top_margin"
         android:layout_width="fill_parent"
         android:layout_height="24.0dip"
         android:visibility="gone" />

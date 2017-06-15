@@ -24,7 +24,6 @@
                 android:textColor="@color/red" />
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
@@ -47,7 +46,6 @@
                     android:text="通过" />
 
                 <RadioButton
-                    android:id="@+id/unpassRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

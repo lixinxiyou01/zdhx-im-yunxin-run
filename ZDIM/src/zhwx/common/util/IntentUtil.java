@@ -77,9 +77,12 @@ public class IntentUtil {
                 context.startActivity(IntentUtil.getTextFileIntent(path, false));
 
             }else if(ConstantForUikit.ATTACHMENT_JPG.equals(lastName)){
-                context.startActivity(IntentUtil.getImageFileIntent(path));
+				context.startActivity(IntentUtil.getImageFileIntent(path));
 
-            }else if(ConstantForUikit.ATTACHMENT_PNG.equals(lastName)){
+			}else if(ConstantForUikit.ATTACHMENT_JPEG.equals(lastName)){
+				context.startActivity(IntentUtil.getImageFileIntent(path));
+
+			}else if(ConstantForUikit.ATTACHMENT_PNG.equals(lastName)){
                 context.startActivity(IntentUtil.getImageFileIntent(path));
 
             }else if(ConstantForUikit.ATTACHMENT_GIF.equals(lastName)){

@@ -18,7 +18,6 @@
             android:gravity="center_vertical" >
 
             <LinearLayout
-                android:id="@+id/LinearLayout01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -55,7 +54,6 @@
     </FrameLayout>
 
     <ScrollView
-        android:id="@+id/mainSV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -151,7 +149,6 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/userLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >

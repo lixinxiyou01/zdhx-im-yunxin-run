@@ -294,6 +294,9 @@ public class NoticeDetailActivity extends BaseActivity {
 							}else if(Constant.ATTACHMENT_JPG.equals(lastName)){
 								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 
+							}else if(Constant.ATTACHMENT_JPEG.equals(lastName)){
+								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
+
 							}else if(Constant.ATTACHMENT_PNG.equals(lastName)){
 								startActivity(IntentUtilForUikit.getImageFileIntent(file.getPath(),context));
 

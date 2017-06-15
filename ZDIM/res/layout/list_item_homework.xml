@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -16,7 +14,6 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/datetime"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp" >
@@ -60,12 +57,10 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/content0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <LinearLayout
-                android:id="@+id/content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/grey_strock"
@@ -73,7 +68,6 @@
                 android:padding="5dp" >
 
                 <RelativeLayout
-                    android:id="@+id/RelativeLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 

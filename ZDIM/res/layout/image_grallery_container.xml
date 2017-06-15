@@ -23,7 +23,6 @@
         android:background="@android:color/black" />
 
     <RelativeLayout
-        android:id="@+id/imagebrower_layout_pagelayout"
         android:background="#5e171b19"
         android:paddingLeft="15.0dip"
         android:paddingRight="15.0dip"

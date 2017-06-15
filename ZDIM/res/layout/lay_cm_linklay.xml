@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linkLay"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -23,7 +22,6 @@
             android:src="@drawable/icon_cm_link_call" />
 
         <TextView
-            android:id="@+id/TextView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="拨打电话"
@@ -69,7 +67,6 @@
             android:src="@drawable/icon_cm_link_im" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="IM消息"

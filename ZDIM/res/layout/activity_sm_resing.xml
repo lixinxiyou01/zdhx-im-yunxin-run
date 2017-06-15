@@ -7,7 +7,6 @@
     >
 
     <ScrollView
-        android:id="@+id/mainliat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/order_btnLay"
@@ -34,7 +33,6 @@
                     android:layout_marginTop="5dp" >
 
                     <TextView
-                        android:id="@+id/TextView12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"

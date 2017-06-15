@@ -40,7 +40,6 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button1"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -92,14 +91,12 @@
                 android:orientation="vertical" >
 
                 <RelativeLayout
-                    android:id="@+id/checkAllOrderLay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/list_item_selector"
                     android:onClick="oncheckAllOrder" >
 
                     <TextView
-                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -133,7 +130,6 @@
                     android:layout_height="wrap_content" >
 
                     <RelativeLayout
-                        android:id="@+id/dpc_a_lay"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -141,7 +137,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button04"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -170,7 +165,6 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/pcz_a_lay"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -178,7 +172,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button03"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -207,7 +200,6 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/ypc_a_lay"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -215,7 +207,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button02"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -244,7 +235,6 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/dpj_a_lay"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -346,7 +336,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button06"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -382,7 +371,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button07"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -418,7 +406,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button08"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -454,7 +441,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button05"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -556,7 +542,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -592,7 +577,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -628,7 +612,6 @@
                         android:background="@drawable/list_item_selector" >
 
                         <Button
-                            android:id="@+id/Button12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -682,7 +665,6 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/actionBar1"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:background="@drawable/list_item_selector"

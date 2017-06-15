@@ -46,7 +46,6 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView5"
             android:layout_width="10dp"
             android:layout_height="20dp"
             android:scaleType="fitXY"

@@ -93,7 +93,6 @@ be found in the AUTHORS file in the root of the source tree.
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/top_right"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:minWidth="@dimen/btn_topbar_layout_minwidth" >

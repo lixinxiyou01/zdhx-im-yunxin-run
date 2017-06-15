@@ -5,13 +5,9 @@
         android:id="@+id/background"
         android:drawable="@drawable/rating_big_empty">
     </item>
-    <item
-        android:id="@+id/secondaryProgress"
-        android:drawable="@drawable/rating_big_empty">
+    <item android:drawable="@drawable/rating_big_empty">
     </item>
-    <item
-        android:id="@+id/progress"
-        android:drawable="@drawable/rating_big_solid">
+    <item android:drawable="@drawable/rating_big_solid">
     </item>
 
 </layer-list>

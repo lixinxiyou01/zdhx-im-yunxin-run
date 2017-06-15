@@ -28,7 +28,6 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/button1"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -71,7 +70,6 @@
                 android:onClick="onSelectTeacher">
 
                 <ImageView
-                    android:id="@+id/ImageView03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -199,7 +197,6 @@
 
 
                 <ImageView
-                    android:id="@+id/ImageView04"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

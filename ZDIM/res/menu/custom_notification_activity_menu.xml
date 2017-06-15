@@ -3,7 +3,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/send_custom_notification"
         android:icon="@drawable/action_bar_black_more_icon"
         android:title=""
         app:showAsAction="always">

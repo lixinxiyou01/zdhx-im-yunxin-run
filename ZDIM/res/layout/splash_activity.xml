@@ -11,7 +11,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/adLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout1"
@@ -29,7 +28,6 @@
         android:paddingBottom="10.0dip" >
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -45,7 +43,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/loginTipLay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -68,7 +65,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="V1.2"
@@ -79,7 +75,6 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/tvCopyRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

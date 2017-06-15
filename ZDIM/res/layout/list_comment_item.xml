@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/commentItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
@@ -14,7 +13,6 @@
         >
 
         <TextView
-            android:id="@+id/replyUserNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="王小二"
@@ -24,7 +22,6 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/replyStringTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="回复"
@@ -33,7 +30,6 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/targetUserNameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Small Text"

@@ -12,18 +12,8 @@
    be found in the AUTHORS file in the root of the source tree.
  -->
 <resources>
-    <item name="main_tab_root" type="id"/>
-    <item name="main_tab_navigation_img" type="id"/>
-    <item name="home" type="id"/>
     <item name="title" type="id"/>
-    <item name="action_bar_activity_content" type="id"/>
-    <item name="action_menu_divider" type="id"/>
-    <item name="action_menu_presenter" type="id"/>
-    <item name="chatting_checkbox" type="id"/>
-    <item name="chatting_content_area" type="id"/>
-    <item name="chatting_maskview" type="id"/>
-    <item name="content" type="id"/>
-    
+
     <item type="id" name="expandable_text"/>
     <item type="id" name="expand_collapse"/>
     

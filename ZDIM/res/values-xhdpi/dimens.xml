@@ -13,10 +13,6 @@
  -->
 <resources>
     <dimen name="list_divider_height">1.0px</dimen>
-    <dimen name="size_large">20.0dip</dimen>
-    <dimen name="size_big">18.0dip</dimen>
-    <dimen name="size_medium">16.0dip</dimen>
     <dimen name="size_top_title_size">18.0dip</dimen>
     <dimen name="size_small">14.0dip</dimen>
-    <dimen name="size_tiny">12.0dip</dimen>
 </resources>

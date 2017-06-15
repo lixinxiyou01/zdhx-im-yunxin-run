@@ -27,7 +27,6 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/button1"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -48,15 +47,16 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <RelativeLayout
-        android:id="@+id/cakeLay"
         android:layout_width="match_parent"
         android:layout_height="250dp" >
 
         <zhwx.common.view.cakeview.CakeSurfaceView
             android:id="@+id/cakeSurfaceView1"
             android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_height="250dp" />
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -100,7 +100,6 @@
                 >
 
                 <RelativeLayout
-                    android:id="@+id/textView2"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:background="@color/notice_unread"

@@ -16,9 +16,9 @@
 
 package volley;
 
-import java.util.concurrent.Executor;
-
 import android.os.Handler;
+
+import java.util.concurrent.Executor;
 
 /**
  * Delivers responses and errors.
@@ -41,7 +41,7 @@ public class ExecutorDelivery implements ResponseDelivery {
         };
     }
 
-    /**
+    /**i
      * Creates a new response delivery interface, mockable version
      * for testing.
      * @param executor For running delivery tasks

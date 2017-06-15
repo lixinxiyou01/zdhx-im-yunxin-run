@@ -66,7 +66,6 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/title_content_layout"
             android:layout_toRightOf="@id/from_account_head_image"
             android:layout_toLeftOf="@id/operator_layout"
             android:layout_width="match_parent"

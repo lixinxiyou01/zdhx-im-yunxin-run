@@ -16,7 +16,6 @@
             android:gravity="center_vertical" >
 
             <LinearLayout
-                android:id="@+id/LinearLayout01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -135,7 +134,6 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/userLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -158,7 +156,6 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/orderNameET"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -194,7 +191,6 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/phoneNumET"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -231,7 +227,6 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/departmentET"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

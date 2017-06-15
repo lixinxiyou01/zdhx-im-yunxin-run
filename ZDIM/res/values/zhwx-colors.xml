@@ -1,102 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="abc_search_url_text_normal">#ff7fa87f</color>
-
-    <item name="abc_search_url_text_selected" type="color">@*android:color/black</item>
-    <item name="abc_search_url_text_pressed" type="color">@*android:color/black</item>
-    <item name="green_btn_color_disable" type="color">@color/ccp_green_alpha</item>
-
     <color name="list_divider">#ffdadada</color>
     <color name="green_btn_color_pressed">#ff298409</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="white_al">#AAFFFFFF</color>
     <color name="gray">#dddddd</color>
     <color name="light_gray">#eeeeee</color>
     <color name="black">#ff000000</color>
     <color name="transparent">#00000000</color>
     <color name="dark_gray">#363636</color>
     <color name="normal_text_color">#444444</color>
-    <color name="light_text_color">#ffd7d7d7</color>
-    <color name="background_dark">#ff000000</color>
-    <color name="bright_foreground_light">@color/background_dark</color>
-    <color name="bright_foreground_light_disabled">#80000000</color>
-    <color name="actionbar_selector_color">#4d000000</color>
-    <color name="actionbar_bg_color">#ff2e3132</color>
     <color name="list_devider_color">#fff2f2f2</color>
     <color name="progress_horizontal_green">#ff45c01a</color>
     <color name="hint_text_color">#ff999999</color>
-    <color name="actionbar_devider_color">#ff212324</color>
-    <color name="white_color_disable">#7fffffff</color>
-    <color name="dialog_transparent">#bf000000</color>
-    <color name="ccp_green">#ff00B486</color>
-    <color name="launcher_tab_text_color">#ff636363</color>
-    <color name="launcher_tab_text_color_press">#ffc9c9c9</color>
-    <color name="ccp_green_alpha">#7f00B486</color>
     <color name="navpage">#ffffffff</color>
-    <color name="last_msg_tv_color">#ffaaaaaa</color>
-    <color name="lightgrey">#ff888888</color>
-    <color name="footer_text_color">#ff7f7f7f</color>
-    <color name="chatroom_user_displayname_color">#A9A9A9</color>
-    <color name="hint_text_color_dark_bg">#ff484c4c</color>
-    <color name="form_hint_text_color">#ffdddddd</color>
-    <color name="ccp_attentoin_color">#CCCCCC</color>
     <color name="text_disabled">#ffa8a8a8</color>
-    <color name="common_popup_menu_list_divider">#ff191919</color>
     <color name="edit_save_btn_color_disable">#ffa8c6ed</color>
     <color name="edit_save_btn_color_click">#ffffffff</color>
-    <color name="small_line_color">#26000000</color>
     <color name="action_bar_tittle_color">#ffcfcfcf</color>
     <color name="red_btn_color_normal">#37b76d</color>
-    <color name="red_btn_color_pressed">#319b5e</color>
-    <color name="red_btn_color_disable">#7fff5454</color>
     <color name="text_content">#ffa19d94</color>
     <color name="dialog_background">#fffbf6f2</color>
     <color name="dialog_btn_press">#ffece5df</color>
     <color name="dialog_divider">#ffe8e0da</color>
     <color name="dialog_btn_normal">#fffbf6f2</color>
-    <color name="dialog_item_normal">#fff7f1ec</color>
     <color name="dialog_item_press">#ffece5df</color>
-    <color name="dialog_backgroud_full">#88000000</color>
     <color name="text_desc">#ffbebbb4</color>
     <color name="text_title">#ff5f5f5f</color>
     <color name="text_light_gray">#dddddd</color>
     <color name="blue">#ff169aff</color>
-    <color name="album_ui_bg">#ff191919</color>
-    <color name="bottom_notepad_panel_bg">#FFF4F4F4</color>
-    <color name="hint_color_white_bg">#ffc5c5c5</color>
     <color name="devideline_listview">#ffe5e2d4</color>
 
-    <item name="menu_pressed_color" type="color">@color/small_line_color</item>
-
-    <color name="bg_bottom_tip">#cc000000</color>
-    <color name="bg_warning">#fffde1b6</color>
-    <color name="text_warning">#ffb8956b</color>
-    <color name="top_bar_normal_bg">#01af69</color>
     <color name="main_bg">#18ab8e</color>
     <color name="top_bg">#18ab8e</color>
    <!--  <color name="top_bg">#00a650</color> -->
     <color name="btn_press_ok_color">#319b5e</color>
-    <color name="btn_unpress_ok_color">#37b76d</color>
-    <color name="btn_pressed_green_solid">#a6f9d8</color>
     <!-- list按下颜色 -->
     <color name="btn_logout_normal">#d33f3f</color>
     <color name="btn_logout_pressed">#DA5A4D</color>
-    <color name="btn_gray_normal">#c0c0c0</color>
-    <color name="btn_gray_pressed_status">#b5b5b6</color>
-    <color name="btn_gray_pressed">#666667</color>
-    <color name="btn_login_normal">#f3a30c</color>
     <color name="btn_login_pressed">#17d4af</color>
-    <color name="light_blue">#6593cb</color>
     <color name="name_blue">#576b95</color>
-    <color name="text_can_send">#ffffffff</color>
-    <color name="text_can_not_send">#55ffffff</color>
     <color name="blue_focused">#c1e8f7</color>
     <color name="greytext">#555555</color>
     <color name="bg_pressed">#90f4df</color>
     <color name="bg_pressed_notice">#d9ae00</color>
 
-    <color name="bind_input">#AAAAAA</color>
     <color name="line">#ffd3dde6</color>
     <color name="main_bg_notice">#ebc426</color>
     <color name="main_bg_notice_hard">#d9ae00</color>
@@ -104,8 +52,7 @@
     <color name="notice_unread">#e64f5a</color>
     
     <color name="main_bg_carmanage">#FFf28d2b</color>
-    <color name="background_tab_pressed">#6633B5E5</color>
-    
+
     <color name="main_bg_assets">#3989fc</color>
     <color name="main_bg_checkin">#4c4c4c</color>
     <color name="main_bg_repairs">#177bb6</color>
@@ -116,8 +63,6 @@
     
     
      <!-- 按下作业颜色 -->
-    <color name="homework_cyan">#36BFB5</color>
-    <color name="homework_turquoise">#40e0d0</color>
 
     <color name="main_bg_homework">#36BFB5</color>
     <color name="main_bg_homework_pressed">#17d4af</color>

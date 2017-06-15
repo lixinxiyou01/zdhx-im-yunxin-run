@@ -20,7 +20,6 @@
             android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/start_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_from"
@@ -45,7 +44,6 @@
             android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/end_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_to"
@@ -65,7 +63,6 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/no_disturb_tip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dip"
