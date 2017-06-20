@@ -34,7 +34,6 @@ import zhwx.ui.dcapp.takecourse.TackCourseIndexActivity;
 import zhwx.ui.imapp.notice.NoticeActivity;
 import zhwx.ui.imapp.notice.NoticeDetailActivity;
 import zhwx.ui.webapp.WebAppActivity;
-import zhwx.ui.webapp.WebAppWithBackActivity;
 
 import static com.netease.nim.uikit.contact_selector.activity.ContactSelectActivity.context;
 
@@ -401,14 +400,18 @@ public class IntentUtil {
 				intent.putExtra("webUrl",  ECApplication.getInstance().getAddress() + Constant.WEBAPP_URL_MESS
 						+ "?sourceId=" + v3NoticeCenter.getSourceId()
 						+ "&userId=" + ECApplication.getInstance().getCurrentIMUser().getId());
-			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_TECH_MANAGE)) { //科研管理
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_TECH_MANAGE)) { //课题管理
 
-				intent = new Intent(context,WebAppWithBackActivity.class);
+				intent = new Intent(context,WebAppActivity.class);
 
-				intent.putExtra("webUrl",  Constant.WEBAPP_URL_TECH_MANAGE
-						+ "?loginName=" + ECApplication.getInstance().getCurrentIMUser().getLoginName());
+				intent.putExtra("webUrl",  Constant.WEBAPP_URL_TECH_MANAGE+ "?loginName=" + ECApplication.getInstance().getCurrentIMUser().getLoginName());
 
-			}else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CARMANAGE)) { //车辆管理
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_TECH_JLLT)) { //经纶论坛
+
+				intent = new Intent(context,WebAppActivity.class);
+				intent.putExtra("webUrl",  Constant.WEBAPP_URL_TECH_JLLT);
+
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CARMANAGE)) { //车辆管理
 
 				intent = new Intent(context,CMainActivity.class);
 			}  else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CHECKIN)) { //考 勤
@@ -547,9 +550,14 @@ public class IntentUtil {
 				buildAlert.show();
 			}
 
-		} else if (V3NoticeCenter.NOTICE_KIND_TECH_MANAGE.equals(kind)) { //科研管理
+		} else if (V3NoticeCenter.NOTICE_KIND_TECH_MANAGE.equals(kind)) { //课题管理
 			V3NoticeCenter center = new V3NoticeCenter();
 			center.setKind(V3NoticeCenter.NOTICE_KIND_TECH_MANAGE);
+			context.startActivity(IntentUtil.getStartAppIntent(context, center));
+
+		} else if (V3NoticeCenter.NOTICE_KIND_TECH_JLLT.equals(kind)) { //经纶论坛
+			V3NoticeCenter center = new V3NoticeCenter();
+			center.setKind(V3NoticeCenter.NOTICE_KIND_TECH_JLLT);
 			context.startActivity(IntentUtil.getStartAppIntent(context, center));
 
 		}else if (V3NoticeCenter.NOTICE_KIND_HOMEWORK.equals(kind)) {   //作业本地

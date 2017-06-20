@@ -30,13 +30,14 @@ public class StickerManager {
     private static final String CATEGORY_AJMD = "ajmd";
     private static final String CATEGORY_XXY = "xxy";
     private static final String CATEGORY_LT = "lt";
+    private static final String CATEGORY_HUANG = "huang";
 
     /**
      * 数据源
      */
     private List<StickerCategory> stickerCategories = new ArrayList<>();
     private Map<String, StickerCategory> stickerCategoryMap = new HashMap<>();
-    private Map<String, Integer> stickerOrder = new HashMap<>(3);
+    private Map<String, Integer> stickerOrder = new HashMap<>(4);
 
     /**
      * ImageLoader
@@ -65,12 +66,13 @@ public class StickerManager {
         stickerOrder.put(CATEGORY_AJMD, 1);
         stickerOrder.put(CATEGORY_XXY, 2);
         stickerOrder.put(CATEGORY_LT, 3);
+        stickerOrder.put(CATEGORY_HUANG, 4);
     }
 
     private boolean isSystemSticker(String category) {
         return CATEGORY_XXY.equals(category) ||
                 CATEGORY_AJMD.equals(category) ||
-                CATEGORY_LT.equals(category);
+                CATEGORY_LT.equals(category)|| CATEGORY_HUANG.equals(category);
     }
 
     private int getStickerOrder(String categoryName) {

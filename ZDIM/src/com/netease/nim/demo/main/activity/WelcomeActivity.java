@@ -138,7 +138,9 @@ public class WelcomeActivity extends UI {
         String token = Preferences.getUserToken();
         String appWebUrl = ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl();
         Log.i(TAG, "get local sdk token =" + token);
-        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(appWebUrl);
+        //TODO
+//        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(appWebUrl);
+        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token);
     }
 
     private void parseNotifyIntent(Intent intent) {

@@ -106,7 +106,8 @@ public class Apps implements Serializable {
 		/**教科研*/
 		AppGroup jkyAg = new AppGroup("教科研","jky");
 		List<Apps> jkyAppList = new ArrayList<Apps>();
-		jkyAppList.add(new Apps("教科研",R.drawable.icon_keyan,"tm"));
+		jkyAppList.add(new Apps("课题管理",R.drawable.icon_keyan,"tm"));
+		jkyAppList.add(new Apps("经纶论坛",R.drawable.icon_jllt,"jllt"));
 		jkyAg.setApps(jkyAppList);
 		appGroupList.add(jkyAg);
 

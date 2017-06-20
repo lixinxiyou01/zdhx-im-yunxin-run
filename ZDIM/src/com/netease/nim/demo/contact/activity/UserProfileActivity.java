@@ -282,7 +282,7 @@ public class UserProfileActivity extends UI {
         } else {
             birthdayLayout.setVisibility(View.GONE);
         }
-        if (userInfo.getExtensionMap() != null && !TextUtils.isEmpty(userInfo.getExtensionMap().get("departmentName").toString())) {
+        if (userInfo.getExtensionMap() != null && !TextUtils.isEmpty(userInfo.getExtensionMap().get("departmentName")!=null?userInfo.getExtensionMap().get("departmentName").toString():null)) {
             departmentNameLayout.setVisibility(View.VISIBLE);
             departmentNameText.setText(userInfo.getExtensionMap().get("departmentName").toString());
         } {

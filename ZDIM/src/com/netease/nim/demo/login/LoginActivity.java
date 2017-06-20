@@ -199,7 +199,6 @@ public class LoginActivity extends UI implements OnKeyListener {
                 if (registerMode) {
                     register();
                 } else {
-                    //fakeLoginTest(); // 假登录代码示例
                     loginImServer();
                 }
             }
@@ -468,7 +467,7 @@ public class LoginActivity extends UI implements OnKeyListener {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                             updata();
+                            updata();
                             mPostingdialog.dismiss();
                         }
                     });

@@ -19,6 +19,7 @@ import com.netease.nim.demo.R;
 import com.netease.nim.uikit.common.fragment.TFragment;
 
 import zhwx.common.util.IntentUtil;
+import zhwx.common.util.ToastUtil;
 import zhwx.ui.webapp.WebAppActivity;
 import zhwx.ui.webapp.view.loadview.LoadingView;
 
@@ -103,6 +104,7 @@ public class ApplicationFragmentWeb extends TFragment {
 			public void onProgressChanged(WebView view, int newProgress) {
 				if (newProgress == 100) {
 				} else {
+
 				}
 				super.onProgressChanged(view, newProgress);
 			}
@@ -131,6 +133,13 @@ public class ApplicationFragmentWeb extends TFragment {
 		public void onPageFinished(WebView view,String url)  //加载结束
 		{
 			super.onPageFinished(view, url);
+		}
+
+		@Override
+		public void onReceivedError(WebView view, int errorCode,String description, String failingUrl) {
+			// TODO Auto-generated method stub
+			super.onReceivedError(view, errorCode, description, failingUrl);
+			ToastUtil.showMessage(errorCode);
 		}
 	}
 }

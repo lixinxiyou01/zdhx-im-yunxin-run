@@ -492,7 +492,6 @@ public class ECApplication extends Application {
         loginMap.put("imToken", new ParameterValue(getCurrentIMUser().getToken()));
         loginMap.put("sys_Token", new ParameterValue(getCurrentIMUser().getToken()));
         String userName = getCurrentIMUser().getLoginName()+","+getCurrentIMUser().getOrganizationId();
-//		loginMap.put("userName", new ParameterValue(userName));
         loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
         loginMap.put("sys_username", new ParameterValue(userName));
         loginMap.put("sys_password", new ParameterValue(getCurrentIMUser().getPassWord()));
@@ -507,7 +506,6 @@ public class ECApplication extends Application {
         HashMap<String, ParameterValue> loginMap = new HashMap<String, ParameterValue>();
         loginMap.put("sys_auto_authenticate", new ParameterValue("true"));
         loginMap.put("sys_Token", new ParameterValue(getCurrentIMUser().getToken()));
-        //lizheng加入
         loginMap.put("dataSourceName", new ParameterValue(getCurrentIMUser().getDataSourceName()));
         loginMap.put("sys_username", new ParameterValue(getCurrentIMUser().getLoginName()));
         loginMap.put("sys_password", new ParameterValue(StringUtil.isBlank(getCurrentIMUser().getV3Pwd())?getCurrentIMUser().getPassWord():getCurrentIMUser().getV3Pwd()));

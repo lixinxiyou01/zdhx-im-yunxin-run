@@ -80,7 +80,8 @@ public class Constant {
 	public static final String WEBAPP_URL_ANNOUNCEMENT = "/bd/webApp/announcement";	 //系统公告
 	public static final String WEBAPP_URL_MESS = "/bd/webApp/canteenmanage";	//食堂
 	public static final String WEBAPP_URL_HOMEWORK_CJL = "/il/homeWork!mobileWorkStatisticsIndex.action";	//陈经纶作业
-	public static final String WEBAPP_URL_TECH_MANAGE = "http://58.132.20.69/iphoneLoginUserCas";	//教科研管理
+	public static final String WEBAPP_URL_TECH_MANAGE = "http://58.132.20.69/iphoneLoginUserCas";	//课题管理
+	public static final String WEBAPP_URL_TECH_JLLT = "http://58.132.20.62/bbs/forum.php";	//经纶论坛
 	
 	/** 附件扩展名 */
 	public static final String ATTACHMENT_DOC  = "doc";	
