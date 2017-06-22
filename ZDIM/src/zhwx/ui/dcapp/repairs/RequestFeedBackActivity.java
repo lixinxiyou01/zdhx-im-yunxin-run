@@ -36,6 +36,7 @@ import java.util.List;
 
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
+import zhwx.common.util.FileUpLoadCallBack;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
 import zhwx.common.util.StringUtil;
@@ -83,6 +84,11 @@ public class RequestFeedBackActivity extends BaseActivity implements View.OnClic
 	private List<File> sendFiles = new ArrayList<File>();
 
 	private ImageGVAdapter imgAdapter;
+
+	private HashMap<String, ParameterValue> loginMap;
+
+	private String sendFlag;
+
 
 
 	@Override
@@ -176,7 +182,8 @@ public class RequestFeedBackActivity extends BaseActivity implements View.OnClic
 	public void onSend(View v) {
 		mPostingdialog = new ECProgressDialog(this, "正在操作");
 		mPostingdialog.show();
-		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		loginMap = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		map = new HashMap<String, ParameterValue>();
 		map.put("reportId", new ParameterValue(repairId)); //报修单Id
 		map.put("attitudeStr", new ParameterValue(taiduRB.getRating()+"")); //服务态度
 		map.put("qualityStr", new ParameterValue(zhiliangRB.getRating()+"")); //维修质量
@@ -190,7 +197,27 @@ public class RequestFeedBackActivity extends BaseActivity implements View.OnClic
 			@Override
 			public void run() {
 				try {
-					final String sendFlag = UrlUtil.saveFeedBack(ECApplication.getInstance().getV3Address(), map);
+//					final String sendFlag = UrlUtil.saveFeedBack(ECApplication.getInstance().getV3Address(), map);
+					if(sendFiles.size() == 0) {
+						loginMap.putAll(map);
+						sendFlag = UrlUtil.saveFeedBack(ECApplication.getInstance().getV3Address(),loginMap);
+					} else {
+						sendFlag = UrlUtil.saveFeedBack(ECApplication.getInstance().getV3Address(), sendFiles, loginMap, map, new FileUpLoadCallBack() {
+							@Override
+							public void upLoadProgress(final int fileCount, final int currentIndex, int currentProgress, final int allProgress) {
+								handler.postDelayed(new Runnable() {
+									@Override
+									public void run() {
+										if(100 == allProgress) {
+											mPostingdialog.setPressText("附件上传完成,正在发送");
+										} else {
+											mPostingdialog.setPressText("正在上传附件(" + (currentIndex + 1) + "/"+ fileCount + ") 总进度:" + allProgress + "%");
+										}
+									}
+								},5);
+							}
+						});
+					}
 					handler.postDelayed(new Runnable() {
 						public void run() {
 							if (sendFlag.contains("ok")) {

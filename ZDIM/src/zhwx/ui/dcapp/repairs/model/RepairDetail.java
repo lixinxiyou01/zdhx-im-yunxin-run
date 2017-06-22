@@ -15,6 +15,7 @@ public class RepairDetail {
 
     private RepairInfoBean repairInfo;
     private RequestInfoBean requestInfo;
+    private FeedBackInfoBean feedBackInfo;
 
     public RepairInfoBean getRepairInfo() {
         return repairInfo;
@@ -208,5 +209,88 @@ public class RepairDetail {
         public void setImageList(List<String> imageList) {
             this.imageList = imageList;
         }
+    }
+
+    public class FeedBackInfoBean{
+        private String attitudeStr;
+        private String repairFlag;
+        private String qualityStr;
+        private String speedStr;
+        private String technicalLevelStr;
+        private String suggestion;
+        private String scoreStr;
+        private List<String> repairImageList;
+
+        public String getAttitudeStr() {
+            return attitudeStr;
+        }
+
+        public void setAttitudeStr(String attitudeStr) {
+            this.attitudeStr = attitudeStr;
+        }
+
+        public String getRepairFlag() {
+            return repairFlag;
+        }
+
+        public void setRepairFlag(String repairFlag) {
+            this.repairFlag = repairFlag;
+        }
+
+        public String getQualityStr() {
+            return qualityStr;
+        }
+
+        public void setQualityStr(String qualityStr) {
+            this.qualityStr = qualityStr;
+        }
+
+        public String getSpeedStr() {
+            return speedStr;
+        }
+
+        public void setSpeedStr(String speedStr) {
+            this.speedStr = speedStr;
+        }
+
+        public String getTechnicalLevelStr() {
+            return technicalLevelStr;
+        }
+
+        public void setTechnicalLevelStr(String technicalLevelStr) {
+            this.technicalLevelStr = technicalLevelStr;
+        }
+
+        public String getSuggestion() {
+            return suggestion;
+        }
+
+        public void setSuggestion(String suggestion) {
+            this.suggestion = suggestion;
+        }
+
+        public String getScoreStr() {
+            return scoreStr;
+        }
+
+        public void setScoreStr(String scoreStr) {
+            this.scoreStr = scoreStr;
+        }
+
+        public List<String> getRepairImageList() {
+            return repairImageList;
+        }
+
+        public void setRepairImageList(List<String> repairImageList) {
+            this.repairImageList = repairImageList;
+        }
+    }
+
+    public FeedBackInfoBean getFeedBackInfo() {
+        return feedBackInfo;
+    }
+
+    public void setFeedBackInfo(FeedBackInfoBean feedBackInfo) {
+        this.feedBackInfo = feedBackInfo;
     }
 }

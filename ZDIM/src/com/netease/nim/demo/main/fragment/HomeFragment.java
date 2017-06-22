@@ -44,7 +44,7 @@ public class HomeFragment extends TFragment implements View.OnClickListener,OnPa
 
     public static PagerSlidingTabStrip tabs;
 
-    private CustomViewPager pager;
+    public static CustomViewPager pager;
 
     private int scrollState;
 

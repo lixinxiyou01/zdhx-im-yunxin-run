@@ -22,6 +22,7 @@ public class RequestFeedBackItem {
     private String scoreStr;
     private String suggestion;
     private String repairFlag;
+    private String applyRepairImageList;
 
     public String getAttitudeStr() {
         return attitudeStr;
@@ -77,5 +78,13 @@ public class RequestFeedBackItem {
 
     public void setRepairFlag(String repairFlag) {
         this.repairFlag = repairFlag;
+    }
+
+    public String getApplyRepairImageList() {
+        return applyRepairImageList;
+    }
+
+    public void setApplyRepairImageList(String applyRepairImageList) {
+        this.applyRepairImageList = applyRepairImageList;
     }
 }

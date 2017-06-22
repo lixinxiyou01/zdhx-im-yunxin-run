@@ -38,6 +38,8 @@ public class ApplicationFragmentWeb extends TFragment {
 
 	private View v;
 
+	private boolean isEditing = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,6 +86,14 @@ public class ApplicationFragmentWeb extends TFragment {
 			public void openWebApp(String url) {
 				startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 			}
+			@JavascriptInterface
+			public void openEdit(String open) {
+				if ("open".equals(open)) {
+					isEditing = true;
+				} else {
+					isEditing = false;
+				}
+			}
 		}, "nativeMobileDom");
 
 		webAppWV.setOnLongClickListener(new View.OnLongClickListener() {
@@ -109,6 +119,7 @@ public class ApplicationFragmentWeb extends TFragment {
 				super.onProgressChanged(view, newProgress);
 			}
 		});
+
 	}
 
 	@Override

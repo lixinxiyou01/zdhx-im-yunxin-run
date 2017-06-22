@@ -2368,6 +2368,14 @@ public class UrlUtil {
 		return getUrlResponse(checkUrl(baseUrl + "/re/repairsRecordMobile!saveFeedBack.action"), map);
 	}
 
+
+	/**
+	 * 提交反馈
+	 */
+	public static String saveFeedBack(String baseUrl, List<File> files,Map<String, ParameterValue> loginMap,Map<String, ParameterValue> map,FileUpLoadCallBack callback) throws IOException {
+		return commitWithFiles(getUrl(baseUrl + "/re/repairsRecordMobile!saveFeedBack.action", loginMap),files, map,callback);
+	}
+
 	/**
 	 * 获取反馈项
 	 * 	checkFlag	是否通过	string	1通过，2不通过

@@ -479,7 +479,7 @@ public class CIMainActivity extends BaseActivity implements OnClickListener {
 						addressName = poi.getName();
 						if (COMPANYADDRESS.equals(poi.getName())) {
 //							addressName = COMPANYNAME;
-							names.add(COMPANYNAME);
+							names.add(0,COMPANYNAME);
 						}
 						names.add(addressName);
 					}

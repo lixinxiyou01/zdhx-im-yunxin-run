@@ -8,7 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -57,6 +62,16 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 	
 	private int startFlag;
 
+	private RadioGroup repairStatusRG;
+
+	private RatingBar suduRB,taiduRB,jishuBar,zhiliangRB,allRB;
+
+	private EditText suggestET;
+
+	private GridView feedbackImgGV;
+
+	private LinearLayout feedBackLay;
+
 	//R
 	private TextView requestUserTV,requestTimeTV,requestDeviceTV,faultKindTV,faultDescriptionTV,
 			repairHistoryTV,faultPlaceTV,requestPhoneTV,repairerTV,repairTimeTV,repairStatusTV
@@ -65,6 +80,7 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 	private GridView requestImgGV,repairImgGV;
 
 	private RepairDetail repairDetail;
+
 
 	public static Fragment newInstance(String id,int startFlag,String status,String evaluateFlag) {
 		RepairDetailFragment f = new RepairDetailFragment();
@@ -107,6 +123,16 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 		requestImgGV = (GridView) v.findViewById(R.id.requestImgGV);
 		repairImgGV = (GridView) v.findViewById(R.id.repairImgGV);
 		costTV = (TextView) v.findViewById(R.id.costTV);
+
+		repairStatusRG = (RadioGroup) v.findViewById(R.id.repairStatusRG);
+		suggestET = (EditText) v.findViewById(R.id.suggestET);
+		jishuBar = (RatingBar) v.findViewById(R.id.jishuBar);
+		zhiliangRB = (RatingBar) v.findViewById(R.id.zhiliangRB);
+		allRB = (RatingBar) v.findViewById(R.id.allRB);
+		taiduRB = (RatingBar) v.findViewById(R.id.taiduRB);
+		suduRB = (RatingBar) v.findViewById(R.id.suduRB);
+		feedbackImgGV = (GridView) v.findViewById(R.id.feedbackImgGV);
+		feedBackLay = (LinearLayout) v.findViewById(R.id.feedBackLay);
 		return v;
 	}
 	@Override
@@ -216,6 +242,35 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 		elseTV.setText(StringUtil.isBlank(eles)?"无":eles);
 
 
+		if (repairDetail.getFeedBackInfo()!=null && repairDetail.getFeedBackInfo().getRepairFlag()!=null) {
+			feedBackLay.setVisibility(View.VISIBLE);
+			suduRB.setRating(Float.parseFloat(repairDetail.getFeedBackInfo().getSpeedStr()));
+			taiduRB.setRating(Float.parseFloat(repairDetail.getFeedBackInfo().getAttitudeStr()));
+			jishuBar.setRating(Float.parseFloat(repairDetail.getFeedBackInfo().getTechnicalLevelStr()));
+			zhiliangRB.setRating(Float.parseFloat(repairDetail.getFeedBackInfo().getQualityStr()));
+			allRB.setRating(Float.parseFloat(repairDetail.getFeedBackInfo().getScoreStr()));
+			suggestET.setText(StringUtil.isNotBlank(repairDetail.getFeedBackInfo().getSuggestion())?repairDetail.getFeedBackInfo().getSuggestion():"");
+			feedbackImgGV.setAdapter(new RmImageGirdAdapter(getActivity(), repairDetail.getFeedBackInfo().getRepairImageList()));
+			Tools.setGridViewHeightBasedOnChildren4(feedbackImgGV);
+			feedbackImgGV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					ArrayList<ViewImageInfo> urls = new ArrayList<ViewImageInfo>();
+					ViewImageInfo imageInfo;
+					for (int i = 0; i < repairDetail.getFeedBackInfo().getRepairImageList().size(); i++) {
+						imageInfo = new ViewImageInfo("", ECApplication.getInstance().getV3Address()+repairDetail.getFeedBackInfo().getRepairImageList().get(i));
+						urls.add(imageInfo);
+					}
+					CCPAppManager.startChattingImageViewAction(getActivity(),position, urls);
+				}
+			});
+			if (repairDetail.getFeedBackInfo().getRepairFlag() != null && "0".equals(repairDetail.getFeedBackInfo().getRepairFlag())) {
+				RadioButton radioButton = (RadioButton) getActivity().findViewById(R.id.cantRepairRb);
+				radioButton.setChecked(true);
+			}
+		} else {
+			feedBackLay.setVisibility(View.GONE);
+		}
 		mPostingdialog.dismiss();
 	}
 
@@ -232,6 +287,5 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount, int pagePosition) {
-
 	}
 }
