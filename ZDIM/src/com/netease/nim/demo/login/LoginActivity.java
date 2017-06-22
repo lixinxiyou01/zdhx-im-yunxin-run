@@ -281,6 +281,9 @@ public class LoginActivity extends UI implements OnKeyListener {
     private void setupLoginPanel() {
         String account = ECApplication.getInstance().getCurrentIMUser().getLoginName();
         usernameET.setText(account);
+
+        String passWord = ECApplication.getInstance().getCurrentIMUser().getPassWord();
+        passwordET.setText(passWord);
     }
 
 
