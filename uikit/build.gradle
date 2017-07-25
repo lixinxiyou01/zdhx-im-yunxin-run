@@ -9,8 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -30,8 +29,8 @@ android {
 }
 
 dependencies {
-//    compile 'com.android.support:design:23.3.0'
-//    compile 'com.android.support:design:25.1.0'
+    //    compile 'com.android.support:design:23.3.0'
+    //    compile 'com.android.support:design:25.1.0'
     compile fileTree(include: '*.jar', dir: 'libs')
     compile project(':baselibrary')
 }
