@@ -11,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -62,7 +60,7 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 	
 	private int startFlag;
 
-	private RadioGroup repairStatusRG;
+	private TextView repairStatusRG;
 
 	private RatingBar suduRB,taiduRB,jishuBar,zhiliangRB,allRB;
 
@@ -124,7 +122,7 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 		repairImgGV = (GridView) v.findViewById(R.id.repairImgGV);
 		costTV = (TextView) v.findViewById(R.id.costTV);
 
-		repairStatusRG = (RadioGroup) v.findViewById(R.id.repairStatusRG);
+		repairStatusRG = (TextView) v.findViewById(R.id.repairStatusRG);
 		suggestET = (EditText) v.findViewById(R.id.suggestET);
 		jishuBar = (RatingBar) v.findViewById(R.id.jishuBar);
 		zhiliangRB = (RatingBar) v.findViewById(R.id.zhiliangRB);
@@ -264,9 +262,12 @@ public class RepairDetailFragment extends ScrollTabHolderFragment {
 					CCPAppManager.startChattingImageViewAction(getActivity(),position, urls);
 				}
 			});
-			if (repairDetail.getFeedBackInfo().getRepairFlag() != null && "0".equals(repairDetail.getFeedBackInfo().getRepairFlag())) {
-				RadioButton radioButton = (RadioButton) getActivity().findViewById(R.id.cantRepairRb);
-				radioButton.setChecked(true);
+			if (repairDetail.getFeedBackInfo().getRepairFlag() != null ) {
+				if("0".equals(repairDetail.getFeedBackInfo().getRepairFlag())) {
+					repairStatusRG.setText("否");
+				} else {
+					repairStatusRG.setText("是	");
+				}
 			}
 		} else {
 			feedBackLay.setVisibility(View.GONE);

@@ -226,7 +226,7 @@
                             android:drawablePadding="5dp"
                             android:drawableTop="@drawable/icon_rm_dfk_a"
                             android:padding="8dp"
-                            android:text="待反馈"
+                            android:text="待评价"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
 
@@ -263,7 +263,7 @@
                             android:drawablePadding="5dp"
                             android:drawableTop="@drawable/icon_rm_yxh_a"
                             android:padding="8dp"
-                            android:text="已修好"
+                            android:text="已完成"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
                         
@@ -635,9 +635,9 @@
                             android:background="@null"
                             android:clickable="false"
                             android:drawablePadding="5dp"
-                            android:drawableTop="@drawable/icon_rm_dfk_a"
+                            android:drawableTop="@drawable/icon_rm_yxh_a"
                             android:padding="8dp"
-                            android:text="已反馈"
+                            android:text="已完成"
                             android:textColor="@color/dark_gray"
                             android:textSize="12sp" />
 

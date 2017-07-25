@@ -20,11 +20,13 @@ import com.netease.nim.demo.main.model.MainTab;
 import com.netease.nim.demo.main.reminder.ReminderId;
 import com.netease.nim.demo.main.reminder.ReminderItem;
 import com.netease.nim.demo.main.reminder.ReminderManager;
+import com.netease.nim.demo.main.reminder.ReminderSettings;
 import com.netease.nim.uikit.common.fragment.TFragment;
 import com.netease.nim.uikit.common.ui.drop.DropCover;
 import com.netease.nim.uikit.common.ui.drop.DropFake;
 import com.netease.nim.uikit.common.ui.drop.DropManager;
 import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nim.uikit.common.util.sys.BadgeUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -99,11 +101,12 @@ public class HomeFragment extends TFragment implements View.OnClickListener,OnPa
     @Override
     public void onPageSelected(int position) {
         tabs.onPageSelected(position);
-
         selectPage(position);
-
         enableMsgNotification(false);
         onTabClicked(mTabs[position]);
+        if(ApplicationFragmentWeb.webAppWV != null) {
+            ApplicationFragmentWeb.webAppWV.loadUrl("javascript:cancelLongPress()"); //中断应用页面长按监听
+        }
     }
 
     @Override
@@ -273,6 +276,9 @@ public class HomeFragment extends TFragment implements View.OnClickListener,OnPa
         if (tab != null) {
             tabs.updateTab(tab.tabIndex, item);
         }
+
+        //TODO 更新角标
+        BadgeUtil.setBadgeCount(ECApplication.getInstance(), ReminderSettings.unreadMessageShowRule(item.unread()));
 //        unReadCountTV.setVisibility(item.unread() > 0?View.VISIBLE:View.INVISIBLE);
 //        unReadCountTV.setText(String.valueOf(ReminderSettings.unreadMessageShowRule(item.unread())));
     }

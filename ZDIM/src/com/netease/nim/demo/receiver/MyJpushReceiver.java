@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.netease.nim.demo.DemoCache;
+import com.netease.nim.demo.login.LoginActivity;
 import com.netease.nim.uikit.recent.RecentContactsFragment;
 
 import org.json.JSONException;
@@ -16,6 +18,7 @@ import java.util.Iterator;
 import cn.jpush.android.api.JPushInterface;
 import zhwx.common.util.SharPreUtil;
 import zhwx.common.util.StringUtil;
+import zhwx.common.util.ToastUtil;
 import zhwx.ui.dcapp.noticecenter.NoticeCenterActivity;
 
 import static android.R.attr.key;
@@ -30,6 +33,10 @@ public class MyJpushReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		if (DemoCache.getAccount() == null) {
+			//如果没有登录用户 不提醒推送
+			return;
+		}
 		Bundle bundle = intent.getExtras();
 		Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 		if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -42,7 +49,6 @@ public class MyJpushReceiver extends BroadcastReceiver {
 			Log.d(TAG,"[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
 			processCustomMessage(context, bundle);
 		} else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-			
 			int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
 			Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
 			processCustomMessage(context, bundle);
@@ -50,10 +56,16 @@ public class MyJpushReceiver extends BroadcastReceiver {
 			
 		} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
 			Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
-			Intent intent1 = new Intent(context, NoticeCenterActivity.class);
-			intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			SharPreUtil.saveField("haveNew", "");
-			context.startActivity(intent1);
+
+			if (DemoCache.getAccount() != null) {
+				Intent intent1 = new Intent(context, NoticeCenterActivity.class);
+				intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				SharPreUtil.saveField("haveNew", "");
+				context.startActivity(intent1);
+			} else {
+				ToastUtil.showMessage("请登录");
+				LoginActivity.start(context);
+			}
 
 		} else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
 			

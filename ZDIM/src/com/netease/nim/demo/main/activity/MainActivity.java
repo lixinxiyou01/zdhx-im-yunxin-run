@@ -6,8 +6,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -381,6 +383,7 @@ public class MainActivity extends UI {
     private void editGroupName(final int groupType) {
         buildAlert = ECAlertDialog.buildAlert(this,R.string.address_v3, null, new DialogInterface.OnClickListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 groupName = ((EditText) (buildAlert.getWindow().findViewById(R.id.dcAddressText))).getText().toString();
@@ -414,11 +417,10 @@ public class MainActivity extends UI {
     public void setPushUser(){
         final String regId = JPushInterface.getRegistrationID(this);
 
-        if(regId==null){
+        if(regId == null){
             ToastUtil.showMessage("推送服务绑定失败");
             return;
         }
-        System.out.println("极光推送ID:"+regId);
         map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
         map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
         map.put("mobileKind", new ParameterValue("1"));
@@ -431,7 +433,7 @@ public class MainActivity extends UI {
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             if (flag.contains("ok")) {
-                                System.out.println("推送绑定成功");
+                                System.out.println("推送绑定成功：" + regId);
                             } else {
                                 System.out.println("推送绑定失败:" + flag);
                             }

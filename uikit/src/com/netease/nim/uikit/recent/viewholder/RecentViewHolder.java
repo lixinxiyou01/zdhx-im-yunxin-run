@@ -1,5 +1,6 @@
 package com.netease.nim.uikit.recent.viewholder;
 
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.text.style.ImageSpan;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.netease.nim.uikit.common.adapter.TViewHolder;
 import com.netease.nim.uikit.common.ui.drop.DropFake;
 import com.netease.nim.uikit.common.ui.drop.DropManager;
 import com.netease.nim.uikit.common.ui.imageview.HeadImageView;
+import com.netease.nim.uikit.common.util.string.StringUtil;
 import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.nim.uikit.recent.RecentContactsCallback;
@@ -150,6 +152,14 @@ public abstract class RecentViewHolder extends TViewHolder implements OnClickLis
         } else {
             tvOnlineState.setVisibility(View.VISIBLE);
             tvOnlineState.setText(getOnlineStateContent(recent));
+
+            if(!StringUtil.isEmpty(getOnlineStateContent(recent))) {
+                if(getOnlineStateContent(recent).contains("在线")) {
+                    tvOnlineState.setTextColor(Color.parseColor("#FF018F57"));
+                } else {
+                    tvOnlineState.setTextColor(Color.parseColor("#ffaaaaaa"));
+                }
+            }
         }
     }
 

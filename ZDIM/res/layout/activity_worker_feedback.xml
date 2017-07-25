@@ -590,6 +590,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/TextView201"
                         android:ems="4"
+                        android:text="0"
                         android:gravity="center_horizontal"
                         android:singleLine="true"
                         android:textColor="@color/greytext"

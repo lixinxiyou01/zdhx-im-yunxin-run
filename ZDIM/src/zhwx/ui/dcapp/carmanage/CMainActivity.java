@@ -225,7 +225,7 @@ public class CMainActivity extends BaseActivity {
 			count_wsh_b.setText(data.getOrderCarManage().getOrderCheck());
 			count_wsh_b.setVisibility("0".equals(data.getOrderCarManage().getOrderCheck())?View.INVISIBLE:View.VISIBLE);
 			chack_item_lay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.GONE:View.VISIBLE);
-			nuLay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.VISIBLE:View.GONE);
+//			nuLay.setVisibility(data.getOrderCarManage().getOrderCheck() == null?View.VISIBLE:View.GONE);
 			
 			count_wpc_b.setText(data.getOrderCarManage().getDpc());
 			count_wpc_b.setVisibility("0".equals(data.getOrderCarManage().getDpc())?View.INVISIBLE:View.VISIBLE);
@@ -390,7 +390,16 @@ public class CMainActivity extends BaseActivity {
 		.putExtra("startFlag", STARTFLAG_ORDERCHECK)
 		.putExtra("status", OrderCarListItem.CHECKSTATUS_ASSIGNING));
 	}
-	
+
+	/** 补单 */
+	public void onBdB(View v){
+		//TODO
+		ToastUtil.showMessage("开发中");
+//		startActivity(new Intent(context, OrderManageActivity.class)
+//		.putExtra("startFlag", STARTFLAG_ORDERCHECK)
+//		.putExtra("status", OrderCarListItem.CHECKSTATUS_ASSIGNING));
+	}
+
 	/** 已派车 */
 	public void onYpcB(View v){
 		startActivity(new Intent(context, OrderManageActivity.class)
@@ -418,6 +427,8 @@ public class CMainActivity extends BaseActivity {
 		.putExtra("startFlag", STARTFLAG_MYTASK)
 		.putExtra("status", OrderCarListItem.CHECKSTATUS_DPJ));
 	}
+
+
 	
 	public void onClose(View v) {
 		if (publicPop.isShowing()) {

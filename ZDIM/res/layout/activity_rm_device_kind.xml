@@ -10,6 +10,7 @@
 	    android:layout_height="match_parent"
         android:dividerHeight="20dp"
         android:divider="@null"
+       android:scrollbars="none"
         android:layout_margin="50dp">
 
     </zhwx.common.view.refreshlayout.PullableListView>

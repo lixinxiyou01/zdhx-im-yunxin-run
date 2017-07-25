@@ -2,7 +2,9 @@ package com.netease.nim.demo.main.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +18,14 @@ import android.widget.RelativeLayout;
 
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
+import com.netease.nim.demo.login.LoginActivity;
+import com.netease.nim.demo.login.LogoutHelper;
 import com.netease.nim.uikit.common.fragment.TFragment;
+import com.netease.nim.uikit.common.util.string.StringUtil;
 
 import zhwx.common.util.IntentUtil;
 import zhwx.common.util.ToastUtil;
+import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.ui.webapp.WebAppActivity;
 import zhwx.ui.webapp.view.loadview.LoadingView;
 
@@ -29,7 +35,7 @@ public class ApplicationFragmentWeb extends TFragment {
 
 	private Activity context;
 
-	private WebView webAppWV;
+	public static WebView webAppWV;
 
 	private LoadingView loadView;
 
@@ -39,6 +45,10 @@ public class ApplicationFragmentWeb extends TFragment {
 	private View v;
 
 	private boolean isEditing = false;
+
+	private boolean isLoaded = false;
+
+	private boolean isFirstLoad = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,9 +69,7 @@ public class ApplicationFragmentWeb extends TFragment {
 		System.out.println(ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl());
 		webAppWV = (WebView) v.findViewById(R.id.webAppWV);
 		loadView = (LoadingView) v.findViewById(R.id.loadView);
-		loadView.setVisibility(View.GONE);
 		loadingLay = (RelativeLayout) v.findViewById(R.id.loadingLay);
-		loadingLay.setVisibility(View.GONE);
 		WebSettings settings = webAppWV.getSettings();
 		settings.setJavaScriptEnabled(true);
 		settings.setJavaScriptCanOpenWindowsAutomatically(true);
@@ -82,10 +90,22 @@ public class ApplicationFragmentWeb extends TFragment {
 				IntentUtil.openApp(context,code);
 			}
 
+
 			@JavascriptInterface
 			public void openWebApp(String url) {
-				startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+
+				if (url.contains("session/checkLogin")) {
+					Intent intent = new Intent();
+					intent.setAction("android.intent.action.VIEW");
+					Uri content_url = Uri.parse(url);
+					intent.setData(content_url);
+					startActivity(intent);
+
+				} else {
+					startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+				}
 			}
+
 			@JavascriptInterface
 			public void openEdit(String open) {
 				if ("open".equals(open)) {
@@ -93,6 +113,14 @@ public class ApplicationFragmentWeb extends TFragment {
 				} else {
 					isEditing = false;
 				}
+			}
+
+			@JavascriptInterface
+			public void tokenTimeOut() {
+				LogoutHelper.logout();
+				// 启动登录
+				LoginActivity.start(context);
+				context.finish();
 			}
 		}, "nativeMobileDom");
 
@@ -113,6 +141,9 @@ public class ApplicationFragmentWeb extends TFragment {
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
 				if (newProgress == 100) {
+					isLoaded = true;
+					loadView.setVisibility(View.GONE);
+					loadingLay.setVisibility(View.GONE);
 				} else {
 
 				}
@@ -125,6 +156,30 @@ public class ApplicationFragmentWeb extends TFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (!isFirstLoad && !isLoaded) {
+			webAppWV.loadUrl(ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl());
+			loadView.setVisibility(View.VISIBLE);
+			loadingLay.setVisibility(View.VISIBLE);
+		}
+		isFirstLoad = false;
+
+		if(StringUtil.isEmpty(ECApplication.getInstance().getFlag())) {
+			ECAlertDialog buildAlert = ECAlertDialog.buildPositiveAlert(context, R.string.action_settings, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int which) {
+					ECApplication.getInstance().saveFlag();
+				}
+			});
+			buildAlert.setTitle("提示");
+			buildAlert.setMessage("1、长按应用图标可开启编辑模式\n\n" +
+					"2、编辑模式下点击图标可将应用从常用应用分组中添加、移除\n\n" +
+					"3、编辑模式下常用应用分组图标可拖动排序");
+			buildAlert.show();
+		}
 	}
 
 	@Override

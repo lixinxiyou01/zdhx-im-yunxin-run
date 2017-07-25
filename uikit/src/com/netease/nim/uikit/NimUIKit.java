@@ -2,6 +2,8 @@ package com.netease.nim.uikit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -305,6 +307,7 @@ public final class NimUIKit {
      * @param option      联系人选择器可选配置项
      * @param requestCode startActivityForResult使用的请求码
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void startContactSelect(Context context, ContactSelectActivity.Option option, int requestCode) {
         ContactSelectActivity.startActivityForResult(context, option, requestCode);
     }

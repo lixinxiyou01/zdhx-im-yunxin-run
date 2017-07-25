@@ -12,6 +12,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:divider="@null"
+        android:scrollbars="none"
         android:dividerHeight="5dp">
 
     </zhwx.common.view.refreshlayout.PullableListView>

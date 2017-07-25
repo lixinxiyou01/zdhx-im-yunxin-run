@@ -64,15 +64,15 @@ public class MyRepairManageActivity extends BaseActivity implements ScrollTabHol
 			kindList.add(new ListKind("全部", RepairListItem.CHECKSTATUS_ALL));
 			kindList.add(new ListKind("未接单",RepairListItem.CHECKSTATUS_WJD));
 			kindList.add(new ListKind("维修中",RepairListItem.CHECKSTATUS_WXZ));
-			kindList.add(new ListKind("待反馈",RepairListItem.CHECKSTATUS_DFK));
-			kindList.add(new ListKind("已修好",RepairListItem.CHECKSTATUS_YXH));
+			kindList.add(new ListKind("待评价",RepairListItem.CHECKSTATUS_DFK));
+			kindList.add(new ListKind("已完成",RepairListItem.CHECKSTATUS_YXH));
 
 			getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"我的报修单", this);
 		} else if (startFlag == RMainActivity.STARTFLAG_MYTASK) {
 			kindList.add(new ListKind("全部",RepairListItem.CHECKSTATUS_ALL));
 //			kindList.add(new ListKind("未接单",RepairListItem.CHECKSTATUS_WJD));
 			kindList.add(new ListKind("维修中",RepairListItem.CHECKSTATUS_WXZ));
-			kindList.add(new ListKind("已反馈",RepairListItem.CHECKSTATUS_YFK));
+			kindList.add(new ListKind("已完成",RepairListItem.CHECKSTATUS_YFK));
 
 			getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, -1,"我的维修", this);
 		} else if (startFlag == RMainActivity.STARTFLAG_ORDERCHECK) {

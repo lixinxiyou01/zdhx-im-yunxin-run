@@ -19,6 +19,17 @@ import com.netease.nimlib.sdk.NimIntent;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import zhwx.Constant;
+import zhwx.common.model.LoginErrorData;
+import zhwx.common.model.LoginSucceedData;
+import zhwx.common.model.ParameterValue;
+import zhwx.common.util.JsonUtil;
+import zhwx.common.util.ProgressThreadWrap;
+import zhwx.common.util.RunnableWrap;
+import zhwx.common.util.ToastUtil;
+import zhwx.common.util.UrlUtil;
 
 /**
  * 欢迎/导航页（app启动Activity）
@@ -32,6 +43,16 @@ public class WelcomeActivity extends UI {
     private boolean customSplash = false;
 
     private static boolean firstEnter = true; // 是否首次进入
+
+
+
+    private String loginJson;
+
+    private HashMap<String, ParameterValue> map;
+
+    private String tag = "WelcomeActivity";
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +146,57 @@ public class WelcomeActivity extends UI {
             if (!firstEnter && intent == null) {
                 finish();
             } else {
-                showMainActivity();
+
+                map = new HashMap<String, ParameterValue>();
+                map.put("terminal", new ParameterValue("android"));//android 0, ios 1, pc 2
+                map.put("loginName", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getLoginName()));
+                map.put("password", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getPassWord()));
+                map.put("organizationId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getOrganizationId()));
+                new ProgressThreadWrap(this, new RunnableWrap() {
+                    @Override
+                    public void run() {
+                        try {
+                            loginJson = UrlUtil.getUserWithLoginNameAndPassword(ECApplication.getInstance().getAddress(), map);
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    System.out.println(loginJson);
+
+                                    if (loginJson.contains("errorMsg")) { // 后台登录错误
+                                        LoginErrorData led = JsonUtil.json2JavaPojo(loginJson, LoginErrorData.class);
+                                        ToastUtil.showMessage(led.getErrorMsg());
+                                        LoginActivity.start(WelcomeActivity.this);
+                                        finish();
+                                    } else if (loginJson.contains("userData")) { // 后台登录成功
+                                        LoginSucceedData lsd = JsonUtil.json2JavaPojo(loginJson, LoginSucceedData.class);
+                                        Log.i(tag, "IM登录用户" + lsd.getUser().getName() + lsd.getUser().getId());
+                                        if (Constant.USER_ADMIN.equals(lsd.getUser().getKind())|| Constant.USER_OTHER.equals(lsd.getUser().getKind())) {
+                                            ToastUtil.showMessage("此账号禁止登录");
+                                            LoginActivity.start(WelcomeActivity.this);
+                                            finish();
+                                            return;
+                                        }
+                                        lsd.getUser().setLoginName(ECApplication.getInstance().getCurrentIMUser().getLoginName());
+                                        lsd.getUser().setPassWord(ECApplication.getInstance().getCurrentIMUser().getPassWord());
+                                        ECApplication.getInstance().saveCurrentIMUser(lsd.getUser());
+                                        ECApplication.getInstance().saveToken(lsd.getToken());
+                                        //TODO
+                                        showMainActivity();
+                                        finish();
+                                    } else {
+                                        ToastUtil.showMessage("无法解析登录返回数据,请检查网络");
+                                        LoginActivity.start(WelcomeActivity.this);
+                                        finish();
+                                    }
+                                }
+                            }, 5);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ToastUtil.showMessage("连接服务器失败");
+                            LoginActivity.start(WelcomeActivity.this);
+                            finish();
+                        }
+                    }
+                }).start();
             }
         }
     }
@@ -139,8 +210,8 @@ public class WelcomeActivity extends UI {
         String appWebUrl = ECApplication.getInstance().getCurrentIMUser().getAppCenterUrl();
         Log.i(TAG, "get local sdk token =" + token);
         //TODO
-        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(appWebUrl);
-//        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token);
+//        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token) && !TextUtils.isEmpty(appWebUrl);
+        return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token);
     }
 
     private void parseNotifyIntent(Intent intent) {

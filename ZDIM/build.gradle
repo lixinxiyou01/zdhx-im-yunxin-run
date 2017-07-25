@@ -18,12 +18,11 @@ android {
         versionCode 2130
         versionName "2.1.3"
         multiDexEnabled true
-        applicationId = "com.zdhx.edu.im"
+        applicationId = "com.lanxum.hzth.im"
         minSdkVersion 14
         targetSdkVersion 24
         buildConfigField "String", "GIT_REVISION", "\"${getGitVersion()}\""
         buildConfigField "String", "BUILD_DATE", "\"${new Date().toLocaleString()}\"";
-
 
         //Jpush
         ndk {
@@ -34,7 +33,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "cc3f74cfe0b39f1140baa114", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "272e5900ec657bb4455425e5", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
@@ -54,7 +53,7 @@ android {
         //高德定位
         debug {
             signingConfig signingConfigs.debug
-            manifestPlaceholders = [AMAP_KEY: "582aa3dba967322b4edfadcf98567982"]
+            manifestPlaceholders = [AMAP_KEY: "8a08faeb98cc1f79e3947bbbae9c268d"]
         }
     }
 
@@ -100,7 +99,7 @@ android {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 // 输出apk名称为XXXX_v1.0_2016-01-15.apk
-                def fileName = "ZWX_v${defaultConfig.versionName}.${releaseTime()}.apk"
+                def fileName = "JLJY_v${defaultConfig.versionName}.${releaseTime()}.apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }
@@ -131,13 +130,14 @@ dependencies {
     compile files('libs/GifView.jar')
     compile project(':photoSelector')
     compile project(':uikit')
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     compile project(':datetimepicker')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'cn.jiguang.sdk:jpush:3.0.0'
     // 此处以JPush 3.0.0 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.0.0'
     // 此处以JCore 1.0.0 版本为例。
     compile files('libs/pgyer_sdk_2.5.6.jar')
+    compile files('libs/ShareSDK-Wechat-3.0.0.jar')
 }
 

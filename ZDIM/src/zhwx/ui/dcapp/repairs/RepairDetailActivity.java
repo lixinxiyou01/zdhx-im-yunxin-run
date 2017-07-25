@@ -34,7 +34,7 @@ public class RepairDetailActivity extends BaseActivity implements ScrollTabHolde
 	
 	private PagerAdapter mPagerAdapter;
 	
-	private String[] title = {"报修单详情","维修记录"};
+	private String[] title = {"报修单详情","维修过程记录"};
 	
 	private String id;
 	private String status;

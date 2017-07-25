@@ -79,7 +79,7 @@ public class DownloadAsyncTask extends AsyncTask<String, Integer, File> {
 			if(params.length >= 4) {
 				filename = params[3];
 			}
-			if (filename==null) {
+			if (filename == null) {
 				filename = conn.getHeaderField("Content-Disposition");
 				if (filename == null) {
 					filename = "noname";

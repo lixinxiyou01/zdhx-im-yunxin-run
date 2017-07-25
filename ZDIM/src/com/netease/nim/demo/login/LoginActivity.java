@@ -524,6 +524,7 @@ public class LoginActivity extends UI implements OnKeyListener {
                                     public void run() {
                                         ShowSchoolInfo();
                                         usernameET.setText("");
+                                        passwordET.setText("");
                                     }
                                 });
                             } catch (Exception e) {

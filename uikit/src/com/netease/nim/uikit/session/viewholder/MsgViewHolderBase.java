@@ -16,6 +16,7 @@ import com.netease.nim.uikit.common.adapter.TViewHolder;
 import com.netease.nim.uikit.common.ui.TasksCompletedView;
 import com.netease.nim.uikit.common.ui.imageview.HeadImageView;
 import com.netease.nim.uikit.common.util.file.IntentUtilForUikit;
+import com.netease.nim.uikit.common.util.string.StringUtil;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.nim.uikit.session.module.list.MsgAdapter;
 import com.netease.nimlib.sdk.NIMClient;
@@ -66,9 +67,14 @@ public abstract class MsgViewHolderBase extends TViewHolder {
     protected void onItemClick() {
         //TODO 聊天内容点击事件
         if (message.getAttachment() != null && message.getMsgType()== MsgTypeEnum.file) {
+
             FileAttachment attachment = (FileAttachment) message.getAttachment();
-            attachment.getUrl();
-            IntentUtilForUikit.openFile(context,attachment);
+            if (!StringUtil.isEmpty(attachment.getPath())) {
+//                attachment.getUrl();
+                IntentUtilForUikit.openFile(context,attachment);
+            } else {
+                downloadAttachment();
+            }
         }
     }
 

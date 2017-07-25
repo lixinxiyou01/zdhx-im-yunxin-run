@@ -6,7 +6,7 @@
     <dimen name="isetting_item_padding_left">15dip</dimen>
     <dimen name="isetting_item_padding_right">15dip</dimen>
     <dimen name="action_bar_height">48dip</dimen>
-    <dimen name="split_one_dip">1dip</dimen>
+    <dimen name="split_one_dip">1px</dimen>
     <dimen name="split_one_pixels">1px</dimen>
     <dimen name="text_small_size_ten_sp">10sp</dimen>
     <dimen name="text_size_9">9sp</dimen>

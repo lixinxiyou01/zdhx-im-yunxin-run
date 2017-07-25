@@ -173,6 +173,8 @@ public class RMainActivity extends BaseActivity {
 
             count_fysp_b.setText(data.getRepairManage().getFysp());
             count_fysp_b.setVisibility("0".equals(data.getRepairManage().getFysp()) ? View.INVISIBLE : View.VISIBLE);
+        } else {
+            managerLay.setVisibility(View.GONE);
         }
 
         if (data.getMyTask() != null) {
@@ -185,6 +187,8 @@ public class RMainActivity extends BaseActivity {
 
             count_hfk_c.setText(data.getMyTask().getYfk());
             count_hfk_c.setVisibility("0".equals(data.getMyTask().getYfk()) ? View.INVISIBLE : View.VISIBLE);
+        } else {
+            dirverLay.setVisibility(View.GONE);
         }
         mPostingdialog.dismiss();
     }

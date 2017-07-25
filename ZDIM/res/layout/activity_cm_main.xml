@@ -475,8 +475,20 @@
                         android:layout_weight="1"
                         android:background="@drawable/list_item_selector"
                         >
-                    </RelativeLayout>
 
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@null"
+                            android:drawableTop="@drawable/icon_cm_bd_b"
+                            android:padding="8dp"
+                            android:text="补单"
+                            android:visibility="gone"
+                            android:clickable="false"
+                            android:textSize="12sp" />
+
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
 

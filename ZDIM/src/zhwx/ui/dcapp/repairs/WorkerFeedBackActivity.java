@@ -502,7 +502,7 @@ public class WorkerFeedBackActivity extends BaseActivity implements OnClickListe
 		map.put("repairId",new ParameterValue(repairId)); //报修人Id
 		map.put("repairStatus",new ParameterValue(repairStatus)); //报修人Id
 		map.put("workerId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id())); //报修人Id
-		if(consumResult.getConsumItems()!=null&&consumResult.getConsumItems().size()>0) {
+		if(consumResult.getConsumItems() != null&&consumResult.getConsumItems().size()>0) {
 			map.put("consumItems",new ParameterValue(new Gson().toJson(consumResult))); //配件明细
 		}
 		new ProgressThreadWrap(this, new RunnableWrap() {

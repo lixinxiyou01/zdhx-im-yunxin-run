@@ -556,7 +556,7 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 				ToastUtil.showMessage("乘车人数不得超过1000人!");
 				return;
 			}
-			String dateTime = useDateET.getText().toString() + " " + arriveTimeET.getText().toString();
+			String dateTime = useDateET.getText().toString() + " " + startTimeET.getText().toString();
 			String backDateTime = backUseDateET.getText().toString() + " " + backArriveTimeET.getText().toString();
 			if (StringUtil.isNotBlank(dateTime) && StringUtil.isNotBlank(backDateTime)) {
 				if (DateUtil.compareTime(dateTime, backDateTime)) {

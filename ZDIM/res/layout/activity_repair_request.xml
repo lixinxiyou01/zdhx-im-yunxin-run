@@ -332,10 +332,10 @@
                             android:id="@+id/floorSP"
                             android:layout_width="match_parent"
                             android:layout_height="28dp"
-                            android:layout_toRightOf="@+id/floorlTV"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:background="@drawable/btn_ordercar_normal" />
+                            android:background="@drawable/btn_ordercar_normal"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
                     </RelativeLayout>
 
                     <RelativeLayout

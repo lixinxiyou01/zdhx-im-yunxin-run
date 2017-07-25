@@ -1,5 +1,6 @@
 package com.netease.nim.uikit.contact.core.viewholder;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -28,6 +29,11 @@ public class OnlineStateContactHolder extends ContactHolder {
             }else {
                 desc.setVisibility(View.VISIBLE);
                 desc.setText(onlineStateContent);
+                if(onlineStateContent.contains("在线")) {
+                    desc.setTextColor(Color.parseColor("#FF018F57"));
+                } else {
+                    desc.setTextColor(Color.parseColor("#ffaaaaaa"));
+                }
             }
         }
     }

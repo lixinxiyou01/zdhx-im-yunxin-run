@@ -45,9 +45,9 @@ public class RepairListItem implements Serializable {
 
     public static final String CHECKSTATUS_YPD = "2";//已派单-管理
 
-    public static final String CHECKSTATUS_YFK = "3";//已反馈-维修
+    public static final String CHECKSTATUS_YFK = "3";//已完成-维修
 
-    public static final String CHECKSTATUS_DFK = "3";//待反馈-报修
+    public static final String CHECKSTATUS_DFK = "3";//待评价-报修
 
     public static final String CHECKSTATUS_YWC = "3";//已完成-管理
 

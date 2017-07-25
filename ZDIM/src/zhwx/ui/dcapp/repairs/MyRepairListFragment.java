@@ -476,7 +476,7 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 			}
 		});
 
-		TextView workerFkBT = getOrderButton("反馈");
+		TextView workerFkBT = getOrderButton("维修反馈");
 		workerFkBT.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -486,7 +486,7 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 			}
 		});
 
-		TextView requestFkBT = getOrderButton("反馈");
+		TextView requestFkBT = getOrderButton("评价");
 		requestFkBT.setOnClickListener(new OnClickListener() {
 
 			@Override

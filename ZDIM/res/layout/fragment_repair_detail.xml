@@ -621,38 +621,15 @@
                             android:text="是否修好："
                             android:textSize="15sp"/>
 
-                        <RadioGroup
+                        <TextView
                             android:id="@+id/repairStatusRG"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="12dp"
-                            android:layout_marginRight="10dp"
                             android:layout_toRightOf="@+id/TextView16"
-                            android:orientation="horizontal">
+                            >
 
-                            <RadioButton
-                                android:id="@+id/repairedRb"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="true"
-                                android:text=" 是"
-                                android:clickable="false"
-                                android:button="@drawable/btn_radio_selector"
-                                android:textColor="@color/dark_gray"/>
-
-                            <RadioButton
-                                android:id="@+id/cantRepairRb"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="13dp"
-                                android:layout_weight="1"
-                                android:text=" 否"
-                                android:clickable="false"
-                                android:button="@drawable/btn_radio_selector"
-                                android:textColor="@color/dark_gray"/>
-                        </RadioGroup>
+                        </TextView>
                     </RelativeLayout>
 
                     <TextView
@@ -671,7 +648,8 @@
 
                         <zhwx.common.view.materialratingbar.MaterialRatingBar
                             android:id="@+id/suduRB"
-                            style="@style/Widget.MaterialRatingBar.RatingBar"
+                            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                            android:layout_centerVertical="true"
                             android:progressTint="@color/main_bg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -687,7 +665,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:text="响应速度："
                             android:textSize="15sp" />
                     </RelativeLayout>
@@ -698,7 +676,8 @@
 
                         <zhwx.common.view.materialratingbar.MaterialRatingBar
                             android:id="@+id/taiduRB"
-                            style="@style/Widget.MaterialRatingBar.RatingBar"
+                            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                            android:layout_centerVertical="true"
                             android:progressTint="@color/main_bg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -714,7 +693,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:text="服务态度："
                             android:textSize="15sp"/>
                     </RelativeLayout>
@@ -725,13 +704,12 @@
 
                         <zhwx.common.view.materialratingbar.MaterialRatingBar
                             android:id="@+id/jishuBar"
-                            style="@style/Widget.MaterialRatingBar.RatingBar"
+                            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                            android:layout_centerVertical="true"
                             android:progressTint="@color/main_bg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/TextView3"
-                            android:layout_marginLeft="-3dp"
-                            android:layout_marginRight="-3dp"
                             android:stepSize="0.5"
                             android:isIndicator="true"
                             />
@@ -742,7 +720,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:text="技术水平："
                             android:textSize="15sp"/>
                     </RelativeLayout>
@@ -753,13 +731,12 @@
 
                         <zhwx.common.view.materialratingbar.MaterialRatingBar
                             android:id="@+id/zhiliangRB"
-                            style="@style/Widget.MaterialRatingBar.RatingBar"
+                            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                            android:layout_centerVertical="true"
                             android:progressTint="@color/main_bg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/TextView4"
-                            android:layout_marginLeft="-3dp"
-                            android:layout_marginRight="-3dp"
                             android:stepSize="0.5"
                             android:isIndicator="true"
                             />
@@ -770,34 +747,28 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:text="维修质量："
                             android:textSize="15sp"/>
                     </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/line"/>
 
                     <RelativeLayout
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <zhwx.common.view.materialratingbar.MaterialRatingBar
                             android:id="@+id/allRB"
-                            style="@style/Widget.MaterialRatingBar.RatingBar"
+                            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                            android:layout_centerVertical="true"
                             android:progressTint="@color/main_bg_carmanage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/TextView5"
-                            android:layout_marginLeft="-3dp"
-                            android:layout_marginRight="-3dp"
                             android:stepSize="0.5"
                             android:isIndicator="true"
-                            />
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@+id/TextView5"
+                            android:layout_toEndOf="@+id/TextView5" />
 
                         <TextView
                             android:id="@+id/TextView5"
@@ -805,7 +776,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:text="整体评价："
                             android:textSize="15sp"/>
                     </RelativeLayout>
@@ -834,9 +805,8 @@
                             android:layout_centerVertical="true"
                             android:layout_margin="10dp"
                             android:layout_toRightOf="@+id/suTV"
-                            android:background="@drawable/btn_ordercar_normal"
+                            android:background="@null"
                             android:gravity="top|left"
-                            android:lines="3"
                             android:editable="false"
                             android:textColor="@color/greytext"
                             android:textSize="15sp"></EditText>

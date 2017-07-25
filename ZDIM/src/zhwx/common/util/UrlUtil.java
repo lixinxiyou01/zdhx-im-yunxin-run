@@ -1,8 +1,12 @@
 package zhwx.common.util;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import com.netease.nim.demo.ECApplication;
+import com.netease.nim.demo.login.LoginActivity;
+import com.netease.nim.demo.login.LogoutHelper;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -11,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.InvalidClassException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,8 +58,8 @@ public class UrlUtil {
 		// 仅对当前请求自动重定向
 		conn.setInstanceFollowRedirects(true);
 		// header 设置编码
-		conn.setRequestProperty("Content-Type",
-				"application/x-www-form-urlencoded");
+		conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		conn.setRequestProperty("User-agent", "android");
 		// 连接
 		conn.connect();
 		Log.v("address", conn.getURL().toString());
@@ -71,7 +76,15 @@ public class UrlUtil {
 		}
 		reader.close();
 		conn.disconnect();
-		return result;
+
+
+		if(result.contains("noToken")) {
+			//TODO  token失效
+			ToastUtil.showMessage("登录信息过期，请注销并重新登录");
+			return "";
+		} else {
+			return result;
+		}
 	}
 
 	public static void writeParameters(HttpURLConnection conn,Map<String, ParameterValue> map) throws IOException {

@@ -3,11 +3,15 @@ package zhwx.ui.webapp;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,8 +20,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.netease.nim.demo.R;
+import com.netease.nim.demo.login.LoginActivity;
+import com.netease.nim.demo.login.LogoutHelper;
+import com.photoselector.model.PhotoModel;
+import com.photoselector.ui.PhotoSelectorActivity;
 
 import java.io.File;
+import java.util.List;
 
 import zhwx.Constant;
 import zhwx.common.base.BaseActivity;
@@ -42,6 +51,16 @@ public class WebAppActivity extends BaseActivity {
 	private LoadingView loadView;
 
 	private RelativeLayout mainLay,loadingLay;
+
+
+
+	public ValueCallback<Uri> mUploadMessage;
+	public ValueCallback<Uri[]> mUploadMessageForAndroid5;
+
+	public final static int FILECHOOSER_RESULTCODE = 1;
+	public final static int FILECHOOSER_RESULTCODE_FOR_ANDROID_5 = 2;
+	private String mCameraFilePath;
+	private Uri uri;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +105,14 @@ public class WebAppActivity extends BaseActivity {
 			}
 
 			@JavascriptInterface
+			public void tokenTimeOut() {
+				LogoutHelper.logout();
+				// 启动登录
+				LoginActivity.start(context);
+				context.finish();
+			}
+
+			@JavascriptInterface
 			public void showToast(String msg) {
 				ToastUtil.showMessage(msg);
 			}
@@ -99,6 +126,7 @@ public class WebAppActivity extends BaseActivity {
 			public void onReceivedTitle(WebView view, String title) {
 				super.onReceivedTitle(view, title);
 			}
+
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
 				if (newProgress == 100) {
@@ -110,14 +138,32 @@ public class WebAppActivity extends BaseActivity {
 				}
 				super.onProgressChanged(view, newProgress);
 			}
+
+			//扩展浏览器上传文件
+			//3.0++版本
+			public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
+				openFileChooserImpl(uploadMsg);
+			}
+
+			//3.0--版本
+			public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+				openFileChooserImpl(uploadMsg);
+			}
+			public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
+				openFileChooserImpl(uploadMsg);
+			}
+			// For Android > 5.0
+			public boolean onShowFileChooser (WebView webView, ValueCallback<Uri[]> uploadMsg, WebChromeClient.FileChooserParams fileChooserParams) {
+				openFileChooserImplForAndroid5(uploadMsg);
+				return true;
+			}
 		});
 
 		// webview 下载监听
 		webAppWV.setDownloadListener(new DownloadListener() {
 
 			@Override
-			public void onDownloadStart(String url, String userAgent,
-										String contentDisposition, String mimetype, long contentLength) {
+			public void onDownloadStart(String url, String userAgent,String contentDisposition, String mimetype, long contentLength) {
 				DownloadAsyncTask downloadAsyncTask = new DownloadAsyncTask(new DownloadAsyncTask.DownloadResponser() {
 					@Override
 					public void predownload() {
@@ -125,8 +171,9 @@ public class WebAppActivity extends BaseActivity {
 					}
 					@Override
 					public void downloading(int progress, int position) {
+
 						if (progress < 100){
-							ToastUtil.showMessage("正在加载：" + progress + "%");
+							ToastUtil.showMessage("正在下载：" + progress + "%");
 						} else {
 							ToastUtil.showMessage("请选择打开方式");
 						}
@@ -184,7 +231,7 @@ public class WebAppActivity extends BaseActivity {
 
 					}
 				}, context);
-				downloadAsyncTask.execute(url,"aaa","8");
+				downloadAsyncTask.execute(url,"aaa","8",contentDisposition);
 			}
 		});
 	}
@@ -203,6 +250,51 @@ public class WebAppActivity extends BaseActivity {
 			super.onPageFinished(view, url);
 		}
 	}
+	/**
+	 * 5.0以下
+	 * @param uploadMsg
+	 */
+	private void openFileChooserImpl(ValueCallback<Uri> uploadMsg) {
+		mUploadMessage = uploadMsg;
+		Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+		i.addCategory(Intent.CATEGORY_OPENABLE);
+		i.setType("image/*");
+		Intent xxx= createChooserIntent(createCameraIntent());
+		xxx.putExtra(Intent.EXTRA_INTENT, i);
+		startActivityForResult(xxx, FILECHOOSER_RESULTCODE);
+	}
+
+	/**
+	 * 5.0以上的
+	 * @param uploadMsg
+	 */
+	private void openFileChooserImplForAndroid5(ValueCallback<Uri[]> uploadMsg) {
+		Intent intent = new Intent(WebAppActivity.this, PhotoSelectorActivity.class);
+		intent.putExtra("canSelectCount", 4);
+		startActivityForResult(intent, 2);
+		mUploadMessageForAndroid5 = uploadMsg;
+	}
+
+	private Intent createCameraIntent() {
+		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		File externalDataDir = Environment.getExternalStoragePublicDirectory(
+				Environment.DIRECTORY_DCIM);
+		File cameraDataDir = new File(externalDataDir.getAbsolutePath() +
+				File.separator + "browser-photos");
+		cameraDataDir.mkdirs();
+		mCameraFilePath = cameraDataDir.getAbsolutePath() + File.separator +
+				System.currentTimeMillis() + ".jpg";
+		uri=  Uri.fromFile(new File(mCameraFilePath));
+		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		return cameraIntent;
+	}
+
+	private Intent createChooserIntent(Intent ... intents) {
+		Intent chooser = new Intent(Intent.ACTION_CHOOSER);
+		chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
+		chooser.putExtra(Intent.EXTRA_TITLE, "选择图片来源");
+		return chooser;
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -214,6 +306,36 @@ public class WebAppActivity extends BaseActivity {
 				String userId = data.getExtras().getString("userId");
 				webAppWV.loadUrl("javascript:com.ue.bd.module.mobile.course.table.getUserCourseTable('"+userId + "','"+ userName + "')");
 			}
+		} else if(requestCode == 2 && resultCode == RESULT_OK) {
+			if (data != null && data.getExtras() != null) {
+				@SuppressWarnings("unchecked")
+				List<PhotoModel> photos = (List<PhotoModel>) data.getExtras()
+						.getSerializable("photos");
+				if (photos == null){
+					mUploadMessageForAndroid5.onReceiveValue(null);
+					return;
+				}
+				Uri[] uris = new Uri[photos.size()];
+				for (int i = 0; i < photos.size(); i++) {
+					uris[i] = Uri.fromFile(new File(photos.get(i).getOriginalPath()));
+				}
+				mUploadMessageForAndroid5.onReceiveValue(uris);
+			}else{
+				mUploadMessageForAndroid5.onReceiveValue(null);
+			}
+			mUploadMessageForAndroid5 = null;
+		}else if (requestCode == FILECHOOSER_RESULTCODE) {
+			if (null == mUploadMessage) {
+				return;
+			}
+			Uri result = data == null || resultCode != RESULT_OK ? null: data.getData();
+			mUploadMessage.onReceiveValue(result);
+			mUploadMessage = null;
+		}else{
+			if (mUploadMessageForAndroid5 != null)
+				mUploadMessageForAndroid5.onReceiveValue(null);
+			if (mUploadMessage != null)
+				mUploadMessage.onReceiveValue(null);
 		}
 	}
 
