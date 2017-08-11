@@ -82,7 +82,6 @@ public class ApplicationFragmentWeb extends TFragment {
 		settings.setAllowFileAccess(true);//启用或禁止WebView访问文件数据
 		settings.setBlockNetworkImage(false);//是否显示网络图像  false 为显示
 
-
 		webAppWV.addJavascriptInterface(new Object() {
 
 			@JavascriptInterface

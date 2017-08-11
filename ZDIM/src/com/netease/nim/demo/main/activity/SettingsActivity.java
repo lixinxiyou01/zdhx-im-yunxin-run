@@ -108,7 +108,7 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
     Observer<Boolean> pushConfigObserver = new Observer<Boolean>() {
         @Override
         public void onEvent(Boolean aBoolean) {
-            Toast.makeText(SettingsActivity.this, "收到multiport push config：" + aBoolean, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(SettingsActivity.this, "收到multiport push config：" + aBoolean, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -156,28 +156,29 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
         items.add(new SettingTemplate(TAG_NOTICE, getString(R.string.msg_notice), SettingType.TYPE_TOGGLE, UserPreferences.getNotificationToggle()));
         items.add(SettingTemplate.addLine());
         items.add(new SettingTemplate(TAG_SPEAKER, getString(R.string.msg_speaker), SettingType.TYPE_TOGGLE,com.netease.nim.uikit.UserPreferences.isEarPhoneModeEnable()));
+
 //        items.add(SettingTemplate.makeSeperator());
 //        items.add(new SettingTemplate(TAG_RING, getString(R.string.ring), SettingType.TYPE_TOGGLE,
 //                UserPreferences.getRingToggle()));
 //        items.add(new SettingTemplate(TAG_LED, getString(R.string.led), SettingType.TYPE_TOGGLE,
 //                UserPreferences.getLedToggle()));
 //        items.add(SettingTemplate.makeSeperator());
-
+//
 //        items.add(new SettingTemplate(TAG_NOTICE_CONTENT, getString(R.string.notice_content), SettingType.TYPE_TOGGLE,
 //                UserPreferences.getNoticeContentToggle()));
 //        items.add(SettingTemplate.makeSeperator());
 
-        //选择声音
+//        选择声音
 //        items.add(SettingTemplate.addLine());
-//        choseMusicItem = new SettingTemplate(TAG_CHOOSE_MUSIC, getString(R.string.chose_notice_music), "跟随系统");
+//        choseMusicItem = new SettingTemplate(TAG_CHOOSE_MUSIC, "选择铃声", "跟随系统");
 //        items.add(choseMusicItem);
 
         items.add(SettingTemplate.addLine());
         disturbItem = new SettingTemplate(TAG_NO_DISTURBE, getString(R.string.no_disturb), noDisturbTime);
         items.add(disturbItem);
-//        items.add(SettingTemplate.addLine());
-//        items.add(new SettingTemplate(TAG_MULTIPORT_PUSH, getString(R.string.multiport_push), SettingType.TYPE_TOGGLE,
-//               !NIMClient.getService(SettingsService.class).isMultiportPushOpen()));
+        items.add(SettingTemplate.addLine());
+        items.add(new SettingTemplate(TAG_MULTIPORT_PUSH, "PC端在线时不接收提醒", SettingType.TYPE_TOGGLE,
+               !NIMClient.getService(SettingsService.class).isMultiportPushOpen()));
         items.add(SettingTemplate.makeSeperator());
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -188,6 +189,7 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
 //        items.add(new SettingTemplate(TAG_MSG_IGNORE, "过滤通知",
 //                SettingType.TYPE_TOGGLE, UserPreferences.getMsgIgnore()));
 //        items.add(SettingTemplate.addLine());
+
         items.add(new SettingTemplate(TAG_CLEAR, getString(R.string.about_clear_msg_history)));
         items.add(SettingTemplate.addLine());
 
@@ -342,12 +344,12 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
         NIMClient.getService(SettingsService.class).updateMultiportPushConfig(checkState).setCallback(new RequestCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
-                Toast.makeText(SettingsActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SettingsActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailed(int code) {
-                Toast.makeText(SettingsActivity.this, "设置失败,code:" + code, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SettingsActivity.this, "设置失败,code:" + code, Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
             }
 

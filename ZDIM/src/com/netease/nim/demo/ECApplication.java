@@ -80,6 +80,7 @@ import zhwx.common.util.SharPreUtil;
 import zhwx.common.util.StringUtil;
 import zhwx.common.util.UrlUtil;
 
+
 public class ECApplication extends Application {
 
     private static ECApplication instance;
@@ -212,7 +213,6 @@ public class ECApplication extends Application {
     private void initStatusBarNotificationConfig(SDKOptions options) {
         // load 应用的状态栏配置
         StatusBarNotificationConfig config = loadStatusBarNotificationConfig();
-
         // load 用户的 StatusBarNotificationConfig 设置项
         StatusBarNotificationConfig userConfig = UserPreferences.getStatusConfig();
         if (userConfig == null) {
@@ -224,6 +224,7 @@ public class ECApplication extends Application {
             userConfig.notificationEntrance = config.notificationEntrance;
 //            userConfig.notificationFolded = config.notificationFolded;
 //            userConfig.notificationColor = getResources().getColor(R.color.color_blue_3a9efb);
+            userConfig.notificationSound = config.notificationSound;
         }
         // 持久化生效
         UserPreferences.setStatusConfig(userConfig);
@@ -237,9 +238,9 @@ public class ECApplication extends Application {
         // 点击通知需要跳转到的界面
         config.notificationEntrance = WelcomeActivity.class;
         config.notificationSmallIconId = R.drawable.ic_stat_notify_msg;
-//        config.notificationColor = getResources().getColor(R.color.color_blue_3a9efb);
+        config.notificationColor = getResources().getColor(R.color.color_blue_3a9efb);
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.netease.nim.demo/raw/msg";
+        config.notificationSound = "android.resource://com.lanxum.hzth.im/raw/msg";
 
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
