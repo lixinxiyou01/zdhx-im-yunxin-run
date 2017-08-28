@@ -349,6 +349,14 @@ public class NoticeActivity extends BaseActivity{
 		if (StringUtil.isBlank(json)||"[]".equals(json)) {
 			listView.finishLoading();
 			listView.setLoadmoreVisible(false);
+
+			if (pageNum == 1) {
+				allDataList.clear();
+				if (adapter != null) {
+					adapter.notifyDataSetChanged();
+				}
+				return;
+			}
 		}
 		if (pageNum == 1) {
 			allDataList.clear();
@@ -1198,7 +1206,6 @@ public class NoticeActivity extends BaseActivity{
 	/**
 	 * 获取未读消息数
 	 * 
-	 * @param UserId
 	 */
 	public void getMessageCount() {
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();

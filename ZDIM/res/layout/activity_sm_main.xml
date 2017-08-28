@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:visibility="invisible"
         android:layout_marginBottom="48dp" >
 
         <LinearLayout

@@ -107,12 +107,12 @@ public class AboutActivity extends UI{
 
 		Intent shareIntent = new Intent();
 		shareIntent.setAction(Intent.ACTION_SEND);
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.pgyer.com/jljy"
+		shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.pgyer.com/zhwx"
 				+ " ---- 分享自"
 				+ ECApplication.getInstance().getCurrentIMUser().getName()
-				+ "(经纶教育)");
+				+ "(智微校)");
 		shareIntent.setType("text/plain");
-		startActivity(Intent.createChooser(shareIntent, "分享经纶教育"));//设置分享列表的标题，并且每次都显示分享列表
+		startActivity(Intent.createChooser(shareIntent, "分享智微校"));//设置分享列表的标题，并且每次都显示分享列表
 
 
 //		Intent shareIntent = new Intent();
@@ -130,7 +130,7 @@ public class AboutActivity extends UI{
 		ShareSDK.initSDK(this);
 		OnekeyShare oks = new OnekeyShare();
 		oks.disableSSOWhenAuthorize();
-		oks.setTitle("下载经纶教育");
+		oks.setTitle("下载智微校");
 		String text = "构筑于工作场景下的即时沟通工具，让科技创新成就教育未来！";
 		oks.setText(text);
 		oks.setImagePath(imageLoader.saveBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher)).getAbsolutePath());//确保SDcard下面存在此张图片

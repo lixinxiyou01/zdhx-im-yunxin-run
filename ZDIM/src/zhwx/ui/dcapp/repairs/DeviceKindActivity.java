@@ -195,6 +195,7 @@ public class DeviceKindActivity extends BaseActivity implements OnClickListener{
 				holder = (ViewHolder) convertView.getTag();
 			}
 			holder.kindNameTV.setText(getItem(position).getName());
+			holder.kindImgIV.setImageResource(R.drawable.icon_shebei);
 			imageLoader.DisplayImage(ECApplication.getInstance().getV3Address() + getItem(position).getImageUrl(), holder.kindImgIV,false);
 			addListener(holder, position, convertView);
 			return convertView;

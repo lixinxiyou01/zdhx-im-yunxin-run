@@ -321,7 +321,7 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 
 			setText(holder.titleTV,getItem(position).getPlaceName()+getItem(position).getDeviceName()+"报修");
 			setText(holder.requestTimeTV,getItem(position).getApplyTime());
-			setText(holder.faultTV,getItem(position).getMalfunction());
+			setText(holder.faultTV,getItem(position).getFaultDescription());
 			setText(holder.checkStatusViewTV,getItem(position).getStatusView());
 			setText(holder.faultDescriptionTV,getItem(position).getFaultDescription());
 

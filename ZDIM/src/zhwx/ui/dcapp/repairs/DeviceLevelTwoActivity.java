@@ -194,6 +194,8 @@ public class DeviceLevelTwoActivity extends BaseActivity implements OnClickListe
 			}
 			
 			holder.kindNameTV.setText(getItem(position).getName());
+
+			holder.kindImgIV.setImageResource(R.drawable.icon_shebei_lan);
 			imageLoader.DisplayImage(ECApplication.getInstance().getV3Address() + getItem(position).getImageUrl(), holder.kindImgIV,false);
 			addListener(holder, position, convertView);
 			return convertView;

@@ -1,13 +1,13 @@
 package com.photoselector.ui;
 
-import java.util.List;
-
 import android.os.Bundle;
 
 import com.photoselector.domain.PhotoSelectorDomain;
 import com.photoselector.model.PhotoModel;
 import com.photoselector.ui.PhotoSelectorActivity.OnLocalReccentListener;
 import com.photoselector.util.CommonUtils;
+
+import java.util.List;
 
 public class PhotoPreviewActivity extends BasePhotoPreviewActivity implements OnLocalReccentListener {
 
@@ -16,7 +16,6 @@ public class PhotoPreviewActivity extends BasePhotoPreviewActivity implements On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		photoSelectorDomain = new PhotoSelectorDomain(getApplicationContext());
 
 		init(getIntent().getExtras());
@@ -49,5 +48,4 @@ public class PhotoPreviewActivity extends BasePhotoPreviewActivity implements On
 		updatePercent();
 		bindData(); // 更新界面
 	}
-
 }

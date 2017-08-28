@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -71,6 +72,8 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 	private TextView count_dsh_a,count_dff_a,count_ck_a;
 	
 	private RelativeLayout dsh_a_lay,dff_a_lay,tj_a_lay,ck_a_lay;
+
+	private ScrollView scrollView1;
 	
     @Override
 	protected int getLayoutId() {return R.layout.activity_sm_main;}
@@ -96,6 +99,7 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 		dff_a_lay = (RelativeLayout) findViewById(R.id.dff_a_lay);
 		tj_a_lay = (RelativeLayout) findViewById(R.id.tj_a_lay);
 		ck_a_lay = (RelativeLayout) findViewById(R.id.ck_a_lay);
+		scrollView1 = (ScrollView) findViewById(R.id.scrollView1);
 	}
 	
 
@@ -122,6 +126,7 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 						
 						@Override
 						public void run() {
+
 						}
 					}, 5);
 				}
@@ -164,6 +169,7 @@ public class SMainActivity extends BaseActivity implements OnClickListener {
 			tj_a_lay.setVisibility(View.GONE);
 			
 		}
+		scrollView1.setVisibility(View.VISIBLE);
 	}
 	
 	@Override

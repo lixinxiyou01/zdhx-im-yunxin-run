@@ -152,7 +152,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="故障现象：" />
+                            android:text="故障描述：" />
 
                         <TextView
                             android:id="@+id/faultTV"

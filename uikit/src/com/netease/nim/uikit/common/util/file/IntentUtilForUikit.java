@@ -177,7 +177,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "image/*");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -200,7 +200,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "application/pdf");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -237,7 +237,7 @@ public class IntentUtilForUikit {
 
 		{
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-				Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(paramString));//android 7.0以上
+				Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(paramString));//android 7.0以上
 				intent.setDataAndType(fileUri, "text/plain");
 				grantUriPermission(context, fileUri, intent);
 			}else {
@@ -264,7 +264,7 @@ public class IntentUtilForUikit {
 		intent.putExtra("configchange", 0);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "audio/*");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -290,7 +290,7 @@ public class IntentUtilForUikit {
 		intent.putExtra("configchange", 0);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "video/*");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -314,7 +314,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "application/x-chm");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -338,7 +338,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "application/msword");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -361,7 +361,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "application/vnd.ms-excel");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -384,7 +384,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "application/vnd.ms-powerpoint");
 			grantUriPermission(context, fileUri, intent);
 		}else {
@@ -408,7 +408,7 @@ public class IntentUtilForUikit {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));//android 7.0以上
+			Uri fileUri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));//android 7.0以上
 			intent.setDataAndType(fileUri, "*/*");
 			grantUriPermission(context, fileUri, intent);
 		}else {

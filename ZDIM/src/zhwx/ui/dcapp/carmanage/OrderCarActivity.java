@@ -603,7 +603,10 @@ public class OrderCarActivity extends BaseActivity implements OnDateSetListener,
 							if (orderFlag.contains("ok")) {
 								ToastUtil.showMessage("订单已提交，请等待派车");
 								finish();
+							} else {
+								ToastUtil.showMessage(orderFlag);
 							}
+							mPostingdialog.dismiss();
 						}
 					}, 5);
 				} catch (IOException e) {

@@ -2,7 +2,6 @@ package com.netease.nim.demo.main.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,11 +20,9 @@ import com.netease.nim.demo.R;
 import com.netease.nim.demo.login.LoginActivity;
 import com.netease.nim.demo.login.LogoutHelper;
 import com.netease.nim.uikit.common.fragment.TFragment;
-import com.netease.nim.uikit.common.util.string.StringUtil;
 
 import zhwx.common.util.IntentUtil;
 import zhwx.common.util.ToastUtil;
-import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.ui.webapp.WebAppActivity;
 import zhwx.ui.webapp.view.loadview.LoadingView;
 
@@ -167,18 +164,18 @@ public class ApplicationFragmentWeb extends TFragment {
 		}
 		isFirstLoad = false;
 
-		if(StringUtil.isEmpty(ECApplication.getInstance().getFlag())) {
-			ECAlertDialog buildAlert = ECAlertDialog.buildPositiveAlert(context, R.string.action_settings, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int which) {
-					ECApplication.getInstance().saveFlag();
-				}
-			});
-			buildAlert.setTitle("提示");
-			buildAlert.setMessage("1、长按应用图标可开启编辑模式\n\n" +
-					"2、编辑模式下点击图标可将应用从常用应用分组中添加、移除\n\n" +
-					"3、编辑模式下常用应用分组图标可拖动排序");
-			buildAlert.show();
-		}
+//		if(StringUtil.isEmpty(ECApplication.getInstance().getFlag())) {
+//			ECAlertDialog buildAlert = ECAlertDialog.buildPositiveAlert(context, R.string.action_settings, new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog,int which) {
+//					ECApplication.getInstance().saveFlag();
+//				}
+//			});
+//			buildAlert.setTitle("提示");
+//			buildAlert.setMessage("1、长按应用图标可开启编辑模式\n\n" +
+//					"2、编辑模式下点击图标可将应用从常用应用分组中添加、移除\n\n" +
+//					"3、编辑模式下常用应用分组图标可拖动排序");
+//			buildAlert.show();
+//		}
 	}
 
 	@Override

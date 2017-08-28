@@ -47,7 +47,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{asKindTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -74,7 +73,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{useDateTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -101,7 +99,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{userNameTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -128,7 +125,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{departmentTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -155,7 +151,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{schoolTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -182,7 +177,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{useWayTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -209,7 +203,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="{needIntroductionsTV}"
                                 android:textColor="@color/greytext" />
                         </LinearLayout>
 
@@ -239,7 +232,6 @@
                                 android:ellipsize="end"
                                 android:gravity="right"
                                 android:singleLine="true"
-                                android:text="{状态}"
                                 android:textColor="@color/main_bg_carmanage" />
                         </LinearLayout>
 
@@ -269,7 +261,6 @@
                                 android:ellipsize="end"
                                 android:gravity="right"
                                 android:singleLine="true"
-                                android:text="{审核说明}"
                                 android:textColor="@color/main_bg_carmanage" />
                         </LinearLayout>
                     </LinearLayout>

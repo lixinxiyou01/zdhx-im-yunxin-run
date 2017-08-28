@@ -374,6 +374,7 @@ public class NoticeDetailActivity extends BaseActivity {
 		amd_time.setText("发送时间: "+v3Notice.getSendTime());
 		amd_title.setText(v3Notice.getTitle());
 		System.out.println(UrlUtil.getUrl(v3Notice.getUrl(), getMap(v3Notice.getId())));
+		//TODO
 		contentWV.loadUrl(UrlUtil.getUrl(v3Notice.getUrl(), getMap(v3Notice.getId())));
 		if(v3Notice.getAttachmentFlag().size() == 0){
 			amd_expand.setVisibility(View.GONE);

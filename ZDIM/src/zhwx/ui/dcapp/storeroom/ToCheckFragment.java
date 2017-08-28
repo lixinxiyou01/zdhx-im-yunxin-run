@@ -201,7 +201,7 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 			
 			holder.smCodeTV.setText(getItem(position).getCode());
 			holder.departmentNameTV.setText(getItem(position).getDepartmentName());
-			holder.smApplyDateTV.setText(getItem(position).getDeptDate());
+			holder.smApplyDateTV.setText(getItem(position).getDate());
 			holder.getKindTV.setText(getItem(position).getKindValue());
 			
 			if (startFlag == SMCHECK_FLAG_BM) { 

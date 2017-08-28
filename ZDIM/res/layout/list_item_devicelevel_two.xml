@@ -31,7 +31,7 @@
                 android:id="@+id/kindImgIV"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/attach_file_icon_mailread_apk"
+                android:src="@drawable/icon_shebei_lan"
                 />
 
             <TextView

@@ -326,6 +326,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="10dp"
+                            android:layout_marginLeft="5dp"
                             android:src="@drawable/icon_rm_down" />
 
                         <Spinner
@@ -335,7 +336,12 @@
                             android:background="@drawable/btn_ordercar_normal"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/floorlTV"
+                            android:layout_toEndOf="@+id/floorlTV" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -366,6 +372,7 @@
                             android:layout_toRightOf="@+id/roomTV"
                             android:layout_marginLeft="5dp"
                             android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:background="@drawable/btn_ordercar_normal"
                             tools:ignore="UnknownId"/>
                     </RelativeLayout>

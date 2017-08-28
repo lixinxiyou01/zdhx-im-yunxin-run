@@ -319,23 +319,23 @@ public class OrderListFragment extends ScrollTabHolderFragment {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.carUserNameTV.setText(getItem(position).getCarUserName());
-			holder.telephoneTV.setText(getItem(position).getTelephone());
-			holder.arriveTimeTV.setText(getItem(position).getArriveTime());
-			holder.startTimeTV.setText(getItem(position).getStartTime());
-			holder.addressTV.setText(getItem(position).getAddress());
-			holder.orderTimeTV.setText(getItem(position).getOrderTime());
-			holder.checkStatusViewTV.setText(getItem(position).getCheckStatusView());
+			holder.carUserNameTV.setText(StringUtil.getString(getItem(position).getCarUserName()));
+			holder.telephoneTV.setText(StringUtil.getString(getItem(position).getTelephone()));
+			holder.arriveTimeTV.setText(StringUtil.isBlank(getItem(position).getArriveTime())?"":getItem(position).getArriveTime());
+			holder.startTimeTV.setText(StringUtil.isBlank(getItem(position).getStartTime())?"":getItem(position).getStartTime());
+			holder.addressTV.setText(StringUtil.isBlank(getItem(position).getAddress())?"":getItem(position).getAddress());
+			holder.orderTimeTV.setText(StringUtil.getString(getItem(position).getOrderTime()));
+			holder.checkStatusViewTV.setText(StringUtil.getString(getItem(position).getCheckStatusView()));
 			
 			if (startFlag == CMainActivity.STARTFLAG_MYTASK) {
-				holder.leaveDateTV.setText(getItem(position).getLeaveDate());
-				holder.leaveTimeTV.setText(getItem(position).getLeaveTime());
-				holder.useAddressTV .setText(getItem(position).getUseAddress());
-				holder.carNameTV.setText(getItem(position).getCarName());
-				holder.carNumTV.setText(getItem(position).getCarNum());
+				holder.leaveDateTV.setText(StringUtil.getString(getItem(position).getLeaveDate()));
+				holder.leaveTimeTV.setText(StringUtil.getString(getItem(position).getLeaveTime()));
+				holder.useAddressTV .setText(StringUtil.getString(getItem(position).getUseAddress()));
+				holder.carNameTV.setText(StringUtil.getString(getItem(position).getCarName()));
+				holder.carNumTV.setText(StringUtil.getString(getItem(position).getCarNum()));
 			} else {
-				holder.userDateTV.setText(getItem(position).getUserDate());
-				holder.departmentNameTV.setText(getItem(position).getDepartmentName());
+				holder.userDateTV.setText(StringUtil.getString(getItem(position).getUserDate()));
+				holder.departmentNameTV.setText(StringUtil.getString(getItem(position).getDepartmentName()));
 			}
 			
 			//动态添加操作按钮
@@ -363,7 +363,7 @@ public class OrderListFragment extends ScrollTabHolderFragment {
 							 leaveTimeTV,leaveDateTV,useAddressTV,carNameTV,carNumTV;
 			private LinearLayout buttonContentLay;
 		}
-		
+
 	}
 	
 	public List<TextView> getOrderButtonList(final String status,final String evaluateFlag,final int position){

@@ -31,7 +31,7 @@
                 android:id="@+id/kindImgIV"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/icon_sao" />
+                android:src="@drawable/icon_shebei" />
 
             <TextView
                 android:id="@+id/kindNameTV"
