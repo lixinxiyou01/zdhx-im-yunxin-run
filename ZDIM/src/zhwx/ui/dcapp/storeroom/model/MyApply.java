@@ -123,7 +123,16 @@ public class MyApply implements Serializable {
         private String kindValue;
         private Object zwAuditopinion;
         private String departmentName;
-        
+        private String userName;
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
         public String getDepartmentName() {
 			return departmentName;
 		}
