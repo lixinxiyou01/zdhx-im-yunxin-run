@@ -128,6 +128,15 @@ public class AuditData implements Serializable {
         private String CHECKSTATUS_UNAUDIT;
         private String kindValue;
         private String zwAuditopinion;
+        private String userName;
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
 
         public String getDeptAuditOpinion() {
             return deptAuditOpinion;
