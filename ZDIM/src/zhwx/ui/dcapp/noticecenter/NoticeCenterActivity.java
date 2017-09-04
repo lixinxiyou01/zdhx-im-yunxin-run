@@ -1159,7 +1159,7 @@ public class NoticeCenterActivity extends BaseActivity implements OnClickListene
 	 *
 	 */
 	public void markAllRead() {
-		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
 		map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
 		new ProgressThreadWrap(context, new RunnableWrap() {
 			@Override
