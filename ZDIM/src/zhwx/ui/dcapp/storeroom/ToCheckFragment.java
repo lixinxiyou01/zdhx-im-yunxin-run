@@ -31,6 +31,7 @@ import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DensityUtil;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
+import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
@@ -184,7 +185,7 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 			ViewHolder holder;
 			if (convertView == null) {
 				
-				convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_sm_myassets, null);
+				convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_sm_checkassets, null);
 				holder = new ViewHolder();
 				holder.smCodeTV = (TextView) convertView.findViewById(R.id.smCodeTV);
 				holder.departmentNameTV = (TextView) convertView.findViewById(R.id.departmentNameTV);
@@ -193,17 +194,20 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 				holder.checkStatusViewTV = (TextView) convertView.findViewById(R.id.checkStatusViewTV);
 				holder.sendStatusViewTV = (TextView) convertView.findViewById(R.id.sendStatusViewTV);
 				holder.buttonContentLay = (LinearLayout) convertView.findViewById(R.id.buttonContentLay);
-				
+				holder.smApplyerNameTV = (TextView) convertView.findViewById(R.id.smApplyerNameTV);
+
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			holder.smCodeTV.setText(getItem(position).getCode());
 			holder.departmentNameTV.setText(getItem(position).getDepartmentName());
 			holder.smApplyDateTV.setText(getItem(position).getDate());
 			holder.getKindTV.setText(getItem(position).getKindValue());
-			
+			//TODO 申领人名字
+			holder.smApplyerNameTV.setText(StringUtil.getString(getItem(position).getUserName()));
+
 			if (startFlag == SMCHECK_FLAG_BM) { 
 				holder.checkStatusViewTV.setText(getItem(position).getDeptCheckStatusValue());
 			} else {
@@ -232,7 +236,7 @@ public class ToCheckFragment extends ScrollTabHolderFragment {
 				final View view) {
 		}
 		private class ViewHolder {
-			private TextView smCodeTV,departmentNameTV,smApplyDateTV,getKindTV,sendStatusViewTV,checkStatusViewTV;
+			private TextView smCodeTV,departmentNameTV,smApplyDateTV,getKindTV,sendStatusViewTV,checkStatusViewTV,smApplyerNameTV;
 			private LinearLayout buttonContentLay;
 		}
 		

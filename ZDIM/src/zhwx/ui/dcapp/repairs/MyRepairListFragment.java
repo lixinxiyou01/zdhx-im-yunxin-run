@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
-import com.netease.nim.demo.session.SessionHelper;
+import com.netease.nim.demo.contact.activity.UserProfileActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -387,8 +387,8 @@ public class MyRepairListFragment extends ScrollTabHolderFragment {
 									handler.postDelayed(new Runnable() {
 										public void run() {
 											if (!"error".equals(accId)) {
-//												UserProfileActivity.start(getActivity(), accId.trim());
-												SessionHelper.startP2PSession(getActivity(), accId.trim());
+												UserProfileActivity.start(getActivity(), accId.trim());
+//												SessionHelper.startP2PSession(getActivity(), accId.trim());
 											} else {
 												ToastUtil.showMessage("此用户未开通即时通讯");
 											}

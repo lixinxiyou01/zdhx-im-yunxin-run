@@ -53,6 +53,7 @@ import zhwx.common.model.ParameterValue;
 import zhwx.common.util.DensityUtil;
 import zhwx.common.util.ProgressThreadWrap;
 import zhwx.common.util.RunnableWrap;
+import zhwx.common.util.StringUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
@@ -176,7 +177,7 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			ViewHolder holder;
 			if (convertView == null) {
 				
-				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_myassets, null);
+				convertView = LayoutInflater.from(context).inflate(R.layout.list_item_sm_checkassets, null);
 				holder = new ViewHolder();
 				holder.smCodeTV = (TextView) convertView.findViewById(R.id.smCodeTV);
 				holder.departmentNameTV = (TextView) convertView.findViewById(R.id.departmentNameTV);
@@ -185,6 +186,7 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 				holder.checkStatusViewTV = (TextView) convertView.findViewById(R.id.checkStatusViewTV);
 				holder.sendStatusViewTV = (TextView) convertView.findViewById(R.id.sendStatusViewTV);
 				holder.buttonContentLay = (LinearLayout) convertView.findViewById(R.id.buttonContentLay);
+				holder.smApplyerNameTV = (TextView) convertView.findViewById(R.id.smApplyerNameTV);
 				
 				convertView.setTag(holder);
 			} else {
@@ -202,6 +204,9 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 			} else {
 				holder.sendStatusViewTV.setTextColor(Color.parseColor("#3573a2"));
 			}
+
+			//TODO 申领人名字
+			holder.smApplyerNameTV.setText(StringUtil.getString(getItem(position).getUserName()));
 			
 			//动态添加操作按钮
 			holder.buttonContentLay.removeAllViews();
@@ -223,7 +228,7 @@ public class ToGrantActivity extends BaseActivity implements OnClickListener {
 				final View view) {
 		}
 		private class ViewHolder {
-			private TextView smCodeTV,departmentNameTV,smApplyDateTV,getKindTV,sendStatusViewTV,checkStatusViewTV;
+			private TextView smCodeTV,departmentNameTV,smApplyDateTV,getKindTV,sendStatusViewTV,checkStatusViewTV,smApplyerNameTV;
 			private LinearLayout buttonContentLay;
 		}
 		
