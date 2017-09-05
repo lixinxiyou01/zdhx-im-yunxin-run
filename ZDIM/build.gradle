@@ -15,8 +15,8 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        versionCode 2160
-        versionName "2.1.6"
+        versionCode 2170
+        versionName "2.1.7"
         multiDexEnabled true
         applicationId = "com.lanxum.hzth.im"
         minSdkVersion 14
