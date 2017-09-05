@@ -7,9 +7,9 @@ package zhwx;
  */
 public class Constant {
 
-	/** 智微校服务端地址 **/
-//	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //jljy
-	public static final String SERVER_ADDRESS_DEFULT = "http://im.zdhx-edu.com/im"; //正式
+	/** 经纶教育服务端地址 **/
+	public static final String SERVER_ADDRESS_DEFULT = "http://im.bjcjl.net/im"; //jljy
+//	public static final String SERVER_ADDRESS_DEFULT = "http://im.zdhx-edu.com/im"; //正式
 //	public static final String SERVER_ADDRESS_DEFULT = "http://hwzx.zdhx-edu.com/im"; //汇文中学
 //	public static final String SERVER_ADDRESS_DEFULT = "http://tj.zdhx-edu.com/im"; //天津
 	public static final String SERVER_ADDRESS_DEFULT_TEST = "http://www.zdhx-edu.com/im"; //中电
@@ -19,7 +19,7 @@ public class Constant {
 
 
 	public static final class YunXin {
-		/** 云信AppId-智微校 **/
+		/** 云信AppId-经纶教育 **/
 		public static final String APPKEY = "e7b43b346eaf69308a902fd1b654caec";
 		public static final String SECRET  = "9a15f6fd0ac7";
 	}

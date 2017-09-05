@@ -40,6 +40,7 @@ import com.netease.nim.uikit.session.viewholder.MsgViewHolderThumbBase;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.NimStrings;
 import com.netease.nimlib.sdk.SDKOptions;
+import com.netease.nimlib.sdk.ServerAddresses;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.MessageNotifierCustomization;
@@ -190,25 +191,25 @@ public class ECApplication extends Application {
         options.messageNotifierCustomization = messageNotifierCustomization;
 
         // 在线多端同步未读数
-//        options.sessionReadAck = true;
+        options.sessionReadAck = true;
 
         // 云信私有化配置项
-//        configServerAddress(options);
+        configServerAddress(options);
 
         return options;
     }
 
-//    private void configServerAddress(final SDKOptions options) {
-//        String appKey = PrivatizationConfig.getAppKey();
-//        if (!TextUtils.isEmpty(appKey)) {
-//            options.appKey = appKey;
-//        }
-//
-//        ServerAddresses serverConfig = PrivatizationConfig.getServerAddresses();
-//        if (serverConfig != null) {
-//            options.serverConfig = serverConfig;
-//        }
-//    }
+    private void configServerAddress(final SDKOptions options) {
+        String appKey = PrivatizationConfig.getAppKey();
+        if (!TextUtils.isEmpty(appKey)) {
+            options.appKey = appKey;
+        }
+
+        ServerAddresses serverConfig = PrivatizationConfig.getServerAddresses();
+        if (serverConfig != null) {
+            options.serverConfig = serverConfig;
+        }
+    }
 
     private void initStatusBarNotificationConfig(SDKOptions options) {
         // load 应用的状态栏配置
@@ -240,7 +241,7 @@ public class ECApplication extends Application {
         config.notificationSmallIconId = R.drawable.ic_stat_notify_msg;
         config.notificationColor = getResources().getColor(R.color.color_blue_3a9efb);
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.zdhx.edu.im/raw/msg";
+        config.notificationSound = "android.resource://com.lanxum.hzth.im/raw/msg";
 
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
@@ -483,7 +484,7 @@ public class ECApplication extends Application {
     };
 
 
-    /********************************  智微校定义  ******************************/
+    /********************************  经纶教育定义  ******************************/
     /**
      * IM登录信息
      * @return
@@ -614,7 +615,7 @@ public class ECApplication extends Application {
     }
 
     /**
-     * 存储智微校服务器地址
+     * 存储经纶教育服务器地址
      * @param address
      */
     public void saveAddress(String address) {

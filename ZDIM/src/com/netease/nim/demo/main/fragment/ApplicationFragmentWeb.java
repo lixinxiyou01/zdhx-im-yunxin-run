@@ -3,7 +3,6 @@ package com.netease.nim.demo.main.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,16 +89,17 @@ public class ApplicationFragmentWeb extends TFragment {
 			@JavascriptInterface
 			public void openWebApp(String url) {
 
-				if (url.contains("session/checkLogin")) {
-					Intent intent = new Intent();
-					intent.setAction("android.intent.action.VIEW");
-					Uri content_url = Uri.parse(url);
-					intent.setData(content_url);
-					startActivity(intent);
-
-				} else {
-					startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
-				}
+//				if (url.contains("session/checkLogin")) {
+//					Intent intent = new Intent();
+//					intent.setAction("android.intent.action.VIEW");
+//					Uri content_url = Uri.parse(url);
+//					intent.setData(content_url);
+//					startActivity(intent);
+//
+//				} else {
+//					startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
+//				}
+				startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", url));
 			}
 
 			@JavascriptInterface

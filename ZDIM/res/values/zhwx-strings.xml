@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">智微校</string>
+    <string name="app_name">经纶教育</string>
     <string name="action_settings">Settings</string>
     <string name="common_enter_activity">当前所在页面,</string>
     <string name="media_ejected">储存卡已拔出，语音功能将暂时不可用</string>

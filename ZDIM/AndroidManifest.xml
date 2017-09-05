@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.netease.nim.demo"
-    android:installLocation="auto">
+    >
 
 
 
@@ -74,7 +74,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="582aa3dba967322b4edfadcf98567982" />
+            android:value="8a08faeb98cc1f79e3947bbbae9c268d" />
 
         <uses-library
             android:name="com.google.android.maps"
@@ -82,7 +82,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.pgyersdk.zdhx.zhwx.provider"
+            android:authorities="com.pgyersdk.zdhx.jljy.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -394,7 +394,7 @@
             android:name="com.netease.cosine.target.receiver"
             android:value="com.netease.nimlib.service.NimReceiver"/>
 
-        <!--******************************************智微校 STATR******************************************************* -->
+        <!--******************************************经纶教育 STATR******************************************************* -->
 
         <!--圈子-->
         <!-- 圈子评论列表 -->
@@ -925,6 +925,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
+        
+        <activity android:name="com.pgyersdk.activity.FeedbackActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
 
         <!--极光推送-->
         <!-- Required SDK 核心功能-->
@@ -1012,7 +1017,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <action android:name="cn.jpush.android.intent.CONNECTION"/>
-                <category android:name="com.zdhx.edu.im"/>
+                <category android:name="com.lanxum.hzth.im"/>
             </intent-filter>
         </receiver>
 
@@ -1062,12 +1067,12 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="mBYLWAsrZF5j6vlVp74DPHi716iKpLVV"/>
+            android:value="aUsCsCA1nYjfrGn3RtwO1cc1ZdAUGQz0"/>
 
         <!-- 蒲公英必选 -->
         <meta-data
             android:name="PGYER_APPID"
-            android:value="1710b02a7af5a997f191c3c203c7e27f"/>
+            android:value="a35b2eefa7cddcf66c4d71c6127b5fbf"/>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
          App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
@@ -1075,7 +1080,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
-        <!--******************************************智微校 END********************************************************* -->
+        <!--******************************************经纶教育 END********************************************************* -->
     </application>
 
 </manifest>

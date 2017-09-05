@@ -177,8 +177,7 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
         disturbItem = new SettingTemplate(TAG_NO_DISTURBE, getString(R.string.no_disturb), noDisturbTime);
         items.add(disturbItem);
         items.add(SettingTemplate.addLine());
-        items.add(new SettingTemplate(TAG_MULTIPORT_PUSH, "PC端在线时不接收提醒", SettingType.TYPE_TOGGLE,
-               !NIMClient.getService(SettingsService.class).isMultiportPushOpen()));
+        items.add(new SettingTemplate(TAG_MULTIPORT_PUSH, "PC端在线时不提醒", SettingType.TYPE_TOGGLE,NIMClient.getService(SettingsService.class).isMultiportPushOpen()));
         items.add(SettingTemplate.makeSeperator());
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -313,7 +312,7 @@ public class SettingsActivity extends UI implements SettingsAdapter.SwitchChange
                 NIMClient.updateStatusBarNotificationConfig(config2);
                 break;
             case TAG_MULTIPORT_PUSH:
-                updateMultiportPushConfig(!checkState);
+                updateMultiportPushConfig(checkState);
                 break;
             default:
                 break;

@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.netease.nim.demo.ECApplication;
+import com.pgyersdk.activity.FeedbackActivity;
+import com.pgyersdk.feedback.PgyFeedbackShakeManager;
 
 import java.io.Serializable;
 import java.util.List;
@@ -302,5 +304,14 @@ public abstract class BaseActivity extends FragmentActivity implements SwipeBack
 
 	public void onBack(View v) {
 		finish();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PgyFeedbackShakeManager.setShakingThreshold(1000);
+		PgyFeedbackShakeManager.register(this);
+		FeedbackActivity.setBarImmersive(true);
+		PgyFeedbackShakeManager.register(this,false);
 	}
 }
