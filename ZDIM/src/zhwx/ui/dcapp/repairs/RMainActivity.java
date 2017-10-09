@@ -137,8 +137,8 @@ public class RMainActivity extends BaseActivity {
         if (data.getNote()!= null && StringUtil.isNotBlank(data.getNote())) {
 //            String  note = data.getNote().replaceAll("<p>","<br>").replaceAll("<\\/p>","<\\/br>");
             System.out.println("note" + data.getNote());
-            noticeTV.setText(Html.fromHtml(data.getNote()));
-            publicTV.setText(Html.fromHtml(data.getNote()));
+            noticeTV.setText((Html.fromHtml(StringUtil.isBlank(data.getNote())?"暂无":data.getNote())));
+            publicTV.setText((Html.fromHtml(StringUtil.isBlank(data.getNote())?"暂无":data.getNote())));
         }
 
         //角色权限控制

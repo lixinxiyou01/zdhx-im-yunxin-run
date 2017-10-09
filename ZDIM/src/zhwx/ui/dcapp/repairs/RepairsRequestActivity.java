@@ -54,6 +54,7 @@ import zhwx.common.view.tagview.TagListView;
 import zhwx.ui.dcapp.assets.adapter.IdAndNameSpinnerAdapter;
 import zhwx.ui.dcapp.repairs.model.FaultList;
 
+
 /**
  * @author Li.xin @ 中电和讯
  */
@@ -261,6 +262,7 @@ public class RepairsRequestActivity extends BaseActivity implements View.OnClick
 		loginMap = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
 		map = new HashMap<String, ParameterValue>();
 		map.put("malfunctionDescribe",new ParameterValue(faultDescriptionET.getEditableText().toString())); //故障描述
+		map.put("groupId",new ParameterValue(DeviceKindActivity.maintenanceId)); 							//维修组Id
 		map.put("malfunctionPlaceId",new ParameterValue(roomId)); 											//故障地点
 		map.put("telNumber",new ParameterValue(mobileET.getEditableText().toString())); 					//电话
 		map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));		//报修人Id

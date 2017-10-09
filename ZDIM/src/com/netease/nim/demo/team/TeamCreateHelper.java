@@ -18,6 +18,7 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomMessageConfig;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.team.TeamService;
+import com.netease.nimlib.sdk.team.constant.TeamBeInviteModeEnum;
 import com.netease.nimlib.sdk.team.constant.TeamFieldEnum;
 import com.netease.nimlib.sdk.team.constant.TeamTypeEnum;
 import com.netease.nimlib.sdk.team.model.Team;
@@ -101,7 +102,7 @@ public class TeamCreateHelper {
         TeamTypeEnum type = TeamTypeEnum.Advanced;
         HashMap<TeamFieldEnum, Serializable> fields = new HashMap<>();
         fields.put(TeamFieldEnum.Name, teamName);
-//        fields.put(TeamFieldEnum.BeInviteMode, TeamBeInviteModeEnum.NoAuth); //设置为直接入群
+        fields.put(TeamFieldEnum.BeInviteMode, TeamBeInviteModeEnum.NoAuth); //设置为直接入群
         NIMClient.getService(TeamService.class).createTeam(fields, type, "", memberAccounts).setCallback(
                 new RequestCallback<Team>() {
                     @Override

@@ -171,10 +171,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="10dp"
-        android:visibility="visible" >
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -186,12 +186,14 @@
             android:visibility="invisible" />
 
         <TextView
+            android:id="@+id/findPassWordTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="18dp"
             android:text="忘记密码?"
-            android:visibility="gone"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/main_bg" />
     </RelativeLayout>

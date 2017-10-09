@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -378,5 +380,18 @@ public class IMUtils {
             //matches():字符串是否在给定的正则表达式匹配
             return number.matches(num);
         }
+    }
+
+    public static void clearCookies(Context context) {
+        // Edge case: an illegal state exception is thrown if an instance of
+        // CookieSyncManager has not be created.  CookieSyncManager is normally
+        // created by a WebKit view, but this might happen if you start the
+        // app, restore saved state, and click logout before running a UI
+        // dialog in a WebView -- in which case the app crashes
+        @SuppressWarnings("unused")
+        CookieSyncManager cookieSyncMngr =
+                CookieSyncManager.createInstance(context);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookie();
     }
 }

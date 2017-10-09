@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 import com.netease.nim.demo.contact.constant.UserConstant;
 import com.netease.nim.demo.contact.helper.UserUpdateHelper;
@@ -39,6 +41,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import zhwx.common.model.ParameterValue;
+import zhwx.common.util.ProgressThreadWrap;
+import zhwx.common.util.RunnableWrap;
+import zhwx.common.util.ToastUtil;
+import zhwx.common.util.UrlUtil;
 
 /**
  * Created by hzxuwen on 2015/9/14.
@@ -304,6 +312,45 @@ public class UserProfileEditItemActivity extends UI implements View.OnClickListe
             DialogMaker.showProgressDialog(this, null, true);
             UserUpdateHelper.update(fieldMap.get(key), content, callback);
         }
+
+        //TODO  如果是修改手机号  也传给IM一份
+        if(key ==  UserConstant.KEY_PHONE) {
+            upLoadNewMessage(editText.getText().toString().trim());
+        }
+    }
+
+    private HashMap<String, ParameterValue> map;
+
+    private String upLoadFlag = "";
+
+    private Handler handler = new Handler();
+
+    public void upLoadNewMessage(final String mobileNum) {
+        map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getLoginMap();
+        map.put("userId", new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getId()));
+        map.put("mobileNum", new ParameterValue(mobileNum));
+        new ProgressThreadWrap(this, new RunnableWrap() {
+            @Override
+            public void run() {
+                try {
+                    upLoadFlag = UrlUtil.updateMobileNum(ECApplication.getInstance().getAddress(), map); // 发送请求
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            if (upLoadFlag.contains("success")) {
+                                ToastUtil.showMessage("手机号码变更成功！");
+                                ECApplication.getInstance().saveMobileNum(mobileNum);
+                                finish();
+                            } else {
+                                ToastUtil.showMessage("手机号码变更失败！");
+                            }
+                        }
+                    }, 5);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ToastUtil.showMessage("手机号码变更失败！");
+                }
+            }
+        }).start();
     }
 
     private void onUpdateCompleted() {

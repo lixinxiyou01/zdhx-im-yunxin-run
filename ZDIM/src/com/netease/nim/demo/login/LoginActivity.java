@@ -76,6 +76,7 @@ import zhwx.common.view.CircleImageViewWithWhite;
 import zhwx.common.view.dialog.ECAlertDialog;
 import zhwx.common.view.dialog.ECProgressDialog;
 import zhwx.ui.adapter.OrganizationSpinnerAdapter;
+import zhwx.ui.settings.FindPwdActivity;
 
 
 /**
@@ -132,6 +133,7 @@ public class LoginActivity extends UI implements OnKeyListener {
     private EditText usernameET,passwordET;
     private Button loginBT;
     private ImageLoader imgLoader;
+    private TextView findPassWordTV;
 
     public static void start(Context context) {
         start(context, false);
@@ -210,6 +212,13 @@ public class LoginActivity extends UI implements OnKeyListener {
             public boolean onLongClick(View arg0) {
                 showConfigDcAddress();
                 return true;
+            }
+        });
+        findPassWordTV = (TextView) findViewById(R.id.findPassWordTV);
+        findPassWordTV.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, FindPwdActivity.class));
             }
         });
     }

@@ -64,6 +64,8 @@ public class DeviceKindActivity extends BaseActivity implements OnClickListener{
 	private  List<DeviceKind> allDataList;
 
 	private ImageLoader imageLoader;
+
+	public static String maintenanceId;
 	
 	@Override
 	protected int getLayoutId() {
@@ -77,7 +79,8 @@ public class DeviceKindActivity extends BaseActivity implements OnClickListener{
 		imageLoader = new ImageLoader(context);
 		cache = new RequestWithCacheGet(context);
 		getTopBarView().setBackGroundColor(R.color.main_bg_repairs);
-		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, R.drawable.icon_sao,"设备分类", this);
+		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, "","维修组", this);
+//		getTopBarView().setTopBarToStatus(1, R.drawable.topbar_back_bt, R.drawable.icon_sao,"设备分类", this);
 		assetsLV = (PullableListView) findViewById(R.id.assetsLV);
 		assetsLV.enableAutoLoad(false);
 		assetsLV.setLoadmoreVisible(false);
@@ -86,6 +89,7 @@ public class DeviceKindActivity extends BaseActivity implements OnClickListener{
 		assetsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				maintenanceId = allDataList.get(position).getId();
 				startActivityForResult(new Intent(context,DeviceLevelOneActivity.class).putExtra("id",allDataList.get(position).getId()),886);
 			}
 		});
@@ -108,6 +112,7 @@ public class DeviceKindActivity extends BaseActivity implements OnClickListener{
 		mPostingdialog = new ECProgressDialog(context, "正在获取信息");
 		mPostingdialog.show();
 		map = (HashMap<String, ParameterValue>) ECApplication.getInstance().getV3LoginMap();
+		map.put("userId",new ParameterValue(ECApplication.getInstance().getCurrentIMUser().getV3Id()));
 		try {
 			circleJson = cache.getRseponse(UrlUtil.getMaintenanceTeamList(ECApplication.getInstance().getV3Address(), map), new RequestWithCacheGet.RequestListener() {
 				

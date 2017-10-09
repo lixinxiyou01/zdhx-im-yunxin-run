@@ -38,6 +38,16 @@ public class User implements Serializable{
 	private String neteaseToken;  //云信登录Token
 
 	private String appCenterUrl;
+	private String messageDetailUrl;//消息中心
+
+	public String getMessageDetailUrl() {
+		return messageDetailUrl;
+	}
+
+	public void setMessageDetailUrl(String messageDetailUrl) {
+		this.messageDetailUrl = messageDetailUrl;
+	}
+
 	public User() {
 		super();
 	}

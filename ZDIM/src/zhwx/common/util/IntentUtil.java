@@ -436,6 +436,106 @@ public class IntentUtil {
 		return intent;
 	}
 
+	/** 根据消息内容获取启动App的Intent */
+
+	public static Intent getStartAppIntentNew(Context context,V3NoticeCenter v3NoticeCenter) {
+
+		Intent intent = null;
+
+
+		if (StringUtil.isNotBlank(v3NoticeCenter.getKind())) { //通知
+
+			if (v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_NOTICE)) {
+
+				intent = new Intent(context, NoticeDetailActivity.class);
+
+				intent.putExtra("noticeId", v3NoticeCenter.getSourceId());
+
+			}else if (v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_ZMAIL)) { //Z邮
+
+				intent = new Intent(context, NoticeDetailActivity.class);
+
+				intent.putExtra("noticeId", v3NoticeCenter.getSourceId());
+
+			} else if (v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_WEEKCALENDAR)) { //周历
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  ECApplication.getInstance().getCurrentIMUser().getMessageDetailUrl()
+						+ "&sourceId=" + v3NoticeCenter.getSourceId()
+						+ "&code=" + v3NoticeCenter.getKind());
+
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_WAGE)) { //工资
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  ECApplication.getInstance().getCurrentIMUser().getMessageDetailUrl()
+						+ "&sourceId=" + v3NoticeCenter.getSourceId()
+						+ "&code=" + v3NoticeCenter.getKind());
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_WAGE2)) { //工资
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  ECApplication.getInstance().getCurrentIMUser().getMessageDetailUrl()
+						+ "&sourceId=" + v3NoticeCenter.getSourceId()
+						+ "&code=" + v3NoticeCenter.getKind());
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CAMPUSBULLETIN)) { //校园公告
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  ECApplication.getInstance().getCurrentIMUser().getMessageDetailUrl()
+						+ "&sourceId=" + v3NoticeCenter.getSourceId()
+						+ "&code=" + v3NoticeCenter.getKind());
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_ANNOUNCEMENT)) { //系统公告
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  ECApplication.getInstance().getCurrentIMUser().getMessageDetailUrl()
+						+ "&sourceId=" + v3NoticeCenter.getSourceId()
+						+ "&code=" + v3NoticeCenter.getKind());
+			}  else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_MESS)) { //食堂管理
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  ECApplication.getInstance().getCurrentIMUser().getMessageDetailUrl()
+						+ "&sourceId=" + v3NoticeCenter.getSourceId()
+						+ "&code=" + v3NoticeCenter.getKind());
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_TECH_MANAGE)) { //课题管理
+
+				intent = new Intent(context,WebAppActivity.class);
+
+				intent.putExtra("webUrl",  Constant.WEBAPP_URL_TECH_MANAGE+ "?loginName=" + ECApplication.getInstance().getCurrentIMUser().getLoginName());
+
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_TECH_JLLT)) { //经纶论坛
+
+				intent = new Intent(context,WebAppActivity.class);
+				intent.putExtra("webUrl",  Constant.WEBAPP_URL_TECH_JLLT);
+
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CARMANAGE)) { //车辆管理
+
+				intent = new Intent(context,CMainActivity.class);
+			}  else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_CHECKIN)) { //考 勤
+
+				intent = new Intent(context,CIMainActivity.class);
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_HOMEWORK_DC)) { //数校作业
+
+				intent = new Intent(context,StudentHomeWorkDetailsActivity.class);
+
+				intent.putExtra("id", v3NoticeCenter.getSourceId());
+			} else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_ASSETS)) { //资产管理
+
+				intent = new Intent(context,AMainActivity.class);
+			}else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_STORE)) { //易耗品管理
+
+				intent = new Intent(context,SMainActivity.class);
+			}else if(v3NoticeCenter.getKind().equals(V3NoticeCenter.NOTICE_KIND_REPAIR)){ //报修
+
+				intent = new Intent(context,RMainActivity.class);
+			}
+		}
+		return intent;
+	}
+
 	public static void openApp(final Context context, String kind){
 		if (V3NoticeCenter.NOTICE_KIND_NEWS.equals(kind)) { // "新闻"
 			context.startActivity(new Intent(context, WebAppActivity.class).putExtra("webUrl", ECApplication.getInstance().getV3Address()

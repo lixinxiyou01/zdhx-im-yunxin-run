@@ -28,10 +28,7 @@ import com.photoselector.ui.PhotoSelectorActivity;
 import java.io.File;
 import java.util.List;
 
-import zhwx.Constant;
 import zhwx.common.base.BaseActivity;
-import zhwx.common.util.DownloadAsyncTask;
-import zhwx.common.util.IMUtils;
 import zhwx.common.util.IntentUtil;
 import zhwx.common.util.ToastUtil;
 import zhwx.ui.webapp.view.loadview.LoadingView;
@@ -159,81 +156,96 @@ public class WebAppActivity extends BaseActivity {
 			}
 		});
 
-		// webview 下载监听
-		webAppWV.setDownloadListener(new DownloadListener() {
+//		// webview 下载监听
+//		webAppWV.setDownloadListener(new DownloadListener() {
+//
+//			@Override
+//			public void onDownloadStart(String url, String userAgent,String contentDisposition, String mimetype, long contentLength) {
+//				DownloadAsyncTask downloadAsyncTask = new DownloadAsyncTask(new DownloadAsyncTask.DownloadResponser() {
+//					@Override
+//					public void predownload() {
+//
+//					}
+//					@Override
+//					public void downloading(int progress, int position) {
+//
+//						if (progress < 100){
+//							ToastUtil.showMessage("正在下载：" + progress + "%");
+//						} else {
+//							ToastUtil.showMessage("请选择打开方式");
+//						}
+//					}
+//
+//					@Override
+//					public void downloaded(File file, int position) {
+//						if(file!=null){
+//							String lastName = IMUtils.getExtensionName(file.getName());
+//							try {
+//								if(Constant.ATTACHMENT_DOC.equals(lastName)){
+//									startActivity(IntentUtil.getWordFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_DOCX.equals(lastName)){
+//									startActivity(IntentUtil.getWordFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_PPT.equals(lastName)){
+//									startActivity(IntentUtil.getPptFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_PPTX.equals(lastName)){
+//									startActivity(IntentUtil.getPptFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_XLS.equals(lastName)){
+//									startActivity(IntentUtil.getExcelFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_XLSX.equals(lastName)){
+//									startActivity(IntentUtil.getExcelFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_PDF.equals(lastName)){
+//									startActivity(IntentUtil.getPdfFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_TXT.equals(lastName)){
+//									startActivity(IntentUtil.getTextFileIntent(file.getPath(), false));
+//
+//								}else if(Constant.ATTACHMENT_JPG.equals(lastName)){
+//									startActivity(IntentUtil.getImageFileIntent(file.getPath()));
+//
+//								}else if(Constant.ATTACHMENT_PNG.equals(lastName)){
+//									startActivity(IntentUtil.getImageFileIntent(file.getPath()));
+//
+//								}else{
+//									startActivity(IntentUtil.getAllFileIntent(file.getPath()));
+//								}
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//								ToastUtil.showMessage("设备中未安装相应的查看程序");
+//							}
+//						}else{
+//							ToastUtil.showMessage("文件错误");
+//						}
+//					}
+//
+//					@Override
+//					public void canceled(int position) {
+//
+//					}
+//				}, context);
+//				downloadAsyncTask.execute(url,"aaa","8",contentDisposition);
+//			}
+//		});
 
-			@Override
-			public void onDownloadStart(String url, String userAgent,String contentDisposition, String mimetype, long contentLength) {
-				DownloadAsyncTask downloadAsyncTask = new DownloadAsyncTask(new DownloadAsyncTask.DownloadResponser() {
-					@Override
-					public void predownload() {
+		webAppWV.setDownloadListener(new MyWebViewDownLoadListener());
+	}
 
-					}
-					@Override
-					public void downloading(int progress, int position) {
 
-						if (progress < 100){
-							ToastUtil.showMessage("正在下载：" + progress + "%");
-						} else {
-							ToastUtil.showMessage("请选择打开方式");
-						}
-					}
+	private class MyWebViewDownLoadListener implements DownloadListener{
 
-					@Override
-					public void downloaded(File file, int position) {
-						if(file!=null){
-							String lastName = IMUtils.getExtensionName(file.getName());
-							try {
-								if(Constant.ATTACHMENT_DOC.equals(lastName)){
-									startActivity(IntentUtil.getWordFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_DOCX.equals(lastName)){
-									startActivity(IntentUtil.getWordFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_PPT.equals(lastName)){
-									startActivity(IntentUtil.getPptFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_PPTX.equals(lastName)){
-									startActivity(IntentUtil.getPptFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_XLS.equals(lastName)){
-									startActivity(IntentUtil.getExcelFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_XLSX.equals(lastName)){
-									startActivity(IntentUtil.getExcelFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_PDF.equals(lastName)){
-									startActivity(IntentUtil.getPdfFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_TXT.equals(lastName)){
-									startActivity(IntentUtil.getTextFileIntent(file.getPath(), false));
-
-								}else if(Constant.ATTACHMENT_JPG.equals(lastName)){
-									startActivity(IntentUtil.getImageFileIntent(file.getPath()));
-
-								}else if(Constant.ATTACHMENT_PNG.equals(lastName)){
-									startActivity(IntentUtil.getImageFileIntent(file.getPath()));
-
-								}else{
-									startActivity(IntentUtil.getAllFileIntent(file.getPath()));
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-								ToastUtil.showMessage("设备中未安装相应的查看程序");
-							}
-						}else{
-							ToastUtil.showMessage("文件错误");
-						}
-					}
-
-					@Override
-					public void canceled(int position) {
-
-					}
-				}, context);
-				downloadAsyncTask.execute(url,"aaa","8",contentDisposition);
-			}
-		});
+		@Override
+		public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,
+									long contentLength) {
+			System.out.println(url);
+			Uri uri = Uri.parse(url);
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			startActivity(intent);
+		}
 	}
 
 	//Web视图

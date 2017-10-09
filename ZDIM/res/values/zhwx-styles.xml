@@ -209,6 +209,7 @@
         <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
 
+
     <style name="CCPTheme.Holo.Transparent" parent="@style/AppTheme">
         <item name="android:windowBackground">@*android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -264,9 +265,22 @@
         <item name="android:background">@drawable/bg_button</item>
     </style>
 
+    <style name="ButtonShot">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/NormalTextSize</item>
+        <item name="android:background">@drawable/bg_button</item>
+    </style>
+
     <!-- 输入框样式 -->
 
     <!-- 短蓝色按钮样式 -->
+    <style name="ButtonFullShot" parent="@style/ButtonShot">
+        <item name="android:background">@drawable/bg_button_shot_blue</item>
+        <item name="android:textColor">@color/main_bg</item>
+    </style>
 
     <!-- 绿色按钮样式 -->
     <style name="ButtonGreen" parent="@style/Button">

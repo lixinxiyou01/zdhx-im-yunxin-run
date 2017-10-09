@@ -108,6 +108,8 @@ public class ECApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        IMUtils.clearCookies(instance);
+
         DemoCache.setContext(this);
 
         IMUtils.setContext(this);
@@ -542,7 +544,6 @@ public class ECApplication extends Application {
             preferences.edit().putString("Id", user.getId())
                     //lizheng加入
                     .putString("dataSourceName",user.getDataSourceName())
-
                     .putString("Name", user.getName())
                     .putString("V3Id", user.getV3Id())
                     .putString("v3PassWord", user.getV3Pwd())
@@ -561,6 +562,7 @@ public class ECApplication extends Application {
                     .putString("accId", user.getAccId())
                     .putString("neteaseToken", user.getNeteaseToken())
                     .putString("appCenterUrl", user.getAppCenterUrl())
+                    .putString("messageDetailUrl", user.getMessageDetailUrl())
                     .commit();
             SharPreUtil.saveObject(user.getId(),user);
         }
@@ -595,6 +597,7 @@ public class ECApplication extends Application {
         user.setAccId(preferences.getString("accId", ""));
         user.setAppCenterUrl(preferences.getString("appCenterUrl", ""));
         user.setNeteaseToken(preferences.getString("neteaseToken", ""));
+        user.setMessageDetailUrl(preferences.getString("messageDetailUrl", ""));
         return user;
     }
 

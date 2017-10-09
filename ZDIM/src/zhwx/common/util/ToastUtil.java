@@ -13,6 +13,7 @@
 package zhwx.common.util;
 
 
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
@@ -47,14 +48,18 @@ public class ToastUtil {
 			@Override
 			public void run() {
 				synchronized (synObj) { //加上同步是为了每个toast只要有机会显示出来
-					if (toast != null) {
-						//toast.cancel();
-						toast.setText(msg);
-						toast.setDuration(len);
-					} else {
-						toast = Toast.makeText(ECApplication.getInstance(), msg, len);
+					try {
+						if (toast != null) {
+                            //toast.cancel();
+                            toast.setText(msg);
+                            toast.setDuration(len);
+                        } else {
+                            toast = Toast.makeText(ECApplication.getInstance(), msg, len);
+                        }
+						toast.show();
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-					toast.show();
 				}
 			}
 		});
@@ -65,14 +70,18 @@ public class ToastUtil {
 			@Override
 			public void run() {
 				synchronized (synObj) {
-					if (toast != null) {
-						//toast.cancel();
-						toast.setText(msg+"");
-						toast.setDuration(len);
-					} else {
-						toast = Toast.makeText(ECApplication.getInstance().getApplicationContext(), msg, len);
+					try {
+						if (toast != null) {
+                            //toast.cancel();
+                            toast.setText(msg+"");
+                            toast.setDuration(len);
+                        } else {
+                            toast = Toast.makeText(ECApplication.getInstance().getApplicationContext(), msg, len);
+                        }
+						toast.show();
+					} catch (Resources.NotFoundException e) {
+						e.printStackTrace();
 					}
-					toast.show();
 				}
 			}
 		});

@@ -202,7 +202,7 @@ public class NoticeCenterActivity extends BaseActivity implements OnClickListene
 					
 				} else {
 					V3NoticeCenter notice = (V3NoticeCenter) parent.getAdapter().getItem(position);
-					Intent intent = IntentUtil.getStartAppIntent(context, notice); //获取APP对应的Intent
+					Intent intent = IntentUtil.getStartAppIntentNew(context, notice); //获取APP对应的Intent
 					if (intent != null) {
 
 						startActivity(intent);

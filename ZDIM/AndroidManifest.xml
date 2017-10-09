@@ -55,6 +55,8 @@
 
     <uses-permission android:name="com.company.app.fileprovider.READ" />
 
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+
     <uses-sdk
         android:minSdkVersion="14"
         tools:overrideLibrary="android.support.multidex,com.photoselector,android.support.design,android.support.v4"/>
@@ -1057,6 +1059,7 @@
         <activity android:name="zhwx.ui.contact.AddContactActivity"/>
         <activity android:name="zhwx.ui.settings.ChangePasswordActivity"/>
         <activity android:name="zhwx.common.view.imagegallery.ImageGralleryPagerActivity"/>
+        <activity android:name="zhwx.ui.settings.FindPwdActivity" />
 
         <!--三方SDK key-->
         <!-- 百度定位 -->
