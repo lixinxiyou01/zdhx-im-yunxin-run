@@ -51,7 +51,7 @@ public class ToastUtil {
 					try {
 						if (toast != null) {
                             //toast.cancel();
-                            toast.setText(msg);
+                            toast.setText(msg+"");
                             toast.setDuration(len);
                         } else {
                             toast = Toast.makeText(ECApplication.getInstance(), msg, len);

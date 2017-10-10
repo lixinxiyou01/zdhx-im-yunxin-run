@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 
@@ -25,6 +26,7 @@ import volley.toolbox.Volley;
 import zhwx.common.base.BaseActivity;
 import zhwx.common.model.ParameterValue;
 import zhwx.common.util.StringUtil;
+import zhwx.common.util.ToastUtil;
 import zhwx.common.util.UrlUtil;
 import zhwx.common.view.dialog.ECProgressDialog;
 
@@ -91,25 +93,29 @@ public class TackCourseIndexActivity extends BaseActivity {
 		dialog.show();
 		Map<String, ParameterValue> map = ECApplication.getInstance().getV3LoginMap();
 		StringRequest sRequest = new StringRequest(
-				UrlUtil.toElectiveCourseNote(ECApplication.getInstance()
-						.getV3Address(), map), new Response.Listener<String>() {
+				UrlUtil.toElectiveCourseNote(ECApplication.getInstance().getV3Address(), map), new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
 						System.out.println(response);
-						if (StringUtil.isNotBlank(response)) {
-							courseNote = new Gson().fromJson(response,ElectiveCourseNote.class);
-							if (StringUtil.isNotBlank(courseNote.getEcActivityId())) {
-								webView1.loadData(courseNote.getEcActivityNote(), "text/html; charset=UTF-8", null);
-//								noteTV.setText(Html.fromHtml(courseNote.getEcActivityNote()));
-								start();
-							} else {
-								Intent intent = new Intent(context, MyCourseActivity.class);
-								intent.putExtra("courseNote", courseNote);
-								startActivity(intent);
-								finish();
-							}
-							dialog.dismiss();
+						try {
+							if (StringUtil.isNotBlank(response)) {
+                                courseNote = new Gson().fromJson(response,ElectiveCourseNote.class);
+                                if (StringUtil.isNotBlank(courseNote.getEcActivityId())) {
+                                    webView1.loadData(courseNote.getEcActivityNote(), "text/html; charset=UTF-8", null);
+    //								noteTV.setText(Html.fromHtml(courseNote.getEcActivityNote()));
+                                    start();
+                                } else {
+                                    Intent intent = new Intent(context, MyCourseActivity.class);
+                                    intent.putExtra("courseNote", courseNote);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                dialog.dismiss();
+                            }
+						} catch (JsonSyntaxException e) {
+							ToastUtil.showMessage("数据解析失败");
+							e.printStackTrace();
 						}
 					}
 				}, new Response.ErrorListener() {

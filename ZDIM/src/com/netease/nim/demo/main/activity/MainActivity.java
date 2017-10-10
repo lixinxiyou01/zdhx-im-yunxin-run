@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
@@ -490,26 +491,32 @@ public class MainActivity extends UI {
         int sRceordCount = 0;
         int cRceordCount = 0;
         if(!json.contains("<html>")){
-            counts = new Gson().fromJson(json, new TypeToken<List<MomentRecordCount>>(){}.getType());
-            sMomentCount = Integer.parseInt(counts.get(0).getCount());
-            cMomentCount = Integer.parseInt(counts.get(1).getCount());
-            sRceordCount = Integer.parseInt(counts.get(2).getCount());
-            cRceordCount = Integer.parseInt(counts.get(3).getCount());
+            try {
+                counts = new Gson().fromJson(json, new TypeToken<List<MomentRecordCount>>(){}.getType());
+                sMomentCount = Integer.parseInt(counts.get(0).getCount());
+                cMomentCount = Integer.parseInt(counts.get(1).getCount());
+                sRceordCount = Integer.parseInt(counts.get(2).getCount());
+                cRceordCount = Integer.parseInt(counts.get(3).getCount());
 
-            if((sRceordCount + cRceordCount) > 0){//有回复的时候显示数字
-                ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
-                item.setIndicator(true);
-                HomeFragment.onNoticeChange(item);
-            }else{
-                if((sMomentCount + cMomentCount) > 0){//没有回复有新动态的时候显示红点
+                if((sRceordCount + cRceordCount) > 0){//有回复的时候显示数字
                     ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
                     item.setIndicator(true);
                     HomeFragment.onNoticeChange(item);
-                }else{//什么也没有隐藏
-                    ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
-                    item.setIndicator(false);
-                    HomeFragment.onNoticeChange(item);
+                }else{
+                    if((sMomentCount + cMomentCount) > 0){//没有回复有新动态的时候显示红点
+                        ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
+                        item.setIndicator(true);
+                        HomeFragment.onNoticeChange(item);
+                    }else{//什么也没有隐藏
+                        ReminderItem item = ReminderManager.getInstance().getItems().get(ReminderId.CIRCLE);
+                        item.setIndicator(false);
+                        HomeFragment.onNoticeChange(item);
+                    }
                 }
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
 
             //校友圈 收到新回复提示

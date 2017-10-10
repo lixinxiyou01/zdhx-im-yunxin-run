@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.ant.liao.GifView;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.netease.nim.demo.ECApplication;
 import com.netease.nim.demo.R;
 import com.netease.nim.uikit.common.util.file.IntentUtilForUikit;
@@ -360,9 +361,14 @@ public class NoticeDetailActivity extends BaseActivity {
 	public void refreshData(String json) {
 		System.out.println(json);
 		if (!json.contains("<html>")) {
-			v3Notice = new Gson().fromJson(json, V3Notice.class);
-			if (v3Notice != null) {
-				refreshView();
+			try {
+				v3Notice = new Gson().fromJson(json, V3Notice.class);
+				if (v3Notice != null) {
+                    refreshView();
+                }
+			} catch (JsonSyntaxException e) {
+				e.printStackTrace();
+				ToastUtil.showMessage("数据解析失败");
 			}
 		}
 		progressDialog.dismiss();

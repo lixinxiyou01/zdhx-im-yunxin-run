@@ -318,17 +318,17 @@ public class ChooseAcitivty extends BaseActivity {
 
 	protected ArrayList<Elective.EcActivityCourseList.EcActivityCourse> getAllselectdecActivityCourse() {
 		ArrayList<Elective.EcActivityCourseList.EcActivityCourse> ecActivityCourses = new ArrayList<Elective.EcActivityCourseList.EcActivityCourse>();
-		for (Elective.EcActivityCourseList iterable_element : mElective
-				.getEcElectiveGroupList()) {
-			for (Elective.EcActivityCourseList.EcActivityCourse iterable : iterable_element
-					.getEcActivityCourseList()) {
-				if (iterable.getSelectedint() == 1) {
-					ecActivityCourses.add(iterable);
+		if(mElective!=null) {
+			for (Elective.EcActivityCourseList iterable_element : mElective.getEcElectiveGroupList()) {
+				for (Elective.EcActivityCourseList.EcActivityCourse iterable : iterable_element
+						.getEcActivityCourseList()) {
+					if (iterable.getSelectedint() == 1) {
+						ecActivityCourses.add(iterable);
+					}
 				}
 			}
 		}
 		return ecActivityCourses;
-
 	}
 
 	protected ArrayList<Elective.EcActivityCourseList.EcActivityCourse> getAllcActivityCourse() {
