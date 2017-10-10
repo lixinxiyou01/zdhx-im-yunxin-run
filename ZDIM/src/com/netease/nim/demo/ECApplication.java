@@ -243,7 +243,7 @@ public class ECApplication extends Application {
         config.notificationSmallIconId = R.drawable.ic_stat_notify_msg;
         config.notificationColor = getResources().getColor(R.color.color_blue_3a9efb);
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.lanxum.hzth.im/raw/msg";
+        config.notificationSound = "android.resource://com.zdhx.edu.im/raw/msg";
 
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
@@ -486,7 +486,7 @@ public class ECApplication extends Application {
     };
 
 
-    /********************************  经纶教育定义  ******************************/
+    /********************************  智微校定义  ******************************/
     /**
      * IM登录信息
      * @return
@@ -618,7 +618,7 @@ public class ECApplication extends Application {
     }
 
     /**
-     * 存储经纶教育服务器地址
+     * 存储智微校服务器地址
      * @param address
      */
     public void saveAddress(String address) {

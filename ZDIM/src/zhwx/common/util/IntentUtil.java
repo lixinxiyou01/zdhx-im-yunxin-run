@@ -128,7 +128,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "image/*");
 
@@ -148,7 +148,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/pdf");
 
@@ -183,7 +183,7 @@ public class IntentUtil {
 		{
 
 //			Uri uri2 = Uri.fromFile(new File(paramString));
-			Uri uri2 = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(paramString));
+			Uri uri2 = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(paramString));
 
 			intent.setDataAndType(uri2, "text/plain");
 			return intent;
@@ -206,7 +206,7 @@ public class IntentUtil {
 
 		intent.putExtra("configchange", 0);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "audio/*");
 
@@ -228,7 +228,7 @@ public class IntentUtil {
 
 		intent.putExtra("configchange", 0);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "video/*");
 
@@ -248,7 +248,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/x-chm");
 
@@ -267,8 +267,8 @@ public class IntentUtil {
 		intent.addCategory("android.intent.category.DEFAULT");
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
-//		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
+//		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/msword");
 
@@ -288,7 +288,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/vnd.ms-excel");
 
@@ -308,7 +308,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
 
@@ -328,7 +328,7 @@ public class IntentUtil {
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.jljy.provider", new File(param));
+		Uri uri = FileProvider.getUriForFile(context, "com.pgyersdk.zdhx.zhwx.provider", new File(param));
 
 		intent.setDataAndType(uri, "*/*");
 
